@@ -1,4 +1,4 @@
-package com.viktor.kh.dev.shoplist.front.recipelists
+package com.viktor.kh.dev.shoplist.screens.other
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.viktor.kh.dev.shoplist.R
 
-class RecipeListsFragment : Fragment() {
+class InfoFragment: Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.recipes_fragment, container,false)
-
+        return inflater.inflate(R.layout.support_fragment,container,false)
     }
 }

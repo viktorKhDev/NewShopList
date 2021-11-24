@@ -5,11 +5,11 @@
 
     <activity
         android:id="@+id/mainActivity"
-        android:name="com.viktor.kh.dev.shoplist.front.MainActivity"
+        android:name="com.viktor.kh.dev.shoplist.screens.MainActivity"
         android:label="MainActivity" />
     <fragment
         android:id="@+id/productListsFragment"
-        android:name="com.viktor.kh.dev.shoplist.front.propuctsists.ProductListsFragment"
+        android:name="com.viktor.kh.dev.shoplist.screens.propuctsists.ProductListsFragment"
         android:label="ProductListsFragment" >
         <action
             android:id="@+id/action_productListsFragment_to_mainActivity"
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/recipeListsFragment"
-        android:name="com.viktor.kh.dev.shoplist.front.recipelists.RecipeListsFragment"
+        android:name="com.viktor.kh.dev.shoplist.screens.recipelists.RecipeListsFragment"
         android:label="RecipeListsFragment" >
         <action
             android:id="@+id/action_recipeListsFragment_to_mainActivity"
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.viktor.kh.dev.shoplist.front.settings.SettingsFragment"
+        android:name="com.viktor.kh.dev.shoplist.screens.settings.SettingsFragment"
         android:label="SettingsFragment" >
         <action
             android:id="@+id/action_settingsFragment_to_mainActivity"
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/productsFragment"
-        android:name="com.viktor.kh.dev.shoplist.front.products.ProductsFragment"
+        android:name="com.viktor.kh.dev.shoplist.screens.products.ProductsFragment"
         android:label="ProductsFragment" >
         <action
             android:id="@+id/action_productsFragment_to_productListsFragment"
@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/recipeFragment"
-        android:name="com.viktor.kh.dev.shoplist.front.recipe.RecipeFragment"
+        android:name="com.viktor.kh.dev.shoplist.screens.recipe.RecipeFragment"
         android:label="RecipeFragment" >
         <action
             android:id="@+id/action_recipeFragment_to_recipeListsFragment"
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/otherFragment"
-        android:name="com.viktor.kh.dev.shoplist.front.other.OtherFragment"
+        android:name="com.viktor.kh.dev.shoplist.screens.other.OtherFragment"
         android:label="OtherFragment" >
         <action
             android:id="@+id/action_otherFragment_to_mainActivity"
@@ -57,7 +57,7 @@
     </fragment>
     <fragment
         android:id="@+id/backupFragment"
-        android:name="com.viktor.kh.dev.shoplist.front.other.BackupFragment"
+        android:name="com.viktor.kh.dev.shoplist.screens.other.BackupFragment"
         android:label="BackupFragment" >
         <action
             android:id="@+id/action_backupFragment_to_otherFragment"
@@ -65,7 +65,7 @@
     </fragment>
     <fragment
         android:id="@+id/infoFragment"
-        android:name="com.viktor.kh.dev.shoplist.front.other.InfoFragment"
+        android:name="com.viktor.kh.dev.shoplist.screens.other.InfoFragment"
         android:label="InfoFragment" >
         <action
             android:id="@+id/action_infoFragment_to_otherFragment"

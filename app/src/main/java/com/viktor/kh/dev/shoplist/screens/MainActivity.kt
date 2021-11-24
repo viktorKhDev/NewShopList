@@ -1,4 +1,4 @@
-package com.viktor.kh.dev.shoplist.front
+package com.viktor.kh.dev.shoplist.screens
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +11,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.main_activity)
 
     }
+
+
+
 
 
 }

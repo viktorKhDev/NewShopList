@@ -1,4 +1,4 @@
-package com.viktor.kh.dev.shoplist.front.settings
+package com.viktor.kh.dev.shoplist.screens.settings
 
 import android.os.Bundle
 import android.view.LayoutInflater
