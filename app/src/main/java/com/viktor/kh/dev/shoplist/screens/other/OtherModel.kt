@@ -1,0 +1,9 @@
+package com.viktor.kh.dev.shoplist.screens.other
+
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+
+class OtherModel(application: Application) : AndroidViewModel(application) {
+
+
+}
