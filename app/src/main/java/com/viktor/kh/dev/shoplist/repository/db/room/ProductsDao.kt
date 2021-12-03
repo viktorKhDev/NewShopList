@@ -9,7 +9,7 @@ import com.viktor.kh.dev.shoplist.repository.db.data.DataProducts
 @Dao
 interface ProductsDao {
 
-    @Query("SELECT * FROM productlists")
+    @Query("SELECT * FROM dataproducts")
     fun getAll(): List<DataProducts>
 
     @Delete

@@ -7,7 +7,7 @@ import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
 
 interface RecipesDao {
 
-    @Query("SELECT * FROM recipelists")
+    @Query("SELECT * FROM datarecipe")
     fun getAll(): List<DataRecipe>
 
     @Delete
