@@ -10,6 +10,6 @@ data class DataRecipe (
     @PrimaryKey val uid: Int,
     @ColumnInfo(name = "name") val name: String?,
     @ColumnInfo(name = "text") val text: String?,
-    @ColumnInfo(name = "products") val products: List<DataProducts>?,
+    @ColumnInfo(name = "products") val products: List<DataProduct>?,
     @ColumnInfo(name = "date")  val date: Date?
         )
