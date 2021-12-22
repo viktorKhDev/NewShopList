@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.viktor.kh.dev.shoplist.repository.db.room.ProductsDB
 import com.viktor.kh.dev.shoplist.repository.db.room.RecipesDB
+import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
@@ -12,6 +13,7 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
+@Module
 class DBModule {
 
 

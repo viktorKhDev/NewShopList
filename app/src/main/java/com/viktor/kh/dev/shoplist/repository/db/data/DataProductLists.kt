@@ -6,10 +6,8 @@ import androidx.room.PrimaryKey
 
 
 @Entity
-data class DataProduct(
-
+data class DataProductLists(
         @PrimaryKey val uid: Int,
         @ColumnInfo(name = "name") val name: String?,
-        @ColumnInfo(name = "date")  val date: String?,
-        @ColumnInfo(name = "ready") val ready : Boolean?
+        @ColumnInfo(name = "date")  val date: String?
 )
