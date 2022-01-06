@@ -1,14 +1,19 @@
 package com.viktor.kh.dev.shoplist.repository.db.data
 
-import androidx.room.ColumnInfo
+
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.*
+import androidx.room.TypeConverters
+import com.viktor.kh.dev.shoplist.repository.db.converters.ProductsConverter
+
+
 
 @Entity
 data class DataRecipe (
-    @PrimaryKey val uid: Int,
-    @ColumnInfo(name = "name") val name: String?,
-    @ColumnInfo(name = "text") val text: String?,
-    @ColumnInfo(name = "date")  val date: String?
+    @PrimaryKey val id: Int,
+     val name: String?,
+     val text: String?,
+     val date: Long?,
+    @TypeConverters(ProductsConverter::class)
+    val products: List<DataProduct>?
 )
