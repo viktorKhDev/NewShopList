@@ -9,11 +9,10 @@ import com.viktor.kh.dev.shoplist.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RecipeListsFragment : Fragment() {
+class RecipeListsFragment : Fragment(R.layout.recipes_fragment) {
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.recipes_fragment, container,false)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 }

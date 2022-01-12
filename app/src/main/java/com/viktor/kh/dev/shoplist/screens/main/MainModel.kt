@@ -1,4 +1,4 @@
-package com.viktor.kh.dev.shoplist.screens
+package com.viktor.kh.dev.shoplist.screens.main
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

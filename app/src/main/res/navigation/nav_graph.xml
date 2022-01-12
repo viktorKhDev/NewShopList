@@ -1,74 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
-    app:startDestination="@id/mainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
 
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.viktor.kh.dev.shoplist.screens.MainActivity"
-        android:label="MainActivity" />
     <fragment
         android:id="@+id/productListsFragment"
         android:name="com.viktor.kh.dev.shoplist.screens.propuctsists.ProductListsFragment"
-        android:label="ProductListsFragment" >
+        android:label="ProductListsFragment">
         <action
-            android:id="@+id/action_productListsFragment_to_mainActivity"
-            app:destination="@id/mainActivity" />
+            android:id="@+id/action_productListsFragment_to_productsFragment"
+            app:destination="@id/productsFragment" />
     </fragment>
     <fragment
         android:id="@+id/recipeListsFragment"
         android:name="com.viktor.kh.dev.shoplist.screens.recipelists.RecipeListsFragment"
-        android:label="RecipeListsFragment" >
+        android:label="RecipeListsFragment">
         <action
-            android:id="@+id/action_recipeListsFragment_to_mainActivity"
-            app:destination="@id/mainActivity" />
+            android:id="@+id/action_recipeListsFragment_to_recipeFragment"
+            app:destination="@id/recipeFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.viktor.kh.dev.shoplist.screens.settings.SettingsFragment"
-        android:label="SettingsFragment" >
-        <action
-            android:id="@+id/action_settingsFragment_to_mainActivity"
-            app:destination="@id/mainActivity" />
-    </fragment>
+        android:label="SettingsFragment"/>
     <fragment
         android:id="@+id/productsFragment"
         android:name="com.viktor.kh.dev.shoplist.screens.products.ProductsFragment"
-        android:label="ProductsFragment" >
-        <action
-            android:id="@+id/action_productsFragment_to_productListsFragment"
-            app:destination="@id/productListsFragment" />
-    </fragment>
+        android:label="ProductsFragment"/>
     <fragment
         android:id="@+id/recipeFragment"
         android:name="com.viktor.kh.dev.shoplist.screens.recipe.RecipeFragment"
-        android:label="RecipeFragment" >
-        <action
-            android:id="@+id/action_recipeFragment_to_recipeListsFragment"
-            app:destination="@id/recipeListsFragment" />
-    </fragment>
+        android:label="RecipeFragment"/>
     <fragment
         android:id="@+id/otherFragment"
         android:name="com.viktor.kh.dev.shoplist.screens.other.OtherFragment"
-        android:label="OtherFragment" >
+        android:label="OtherFragment">
         <action
-            android:id="@+id/action_otherFragment_to_mainActivity"
-            app:destination="@id/mainActivity" />
+            android:id="@+id/action_otherFragment_to_backupFragment2"
+            app:destination="@id/backupFragment" />
+        <action
+            android:id="@+id/action_otherFragment_to_infoFragment2"
+            app:destination="@id/infoFragment" />
     </fragment>
     <fragment
         android:id="@+id/backupFragment"
         android:name="com.viktor.kh.dev.shoplist.screens.other.BackupFragment"
-        android:label="BackupFragment" >
-        <action
-            android:id="@+id/action_backupFragment_to_otherFragment"
-            app:destination="@id/otherFragment" />
-    </fragment>
+        android:label="BackupFragment"/>
     <fragment
         android:id="@+id/infoFragment"
         android:name="com.viktor.kh.dev.shoplist.screens.other.InfoFragment"
-        android:label="InfoFragment" >
+        android:label="InfoFragment"/>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.viktor.kh.dev.shoplist.screens.main.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
         <action
-            android:id="@+id/action_infoFragment_to_otherFragment"
+            android:id="@+id/action_mainFragment_to_productListsFragment"
+            app:destination="@id/productListsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_recipeListsFragment"
+            app:destination="@id/recipeListsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_otherFragment2"
             app:destination="@id/otherFragment" />
     </fragment>
 </navigation>

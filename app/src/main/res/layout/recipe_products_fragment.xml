@@ -6,7 +6,7 @@
 
     <include
         android:id="@+id/inc_add_in_recipe"
-        layout="@layout/activity_add"
+        layout="@layout/fragment_add"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </include>
