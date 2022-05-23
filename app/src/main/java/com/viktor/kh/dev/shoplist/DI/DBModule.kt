@@ -13,6 +13,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+
 @InstallIn(SingletonComponent::class)
 @Module
 class DBModule {
@@ -29,7 +30,7 @@ class DBModule {
     }
 
 
-    @Singleton
+   @Singleton
     @Provides
     fun providesRecipesDB(@ApplicationContext context: Context):RecipesDB{
         return Room.databaseBuilder(
@@ -39,7 +40,7 @@ class DBModule {
         ).build()
     }
 
-    @Singleton
+   @Singleton
     @Provides
     fun providesProductListsDao( db: ProductListsDB): ProductListsDao{
         return db.productListsDao()
