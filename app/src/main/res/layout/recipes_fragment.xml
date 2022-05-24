@@ -11,7 +11,7 @@
 
     <include
         android:id="@+id/lists_include_in_recipes"
-        layout="@layout/activity_lists"
+        layout="@layout/fragment_lists"
         android:layout_height="match_parent"
         android:layout_width="match_parent">
     </include>
