@@ -25,4 +25,10 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
       return productListsDao.getAll()
     }
 
+    fun updateLists(){
+
+    }
+
+
+
 }

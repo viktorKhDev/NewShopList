@@ -16,11 +16,14 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists) {
     private val model: ProductListsModel by activityViewModels()
      private lateinit var binding : FragmentListsBinding
      private lateinit var list: RecyclerView
+     private lateinit var adapter: ProductListsAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentListsBinding.bind(view)
         list = binding.includeLists.lists
+        adapter = ProductListsAdapter()
+        list.adapter = ProductListsAdapter()
        model.dataLists.observe(viewLifecycleOwner, Observer {
             subscribeData(it)
        })
