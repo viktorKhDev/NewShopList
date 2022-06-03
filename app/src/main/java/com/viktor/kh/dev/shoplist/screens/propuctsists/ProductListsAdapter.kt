@@ -6,13 +6,25 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.ItemListBinding
+import com.viktor.kh.dev.shoplist.helpers.convertLongToTime
+import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductLists
 
 
-class ProductListsAdapter : RecyclerView.Adapter<ProductListsAdapter.ProductListHolder>() {
+class ProductListsAdapter
+constructor(onListClickListener: OnListClickListener,
+            onSetClickListener: OnSetClickListener,
+            onDelClickListener: OnDelClickListener )
+    : RecyclerView.Adapter<ProductListsAdapter.ProductListHolder>() {
+
+
+
+
 
 
     lateinit var data : ArrayList<DataProductLists>
+
+
 
 
 
@@ -26,7 +38,7 @@ class ProductListsAdapter : RecyclerView.Adapter<ProductListsAdapter.ProductList
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return data.size
     }
 
 
@@ -41,16 +53,39 @@ class ProductListsAdapter : RecyclerView.Adapter<ProductListsAdapter.ProductList
 
 
 
-
-
-
-
     //holder
     class ProductListHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val binding = ItemListBinding.bind(itemView)
 
         fun bind (data : DataProductLists) = with(binding){
+           listName.text = data.name
+            textListDate.text = data.date?.let { convertLongToTime(it) }
+            textListReady.text = data.products?.let { findReady(it) }
 
         }
+
+       private fun findReady(list: List<DataProduct>): String{
+           var containsReady = 0
+           for(i in list){
+               if(i.ready == true){
+                   containsReady++
+               }
+           }
+           return "$containsReady/${list.size}"
+       }
     } //holder
+
+
+    interface  OnDelClickListener{
+        fun onDelClick()
+    }
+
+    interface OnListClickListener{
+        fun onListClick()
+    }
+
+    interface OnSetClickListener{
+        fun onSet()
+    }
+
 }

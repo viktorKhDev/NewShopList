@@ -10,21 +10,21 @@ import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.FragmentListsBinding
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductLists
 import dagger.hilt.android.AndroidEntryPoint
+
 @AndroidEntryPoint
-class ProductListsFragment: Fragment(R.layout.fragment_lists) {
+class ProductListsFragment: Fragment(R.layout.fragment_lists)
+{
 
     private val model: ProductListsModel by activityViewModels()
      private lateinit var binding : FragmentListsBinding
      private lateinit var list: RecyclerView
-     private lateinit var adapter: ProductListsAdapter
+     lateinit var adapter: ProductListsAdapter
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentListsBinding.bind(view)
         list = binding.includeLists.lists
-        adapter = ProductListsAdapter()
-        list.adapter = ProductListsAdapter()
-       model.dataLists.observe(viewLifecycleOwner, Observer {
+         model.dataLists.observe(viewLifecycleOwner, Observer {
             subscribeData(it)
        })
 
@@ -32,8 +32,33 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists) {
 
 
     fun subscribeData(data: List<DataProductLists>){
-
+      adapter.setData(data)
     }
+
+   fun initList(){
+       val onListClickListener = object : ProductListsAdapter.OnListClickListener {
+           override fun onListClick() {
+               //click on item
+           }
+       }
+
+       val onDelClickListener = object : ProductListsAdapter.OnDelClickListener{
+           override fun onDelClick() {
+               // click on del button
+           }
+       }
+       val onSetClickListener = object : ProductListsAdapter.OnSetClickListener{
+           override fun onSet() {
+               // click on det button
+           }
+
+
+       }
+       list.adapter = ProductListsAdapter(onListClickListener, onSetClickListener, onDelClickListener)
+
+   }
+
+
 
 
 }
