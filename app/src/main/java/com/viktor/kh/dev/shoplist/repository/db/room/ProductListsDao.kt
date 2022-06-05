@@ -4,17 +4,17 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.viktor.kh.dev.shoplist.repository.db.data.DataProductLists
+import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 
 
 @Dao
 interface ProductListsDao {
-    @Query("SELECT * FROM dataProductLists")
-    fun getAll(): List<DataProductLists>
+    @Query("SELECT * FROM dataProductList")
+    fun getAll(): List<DataProductList>
 
     @Delete
-    fun delete(dataProducts: DataProductLists)
+    fun delete(dataProducts: DataProductList)
 
     @Insert
-    fun insert(dataProducts: DataProductLists)
+    fun insert(dataProducts: DataProductList)
 }

@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.FragmentListsBinding
-import com.viktor.kh.dev.shoplist.repository.db.data.DataProductLists
+import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,37 +24,38 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentListsBinding.bind(view)
         list = binding.includeLists.lists
+         initList()
          model.dataLists.observe(viewLifecycleOwner, Observer {
             subscribeData(it)
        })
 
     }
-
-
-    fun subscribeData(data: List<DataProductLists>){
+    fun subscribeData(data: List<DataProductList>){
       adapter.setData(data)
     }
 
    fun initList(){
        val onListClickListener = object : ProductListsAdapter.OnListClickListener {
-           override fun onListClick() {
+           override fun onListClick(position: Int) {
                //click on item
            }
        }
 
        val onDelClickListener = object : ProductListsAdapter.OnDelClickListener{
-           override fun onDelClick() {
+           override fun onDelClick(position: Int) {
                // click on del button
            }
        }
        val onSetClickListener = object : ProductListsAdapter.OnSetClickListener{
-           override fun onSet() {
+           override fun onSet(position: Int) {
                // click on det button
            }
 
 
        }
        list.adapter = ProductListsAdapter(onListClickListener, onSetClickListener, onDelClickListener)
+
+
 
    }
 

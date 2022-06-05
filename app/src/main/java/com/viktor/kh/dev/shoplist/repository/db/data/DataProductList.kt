@@ -9,8 +9,7 @@ import org.jetbrains.annotations.Nullable
 
 
 @Entity
-
-data class DataProductLists(
+data class DataProductList(
         @PrimaryKey val id: Int,
         val name: String?,
         val date: Long?,

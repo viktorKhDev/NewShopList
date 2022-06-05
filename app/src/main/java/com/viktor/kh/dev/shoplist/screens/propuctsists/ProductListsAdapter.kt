@@ -8,33 +8,34 @@ import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.ItemListBinding
 import com.viktor.kh.dev.shoplist.helpers.convertLongToTime
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
-import com.viktor.kh.dev.shoplist.repository.db.data.DataProductLists
+import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 
 
 class ProductListsAdapter
-constructor(onListClickListener: OnListClickListener,
-            onSetClickListener: OnSetClickListener,
-            onDelClickListener: OnDelClickListener )
+constructor(_onListClickListener: OnListClickListener,
+            _onSetClickListener: OnSetClickListener,
+            _onDelClickListener: OnDelClickListener )
     : RecyclerView.Adapter<ProductListsAdapter.ProductListHolder>() {
 
+    val onListClickListener : OnListClickListener
+    val onSetClickListener : OnSetClickListener
+    val onDelClickListener: OnDelClickListener
 
+    lateinit var data : ArrayList<DataProductList>
+init {
+    onDelClickListener = _onDelClickListener
+    onListClickListener = _onListClickListener
+    onSetClickListener = _onSetClickListener
 
-
-
-
-    lateinit var data : ArrayList<DataProductLists>
-
-
-
-
-
+}
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductListHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_list,parent,false)
         return ProductListHolder(view)
+
     }
 
     override fun onBindViewHolder(holder: ProductListHolder, position: Int) {
-        //holder.bind()
+        holder.bind(data[position])
     }
 
     override fun getItemCount(): Int {
@@ -42,27 +43,47 @@ constructor(onListClickListener: OnListClickListener,
     }
 
 
-    fun setData(list: List<DataProductLists>){
+    fun setData(list: List<DataProductList>){
         data = ArrayList(list)
     }
 
-    fun addList(list :DataProductLists){
+    fun addList(list :DataProductList){
         data.add(list)
+    }
+
+    fun deleteList(list : DataProductList){
+
     }
 
 
 
 
     //holder
-    class ProductListHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+   inner class ProductListHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val binding = ItemListBinding.bind(itemView)
 
-        fun bind (data : DataProductLists) = with(binding){
+        fun bind (data : DataProductList) = with(binding){
            listName.text = data.name
             textListDate.text = data.date?.let { convertLongToTime(it) }
             textListReady.text = data.products?.let { findReady(it) }
+            itemView.setOnClickListener(View.OnClickListener {
+                onListClickListener.onListClick(layoutPosition)
+            })
+            editImage.setOnClickListener(View.OnClickListener {
+                onSetClickListener.onSet(layoutPosition)
+            })
+            deleteImage.setOnClickListener(View.OnClickListener {
+                onDelClickListener.onDelClick(layoutPosition)
+            })
+        }
+
+
+
+        private fun initClick(){
 
         }
+
+
 
        private fun findReady(list: List<DataProduct>): String{
            var containsReady = 0
@@ -77,15 +98,15 @@ constructor(onListClickListener: OnListClickListener,
 
 
     interface  OnDelClickListener{
-        fun onDelClick()
+        fun onDelClick(position: Int)
     }
 
     interface OnListClickListener{
-        fun onListClick()
+        fun onListClick(position: Int)
     }
 
     interface OnSetClickListener{
-        fun onSet()
+        fun onSet(position: Int)
     }
 
 }
