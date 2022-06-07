@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable
 data class DataProductList(
         @PrimaryKey val id: Int,
         val name: String?,
-        val date: Long?,
+        val date:Long,
         @TypeConverters(ProductsConverter::class)
         val products: List<DataProduct>?
 )

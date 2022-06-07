@@ -17,4 +17,5 @@ interface ProductListsDao {
 
     @Insert
     fun insert(dataProducts: DataProductList)
+
 }

@@ -3,9 +3,14 @@ package com.viktor.kh.dev.shoplist.screens.propuctsists
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.viktor.kh.dev.shoplist.helpers.currentTimeToLong
+import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 import com.viktor.kh.dev.shoplist.repository.db.room.ProductListsDao
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 
@@ -25,16 +30,28 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
       return productListsDao.getAll()
     }
 
-    fun updateLists(){
+    fun updateList(){
 
     }
 
     fun deleteList(position : Int){
-
+        var list = dataLists.value as MutableList<DataProductList>?
+        if (list!=null){
+            productListsDao.delete(list[position])
+            list.removeAt(position)
+            dataLists.value = list
+        }
     }
 
-    fun addList(){
+    fun addList(name: String){
+        var list = dataLists.value as MutableList<DataProductList>?
+        if (list!=null){
+           val listProduct :List<DataProduct> = emptyList()
+            val productList = DataProductList(0,name, currentTimeToLong(),listProduct)
+            list.add(productList)
+            dataLists.value = list
 
+        }
     }
 
 
