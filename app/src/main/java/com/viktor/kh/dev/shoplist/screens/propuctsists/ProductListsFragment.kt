@@ -1,5 +1,6 @@
 package com.viktor.kh.dev.shoplist.screens.propuctsists
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -7,6 +8,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
+import com.viktor.kh.dev.shoplist.databinding.DialogAddBinding
 import com.viktor.kh.dev.shoplist.databinding.FragmentListsBinding
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,16 +27,19 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
         binding = FragmentListsBinding.bind(view)
         list = binding.includeLists.lists
          initList()
+         binding.fabAddList.setOnClickListener(View.OnClickListener {
+             addList()
+         })
          model.dataLists.observe(viewLifecycleOwner, Observer {
             subscribeData(it)
        })
 
     }
-    fun subscribeData(data: List<DataProductList>){
+    private fun subscribeData(data: List<DataProductList>){
       adapter.setData(data)
     }
 
-   fun initList(){
+   private fun initList(){
        val onListClickListener = object : ProductListsAdapter.OnListClickListener {
            override fun onListClick(position: Int) {
                //click on item
@@ -53,13 +58,14 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
 
        }
-       list.adapter = ProductListsAdapter(onListClickListener, onSetClickListener, onDelClickListener)
-
+       adapter = ProductListsAdapter(onListClickListener, onSetClickListener, onDelClickListener)
+       list.adapter = adapter
 
 
    }
 
-
-
+    private fun addList(){
+        AddDialog(model).showsDialog
+    }
 
 }

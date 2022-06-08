@@ -8,6 +8,8 @@ import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 import com.viktor.kh.dev.shoplist.repository.db.room.ProductListsDao
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
@@ -19,6 +21,7 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
 
     @Inject lateinit var productListsDao: ProductListsDao
 
+
    val dataLists : MutableLiveData <List<DataProductList>> by lazy {
        MutableLiveData <List<DataProductList>>().also {
            getLists()
@@ -26,13 +29,13 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
    }
 
 
-   fun getLists(): List<DataProductList> {
-      return productListsDao.getAll()
+    private fun getLists(){
+       CoroutineScope(Dispatchers.IO).launch {
+     dataLists.postValue(productListsDao.getAll())
+       }
+
     }
 
-    fun updateList(){
-
-    }
 
     fun deleteList(position : Int){
         var list = dataLists.value as MutableList<DataProductList>?
