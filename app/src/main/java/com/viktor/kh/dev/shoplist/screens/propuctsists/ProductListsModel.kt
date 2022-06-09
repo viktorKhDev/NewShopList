@@ -3,7 +3,9 @@ package com.viktor.kh.dev.shoplist.screens.propuctsists
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.helpers.currentTimeToLong
+import com.viktor.kh.dev.shoplist.helpers.showToast
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 import com.viktor.kh.dev.shoplist.repository.db.room.ProductListsDao
@@ -49,12 +51,14 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
     fun addList(name: String){
         var list = dataLists.value as MutableList<DataProductList>?
         if (list!=null){
-           val listProduct :List<DataProduct> = emptyList()
-            val productList = DataProductList(0,name, currentTimeToLong(),listProduct)
-            list.add(productList)
-            dataLists.value = list
-
+                val listProduct :List<DataProduct> = emptyList()
+                val productList = DataProductList(0,name, currentTimeToLong(),listProduct)
+                list.add(productList)
+                dataLists.value = list
+            productListsDao.insert(productList)
         }
+
+
     }
 
 
