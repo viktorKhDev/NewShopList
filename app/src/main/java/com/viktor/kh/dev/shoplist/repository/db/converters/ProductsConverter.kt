@@ -8,7 +8,7 @@ import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 
 object ProductsConverter {
 
-    val gson = Gson()
+    private val gson = Gson()
 
         @TypeConverter
         fun fromProductList( productList: List<DataProduct>?): String?{

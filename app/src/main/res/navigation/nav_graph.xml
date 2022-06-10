@@ -62,7 +62,8 @@
             app:destination="@id/productListsFragment" />
         <action
             android:id="@+id/action_mainFragment_to_recipeListsFragment"
-            app:destination="@id/recipeListsFragment" />
+            app:destination="@id/recipeListsFragment"
+            app:enterAnim="@anim/nav_default_pop_enter_anim" />
         <action
             android:id="@+id/action_mainFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />

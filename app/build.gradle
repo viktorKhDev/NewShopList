@@ -12,7 +12,7 @@ android {
     compileSdkVersion 32
 
     defaultConfig {
-        applicationId "com.viktor.kh.dev.shoplist"
+        applicationId "com.viktor.kh.dev.shoplist.test"
         minSdkVersion 21
         targetSdkVersion 32
         versionCode 1

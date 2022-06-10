@@ -1,5 +1,6 @@
 package com.viktor.kh.dev.shoplist.screens.propuctsists
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,15 +27,18 @@ init {
     onDelClickListener = _onDelClickListener
     onListClickListener = _onListClickListener
     onSetClickListener = _onSetClickListener
+    Log.d("MyLog" , "init in adapter")
 
 }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductListHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_list,parent,false)
+        Log.d("MyLog" , "onCreateViewHolder in adapter")
         return ProductListHolder(view)
 
     }
 
     override fun onBindViewHolder(holder: ProductListHolder, position: Int) {
+        Log.d("MyLog" , " onBindViewHolder in adapter")
         holder.bind(data[position])
     }
 
@@ -44,25 +48,22 @@ init {
 
 
     fun setData(list: List<DataProductList>){
+        for (i in list){
+            Log.d("MyLog" , "${i.name.toString()} in adapter")
+        }
         data = ArrayList(list)
-    }
-
-    fun addList(list :DataProductList){
-        data.add(list)
-    }
-
-    fun deleteList(list : DataProductList){
+        Log.d("MyLog" , "${data.size} in adapter")
+        notifyDataSetChanged()
 
     }
-
-
 
 
     //holder
    inner class ProductListHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val binding = ItemListBinding.bind(itemView)
+        private val binding = ItemListBinding.bind(itemView)
 
         fun bind (data : DataProductList) = with(binding){
+            Log.d("MyLog", "${data.name} in holder")
            listName.text = data.name
             textListDate.text = data.date?.let { convertLongToTime(it) }
             textListReady.text = data.products?.let { findReady(it) }
@@ -79,13 +80,8 @@ init {
 
 
 
-        private fun initClick(){
 
-        }
-
-
-
-       private fun findReady(list: List<DataProduct>): String{
+        private fun findReady(list: List<DataProduct>): String{
            var containsReady = 0
            for(i in list){
                if(i.ready == true){

@@ -1,8 +1,11 @@
 package com.viktor.kh.dev.shoplist.screens.propuctsists
 
 import android.app.Application
+import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.NavController
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.helpers.currentTimeToLong
 import com.viktor.kh.dev.shoplist.helpers.showToast
@@ -32,37 +35,53 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
 
 
     private fun getLists(){
+        // get all list from DB
        CoroutineScope(Dispatchers.IO).launch {
      dataLists.postValue(productListsDao.getAll())
+           Log.d("MyLog", dataLists.value?.size.toString())
+           Log.d("MyLog", "getLists() in model")
        }
 
     }
 
 
     fun deleteList(position : Int){
-        var list = dataLists.value as MutableList<DataProductList>?
-        if (list!=null){
-            productListsDao.delete(list[position])
-            list.removeAt(position)
-            dataLists.value = list
-        }
+        //delete list on position
+        CoroutineScope(Dispatchers.IO).launch {
+                productListsDao.delete(dataLists.value!![position]) }
+                dataLists.postValue(productListsDao.getAll())
+
     }
 
     fun addList(name: String){
-        var list = dataLists.value as MutableList<DataProductList>?
-        if (list!=null){
-                val listProduct :List<DataProduct> = emptyList()
-                val productList = DataProductList(0,name, currentTimeToLong(),listProduct)
-                list.add(productList)
-                dataLists.value = list
+        //add list with name
+        val listProduct :List<DataProduct> = emptyList()
+        val productList = DataProductList(0,name, currentTimeToLong(),listProduct)
+        CoroutineScope(Dispatchers.IO).launch {
             productListsDao.insert(productList)
+            dataLists.postValue(productListsDao.getAll())
         }
-
 
     }
 
+    fun setList(position: Int,name: String){
+        val list : DataProductList = dataLists.value!![position]
+        CoroutineScope(Dispatchers.IO).launch {
+         productListsDao.update(
+             DataProductList(
+             list.id, name, list.date,list.products
+         )
+         )
+            dataLists.postValue(productListsDao.getAll())
+      }
+    }
 
-
-
+    fun openList(controller: NavController, id :Int){
+        // open list on position
+        var bundle = Bundle()
+       bundle.putInt("listID",id)
+        controller.navigate(R.id.action_productListsFragment_to_productsFragment,bundle)
+    }
 
 }
+
