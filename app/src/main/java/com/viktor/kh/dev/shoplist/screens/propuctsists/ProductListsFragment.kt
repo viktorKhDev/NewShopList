@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.DialogAddBinding
@@ -68,7 +69,12 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
        }
        listAdapter = ProductListsAdapter(onListClickListener, onSetClickListener, onDelClickListener)
-       list.adapter = listAdapter
+       list.apply {
+           layoutManager = LinearLayoutManager(context)
+           adapter = listAdapter
+
+       }
+
 
 
    }
@@ -79,7 +85,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
             dialog.setContentView(R.layout.dialog_add)
             val text = dialog.findViewById<EditText>(R.id.text_del_product)
             text.hint = getString(R.string.list_title)
-            //initFocusAndShowKeyboard(text, activity as AppCompatActivity)
+            initFocusAndShowKeyboard(text, activity as AppCompatActivity)
             val buttonAdd = dialog.findViewById<Button>(R.id.btn_yes)
             val  buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
             dialog.setCancelable(true)
@@ -87,7 +93,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
             buttonCancel.setOnClickListener(View.OnClickListener {
                 dialog.dismiss()
-                //cancelKeyboard(text, activity as AppCompatActivity)
+                cancelKeyboard(text, activity as AppCompatActivity)
             })
 
             buttonAdd.setOnClickListener(View.OnClickListener {
@@ -95,7 +101,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
                     model.addList(text.text.toString())
                     dialog.dismiss()
                 }else{
-                    showToast(R.string.input_the_title.toString(),context)
+                    showToast(getString(R.string.input_the_title),context)
                 }
             })
         }
@@ -109,7 +115,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
             dialog.setContentView(R.layout.dialog_add)
             val text = dialog.findViewById<EditText>(R.id.text_del_product)
             text.setText(dataList.name)
-            //initFocusAndShowKeyboard(text, activity as AppCompatActivity)
+            initFocusAndShowKeyboard(text, activity as AppCompatActivity)
             val buttonAdd = dialog.findViewById<Button>(R.id.btn_yes)
             val  buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
             dialog.setCancelable(true)
@@ -117,15 +123,16 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
             buttonCancel.setOnClickListener(View.OnClickListener {
                 dialog.dismiss()
-                //cancelKeyboard(text, activity as AppCompatActivity)
+                cancelKeyboard(text, activity as AppCompatActivity)
             })
 
             buttonAdd.setOnClickListener(View.OnClickListener {
-                if(text.length()!=0){
+                if(text.text.toString().isNotEmpty()){
                     model.setList(position,text.text.toString())
                     dialog.dismiss()
                 }else{
-                    showToast(R.string.input_the_title.toString(),context)
+
+                    showToast(getString(R.string.input_the_title),activity)
                 }
             })
         }

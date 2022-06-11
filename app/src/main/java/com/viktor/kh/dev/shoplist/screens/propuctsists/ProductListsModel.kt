@@ -48,8 +48,10 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
     fun deleteList(position : Int){
         //delete list on position
         CoroutineScope(Dispatchers.IO).launch {
-                productListsDao.delete(dataLists.value!![position]) }
-                dataLists.postValue(productListsDao.getAll())
+                productListsDao.delete(dataLists.value!![position])
+            dataLists.postValue(productListsDao.getAll())
+        }
+
 
     }
 
