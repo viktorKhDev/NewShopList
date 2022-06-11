@@ -52,7 +52,8 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
    private fun initList(){
        val onListClickListener = object : ProductListsAdapter.OnListClickListener {
            override fun onListClick(position: Int) {
-               model.openList(findNavController(),position)
+               val listID = model.dataLists.value!![position].id
+               model.openList(findNavController(),listID)
            }
        }
 
