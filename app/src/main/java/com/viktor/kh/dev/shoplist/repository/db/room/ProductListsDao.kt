@@ -18,6 +18,7 @@ interface ProductListsDao {
 
     @Insert
     fun insert(dataProducts: DataProductList)
+
     @Query("SELECT products FROM dataProductList WHERE id = :listID")
     fun openList(listID: Int): List<DataProduct>
 

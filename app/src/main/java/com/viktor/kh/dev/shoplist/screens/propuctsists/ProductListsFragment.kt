@@ -30,7 +30,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
     private val model: ProductListsModel by activityViewModels()
      private lateinit var binding : FragmentListsBinding
      private lateinit var list: RecyclerView
-     lateinit var listAdapter: ProductListsAdapter
+    private lateinit var listAdapter: ProductListsAdapter
 
      override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

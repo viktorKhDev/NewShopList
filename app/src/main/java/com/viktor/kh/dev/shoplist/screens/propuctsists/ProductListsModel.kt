@@ -8,16 +8,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.helpers.currentTimeToLong
-import com.viktor.kh.dev.shoplist.helpers.showToast
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 import com.viktor.kh.dev.shoplist.repository.db.room.ProductListsDao
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.util.*
 import javax.inject.Inject
 
 

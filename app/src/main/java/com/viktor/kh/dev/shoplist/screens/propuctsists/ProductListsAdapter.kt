@@ -13,23 +13,13 @@ import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 
 
 class ProductListsAdapter
-constructor(_onListClickListener: OnListClickListener,
-            _onSetClickListener: OnSetClickListener,
-            _onDelClickListener: OnDelClickListener )
+constructor(val onListClickListener: OnListClickListener,
+            val onSetClickListener: OnSetClickListener,
+            val onDelClickListener: OnDelClickListener )
     : RecyclerView.Adapter<ProductListsAdapter.ProductListHolder>() {
 
-    val onListClickListener : OnListClickListener
-    val onSetClickListener : OnSetClickListener
-    val onDelClickListener: OnDelClickListener
-
     lateinit var data : ArrayList<DataProductList>
-init {
-    onDelClickListener = _onDelClickListener
-    onListClickListener = _onListClickListener
-    onSetClickListener = _onSetClickListener
-    Log.d("MyLog" , "init in adapter")
 
-}
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductListHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_list,parent,false)
         Log.d("MyLog" , "onCreateViewHolder in adapter")
@@ -65,7 +55,7 @@ init {
         fun bind (data : DataProductList) = with(binding){
             Log.d("MyLog", "${data.name} in holder")
            listName.text = data.name
-            textListDate.text = data.date?.let { convertLongToTime(it) }
+            textListDate.text = convertLongToTime(data.date)
             textListReady.text = data.products?.let { findReady(it) }
             itemView.setOnClickListener(View.OnClickListener {
                 onListClickListener.onListClick(layoutPosition)
