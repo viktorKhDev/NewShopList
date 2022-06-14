@@ -8,6 +8,7 @@ import com.viktor.kh.dev.shoplist.repository.db.converters.ProductsConverter
 
 
 @Entity
+
 data class DataProductList(
         @PrimaryKey(autoGenerate = true) val id: Int = 0,
         val name: String?,

@@ -38,9 +38,6 @@ constructor(val onListClickListener: OnListClickListener,
 
 
     fun setData(list: List<DataProductList>){
-        for (i in list){
-            Log.d("MyLog" , "${i.name.toString()} in adapter")
-        }
         data = ArrayList(list)
         Log.d("MyLog" , "${data.size} in adapter")
         notifyDataSetChanged()
@@ -78,7 +75,7 @@ constructor(val onListClickListener: OnListClickListener,
                    containsReady++
                }
            }
-           return "$containsReady/${list.size}"
+           return "$containsReady/${list?.size ?: 0}"
        }
     } //holder
 

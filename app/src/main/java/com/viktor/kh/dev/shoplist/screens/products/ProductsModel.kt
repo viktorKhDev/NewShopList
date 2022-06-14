@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ProductsModel @Inject constructor(application: Application,val listId : Int) : AndroidViewModel(application) {
+class ProductsModel @Inject constructor(application: Application, val listId : Int) : AndroidViewModel(application) {
 
   @Inject lateinit var productListsDao: ProductListsDao
 
@@ -30,4 +30,31 @@ class ProductsModel @Inject constructor(application: Application,val listId : In
             productsList.postValue(productListsDao.openList(listId))
         }
     }
+
+
+    fun onItemClick(position :Int){
+
+    }
+
+    fun onItemLongClick(position: Int){
+
+    }
+
+    fun onItemSwipe(position: Int){
+
+    }
+
+    fun addProduct(product: DataProduct){
+       var list: ArrayList<DataProduct> = ArrayList(productsList.value!!)
+        list.add(product)
+
+
+       CoroutineScope(Dispatchers.IO).launch {
+           productListsDao.setProducts(list.toList(),listId)
+           productsList.postValue(list)
+
+       }
+    }
+
+
 }
