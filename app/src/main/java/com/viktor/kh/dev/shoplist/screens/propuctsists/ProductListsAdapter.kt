@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.ItemListBinding
 import com.viktor.kh.dev.shoplist.helpers.convertLongToTime
+import com.viktor.kh.dev.shoplist.helpers.true1
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 
@@ -18,7 +19,7 @@ constructor(val onListClickListener: OnListClickListener,
             val onDelClickListener: OnDelClickListener )
     : RecyclerView.Adapter<ProductListsAdapter.ProductListHolder>() {
 
-    lateinit var data : ArrayList<DataProductList>
+     var data : ArrayList<DataProductList> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductListHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_list,parent,false)
@@ -52,7 +53,7 @@ constructor(val onListClickListener: OnListClickListener,
         fun bind (data : DataProductList) = with(binding){
             Log.d("MyLog", "${data.name} in holder")
            listName.text = data.name
-            textListDate.text = convertLongToTime(data.date)
+            textListDate.text = data.date?.let { convertLongToTime(it) }
             textListReady.text = data.products?.let { findReady(it) }
             itemView.setOnClickListener(View.OnClickListener {
                 onListClickListener.onListClick(layoutPosition)
@@ -71,7 +72,7 @@ constructor(val onListClickListener: OnListClickListener,
         private fun findReady(list: List<DataProduct>): String{
            var containsReady = 0
            for(i in list){
-               if(i.ready == true){
+               if(i.ready == true1){
                    containsReady++
                }
            }

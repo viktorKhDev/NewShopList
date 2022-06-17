@@ -24,15 +24,15 @@ object ProductsConverter {
 
         }
 
-    @TypeConverter
-    fun fromProduct(product: DataProduct):String?{
+   @TypeConverter
+    fun fromProduct(product: DataProduct?):String?{
         return gson.toJson(product)
     }
 
     @TypeConverter
-    fun toProduct(s: String?):DataProduct{
-        val myType = object : TypeToken<DataProduct>() {}.type
-        return gson.fromJson(s,myType)
+    fun toProduct(s: String?):DataProduct?{
+       return if (s == null) null else gson.fromJson(s,DataProduct::class.java)
+
     }
 
 

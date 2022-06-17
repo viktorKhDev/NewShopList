@@ -10,6 +10,9 @@ interface ProductListsDao {
     @Query("SELECT * FROM dataProductList")
     fun getAll(): List<DataProductList>
 
+    @Query("SELECT * FROM dataProductList WHERE id = :listID")
+    fun get(listID: Int):DataProductList
+
     @Update
     fun update(dataProducts: DataProductList)
 
@@ -18,11 +21,5 @@ interface ProductListsDao {
 
     @Insert
     fun insert(dataProducts: DataProductList)
-
-    @Query("SELECT products FROM dataProductList WHERE id = :listID")
-    fun openList(listID: Int): List<DataProduct>
-
-    @Query("UPDATE dataProductList SET products = :products  WHERE id = :listID")
-    fun setProducts(products: List<DataProduct>, listID: Int)
 
 }

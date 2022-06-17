@@ -2,6 +2,7 @@ package com.viktor.kh.dev.shoplist.screens.products
 
 import android.app.Application
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.FragmentAddBinding
 import com.viktor.kh.dev.shoplist.helpers.currentTimeToLong
+import com.viktor.kh.dev.shoplist.helpers.falce0
 import com.viktor.kh.dev.shoplist.helpers.showToast
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,7 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ProductsFragment : Fragment(R.layout.fragment_add) {
 
-    private lateinit var model: ProductsModel
+    private val model: ProductsModel by activityViewModels()
     private lateinit var binding: FragmentAddBinding
     private lateinit var rv: RecyclerView
     private lateinit var productsAdapter: ProductsAdapter
@@ -30,18 +32,15 @@ class ProductsFragment : Fragment(R.layout.fragment_add) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAddBinding.bind(view)
         rv  = binding.listProducts
+        val  listId = arguments?.getInt("listID")!!
+        model.init(listId)
+        binding.addProduct.setOnClickListener(View.OnClickListener {
+            addProduct()
+        })
         initRv()
-      val  listId = arguments?.getInt("listID")!!
-        model = ViewModelProvider(this,ProductsModelFactory(activity!!.application, listId))
-                .get(ProductsModel::class.java)
-
 
         model.productsList.observe(viewLifecycleOwner, Observer {
             subscribeData(it)
-        })
-
-        binding.addProduct.setOnClickListener(View.OnClickListener {
-            addProduct()
         })
 
 
@@ -49,10 +48,12 @@ class ProductsFragment : Fragment(R.layout.fragment_add) {
 
     private fun addProduct() = with(binding) {
        relativeAddProduct.visibility = View.VISIBLE
+        addProduct.visibility = View.GONE
         btnAcceptProduct.setOnClickListener(View.OnClickListener {
             val productName : String = textProduct.text.toString()
             if(productName.isNotEmpty()){
-                val dataProduct = DataProduct(productName, currentTimeToLong(),false)
+                val dataProduct = DataProduct(productName, currentTimeToLong().toString(), falce0)
+                textProduct.setText("")
                 model.addProduct(dataProduct)
             }else{
                 showToast(getString(R.string.input_the_title),context)
@@ -62,6 +63,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add) {
         btnNoProduct.setOnClickListener(View.OnClickListener {
             textProduct.text.clear()
             relativeAddProduct.visibility = View.GONE
+            addProduct.visibility = View.VISIBLE
         })
 
     }
@@ -98,7 +100,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add) {
             layoutManager = LinearLayoutManager(context)
         }
 
-
+      Log.d("MyLog", "rv init")
     }
 
 }
