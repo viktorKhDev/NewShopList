@@ -1,32 +1,35 @@
 package com.viktor.kh.dev.shoplist.screens.products
 
-import android.app.Application
+
+import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewTreeLifecycleOwner
-import androidx.lifecycle.get
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.FragmentAddBinding
-import com.viktor.kh.dev.shoplist.helpers.currentTimeToLong
-import com.viktor.kh.dev.shoplist.helpers.falce0
-import com.viktor.kh.dev.shoplist.helpers.showToast
+import com.viktor.kh.dev.shoplist.helpers.*
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
-class ProductsFragment : Fragment(R.layout.fragment_add) {
+class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
 
     private val model: ProductsModel by activityViewModels()
     private lateinit var binding: FragmentAddBinding
     private lateinit var rv: RecyclerView
     private lateinit var productsAdapter: ProductsAdapter
+    private  lateinit var itemTouchHelper: ItemTouchHelper
+    private lateinit var itemTouchCallback: ItemTouchCallback
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,8 +50,9 @@ class ProductsFragment : Fragment(R.layout.fragment_add) {
     }
 
     private fun addProduct() = with(binding) {
-       relativeAddProduct.visibility = View.VISIBLE
+        relativeAddProduct.visibility = View.VISIBLE
         addProduct.visibility = View.GONE
+        Log.d("MyLog" , "addButton Hide")
         btnAcceptProduct.setOnClickListener(View.OnClickListener {
             val productName : String = textProduct.text.toString()
             if(productName.isNotEmpty()){
@@ -64,11 +68,40 @@ class ProductsFragment : Fragment(R.layout.fragment_add) {
             textProduct.text.clear()
             relativeAddProduct.visibility = View.GONE
             addProduct.visibility = View.VISIBLE
+            Log.d("MyLog" , "addButton visible")
         })
 
     }
 
-    private fun setProduct(){
+    private fun setProduct(position: Int){
+        //change name for product
+        var dataProduct: DataProduct = model.productsList.value!![position]
+        val dialog = context?.let { Dialog(it) }
+        if(dialog!=null){
+            dialog.setContentView(R.layout.dialog_add)
+            val text = dialog.findViewById<EditText>(R.id.text_del_product)
+            text.setText(dataProduct.name)
+            initFocusAndShowKeyboard(text, activity as AppCompatActivity)
+            val buttonAdd = dialog.findViewById<Button>(R.id.btn_yes)
+            val  buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
+            dialog.setCancelable(true)
+            dialog.show()
+
+            buttonCancel.setOnClickListener(View.OnClickListener {
+                dialog.dismiss()
+                cancelKeyboard(text, activity as AppCompatActivity)
+            })
+
+            buttonAdd.setOnClickListener(View.OnClickListener {
+                if(text.text.toString().isNotEmpty()){
+                    model.renameProduct(position,text.text.toString())
+                    dialog.dismiss()
+                }else{
+
+                    showToast(getString(R.string.input_the_title),activity)
+                }
+            })
+        }
 
     }
 
@@ -81,14 +114,14 @@ class ProductsFragment : Fragment(R.layout.fragment_add) {
 
         val onClickListener = object : ProductsAdapter.OnProductClickListener {
             override fun onProductClick(position: Int) {
-                model.onItemClick(position)
+                model.changeReady(position)
             }
 
         }
 
         val onLongClickListener = object: ProductsAdapter.OnProductLongClickListener{
-            override fun onoProductLongClick(position: Int) {
-                model.onItemLongClick(position)
+            override fun onProductLongClick(position: Int) {
+               setProduct(position)
             }
 
         }
@@ -99,8 +132,15 @@ class ProductsFragment : Fragment(R.layout.fragment_add) {
             adapter = productsAdapter
             layoutManager = LinearLayoutManager(context)
         }
+        itemTouchCallback = ItemTouchCallback(this)
+        itemTouchHelper = ItemTouchHelper(itemTouchCallback)
+        itemTouchHelper.attachToRecyclerView(rv)
 
       Log.d("MyLog", "rv init")
+    }
+
+    override fun onItemDismiss(position: Int) {
+        model.deleteProduct(position)
     }
 
 }

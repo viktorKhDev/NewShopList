@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/dev/projects/NewShopList/app/src/main/res/font/actor.xml" value="0.1" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout-v26/dialog_add.xml" value="0.17552083333333332" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/activity_lists.xml" value="0.14130434782608695" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/backup_fragment.xml" value="0.17552083333333332" />
@@ -18,7 +19,7 @@
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/include_activity.xml" value="0.17552083333333332" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/include_recipe_description.xml" value="0.17552083333333332" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/item.xml" value="0.17552083333333332" />
-        <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/item_list.xml" value="0.22" />
+        <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/item_list.xml" value="0.4425531914893617" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/item_ready.xml" value="0.17552083333333332" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/list_dialog.xml" value="0.17552083333333332" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/main_container.xml" value="0.17552083333333332" />

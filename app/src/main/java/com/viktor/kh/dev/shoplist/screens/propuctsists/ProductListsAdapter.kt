@@ -53,7 +53,9 @@ constructor(val onListClickListener: OnListClickListener,
         fun bind (data : DataProductList) = with(binding){
             Log.d("MyLog", "${data.name} in holder")
            listName.text = data.name
-            textListDate.text = data.date?.let { convertLongToTime(it) }
+            val date  = data.date?.let { convertLongToTime(it) }.toString()
+            Log.d("MyLog", "listDate = $date")
+            textListDate.text = date
             textListReady.text = data.products?.let { findReady(it) }
             itemView.setOnClickListener(View.OnClickListener {
                 onListClickListener.onListClick(layoutPosition)
@@ -76,7 +78,9 @@ constructor(val onListClickListener: OnListClickListener,
                    containsReady++
                }
            }
-           return "$containsReady/${list?.size ?: 0}"
+            val s  = "$containsReady/${list?.size ?: 0}"
+            Log.d("MyLog", "findReady = $s")
+           return s
        }
     } //holder
 

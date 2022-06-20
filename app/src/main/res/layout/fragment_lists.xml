@@ -11,7 +11,7 @@
 
 
     <include
-        layout="@layout/include__list_activity"
+        layout="@layout/include_list_activity"
         android:id="@+id/include_lists"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

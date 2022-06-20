@@ -73,6 +73,6 @@ class ProductsAdapter(
         fun onProductClick(position: Int)
     }
     interface OnProductLongClickListener{
-        fun onoProductLongClick(position: Int)
+        fun onProductLongClick(position: Int)
     }
 }
