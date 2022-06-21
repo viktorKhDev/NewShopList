@@ -44,6 +44,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
 
         model.productsList.observe(viewLifecycleOwner, Observer {
             subscribeData(it)
+
         })
 
 
@@ -131,6 +132,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         rv.apply {
             adapter = productsAdapter
             layoutManager = LinearLayoutManager(context)
+
         }
         itemTouchCallback = ItemTouchCallback(this)
         itemTouchHelper = ItemTouchHelper(itemTouchCallback)
@@ -140,6 +142,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
     }
 
     override fun onItemDismiss(position: Int) {
+        //activate swipe from ItemTouchHelper
         model.deleteProduct(position)
     }
 

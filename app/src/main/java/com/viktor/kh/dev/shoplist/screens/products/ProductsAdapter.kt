@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
+import com.viktor.kh.dev.shoplist.helpers.true1
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
-import java.util.*
 import kotlin.collections.ArrayList
 
 class ProductsAdapter(
@@ -36,7 +36,7 @@ class ProductsAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if(data[position].ready == "true"){
+        return if(data[position].ready == true1){
             1
         }else{
             0
@@ -44,8 +44,11 @@ class ProductsAdapter(
     }
 
     fun setData(list: List<DataProduct>){
-       data = ArrayList(list)
+        val currentData  = data
+
+        data = ArrayList(list)
         notifyDataSetChanged()
+
    }
 
     inner class ProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -60,7 +63,12 @@ class ProductsAdapter(
             }
 
             itemView.setOnClickListener(View.OnClickListener {
+              onProductClickListener.onProductClick(layoutPosition)
+            })
 
+            itemView.setOnLongClickListener(View.OnLongClickListener {
+                onProductLongClickListener.onProductLongClick(layoutPosition)
+                return@OnLongClickListener true
             })
 
         }

@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="8dp"
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:gravity="top"
@@ -32,7 +32,7 @@
             android:textColor="@android:color/background_dark"
             android:textColorHint="@android:color/black"
             android:textColorLink="@color/colorPrimary"
-            android:textSize="20sp" />
+            android:textSize="25sp" />
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -82,16 +82,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="15dp"
             android:layout_centerVertical="true"
-
             android:src="@drawable/ic_edit_black_24dp" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/delete_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_centerVertical="true"
             android:layout_toEndOf="@id/edit_image"
             android:layout_marginStart="10dp"
