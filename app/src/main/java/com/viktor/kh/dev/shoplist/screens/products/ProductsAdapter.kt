@@ -4,6 +4,7 @@ import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
@@ -20,6 +21,7 @@ class ProductsAdapter(
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
+
         var view = LayoutInflater.from(parent.context).inflate(R.layout.item,parent,false)
         if (viewType==1) {
             view = LayoutInflater.from(parent.context).inflate(R.layout.item_ready,parent,false)
@@ -32,7 +34,7 @@ class ProductsAdapter(
     }
 
     override fun getItemCount(): Int {
-       return  data.size
+        return  data.size
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -44,12 +46,13 @@ class ProductsAdapter(
     }
 
     fun setData(list: List<DataProduct>){
-        val currentData  = data
-
-        data = ArrayList(list)
+        data.clear()
+        data.addAll(list)
         notifyDataSetChanged()
 
-   }
+    }
+
+
 
     inner class ProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 

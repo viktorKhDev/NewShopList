@@ -42,6 +42,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
          })
          model.dataLists.observe(viewLifecycleOwner, Observer {
             subscribeData(it)
+
        })
 
     }

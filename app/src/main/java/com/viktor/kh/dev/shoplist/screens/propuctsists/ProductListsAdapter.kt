@@ -31,6 +31,7 @@ constructor(val onListClickListener: OnListClickListener,
     override fun onBindViewHolder(holder: ProductListHolder, position: Int) {
         Log.d("MyLog" , " onBindViewHolder in adapter")
         holder.bind(data[position])
+
     }
 
     override fun getItemCount(): Int {

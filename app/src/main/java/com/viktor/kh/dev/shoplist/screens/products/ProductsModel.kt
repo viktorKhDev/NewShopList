@@ -11,9 +11,7 @@ import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 import com.viktor.kh.dev.shoplist.repository.db.room.ProductListsDao
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -50,7 +48,10 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
             val newData  = DataProductList(data.id,data.name,data.date,
                 data.products?.let { sortProducts(it) })
             productListsDao.update(DataProductList(newData.id,newData.name,newData.date,newData.products))
-            productsList.postValue(newData.products)
+            withContext(Dispatchers.Main){
+                productsList.value = newData.products
+            }
+
             Log.d("MyLog", "productsModel get list")
         }
     }
@@ -86,6 +87,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
     }
 
     fun deleteProduct(position: Int){
+
      CoroutineScope(Dispatchers.IO).launch {
          val list: DataProductList = productListsDao.get(listId!!)
          val products  = mutableListOf<DataProduct>()

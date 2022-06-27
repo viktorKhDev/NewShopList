@@ -5,6 +5,8 @@ import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.animation.AnimationUtils
+import android.view.animation.LayoutAnimationController
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -36,6 +38,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         binding = FragmentAddBinding.bind(view)
         rv  = binding.listProducts
         val  listId = arguments?.getInt("listID")!!
+        val anim = AnimationUtils.loadLayoutAnimation(context,R.anim.layout_animation_fall_down)
         model.init(listId)
         binding.addProduct.setOnClickListener(View.OnClickListener {
             addProduct()
@@ -43,6 +46,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         initRv()
 
         model.productsList.observe(viewLifecycleOwner, Observer {
+            rv.layoutAnimation = anim
             subscribeData(it)
 
         })
@@ -132,8 +136,10 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         rv.apply {
             adapter = productsAdapter
             layoutManager = LinearLayoutManager(context)
-
+          rv.itemAnimator = null
         }
+
+        productsAdapter.notifyDataSetChanged()
         itemTouchCallback = ItemTouchCallback(this)
         itemTouchHelper = ItemTouchHelper(itemTouchCallback)
         itemTouchHelper.attachToRecyclerView(rv)
