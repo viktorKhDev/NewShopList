@@ -1,12 +1,12 @@
 package com.viktor.kh.dev.shoplist.screens.products
 
 
+
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
-import android.view.animation.LayoutAnimationController
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -35,22 +35,25 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding = FragmentAddBinding.bind(view)
         rv  = binding.listProducts
-        val  listId = arguments?.getInt("listID")!!
-        val anim = AnimationUtils.loadLayoutAnimation(context,R.anim.layout_animation_fall_down)
-        model.init(listId)
         binding.addProduct.setOnClickListener(View.OnClickListener {
             addProduct()
         })
+        initActionbar()
+        val anim = AnimationUtils.loadLayoutAnimation(context,R.anim.layout_animation_fall_down)
+        val  listId = arguments?.getInt(listId)!!
         initRv()
-
+        model.init(listId)
+        Log.d("fixLog" , "ProductsFragment onViewCreated")
         model.productsList.observe(viewLifecycleOwner, Observer {
-            rv.layoutAnimation = anim
+           if (model.initAnim){
+               rv.layoutAnimation = anim
+           }
             subscribeData(it)
 
         })
-
 
     }
 
@@ -112,6 +115,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
 
     private fun subscribeData(data :List<DataProduct>){
         productsAdapter.setData(data)
+
     }
 
     private fun initRv(){
@@ -147,9 +151,20 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
       Log.d("MyLog", "rv init")
     }
 
+
+    private fun initActionbar(){
+        val supportActionBar: androidx.appcompat.app.ActionBar?
+                = (activity as AppCompatActivity).supportActionBar
+        val listName = arguments?.getString(listName)
+        supportActionBar?.title = listName
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+
     override fun onItemDismiss(position: Int) {
         //activate swipe from ItemTouchHelper
         model.deleteProduct(position)
     }
+
 
 }

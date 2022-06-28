@@ -8,6 +8,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.helpers.currentTimeToLong
+import com.viktor.kh.dev.shoplist.helpers.listId
+import com.viktor.kh.dev.shoplist.helpers.listName
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 import com.viktor.kh.dev.shoplist.repository.db.room.ProductListsDao
@@ -75,10 +77,11 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
       }
     }
 
-    fun openList(controller: NavController, id :Int){
+    fun openList(controller: NavController, dataProductList: DataProductList){
         // open list on position
         var bundle = Bundle()
-       bundle.putInt("listID",id)
+       bundle.putInt(listId,dataProductList.id)
+        bundle.putString(listName,dataProductList.name)
         controller.navigate(R.id.action_productListsFragment_to_productsFragment,bundle)
     }
 

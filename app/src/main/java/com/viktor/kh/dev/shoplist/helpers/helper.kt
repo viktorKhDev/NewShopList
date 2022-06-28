@@ -46,6 +46,9 @@ fun cancelKeyboard(view: View,activity: AppCompatActivity){
 const val true1 :String = "1"
 const val falce0 :String = "0"
 const val sortByName = "sort_by_name"
+const val listId = "ListId"
+const val listName = "ListName"
+
 
 
 

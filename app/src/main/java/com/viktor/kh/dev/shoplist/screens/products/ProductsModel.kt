@@ -20,29 +20,34 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
   @Inject lateinit var productListsDao: ProductListsDao
 
   private var listId :Int? = null
-    private val init = false
+
+    //variable for check animation
+    var initAnim = false
 
     //need get from settings
    private  var typeSortProduct = sortByName
 
-    fun init(id: Int){
-        if (!init||listId!=id){
-            listId = id
-            getProducts()
-        }
-
-        Log.d("MyLog", "productsModel init with id ${id.toString()}")
-    }
 
   val productsList : MutableLiveData<List<DataProduct>> by lazy {
       MutableLiveData<List<DataProduct>>().also {
           getProducts()
       }
   }
+    fun init(id: Int){
+        initAnim = true
+        if (listId!=id) {
+            listId = id
+            getProducts()
+
+        }
+
+        Log.d("MyLog", "productsModel init with id ${id.toString()}")
+    }
 
 
 
-   private fun getProducts(){
+
+    private fun getProducts(){
         CoroutineScope(Dispatchers.IO).launch {
             val data : DataProductList = productListsDao.get(listId!!)
             val newData  = DataProductList(data.id,data.name,data.date,
@@ -58,6 +63,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
 
 
     fun changeReady(position :Int){
+       initAnim = false
       CoroutineScope(Dispatchers.IO).launch {
           val currentProduct = productsList.value!![position]
           val newProduct = DataProduct(currentProduct.name,currentProduct.date
@@ -73,6 +79,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
     }
 
     fun renameProduct(position: Int,name: String){
+        initAnim = false
         CoroutineScope(Dispatchers.IO).launch {
             val currentProduct = productsList.value!![position]
             val newProduct = DataProduct(name,currentProduct.date,currentProduct.ready)
@@ -87,8 +94,8 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
     }
 
     fun deleteProduct(position: Int){
-
-     CoroutineScope(Dispatchers.IO).launch {
+        initAnim = false
+        CoroutineScope(Dispatchers.IO).launch {
          val list: DataProductList = productListsDao.get(listId!!)
          val products  = mutableListOf<DataProduct>()
          list.products?.let { products.addAll(it) }
@@ -99,7 +106,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
     }
 
     fun addProduct(product: DataProduct){
-
+      initAnim = false
         CoroutineScope(Dispatchers.IO).launch {
             val list: DataProductList = productListsDao.get(listId!!)
             val products  = mutableListOf<DataProduct>()
