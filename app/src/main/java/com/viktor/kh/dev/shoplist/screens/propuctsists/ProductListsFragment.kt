@@ -3,6 +3,9 @@ package com.viktor.kh.dev.shoplist.screens.propuctsists
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -19,6 +22,7 @@ import com.viktor.kh.dev.shoplist.databinding.DialogAddBinding
 import com.viktor.kh.dev.shoplist.databinding.FragmentListsBinding
 import com.viktor.kh.dev.shoplist.helpers.cancelKeyboard
 import com.viktor.kh.dev.shoplist.helpers.initFocusAndShowKeyboard
+import com.viktor.kh.dev.shoplist.helpers.listName
 import com.viktor.kh.dev.shoplist.helpers.showToast
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,6 +41,8 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
         binding = FragmentListsBinding.bind(view)
         list = binding.includeLists.lists
          initList()
+         initActionbar()
+         setHasOptionsMenu(true)
          binding.fabAddList.setOnClickListener(View.OnClickListener {
              addList()
          })
@@ -140,6 +146,31 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
         }
 
 
+
+    }
+
+    private fun initActionbar(){
+        val supportActionBar: androidx.appcompat.app.ActionBar?
+                = (activity as AppCompatActivity).supportActionBar
+        supportActionBar?.title = getString(R.string.lists)
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.options_menu_in_lists,menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+          R.id.search_item -> searchList()
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+
+    fun searchList(){
 
     }
 

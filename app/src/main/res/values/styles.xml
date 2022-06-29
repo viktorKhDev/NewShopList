@@ -1,7 +1,8 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent= "MyActionBar">
+
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -9,8 +10,14 @@
 
     </style>
 
-    <style name="Text_andika">
+    <style name="MyActionBar" parent="android:ThemeOverlay.Material.Dark.ActionBar">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:color">@color/colorPrimary</item>
+        <item name="popupMenuBackground">@color/colorPrimary</item>
 
     </style>
+
+    <style name="Text_andika"/>
 
 </resources>

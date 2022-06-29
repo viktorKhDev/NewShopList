@@ -5,6 +5,9 @@ package com.viktor.kh.dev.shoplist.screens.products
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Button
@@ -47,6 +50,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         initRv()
         model.init(listId)
         Log.d("fixLog" , "ProductsFragment onViewCreated")
+        setHasOptionsMenu(true)
         model.productsList.observe(viewLifecycleOwner, Observer {
            if (model.initAnim){
                rv.layoutAnimation = anim
@@ -158,13 +162,36 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         val listName = arguments?.getString(listName)
         supportActionBar?.title = listName
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
     }
 
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.options_menu_in_list,menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+      when(item.itemId){
+          android.R.id.home -> activity!!.onBackPressed()
+          R.id.clean -> model.cleanList()
+          R.id.paste -> model.pasteList()
+          R.id.share_item -> model.shareList()
+          R.id.add_recipe -> model.addListFromRecipe()
+      }
+
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun onItemDismiss(position: Int) {
         //activate swipe from ItemTouchHelper
         model.deleteProduct(position)
     }
+
+
+
+
+
 
 
 }

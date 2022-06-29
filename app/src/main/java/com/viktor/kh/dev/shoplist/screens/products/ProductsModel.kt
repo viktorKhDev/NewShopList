@@ -134,5 +134,20 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
 
 
 
+    fun cleanList(){
+
+    }
+
+     fun pasteList(){
+
+    }
+
+     fun shareList(){
+
+    }
+    fun addListFromRecipe(){
+
+    }
+
 
 }
