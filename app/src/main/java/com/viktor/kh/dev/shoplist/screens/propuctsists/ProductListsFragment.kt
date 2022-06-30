@@ -1,15 +1,14 @@
 package com.viktor.kh.dev.shoplist.screens.propuctsists
 
-import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -18,11 +17,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
-import com.viktor.kh.dev.shoplist.databinding.DialogAddBinding
 import com.viktor.kh.dev.shoplist.databinding.FragmentListsBinding
 import com.viktor.kh.dev.shoplist.helpers.cancelKeyboard
 import com.viktor.kh.dev.shoplist.helpers.initFocusAndShowKeyboard
-import com.viktor.kh.dev.shoplist.helpers.listName
 import com.viktor.kh.dev.shoplist.helpers.showToast
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,20 +30,25 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
     private val model: ProductListsModel by activityViewModels()
      private lateinit var binding : FragmentListsBinding
-     private lateinit var list: RecyclerView
+     private lateinit var rv: RecyclerView
     private lateinit var listAdapter: ProductListsAdapter
 
      override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentListsBinding.bind(view)
-        list = binding.includeLists.lists
+        rv = binding.includeLists.lists
+         val anim = AnimationUtils.loadLayoutAnimation(context,R.anim.bottom_layout_anim)
          initList()
+         model.init()
          initActionbar()
          setHasOptionsMenu(true)
          binding.fabAddList.setOnClickListener(View.OnClickListener {
              addList()
          })
          model.dataLists.observe(viewLifecycleOwner, Observer {
+             if (model.initAnim){
+                 rv.layoutAnimation = anim
+             }
             subscribeData(it)
 
        })
@@ -77,11 +79,14 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
        }
        listAdapter = ProductListsAdapter(onListClickListener, onSetClickListener, onDelClickListener)
-       list.apply {
+       rv.apply {
            layoutManager = LinearLayoutManager(context)
            adapter = listAdapter
 
+
        }
+
+       rv.adapter!!.notifyDataSetChanged()
 
 
 

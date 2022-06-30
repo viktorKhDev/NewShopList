@@ -49,7 +49,6 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         val  listId = arguments?.getInt(listId)!!
         initRv()
         model.init(listId)
-        Log.d("fixLog" , "ProductsFragment onViewCreated")
         setHasOptionsMenu(true)
         model.productsList.observe(viewLifecycleOwner, Observer {
            if (model.initAnim){

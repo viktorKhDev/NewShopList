@@ -25,12 +25,23 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
 
     @Inject lateinit var productListsDao: ProductListsDao
 
+    //variable for check start animation
+    var initAnim = false
+
 
    val dataLists : MutableLiveData <List<DataProductList>> by lazy {
        MutableLiveData <List<DataProductList>>().also {
            getLists()
        }
    }
+
+    fun init(){
+        initAnim = true
+        getLists()
+    }
+
+
+
 
 
     private fun getLists(){
@@ -46,9 +57,10 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
 
     fun deleteList(position : Int){
         //delete list on position
+        initAnim = false
         CoroutineScope(Dispatchers.IO).launch {
                 productListsDao.delete(dataLists.value!![position])
-            dataLists.postValue(productListsDao.getAll())
+            getLists()
         }
 
 
@@ -56,16 +68,18 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
 
     fun addList(name: String){
         //add list with name
+        initAnim = false
         val listProduct :List<DataProduct> = emptyList()
         val productList = DataProductList(0,name, currentTimeToLong(),listProduct)
         CoroutineScope(Dispatchers.IO).launch {
             productListsDao.insert(productList)
-            dataLists.postValue(productListsDao.getAll())
+            getLists()
         }
 
     }
 
     fun setList(position: Int,name: String){
+        initAnim = false
         val list : DataProductList = dataLists.value!![position]
         CoroutineScope(Dispatchers.IO).launch {
          productListsDao.update(
@@ -73,7 +87,7 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
              list.id, name, list.date,list.products
          )
          )
-            dataLists.postValue(productListsDao.getAll())
+           getLists()
       }
     }
 

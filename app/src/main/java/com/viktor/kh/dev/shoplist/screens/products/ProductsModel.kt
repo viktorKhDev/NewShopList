@@ -2,7 +2,6 @@ package com.viktor.kh.dev.shoplist.screens.products
 
 import android.app.Application
 import android.util.Log
-import androidx.appcompat.widget.ThemedSpinnerAdapter.Helper
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.viktor.kh.dev.shoplist.helpers.*
@@ -12,9 +11,7 @@ import com.viktor.kh.dev.shoplist.repository.db.room.ProductListsDao
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import java.lang.StringBuilder
-import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 
 @HiltViewModel
@@ -24,7 +21,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
 
   private var listId :Int? = null
 
-    //variable for check animation
+    //variable for check start animation
     var initAnim = false
 
     //need get from settings
@@ -111,8 +108,8 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
     fun addProduct(productName: String){
       initAnim = false
         CoroutineScope(Dispatchers.IO).launch {
-            val dataProduct = DataProduct(productName.trim(), currentTimeToLong().toString(), falce0)
             val list: DataProductList = productListsDao.get(listId!!)
+            val dataProduct = DataProduct(checkIdenticalName(productName.trim(),list), currentTimeToLong().toString(), falce0)
             val products  = mutableListOf<DataProduct>()
             list.products?.let { products.addAll(it) }
             products.add(dataProduct)
@@ -120,9 +117,6 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
             getProducts()
         }
     }
-
-
-
 
 
 
@@ -138,19 +132,25 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
     }
 
      fun pasteList(){
-         val currentData = mutableListOf<DataProduct>()
+         initAnim = false
+         CoroutineScope(Dispatchers.IO).launch {
+             val products = mutableListOf<DataProduct>()
 
-         val text: String = getClipboard(getApplication())
-         val strings = text.split("\n").toTypedArray()
-
+             val text: String = getClipboard(getApplication())
+             val strings = text.split("\n").toTypedArray()
+             val list: DataProductList = productListsDao.get(listId!!)
              for (name in strings) {
-                 val product = DataProduct(name, currentTimeToLong().toString(), falce0)
-                 currentData.add(product)
+                 val product = DataProduct(checkIdenticalName(name.trim(),list), currentTimeToLong().toString(), falce0)
+                 products.add(product)
              }
 
+             productListsDao.update(DataProductList(list.id,list.name,list.date,products))
+             getProducts()
 
 
-    }
+         }
+
+     }
 
      fun shareList(){
 
@@ -173,32 +173,27 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
         return sortedList
     }
 
-    private fun checkIdenticalName( productName: String): String{
+    private fun checkIdenticalName(s: String, productList :DataProductList): String{
         // logic for the name if the list of names contains such a name
-        var newName: String = ""
+        var newName: String
+
+        val products  = mutableListOf<DataProduct>()
+        productList.products?.let { products.addAll(it) }
          val list  = mutableListOf<String>()
-        for (i in productsList.value!!){
+        for (i in products){
                list.add(i.name.toString())
            }
-
-        newName = changeIdenticalName(productName,list)
-
-
-         return newName
-    }
-
-    private fun changeIdenticalName(s : String, list : List<String>):String{
         val r = Regex("\\(\\d\\)")
-
         var sameNumber = 2
-        var newName = ""
+        var countDownsize = 2
         if (list.contains(s)){
             if (s.equals(r)){
                 val symbols = s.toCharArray()
                 val numbers = mutableListOf<Char>()
                 for (i in symbols.size-2 downTo 1){
+                    countDownsize++
                     if (symbols[i]=='(') break
-                   numbers.add(symbols[i])
+                    numbers.add(symbols[i])
                 }
                 numbers.reverse()
                 var str =  StringBuilder()
@@ -206,14 +201,18 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                     str.append(i)
                 }
                 sameNumber = str.toString().toInt()
-
+                newName = "${s.substring(0,s.length - countDownsize)}($sameNumber)"
 
             }else{
                 newName = "$s ($sameNumber)"
             }
 
+        }else{
+            newName = s
         }
+
         return newName
     }
+
 
 }
