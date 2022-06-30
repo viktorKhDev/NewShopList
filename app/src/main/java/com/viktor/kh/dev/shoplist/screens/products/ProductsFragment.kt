@@ -68,9 +68,9 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         btnAcceptProduct.setOnClickListener(View.OnClickListener {
             val productName : String = textProduct.text.toString()
             if(productName.isNotEmpty()){
-                val dataProduct = DataProduct(productName, currentTimeToLong().toString(), falce0)
+
                 textProduct.setText("")
-                model.addProduct(dataProduct)
+                model.addProduct(productName)
             }else{
                 showToast(getString(R.string.input_the_title),context)
             }

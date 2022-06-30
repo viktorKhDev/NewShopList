@@ -1,15 +1,16 @@
 package com.viktor.kh.dev.shoplist.helpers
 
+import android.content.ClipData
+import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
+import android.content.ClipboardManager
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import com.viktor.kh.dev.shoplist.screens.main.MainActivity
-import dagger.hilt.android.internal.Contexts
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 val format = SimpleDateFormat("dd.MM.yyyy")
 
@@ -40,6 +41,31 @@ fun cancelKeyboard(view: View,activity: AppCompatActivity){
     val  inputMethodManager :InputMethodManager = activity
         .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
        inputMethodManager.hideSoftInputFromWindow(view.windowToken,0)
+}
+
+
+fun getClipboard(context: Context): String {
+    val clipboard: ClipboardManager =
+        context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    var pasteData = ""
+
+    // If it does contain data, decide if you can handle the data.
+    if (!clipboard.hasPrimaryClip()) {
+    } else if (!clipboard.primaryClipDescription?.hasMimeType(
+            MIMETYPE_TEXT_PLAIN
+        )!!
+    ) {
+
+        // since the clipboard has data but it is not plain text
+    } else {
+
+        //since the clipboard contains plain text.
+        val item: ClipData.Item = clipboard.primaryClip!!.getItemAt(0)
+
+        // Gets the clipboard as text.
+        pasteData = item.text.toString()
+    }
+    return pasteData
 }
 
 
