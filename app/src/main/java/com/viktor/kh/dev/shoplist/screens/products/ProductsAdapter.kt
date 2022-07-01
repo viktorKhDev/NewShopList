@@ -45,10 +45,12 @@ class ProductsAdapter(
         }
     }
 
-    fun setData(list: List<DataProduct>){
+    fun setData(list: List<DataProduct>,stateForAnim: Int){
+
         data.clear()
         data.addAll(list)
         notifyDataSetChanged()
+
 
     }
 

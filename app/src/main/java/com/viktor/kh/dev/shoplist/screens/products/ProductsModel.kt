@@ -1,6 +1,7 @@
 package com.viktor.kh.dev.shoplist.screens.products
 
 import android.app.Application
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
@@ -10,7 +11,6 @@ import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 import com.viktor.kh.dev.shoplist.repository.db.room.ProductListsDao
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
-import java.lang.StringBuilder
 import javax.inject.Inject
 
 
@@ -23,6 +23,8 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
 
     //variable for check start animation
     var initAnim = false
+    var stateChange = updateData
+    var animPosition = -1
 
     //need get from settings
    private  var typeSortProduct = sortByName
@@ -37,6 +39,8 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
         initAnim = true
         if (listId!=id) {
             listId = id
+            stateChange = updateData
+            animPosition = -1
             getProducts()
 
         }
@@ -74,6 +78,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
           products.removeAt(position)
           products.add(newProduct)
           productListsDao.update(DataProductList(list.id,list.name,list.date,products))
+          stateChange = changeReady
           getProducts()
       }
     }
@@ -89,6 +94,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
             products.removeAt(position)
             products.add(newProduct)
             productListsDao.update(DataProductList(list.id,list.name,list.date,products))
+            stateChange = updateData
             getProducts()
         }
     }
@@ -101,6 +107,8 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
          list.products?.let { products.addAll(it) }
          products.removeAt(position)
          productListsDao.update(DataProductList(list.id,list.name,list.date,products))
+            stateChange = deleteProduct
+            animPosition = position
          getProducts()
      }
     }
@@ -109,11 +117,12 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
       initAnim = false
         CoroutineScope(Dispatchers.IO).launch {
             val list: DataProductList = productListsDao.get(listId!!)
-            val dataProduct = DataProduct(checkIdenticalName(productName.trim(),list), currentTimeToLong().toString(), falce0)
+            val dataProduct = DataProduct(productName.trim(), currentTimeToLong().toString(), falce0)
             val products  = mutableListOf<DataProduct>()
             list.products?.let { products.addAll(it) }
             products.add(dataProduct)
            productListsDao.update(DataProductList(list.id,list.name,list.date,products))
+            stateChange = addProduct
             getProducts()
         }
     }
@@ -127,6 +136,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
            list.products?.let { products.addAll(it) }
            products.clear()
            productListsDao.update(DataProductList(list.id,list.name,list.date,products))
+           stateChange = updateData
            getProducts()
        }
     }
@@ -140,11 +150,12 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
              val strings = text.split("\n").toTypedArray()
              val list: DataProductList = productListsDao.get(listId!!)
              for (name in strings) {
-                 val product = DataProduct(checkIdenticalName(name.trim(),list), currentTimeToLong().toString(), falce0)
+                 val product = DataProduct(name.trim(), currentTimeToLong().toString(), falce0)
                  products.add(product)
              }
 
              productListsDao.update(DataProductList(list.id,list.name,list.date,products))
+             stateChange =  updateData
              getProducts()
 
 
@@ -152,7 +163,16 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
 
      }
 
-     fun shareList(){
+     fun shareList(context: Context){
+         val list = productsList.value
+         val stringBuilder = StringBuilder()
+         if (list!!.isNotEmpty()){
+             for (product in list) {
+                 stringBuilder.append(product.name)
+                 stringBuilder.append("\n")
+             }
+             shareText(stringBuilder.toString(),context)
+         }
 
     }
     fun addListFromRecipe(){
@@ -173,7 +193,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
         return sortedList
     }
 
-    private fun checkIdenticalName(s: String, productList :DataProductList): String{
+   /* private fun checkIdenticalName(s: String, productList :DataProductList): String{
         // logic for the name if the list of names contains such a name
         var newName: String
 
@@ -212,7 +232,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
         }
 
         return newName
-    }
+    }*/
 
 
 }

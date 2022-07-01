@@ -117,7 +117,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
     }
 
     private fun subscribeData(data :List<DataProduct>){
-        productsAdapter.setData(data)
+        productsAdapter.setData(data,model.stateChange)
 
     }
 
@@ -175,7 +175,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
           android.R.id.home -> activity!!.onBackPressed()
           R.id.clean -> model.cleanList()
           R.id.paste -> model.pasteList()
-          R.id.share_item -> model.shareList()
+          R.id.share_item -> activity?.let { model.shareList(it) }
           R.id.add_recipe -> model.addListFromRecipe()
       }
 

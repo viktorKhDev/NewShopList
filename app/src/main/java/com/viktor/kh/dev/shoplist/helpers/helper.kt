@@ -4,15 +4,26 @@ import android.content.ClipData
 import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 val format = SimpleDateFormat("dd.MM.yyyy")
+const val true1 :String = "1"
+const val falce0 :String = "0"
+const val sortByName = "sort_by_name"
+const val listId = "ListId"
+const val listName = "ListName"
+const val addProduct = 1
+const val changeReady = 2
+const val deleteProduct = 3
+const val updateData = 0
 
 fun convertLongToTime(time: Long): String {
     val date = Date(time)
@@ -69,11 +80,30 @@ fun getClipboard(context: Context): String {
 }
 
 
-const val true1 :String = "1"
-const val falce0 :String = "0"
-const val sortByName = "sort_by_name"
-const val listId = "ListId"
-const val listName = "ListName"
+fun shareText(text: String?, context: Context) {
+    val intent = Intent(Intent.ACTION_SEND)
+    intent.putExtra(Intent.EXTRA_TEXT, text)
+    intent.type = "text/plain"
+    if (intent.resolveActivity(context.packageManager) != null) {
+        context.startActivity(intent)
+    }
+
+}
+
+
+fun checkChangePosition(oldList: List<DataProduct>, newList: List<DataProduct>): Int{
+    //logic for animation rv when change data
+           if (newList.size>oldList.size){
+
+           }
+
+
+
+
+    return 0
+
+}
+
 
 
 
