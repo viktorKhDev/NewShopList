@@ -1,6 +1,7 @@
 package com.viktor.kh.dev.shoplist.screens.products
 
 import android.graphics.Paint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,9 @@ import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
+import com.viktor.kh.dev.shoplist.helpers.addProduct
+import com.viktor.kh.dev.shoplist.helpers.changeReady
+import com.viktor.kh.dev.shoplist.helpers.deleteProduct
 import com.viktor.kh.dev.shoplist.helpers.true1
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import kotlin.collections.ArrayList
@@ -45,13 +49,32 @@ class ProductsAdapter(
         }
     }
 
-    fun setData(list: List<DataProduct>,stateForAnim: Int){
+    fun setData(list: List<DataProduct>,stateForAnim: Int,position: Int
+    ,newPosition: Int){
 
         data.clear()
         data.addAll(list)
-        notifyDataSetChanged()
+        if (position!=-1){
+            when(stateForAnim){
+                addProduct -> {
+                    notifyItemInserted(position)
+                }
 
+                deleteProduct -> {
+                    notifyItemRemoved(position)
+                }
 
+                changeReady -> {
+                   notifyItemMoved(position,newPosition)
+                }
+
+                else -> {
+                    notifyDataSetChanged()
+                }
+            }
+        }else{
+            notifyDataSetChanged()
+        }
     }
 
 

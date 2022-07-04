@@ -117,7 +117,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
     }
 
     private fun subscribeData(data :List<DataProduct>){
-        productsAdapter.setData(data,model.stateChange)
+        productsAdapter.setData(data,model.stateChange,model.animPosition,model.newPosition)
 
     }
 
@@ -143,7 +143,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         rv.apply {
             adapter = productsAdapter
             layoutManager = LinearLayoutManager(context)
-          rv.itemAnimator = null
+           // rv.itemAnimator = null
         }
 
         productsAdapter.notifyDataSetChanged()

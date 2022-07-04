@@ -25,6 +25,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
     var initAnim = false
     var stateChange = updateData
     var animPosition = -1
+    var newPosition  = 0
 
     //need get from settings
    private  var typeSortProduct = sortByName
@@ -79,6 +80,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
           products.add(newProduct)
           productListsDao.update(DataProductList(list.id,list.name,list.date,products))
           stateChange = changeReady
+          animPosition = position
           getProducts()
       }
     }
@@ -121,8 +123,9 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
             val products  = mutableListOf<DataProduct>()
             list.products?.let { products.addAll(it) }
             products.add(dataProduct)
-           productListsDao.update(DataProductList(list.id,list.name,list.date,products))
+            productListsDao.update(DataProductList(list.id,list.name,list.date,products))
             stateChange = addProduct
+            animPosition = products.size-1
             getProducts()
         }
     }
@@ -138,6 +141,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
            productListsDao.update(DataProductList(list.id,list.name,list.date,products))
            stateChange = updateData
            getProducts()
+
        }
     }
 
@@ -145,19 +149,20 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
          initAnim = false
          CoroutineScope(Dispatchers.IO).launch {
              val products = mutableListOf<DataProduct>()
-
              val text: String = getClipboard(getApplication())
-             val strings = text.split("\n").toTypedArray()
-             val list: DataProductList = productListsDao.get(listId!!)
-             for (name in strings) {
-                 val product = DataProduct(name.trim(), currentTimeToLong().toString(), falce0)
-                 products.add(product)
+             if (text.isNotEmpty()){
+                 val strings = text.split("\n").toTypedArray()
+                 val list: DataProductList = productListsDao.get(listId!!)
+                 products.addAll(list.products!!)
+                 for (name in strings) {
+                     val product = DataProduct(name.trim(), currentTimeToLong().toString(), falce0)
+                     products.add(product)
+                     animPosition = products.size
+                 }
+                 productListsDao.update(DataProductList(list.id,list.name,list.date,products))
+                 stateChange =  updateData
+                 getProducts()
              }
-
-             productListsDao.update(DataProductList(list.id,list.name,list.date,products))
-             stateChange =  updateData
-             getProducts()
-
 
          }
 
@@ -184,13 +189,50 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
     }
 
     private  fun sortProducts(products: List<DataProduct>):List<DataProduct>{
-        val sortedList: List<DataProduct>
-        if (typeSortProduct == sortByName) {
-            sortedList = products.sortedWith(compareBy({ it.ready }, { it.name }))
+        if (products.isNotEmpty()&&products.size!=1){
+            val sortedList: List<DataProduct>
+            val product: DataProduct
+            if (typeSortProduct == sortByName) {
+                sortedList = products.sortedWith(compareBy({ it.ready }, { it.name }))
+            }else{
+                sortedList = products.sortedBy { it.ready }
+            }
+            when(stateChange){
+                addProduct -> {
+                    if(animPosition!=-1){
+                        product = products[animPosition]
+                        for (i in 1..sortedList.size){
+                            if (product == sortedList[i]){
+                                animPosition = i
+                                break
+                            }
+                        }
+                    }
+                }
+
+                changeReady ->{
+                    if(animPosition!=-1){
+                        product = products[animPosition]
+                        for (i in 1..sortedList.size){
+                            if (product == sortedList[i]){
+                                newPosition = i
+                                break
+                            }
+                        }
+                    }
+                }
+
+
+
+            }
+
+            return sortedList
         }else{
-            sortedList = products.sortedBy { it.ready }
+            return products
         }
-        return sortedList
+
+
+
     }
 
    /* private fun checkIdenticalName(s: String, productList :DataProductList): String{
