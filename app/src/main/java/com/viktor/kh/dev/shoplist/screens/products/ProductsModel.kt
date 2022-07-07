@@ -25,8 +25,6 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
     var initAnim = false
     var stateChange = updateData
     var animPosition = -1
-    var newPosition  = 0
-
     //need get from settings
    private  var typeSortProduct = sortByName
 
@@ -37,13 +35,13 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
       }
   }
     fun init(id: Int){
+        stateChange = updateData
+        Log.d("fixLog", "state in model = $stateChange  ")
+        animPosition = -1
         initAnim = true
         if (listId!=id) {
             listId = id
-            stateChange = updateData
-            animPosition = -1
             getProducts()
-
         }
 
         Log.d("MyLog", "productsModel init with id ${id.toString()}")
@@ -61,11 +59,9 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
             withContext(Dispatchers.Main){
                 productsList.value = newData.products
             }
-
             Log.d("MyLog", "productsModel get list")
         }
     }
-
 
     fun changeReady(position :Int){
        initAnim = false
@@ -197,34 +193,6 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
             }else{
                 sortedList = products.sortedBy { it.ready }
             }
-            when(stateChange){
-                addProduct -> {
-                    if(animPosition!=-1){
-                        product = products[animPosition]
-                        for (i in 1..sortedList.size){
-                            if (product == sortedList[i]){
-                                animPosition = i
-                                break
-                            }
-                        }
-                    }
-                }
-
-                changeReady ->{
-                    if(animPosition!=-1){
-                        product = products[animPosition]
-                        for (i in 1..sortedList.size){
-                            if (product == sortedList[i]){
-                                newPosition = i
-                                break
-                            }
-                        }
-                    }
-                }
-
-
-
-            }
 
             return sortedList
         }else{
@@ -234,6 +202,9 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
 
 
     }
+
+
+
 
    /* private fun checkIdenticalName(s: String, productList :DataProductList): String{
         // logic for the name if the list of names contains such a name

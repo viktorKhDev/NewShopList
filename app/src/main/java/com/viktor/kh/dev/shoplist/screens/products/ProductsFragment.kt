@@ -47,8 +47,8 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         initActionbar()
         val anim = AnimationUtils.loadLayoutAnimation(context,R.anim.layout_animation_fall_down)
         val  listId = arguments?.getInt(listId)!!
-        initRv()
         model.init(listId)
+        initRv()
         setHasOptionsMenu(true)
         model.productsList.observe(viewLifecycleOwner, Observer {
            if (model.initAnim){
@@ -117,7 +117,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
     }
 
     private fun subscribeData(data :List<DataProduct>){
-        productsAdapter.setData(data,model.stateChange,model.animPosition,model.newPosition)
+        productsAdapter.setData(data,model.stateChange)
 
     }
 
@@ -137,9 +137,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
             }
 
         }
-
         productsAdapter = ProductsAdapter(onClickListener,onLongClickListener)
-
         rv.apply {
             adapter = productsAdapter
             layoutManager = LinearLayoutManager(context)

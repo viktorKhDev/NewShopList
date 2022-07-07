@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
@@ -14,6 +13,7 @@ import com.viktor.kh.dev.shoplist.helpers.changeReady
 import com.viktor.kh.dev.shoplist.helpers.deleteProduct
 import com.viktor.kh.dev.shoplist.helpers.true1
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
+import java.util.*
 import kotlin.collections.ArrayList
 
 class ProductsAdapter(
@@ -22,6 +22,7 @@ class ProductsAdapter(
 ) : RecyclerView.Adapter<ProductsAdapter.ProductHolder>() {
 
     var data : ArrayList<DataProduct> = ArrayList()
+    private var positionClick = 0
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
@@ -49,35 +50,63 @@ class ProductsAdapter(
         }
     }
 
-    fun setData(list: List<DataProduct>,stateForAnim: Int,position: Int
-    ,newPosition: Int){
 
-        data.clear()
-        data.addAll(list)
-        if (position!=-1){
+
+    fun setData(list: List<DataProduct>, stateForAnim: Int){
+        //Log.d("fixLog", "state  = $stateForAnim")
+        var animPosition = 0
+        var newPosition = 0
+
             when(stateForAnim){
                 addProduct -> {
-                    notifyItemInserted(position)
+                    for (i in list.indices){
+                            if (!data.contains(list[i])){
+                                animPosition = i
+                            }
+                        }
+                    data.clear()
+                    data.addAll(list)
+                    notifyItemInserted(animPosition)
                 }
-
-                deleteProduct -> {
-                    notifyItemRemoved(position)
-                }
-
                 changeReady -> {
-                   notifyItemMoved(position,newPosition)
+                    animPosition = positionClick
+                   for ( i in list.indices){
+                        if (compareProduct(list[i],data[animPosition])){
+                           newPosition = i
+                        }
+
+                   }
+                    data.clear()
+                    data.addAll(list)
+                    if (animPosition==newPosition){
+                        notifyDataSetChanged()
+                    }else{
+                        notifyItemMoved(animPosition,newPosition)
+
+                    }
+
+                    //Log.d("fixLog", "moved from $animPosition(${data[animPosition].name}) to $newPosition(${data[newPosition].name}) ")
+                }
+                deleteProduct -> {
+                    for (i in data.indices){
+                        if (!list.contains(data[i])){
+                           animPosition = i
+                        }
+                    }
+                    data.clear()
+                    data.addAll(list)
+                   notifyItemRemoved(animPosition)
                 }
 
                 else -> {
+                    data.clear()
+                    data.addAll(list)
                     notifyDataSetChanged()
                 }
+
             }
-        }else{
-            notifyDataSetChanged()
-        }
+
     }
-
-
 
     inner class ProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
@@ -91,6 +120,7 @@ class ProductsAdapter(
             }
 
             itemView.setOnClickListener(View.OnClickListener {
+                positionClick = layoutPosition
               onProductClickListener.onProductClick(layoutPosition)
             })
 
@@ -102,6 +132,12 @@ class ProductsAdapter(
         }
 
 
+
+    }
+    private fun compareProduct(product1:DataProduct,product2: DataProduct):Boolean{
+        return (product1.name==product2.name
+                &&product1.date == product2.date
+                /*&&product1.ready == product2.ready*/)
 
     }
 

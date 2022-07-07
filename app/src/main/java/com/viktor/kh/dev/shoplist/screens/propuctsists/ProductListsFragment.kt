@@ -158,6 +158,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
         val supportActionBar: androidx.appcompat.app.ActionBar?
                 = (activity as AppCompatActivity).supportActionBar
         supportActionBar?.title = getString(R.string.lists)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
     }
 
