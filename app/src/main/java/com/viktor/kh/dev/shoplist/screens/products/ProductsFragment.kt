@@ -61,8 +61,9 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
     }
 
     private fun addProduct() = with(binding) {
+        relativeAddProduct.startAnimation(AnimationUtils.loadAnimation(activity,R.anim.to_start_anim))
         relativeAddProduct.visibility = View.VISIBLE
-        addProduct.visibility = View.GONE
+        addProduct.hide()
         Log.d("MyLog" , "addButton Hide")
         btnAcceptProduct.setOnClickListener(View.OnClickListener {
             val productName : String = textProduct.text.toString()
@@ -78,7 +79,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         btnNoProduct.setOnClickListener(View.OnClickListener {
             textProduct.text.clear()
             relativeAddProduct.visibility = View.GONE
-            addProduct.visibility = View.VISIBLE
+            addProduct.show()
             Log.d("MyLog" , "addButton visible")
         })
 

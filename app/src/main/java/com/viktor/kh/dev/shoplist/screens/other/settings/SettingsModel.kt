@@ -1,4 +1,4 @@
-package com.viktor.kh.dev.shoplist.screens.settings
+package com.viktor.kh.dev.shoplist.screens.other.settings
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
