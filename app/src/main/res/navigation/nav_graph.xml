@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/productListsFragment">
 
     <fragment
         android:id="@+id/productListsFragment"
@@ -13,6 +13,12 @@
             android:id="@+id/action_productListsFragment_to_productsFragment"
             app:destination="@id/productsFragment"
             />
+        <action
+            android:id="@+id/action_productListsFragment_to_otherFragment"
+            app:destination="@id/otherFragment" />
+        <action
+            android:id="@+id/action_productListsFragment_to_recipeListsFragment"
+            app:destination="@id/recipeListsFragment" />
 
     </fragment>
     <fragment
@@ -22,6 +28,9 @@
         <action
             android:id="@+id/action_recipeListsFragment_to_recipeFragment"
             app:destination="@id/recipeFragment" />
+        <action
+            android:id="@+id/action_recipeListsFragment_to_productListsFragment"
+            app:destination="@id/productListsFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -45,6 +54,12 @@
         <action
             android:id="@+id/action_otherFragment_to_infoFragment2"
             app:destination="@id/infoFragment" />
+        <action
+            android:id="@+id/action_otherFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_otherFragment_to_productListsFragment"
+            app:destination="@id/productListsFragment" />
     </fragment>
     <fragment
         android:id="@+id/backupFragment"
@@ -54,24 +69,4 @@
         android:id="@+id/infoFragment"
         android:name="com.viktor.kh.dev.shoplist.screens.other.InfoFragment"
         android:label="InfoFragment"/>
-    <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.viktor.kh.dev.shoplist.screens.main.MainFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
-        <action
-            app:popUpTo="@id/nav_graph"
-            android:id="@+id/action_mainFragment_to_productListsFragment"
-            app:destination="@id/productListsFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_recipeListsFragment"
-            app:destination="@id/recipeListsFragment"
-            app:enterAnim="@anim/nav_default_pop_enter_anim" />
-        <action
-            android:id="@+id/action_mainFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_otherFragment2"
-            app:destination="@id/otherFragment" />
-    </fragment>
 </navigation>

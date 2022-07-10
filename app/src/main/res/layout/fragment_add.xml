@@ -22,8 +22,7 @@
             android:id="@+id/listProducts"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/background"
-            />
+            android:background="@color/background" />
 
 
     </RelativeLayout>
@@ -104,5 +103,6 @@
         android:clickable="true"
         android:focusable="true"
         app:backgroundTint="@color/colorAccent"
-        app:srcCompat="@drawable/plus" />
+        app:tint ="@color/black"
+        app:srcCompat="@drawable/ic_baseline_add_24" />
 </RelativeLayout>
