@@ -90,17 +90,7 @@ fun shareText(text: String?, context: Context) {
 
 }
 
-
-fun checkChangePosition(oldList: List<DataProduct>, newList: List<DataProduct>): Int{
-    //logic for animation rv when change data
-           if (newList.size>oldList.size){
-
-           }
-
-
-
-
-    return 0
+fun showDialog(){
 
 }
 

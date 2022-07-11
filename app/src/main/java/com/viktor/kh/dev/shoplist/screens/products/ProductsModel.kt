@@ -25,6 +25,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
     var initAnim = false
     var stateChange = updateData
     var animPosition = -1
+    var isAddClicked = false
     //need get from settings
    private  var typeSortProduct = sortByName
 
@@ -65,7 +66,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
 
     fun changeReady(position :Int){
        initAnim = false
-      CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.IO).launch {
           val currentProduct = productsList.value!![position]
           val newProduct = DataProduct(currentProduct.name,currentProduct.date
               , currentProduct.ready?.let { changeReady(it) })
@@ -129,7 +130,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
 
 
     fun cleanList(){
-       CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.IO).launch {
            val list: DataProductList = productListsDao.get(listId!!)
            val products  = mutableListOf<DataProduct>()
            list.products?.let { products.addAll(it) }

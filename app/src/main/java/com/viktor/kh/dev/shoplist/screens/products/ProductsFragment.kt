@@ -119,6 +119,9 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
 
     private fun subscribeData(data :List<DataProduct>){
         productsAdapter.setData(data,model.stateChange)
+        if (model.stateChange== addProduct){
+            rv.scrollToPosition(data.size-1)
+        }
 
     }
 

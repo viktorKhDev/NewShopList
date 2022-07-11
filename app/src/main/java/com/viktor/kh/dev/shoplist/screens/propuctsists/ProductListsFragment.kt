@@ -33,7 +33,8 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
      private lateinit var rv: RecyclerView
     private lateinit var listAdapter: ProductListsAdapter
 
-     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentListsBinding.bind(view)
         rv = binding.includeLists.lists
@@ -56,6 +57,9 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
     }
     private fun subscribeData(data: List<DataProductList>){
       listAdapter.setData(data)
+        if (model.isAddClicked){
+            rv.scrollToPosition(data.size-1)
+        }
     }
 
    private fun initList(){
@@ -63,6 +67,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
            override fun onListClick(position: Int) {
                val list = model.dataLists.value!![position]
                model.openList(findNavController(),list)
+
            }
        }
 
@@ -176,7 +181,8 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
     }
 
 
-    fun searchList(){
+    private fun searchList(){
+
 
     }
 

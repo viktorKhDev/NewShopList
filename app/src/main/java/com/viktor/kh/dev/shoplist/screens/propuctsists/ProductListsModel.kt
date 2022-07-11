@@ -27,6 +27,7 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
 
     //variable for check start animation
     var initAnim = false
+    var isAddClicked = false
 
 
    val dataLists : MutableLiveData <List<DataProductList>> by lazy {
@@ -36,8 +37,10 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
    }
 
     fun init(){
+        isAddClicked = false
         initAnim = true
         getLists()
+
     }
 
 
@@ -58,6 +61,7 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
     fun deleteList(position : Int){
         //delete list on position
         initAnim = false
+        isAddClicked = false
         CoroutineScope(Dispatchers.IO).launch {
                 productListsDao.delete(dataLists.value!![position])
             getLists()
@@ -69,6 +73,7 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
     fun addList(name: String){
         //add list with name
         initAnim = false
+        isAddClicked = true
         val listProduct :List<DataProduct> = emptyList()
         val productList = DataProductList(0,name, currentTimeToLong(),listProduct)
         CoroutineScope(Dispatchers.IO).launch {
@@ -79,6 +84,7 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
     }
 
     fun setList(position: Int,name: String){
+        isAddClicked = false
         initAnim = false
         val list : DataProductList = dataLists.value!![position]
         CoroutineScope(Dispatchers.IO).launch {
@@ -93,6 +99,7 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
 
     fun openList(controller: NavController, dataProductList: DataProductList){
         // open list on position
+        isAddClicked = false
         var bundle = Bundle()
        bundle.putInt(listId,dataProductList.id)
         bundle.putString(listName,dataProductList.name)
