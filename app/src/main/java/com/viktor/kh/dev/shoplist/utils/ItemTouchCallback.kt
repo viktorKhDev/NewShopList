@@ -1,4 +1,4 @@
-package com.viktor.kh.dev.shoplist.helpers
+package com.viktor.kh.dev.shoplist.utils
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView

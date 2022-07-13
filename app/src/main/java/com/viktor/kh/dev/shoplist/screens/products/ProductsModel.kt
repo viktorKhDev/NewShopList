@@ -5,7 +5,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.viktor.kh.dev.shoplist.helpers.*
+import com.viktor.kh.dev.shoplist.utils.*
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 import com.viktor.kh.dev.shoplist.repository.db.room.ProductListsDao

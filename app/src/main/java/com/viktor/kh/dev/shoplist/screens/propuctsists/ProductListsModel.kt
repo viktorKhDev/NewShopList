@@ -7,9 +7,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import com.viktor.kh.dev.shoplist.R
-import com.viktor.kh.dev.shoplist.helpers.currentTimeToLong
-import com.viktor.kh.dev.shoplist.helpers.listId
-import com.viktor.kh.dev.shoplist.helpers.listName
+import com.viktor.kh.dev.shoplist.utils.currentTimeToLong
+import com.viktor.kh.dev.shoplist.utils.listId
+import com.viktor.kh.dev.shoplist.utils.listName
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 import com.viktor.kh.dev.shoplist.repository.db.room.ProductListsDao

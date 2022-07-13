@@ -1,4 +1,4 @@
-package com.viktor.kh.dev.shoplist.helpers
+package com.viktor.kh.dev.shoplist.utils
 
 import android.content.ClipData
 import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
@@ -9,7 +9,6 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -90,9 +89,7 @@ fun shareText(text: String?, context: Context) {
 
 }
 
-fun showDialog(){
 
-}
 
 
 

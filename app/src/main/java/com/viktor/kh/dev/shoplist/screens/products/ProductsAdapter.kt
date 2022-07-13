@@ -1,19 +1,17 @@
 package com.viktor.kh.dev.shoplist.screens.products
 
 import android.graphics.Paint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
-import com.viktor.kh.dev.shoplist.helpers.addProduct
-import com.viktor.kh.dev.shoplist.helpers.changeReady
-import com.viktor.kh.dev.shoplist.helpers.deleteProduct
-import com.viktor.kh.dev.shoplist.helpers.true1
+import com.viktor.kh.dev.shoplist.utils.addProduct
+import com.viktor.kh.dev.shoplist.utils.changeReady
+import com.viktor.kh.dev.shoplist.utils.deleteProduct
+import com.viktor.kh.dev.shoplist.utils.true1
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
-import java.util.*
 import kotlin.collections.ArrayList
 
 class ProductsAdapter(

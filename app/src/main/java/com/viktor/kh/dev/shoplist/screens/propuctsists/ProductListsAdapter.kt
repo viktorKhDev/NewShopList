@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.ItemListBinding
-import com.viktor.kh.dev.shoplist.helpers.convertLongToTime
-import com.viktor.kh.dev.shoplist.helpers.true1
+import com.viktor.kh.dev.shoplist.utils.convertLongToTime
+import com.viktor.kh.dev.shoplist.utils.true1
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 

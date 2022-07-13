@@ -2,6 +2,7 @@ package com.viktor.kh.dev.shoplist.screens.products
 
 
 
+
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
@@ -21,7 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.FragmentAddBinding
-import com.viktor.kh.dev.shoplist.helpers.*
+import com.viktor.kh.dev.shoplist.utils.*
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -91,10 +92,10 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         val dialog = context?.let { Dialog(it) }
         if(dialog!=null){
             dialog.setContentView(R.layout.dialog_add)
-            val text = dialog.findViewById<EditText>(R.id.text_del_product)
+            val text = dialog.findViewById<EditText>(R.id.dialog_text)
             text.setText(dataProduct.name)
             initFocusAndShowKeyboard(text, activity as AppCompatActivity)
-            val buttonAdd = dialog.findViewById<Button>(R.id.btn_yes)
+            val buttonYes = dialog.findViewById<Button>(R.id.btn_yes)
             val  buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
             dialog.setCancelable(true)
             dialog.show()
@@ -104,7 +105,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
                 cancelKeyboard(text, activity as AppCompatActivity)
             })
 
-            buttonAdd.setOnClickListener(View.OnClickListener {
+            buttonYes.setOnClickListener(View.OnClickListener {
                 if(text.text.toString().isNotEmpty()){
                     model.renameProduct(position,text.text.toString())
                     dialog.dismiss()
@@ -175,7 +176,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
       when(item.itemId){
           android.R.id.home -> activity!!.onBackPressed()
-          R.id.clean -> model.cleanList()
+          R.id.clean -> cleanList()
           R.id.paste -> model.pasteList()
           R.id.share_item -> activity?.let { model.shareList(it) }
           R.id.add_recipe -> model.addListFromRecipe()
@@ -190,7 +191,30 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
     }
 
 
+    private fun cleanList(){
+        val dialog = context?.let { Dialog(it) }
+        if(dialog!=null) {
+            dialog.setContentView(R.layout.dialog_add)
+            val text = dialog.findViewById<EditText>(R.id.dialog_text)
+            text.setText(R.string.clear_list)
+            initFocusAndShowKeyboard(text, activity as AppCompatActivity)
+            val buttonYes = dialog.findViewById<Button>(R.id.btn_yes)
+            val buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
+            dialog.setCancelable(true)
+            dialog.show()
 
+            buttonYes.setOnClickListener(View.OnClickListener {
+                model.cleanList()
+                dialog.dismiss()
+            })
+
+            buttonCancel.setOnClickListener(View.OnClickListener {
+                dialog.dismiss()
+            })
+
+
+        }
+    }
 
 
 
