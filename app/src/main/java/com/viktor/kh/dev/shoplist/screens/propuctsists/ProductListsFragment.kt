@@ -39,7 +39,8 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
 
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentListsBinding.bind(view)
         rv = binding.lists
@@ -61,10 +62,11 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
     }
     private fun subscribeData(data: List<DataProductList>){
-      listAdapter.setData(data)
-        if (model.isAddClicked){
-            rv.scrollToPosition(data.size-1)
-        }
+        listAdapter.setData(data)
+            if (model.isAddClicked){
+                rv.scrollToPosition(data.size-1)
+
+            }
     }
 
    private fun initList(){
@@ -105,6 +107,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
    }
 
     private fun addList(){
+
         val dialog = context?.let { Dialog(it) }
         if(dialog!=null){
             dialog.setContentView(R.layout.dialog_add)
@@ -123,8 +126,10 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
             buttonAdd.setOnClickListener(View.OnClickListener {
                 if(text.length()!=0){
+                    goneSearch()
                     model.addList(text.text.toString())
                     dialog.dismiss()
+
                 }else{
                     showToast(getString(R.string.input_the_title),context)
                 }
@@ -132,7 +137,6 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
         }
 
     }
-
     private fun setList(position:Int){
         var dataList: DataProductList = model.dataLists.value!![position]
         val dialog = context?.let { Dialog(it) }
@@ -152,6 +156,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
             })
 
             buttonAdd.setOnClickListener(View.OnClickListener {
+                goneSearch()
                 if(text.text.toString().isNotEmpty()){
                     model.setList(position,text.text.toString())
                     dialog.dismiss()
@@ -180,6 +185,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
             dialog.show()
 
             buttonYes.setOnClickListener(View.OnClickListener {
+                goneSearch()
                 model.deleteList(position)
                 dialog.dismiss()
             })
@@ -220,7 +226,6 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
         val animation = AnimationUtils.loadAnimation(context,R.anim.to_start_anim)
         searchBar.animation = animation
         animation.start()
-
         searchBar.visibility  = View.VISIBLE
         autoCompleteText.addTextChangedListener(FollowText(this@ProductListsFragment))
         closeSearch.setOnClickListener(View.OnClickListener {
@@ -231,11 +236,12 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
 
     private fun goneSearch() = with(binding){
-        autoCompleteText.setText("")
-        searchBar.visibility = View.GONE
-        supportActionBar.show()
-        model.dataLists.value?.let { it1 -> subscribeData(it1) }
-
+        if (searchBar.visibility == View.VISIBLE){
+            autoCompleteText.setText("")
+            searchBar.visibility = View.GONE
+            supportActionBar.show()
+            model.dataLists.value?.let { it1 -> subscribeData(it1) }
+        }
     }
 
 

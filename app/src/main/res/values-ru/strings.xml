@@ -51,7 +51,7 @@
     <string name="recipes_for_dialog">Рецепты:</string>
     <string name="list_title">Название списка</string>
     <string name="delete_list_q">Удалить список?</string>
-    <string name="delete_recipe_q">Удалить Рецепт?</string>
+    <string name="delete_recipe_q">Удалить рецепт?</string>
     <string name="edit">Изменить</string>
     <string name="sort_summary">Сортировка товаров от первого добавленого к последнему</string>
     <string name="sort_title">Сортировка по времени добавления</string>

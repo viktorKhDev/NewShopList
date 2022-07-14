@@ -10,7 +10,7 @@ import com.viktor.kh.dev.shoplist.repository.db.converters.ProductsConverter
 
 @Entity
 data class DataRecipe (
-    @PrimaryKey val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
      val name: String?,
      val text: String?,
      val date: Long?,
