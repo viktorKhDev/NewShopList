@@ -30,7 +30,7 @@
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/dialog_add.xml" value="0.17552083333333332" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/dialog_delete_product.xml" value="0.17552083333333332" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/dialog_rename_item.xml" value="0.17552083333333332" />
-        <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/fragment_add.xml" value="0.1" />
+        <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/fragment_add.xml" value="0.22" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/fragment_lists.xml" value="0.17552083333333332" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/fragment_main.xml" value="0.17552083333333332" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/include__list_activity.xml" value="0.17552083333333332" />
@@ -46,6 +46,7 @@
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/main_container.xml" value="0.17552083333333332" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/nav_header_main.xml" value="0.17552083333333332" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/other_fragment.xml" value="0.17552083333333332" />
+        <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/recipe_fragment.xml" value="0.1" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/recipe_products_fragment.xml" value="0.1" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/recipe_tab_layout_fragment.xml" value="0.17552083333333332" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/recipe_text_fragment.xml" value="0.1" />
