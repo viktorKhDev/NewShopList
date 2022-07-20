@@ -78,6 +78,7 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
                 model.openRecipe(findNavController(),list)
 
 
+
             }
         }
 
@@ -200,14 +201,17 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
 
     }
 
-    private fun initActionbar(){
-        supportActionBar =  (activity as AppCompatActivity).supportActionBar!!
+    private fun initActionbar() {
+        val activity = activity as AppCompatActivity
+
+        supportActionBar = (activity as AppCompatActivity).supportActionBar!!
         supportActionBar.apply {
             title = getString(R.string.recipes)
             setDisplayHomeAsUpEnabled(false)
             setShowHideAnimationEnabled(false)
 
         }
+
     }
 
 
