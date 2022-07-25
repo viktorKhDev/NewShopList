@@ -203,13 +203,12 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
 
     private fun initActionbar() {
         val activity = activity as AppCompatActivity
-
         supportActionBar = (activity as AppCompatActivity).supportActionBar!!
         supportActionBar.apply {
             title = getString(R.string.recipes)
             setDisplayHomeAsUpEnabled(false)
             setShowHideAnimationEnabled(false)
-
+            show()
         }
 
     }

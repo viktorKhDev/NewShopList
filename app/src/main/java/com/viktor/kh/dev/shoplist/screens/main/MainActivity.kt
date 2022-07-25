@@ -36,6 +36,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.otherFragment -> {
                     openBottomMenu()
                 }
+                R.id.recipeFragment ->{
+                    closeBottomMenuWithHideToolbar()
+                }
                 else -> {
                    closeBottomMenu()
                 }
@@ -61,5 +64,11 @@ class MainActivity : AppCompatActivity() {
        bottomNavView.visibility = View.GONE
    }
 
+
+    private fun closeBottomMenuWithHideToolbar(){
+        //val animation = AnimationUtils.loadAnimation(this,R.anim.bottom_menu_cler_hide_toolbar)
+        //bottomNavView.startAnimation(animation)
+        bottomNavView.visibility = View.GONE
+    }
 
 }
