@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.RecipeFragmentBinding
@@ -31,34 +32,27 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment) {
 
 
     private fun initClicks() = with(binding){
-        fabEditDescription.setOnClickListener(View.OnClickListener {
-         //initFocusAndShowKeyboard(recipeText, activity = AppCompatActivity())
-            fabEditDescription.visibility = View.GONE
-            fabConfirmDescription.visibility = View.VISIBLE
-        })
 
-        fabConfirmDescription.setOnClickListener(View.OnClickListener {
-
-            fabConfirmDescription.visibility = View.GONE
-            fabEditDescription.visibility = View.VISIBLE
-
-        })
-
-        productsFab.setOnClickListener(View.OnClickListener {
+          productsFab.setOnClickListener(View.OnClickListener {
             recipeProductList.visibility = View.VISIBLE
             val alphaColor = Color.argb(50,0,0,0)
             recipeProductList.setBackgroundColor(alphaColor)
-            val anim = AnimationUtils.loadLayoutAnimation(context,R.anim.recipe_products_show)
-            recipeProductList.layoutAnimation = anim
-            recipeProductList.startLayoutAnimation()
-            productsFab.hide()
-            productAdd.show()
-        })
+            val anim = AnimationUtils.loadAnimation(context,R.anim.scale_show_center)
+              rv.startAnimation(anim)
+              rv.focusable = View.FOCUSABLE
+              scrollText.isNestedScrollingEnabled = false
 
-        blackoutFrameImg.setOnClickListener(View.OnClickListener {
-            productAdd.hide()
-            productsFab.show()
+          })
+
+
+        blackoutFrameImgTop.setOnClickListener(View.OnClickListener {
             recipeProductList.visibility = View.GONE
+            scrollText.isNestedScrollingEnabled = true
+
+        })
+        blackoutFrameImgBottom.setOnClickListener(View.OnClickListener {
+            recipeProductList.visibility = View.GONE
+            scrollText.isNestedScrollingEnabled = true
 
         })
 
@@ -88,4 +82,13 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment) {
 
     }
 
+
+    private fun stopScrollAppbar() = with(binding){
+
+    }
+
+    override fun onStop() {
+
+        super.onStop()
+    }
 }
