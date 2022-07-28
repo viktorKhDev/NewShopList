@@ -9,6 +9,14 @@
         android:color="@color/background"
         />
 
+    <corners
+        android:topRightRadius="5dp"
+        android:topLeftRadius="5dp"
+        android:bottomLeftRadius="15dp"
+        android:bottomRightRadius="15dp"
+
+        />
+
 
 </shape>
 

@@ -25,7 +25,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
     var initAnim = false
     var stateChange = updateData
     var animPosition = -1
-    var isAddClicked = false
+
     //need get from settings
    private  var typeSortProduct = sortByName
 
@@ -37,7 +37,6 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
   }
     fun init(id: Int){
         stateChange = updateData
-        Log.d("fixLog", "state in model = $stateChange  ")
         animPosition = -1
         initAnim = true
         if (listId!=id) {
@@ -206,47 +205,6 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
 
 
 
-
-   /* private fun checkIdenticalName(s: String, productList :DataProductList): String{
-        // logic for the name if the list of names contains such a name
-        var newName: String
-
-        val products  = mutableListOf<DataProduct>()
-        productList.products?.let { products.addAll(it) }
-         val list  = mutableListOf<String>()
-        for (i in products){
-               list.add(i.name.toString())
-           }
-        val r = Regex("\\(\\d\\)")
-        var sameNumber = 2
-        var countDownsize = 2
-        if (list.contains(s)){
-            if (s.equals(r)){
-                val symbols = s.toCharArray()
-                val numbers = mutableListOf<Char>()
-                for (i in symbols.size-2 downTo 1){
-                    countDownsize++
-                    if (symbols[i]=='(') break
-                    numbers.add(symbols[i])
-                }
-                numbers.reverse()
-                var str =  StringBuilder()
-                for(i in numbers) {
-                    str.append(i)
-                }
-                sameNumber = str.toString().toInt()
-                newName = "${s.substring(0,s.length - countDownsize)}($sameNumber)"
-
-            }else{
-                newName = "$s ($sameNumber)"
-            }
-
-        }else{
-            newName = s
-        }
-
-        return newName
-    }*/
 
 
 }

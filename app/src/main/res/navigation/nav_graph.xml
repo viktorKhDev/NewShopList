@@ -36,7 +36,13 @@
     <fragment
         android:id="@+id/recipeFragment"
         android:name="com.viktor.kh.dev.shoplist.screens.recipe.RecipeFragment"
-        android:label="RecipeFragment"/>
+        android:label="RecipeFragment">
+        <action
+            android:id="@+id/action_recipeFragment_to_recipeListsFragment"
+            app:destination="@id/recipeListsFragment"
+            app:popUpTo="@id/productListsFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
     <fragment
         android:id="@+id/otherFragment"
         android:name="com.viktor.kh.dev.shoplist.screens.other.OtherFragment"

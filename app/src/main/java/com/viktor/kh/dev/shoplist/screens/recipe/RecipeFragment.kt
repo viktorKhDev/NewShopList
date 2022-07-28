@@ -1,35 +1,54 @@
 package com.viktor.kh.dev.shoplist.screens.recipe
 
+import android.app.Dialog
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
+import android.widget.Button
+import android.widget.EditText
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.RecipeFragmentBinding
-import com.viktor.kh.dev.shoplist.utils.listName
-import com.viktor.kh.dev.shoplist.utils.showToast
+import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
+import com.viktor.kh.dev.shoplist.screens.products.ProductsAdapter
+import com.viktor.kh.dev.shoplist.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class RecipeFragment : Fragment(R.layout.recipe_fragment) {
+class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
 
    private lateinit var binding : RecipeFragmentBinding
+   private val model: RecipeModel by activityViewModels()
+    private lateinit var rv: RecyclerView
+    private lateinit var productsAdapter: RecipeProductsAdapter
+    private  lateinit var itemTouchHelper: ItemTouchHelper
+    private lateinit var itemTouchCallback: ItemTouchCallback
 
 
    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = RecipeFragmentBinding.bind(view)
         initActionbar()
-       initClicks()
-
+         initClicks()
+       onBackCallBack()
+       val  listId = arguments?.getInt(listId)!!
+       model.initText(listId)
+         model.recipeText.observe(viewLifecycleOwner, Observer {
+             subscribeText(it)
+         })
     }
-
-
 
     private fun initClicks() = with(binding){
 
@@ -41,21 +60,89 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment) {
               rv.startAnimation(anim)
               rv.focusable = View.FOCUSABLE
               scrollText.isNestedScrollingEnabled = false
+              initRv()
 
           })
 
-
         blackoutFrameImgTop.setOnClickListener(View.OnClickListener {
-            recipeProductList.visibility = View.GONE
-            scrollText.isNestedScrollingEnabled = true
+            hideRecipeProducts()
 
         })
         blackoutFrameImgBottom.setOnClickListener(View.OnClickListener {
-            recipeProductList.visibility = View.GONE
-            scrollText.isNestedScrollingEnabled = true
+            hideRecipeProducts()
 
         })
 
+
+        addProductFab.setOnClickListener(View.OnClickListener {
+            relativeAddProduct.startAnimation(AnimationUtils.loadAnimation(activity,R.anim.to_start_anim))
+            relativeAddProduct.visibility = View.VISIBLE
+            addProductFab.hide()
+            Log.d("MyLog" , "addButton Hide")
+            btnAcceptProduct.setOnClickListener(View.OnClickListener {
+                val productName : String = textProduct.text.toString()
+                if(productName.isNotEmpty()){
+
+                    textProduct.setText("")
+                    model.addProduct(productName)
+                }else{
+                    showToast(getString(R.string.input_the_title),context)
+                }
+
+            })
+            btnNoProduct.setOnClickListener(View.OnClickListener {
+                textProduct.text.clear()
+                relativeAddProduct.visibility = View.GONE
+                addProductFab.show()
+                Log.d("MyLog" , "addButton visible")
+            })
+        })
+
+    }
+
+
+    private fun initRv(){
+        //init recyclerView
+        rv  = binding.rv
+
+        val anim = AnimationUtils.loadLayoutAnimation(context,R.anim.layout_animation_fall_down)
+
+        val onClickListener = object : RecipeProductsAdapter.OnProductClickListener {
+            override fun onProductClick(position: Int) {
+                setProduct(position)
+            }
+
+        }
+
+        val onLongClickListener = object: RecipeProductsAdapter.OnProductLongClickListener{
+            override fun onProductLongClick(position: Int) {
+               // Long press action
+            }
+
+        }
+
+        productsAdapter = RecipeProductsAdapter(onClickListener,onLongClickListener)
+        rv.apply {
+            adapter = productsAdapter
+            layoutManager = LinearLayoutManager(context)
+
+        }
+
+        productsAdapter.notifyDataSetChanged()
+        itemTouchCallback = ItemTouchCallback(this)
+        itemTouchHelper = ItemTouchHelper(itemTouchCallback)
+        itemTouchHelper.attachToRecyclerView(rv)
+
+
+        model.productsList.observe(viewLifecycleOwner, Observer {
+            if (model.initAnim){
+                rv.layoutAnimation = anim
+            }
+            subscribeData(it)
+
+        })
+
+        Log.d("MyLog", "rv init")
     }
 
 
@@ -80,15 +167,86 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment) {
             activity!!.onBackPressed()
         })
 
-    }
-
-
-    private fun stopScrollAppbar() = with(binding){
 
     }
 
-    override fun onStop() {
 
-        super.onStop()
+    private fun setProduct(position: Int){
+        //change name for product
+        var dataProduct: DataProduct = model.productsList.value!![position]
+        val dialog = context?.let { Dialog(it) }
+        if(dialog!=null){
+            dialog.setContentView(R.layout.dialog_add)
+            val text = dialog.findViewById<EditText>(R.id.dialog_text)
+            text.setText(dataProduct.name)
+            initFocusAndShowKeyboard(text, activity as AppCompatActivity)
+            val buttonYes = dialog.findViewById<Button>(R.id.btn_yes)
+            val  buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
+            dialog.setCancelable(true)
+            dialog.show()
+
+            buttonCancel.setOnClickListener(View.OnClickListener {
+                dialog.dismiss()
+                cancelKeyboard(text, activity as AppCompatActivity)
+            })
+
+            buttonYes.setOnClickListener(View.OnClickListener {
+                if(text.text.toString().isNotEmpty()){
+                    model.renameProduct(position,text.text.toString())
+                    dialog.dismiss()
+                }else{
+
+                    showToast(getString(R.string.input_the_title),activity)
+                }
+            })
+        }
+
+    }
+
+    private fun subscribeData(data :List<DataProduct>){
+        productsAdapter.setData(data,model.stateChange)
+        if (model.stateChange== addProduct){
+            rv.scrollToPosition(data.size-1)
+        }
+
+    }
+
+
+    private fun subscribeText(text: String){
+        binding.recipeText.setText(text)
+    }
+
+
+    private fun hideRecipeProducts() = with(binding){
+        recipeProductList.visibility = View.GONE
+        scrollText.isNestedScrollingEnabled = true
+    }
+
+
+
+
+    private fun onBackCallBack(){
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                   if (binding.recipeProductList.visibility == View.VISIBLE){
+                       hideRecipeProducts()
+                   }else{
+                       findNavController().navigate(R.id.action_recipeFragment_to_recipeListsFragment)
+                   }
+
+                }
+
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+    }
+
+    override fun onPause() {
+        model.saveText(binding.recipeText.text.toString())
+        super.onPause()
+    }
+
+    override fun onItemDismiss(position: Int) {
+       model.deleteProduct(position)
     }
 }

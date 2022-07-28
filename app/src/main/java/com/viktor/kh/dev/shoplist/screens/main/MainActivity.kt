@@ -1,27 +1,32 @@
 package com.viktor.kh.dev.shoplist.screens.main
 
 
+
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.viktor.kh.dev.shoplist.R
-
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var bottomNavView : BottomNavigationView
-
+    private val model: MainModel by viewModels()
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
-        val navController = findNavController(R.id.nav_host_fragment)
+        navController = findNavController(R.id.nav_host_fragment)
         bottomNavView =  findViewById(R.id.bottom_nav_view)
         bottomNavView.setupWithNavController(navController)
 
@@ -71,4 +76,13 @@ class MainActivity : AppCompatActivity() {
         bottomNavView.visibility = View.GONE
     }
 
+    override fun onBackPressed() {
+        Log.d("fixLog","current destination = ${navController.currentDestination.toString()}" )
+        super.onBackPressed()
+    }
+
+
+    override fun onSupportNavigateUp(): Boolean {
+        return super.onSupportNavigateUp()
+    }
 }
