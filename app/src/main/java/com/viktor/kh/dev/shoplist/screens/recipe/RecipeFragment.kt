@@ -40,29 +40,27 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = RecipeFragmentBinding.bind(view)
-        initActionbar()
+       val  listId = arguments?.getInt(listId)!!
+       model.init(listId)
+       initActionbar()
+       initRv()
          initClicks()
        onBackCallBack()
-       val  listId = arguments?.getInt(listId)!!
-       model.initText(listId)
-         model.recipeText.observe(viewLifecycleOwner, Observer {
+       model.recipeText.observe(viewLifecycleOwner, Observer {
              subscribeText(it)
          })
+
+       model.productsList.observe(viewLifecycleOwner, Observer {
+           subscribeProducts(it)
+
+       })
     }
+
+
+
 
     private fun initClicks() = with(binding){
 
-          productsFab.setOnClickListener(View.OnClickListener {
-            recipeProductList.visibility = View.VISIBLE
-            val alphaColor = Color.argb(50,0,0,0)
-            recipeProductList.setBackgroundColor(alphaColor)
-            val anim = AnimationUtils.loadAnimation(context,R.anim.scale_show_center)
-              rv.startAnimation(anim)
-              rv.focusable = View.FOCUSABLE
-              scrollText.isNestedScrollingEnabled = false
-              initRv()
-
-          })
 
         blackoutFrameImgTop.setOnClickListener(View.OnClickListener {
             hideRecipeProducts()
@@ -74,38 +72,27 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         })
 
 
+
+        productsFab.setOnClickListener(View.OnClickListener {
+            recipeProductList.visibility = View.VISIBLE
+            val alphaColor = Color.argb(50,0,0,0)
+            recipeProductList.setBackgroundColor(alphaColor)
+            val anim = AnimationUtils.loadAnimation(context,R.anim.scale_show_center)
+            rv.startAnimation(anim)
+        })
+
+
         addProductFab.setOnClickListener(View.OnClickListener {
-            relativeAddProduct.startAnimation(AnimationUtils.loadAnimation(activity,R.anim.to_start_anim))
-            relativeAddProduct.visibility = View.VISIBLE
-            addProductFab.hide()
-            Log.d("MyLog" , "addButton Hide")
-            btnAcceptProduct.setOnClickListener(View.OnClickListener {
-                val productName : String = textProduct.text.toString()
-                if(productName.isNotEmpty()){
-
-                    textProduct.setText("")
-                    model.addProduct(productName)
-                }else{
-                    showToast(getString(R.string.input_the_title),context)
-                }
-
-            })
-            btnNoProduct.setOnClickListener(View.OnClickListener {
-                textProduct.text.clear()
-                relativeAddProduct.visibility = View.GONE
-                addProductFab.show()
-                Log.d("MyLog" , "addButton visible")
-            })
+           addProduct()
         })
 
     }
 
 
+
     private fun initRv(){
         //init recyclerView
         rv  = binding.rv
-
-        val anim = AnimationUtils.loadLayoutAnimation(context,R.anim.layout_animation_fall_down)
 
         val onClickListener = object : RecipeProductsAdapter.OnProductClickListener {
             override fun onProductClick(position: Int) {
@@ -125,8 +112,9 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         rv.apply {
             adapter = productsAdapter
             layoutManager = LinearLayoutManager(context)
-
         }
+
+
 
         productsAdapter.notifyDataSetChanged()
         itemTouchCallback = ItemTouchCallback(this)
@@ -134,16 +122,12 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         itemTouchHelper.attachToRecyclerView(rv)
 
 
-        model.productsList.observe(viewLifecycleOwner, Observer {
-            if (model.initAnim){
-                rv.layoutAnimation = anim
-            }
-            subscribeData(it)
-
-        })
-
+        model.getProducts()
         Log.d("MyLog", "rv init")
     }
+
+
+
 
 
     private fun initActionbar() = with(binding){
@@ -168,6 +152,32 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         })
 
 
+    }
+
+
+
+    private fun addProduct() = with(binding){
+        relativeAddProduct.startAnimation(AnimationUtils.loadAnimation(activity,R.anim.to_start_anim))
+        relativeAddProduct.visibility = View.VISIBLE
+        addProductFab.hide()
+        Log.d("MyLog" , "addButton Hide")
+        btnAcceptProduct.setOnClickListener(View.OnClickListener {
+            val productName : String = textProduct.text.toString()
+            if(productName.isNotEmpty()){
+
+                textProduct.setText("")
+                model.addProduct(productName)
+            }else{
+                showToast(getString(R.string.input_the_title),context)
+            }
+
+        })
+        btnNoProduct.setOnClickListener(View.OnClickListener {
+            textProduct.text.clear()
+            relativeAddProduct.visibility = View.GONE
+            addProductFab.show()
+            Log.d("MyLog" , "addButton visible")
+        })
     }
 
 
@@ -203,14 +213,13 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
     }
 
-    private fun subscribeData(data :List<DataProduct>){
+    private fun subscribeProducts(data :List<DataProduct>){
         productsAdapter.setData(data,model.stateChange)
         if (model.stateChange== addProduct){
             rv.scrollToPosition(data.size-1)
         }
 
     }
-
 
     private fun subscribeText(text: String){
         binding.recipeText.setText(text)

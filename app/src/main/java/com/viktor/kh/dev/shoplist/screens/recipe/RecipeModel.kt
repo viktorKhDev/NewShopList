@@ -45,27 +45,13 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
     }
 
 
-    fun initText(id: Int){
+    fun init(id: Int){
+        stateChange = updateData
         if (listId!=id) {
             listId = id
            getText()
         }
-    }
 
-
-
-
-
-    fun initProducts(id: Int){
-        stateChange = updateData
-        animPosition = -1
-        initAnim = true
-        if (listId!=id) {
-            listId = id
-            getProducts()
-        }
-
-        Log.d("MyLog", "productsModel init with id ${id.toString()}")
     }
 
 
@@ -98,7 +84,8 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
     }
 
 
-    private fun getProducts(){
+    fun getProducts(){
+
         CoroutineScope(Dispatchers.IO).launch {
             val data : DataRecipe = recipesDao.get(listId!!)
             val newData  = DataRecipe(data.id,data.name,data.text,data.date,
@@ -107,7 +94,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
             withContext(Dispatchers.Main){
                 productsList.value = newData.products
             }
-            Log.d("MyLog", "recipeModel get list")
+            Log.d("MyLog", "recipeModel get list in listId $listId")
         }
     }
 

@@ -39,7 +39,6 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding = FragmentAddBinding.bind(view)
         rv  = binding.listProducts
         binding.addProduct.setOnClickListener(View.OnClickListener {
@@ -146,7 +145,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         rv.apply {
             adapter = productsAdapter
             layoutManager = LinearLayoutManager(context)
-           // rv.itemAnimator = null
+
         }
 
         productsAdapter.notifyDataSetChanged()
