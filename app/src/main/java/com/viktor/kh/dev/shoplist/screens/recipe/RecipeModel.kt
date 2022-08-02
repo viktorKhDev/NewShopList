@@ -102,7 +102,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
         initAnim = false
         CoroutineScope(Dispatchers.IO).launch {
             val currentProduct = productsList.value!![position]
-            val newProduct = DataProduct(name,currentProduct.date, falce0)
+            val newProduct = DataProduct(name,currentProduct.date, false,"")
             val recipe: DataRecipe = recipesDao.get(listId!!)
             val products  = mutableListOf<DataProduct>()
             recipe.products?.let { products.addAll(it) }
@@ -132,7 +132,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
         initAnim = false
         CoroutineScope(Dispatchers.IO).launch {
             val recipe: DataRecipe = recipesDao.get(listId!!)
-            val dataProduct = DataProduct(productName.trim(), currentTimeToLong().toString(), falce0)
+            val dataProduct = DataProduct(productName.trim(), currentTimeToLong(), false,"")
             val products  = mutableListOf<DataProduct>()
             recipe.products?.let { products.addAll(it) }
             products.add(dataProduct)
@@ -168,7 +168,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
                 val recipe: DataRecipe = recipesDao.get(listId!!)
                 products.addAll(recipe.products!!)
                 for (name in strings) {
-                    val product = DataProduct(name.trim(), currentTimeToLong().toString(), falce0)
+                    val product = DataProduct(name.trim(), currentTimeToLong(), false,"")
                     products.add(product)
                     animPosition = products.size
                 }

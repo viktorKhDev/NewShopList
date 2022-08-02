@@ -8,11 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
-import com.viktor.kh.dev.shoplist.screens.products.ProductsAdapter
 import com.viktor.kh.dev.shoplist.utils.addProduct
-import com.viktor.kh.dev.shoplist.utils.changeReady
 import com.viktor.kh.dev.shoplist.utils.deleteProduct
-import com.viktor.kh.dev.shoplist.utils.true1
+
 
 class RecipeProductsAdapter(
     val onProductClickListener: RecipeProductsAdapter.OnProductClickListener,

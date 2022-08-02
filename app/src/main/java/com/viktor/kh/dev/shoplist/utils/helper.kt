@@ -14,8 +14,7 @@ import java.util.*
 
 
 val format = SimpleDateFormat("dd.MM.yyyy")
-const val true1 :String = "1"
-const val falce0 :String = "0"
+
 const val sortByName = "sort_by_name"
 const val listId = "ListId"
 const val listName = "ListName"

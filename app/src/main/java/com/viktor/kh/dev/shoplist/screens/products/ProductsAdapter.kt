@@ -10,7 +10,6 @@ import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.utils.addProduct
 import com.viktor.kh.dev.shoplist.utils.changeReady
 import com.viktor.kh.dev.shoplist.utils.deleteProduct
-import com.viktor.kh.dev.shoplist.utils.true1
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import kotlin.collections.ArrayList
 
@@ -41,7 +40,7 @@ class ProductsAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if(data[position].ready == true1){
+        return if(data[position].ready == true){
             1
         }else{
             0

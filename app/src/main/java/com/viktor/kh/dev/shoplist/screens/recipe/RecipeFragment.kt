@@ -189,7 +189,7 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         })
         btnNoProduct.setOnClickListener(View.OnClickListener {
             textProduct.text.clear()
-            blackoutFrameImgBottom
+            relativeAddProduct.visibility = View.GONE
             addProductFab.show()
             textProduct.hideKeyboard()
             Log.d("MyLog" , "addButton visible")

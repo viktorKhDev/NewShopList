@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.ItemListBinding
 import com.viktor.kh.dev.shoplist.utils.convertLongToTime
-import com.viktor.kh.dev.shoplist.utils.true1
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 
@@ -75,7 +74,7 @@ constructor(val onListClickListener: OnListClickListener,
         private fun findReady(list: List<DataProduct>): String{
            var containsReady = 0
            for(i in list){
-               if(i.ready == true1){
+               if(i.ready == true){
                    containsReady++
                }
            }

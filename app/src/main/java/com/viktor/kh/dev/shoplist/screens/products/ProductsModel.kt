@@ -68,7 +68,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
         CoroutineScope(Dispatchers.IO).launch {
           val currentProduct = productsList.value!![position]
           val newProduct = DataProduct(currentProduct.name,currentProduct.date
-              , currentProduct.ready?.let { changeReady(it) })
+              , currentProduct.ready?.let { changeReady(it) },"")
           val list: DataProductList = productListsDao.get(listId!!)
           val products  = mutableListOf<DataProduct>()
           list.products?.let { products.addAll(it) }
@@ -85,7 +85,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
         initAnim = false
         CoroutineScope(Dispatchers.IO).launch {
             val currentProduct = productsList.value!![position]
-            val newProduct = DataProduct(name,currentProduct.date,currentProduct.ready)
+            val newProduct = DataProduct(name,currentProduct.date,currentProduct.ready,"")
             val list: DataProductList = productListsDao.get(listId!!)
             val products  = mutableListOf<DataProduct>()
             list.products?.let { products.addAll(it) }
@@ -115,7 +115,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
       initAnim = false
         CoroutineScope(Dispatchers.IO).launch {
             val list: DataProductList = productListsDao.get(listId!!)
-            val dataProduct = DataProduct(productName.trim(), currentTimeToLong().toString(), falce0)
+            val dataProduct = DataProduct(productName.trim(), currentTimeToLong(), false,"")
             val products  = mutableListOf<DataProduct>()
             list.products?.let { products.addAll(it) }
             products.add(dataProduct)
@@ -151,7 +151,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                  val list: DataProductList = productListsDao.get(listId!!)
                  products.addAll(list.products!!)
                  for (name in strings) {
-                     val product = DataProduct(name.trim(), currentTimeToLong().toString(), falce0)
+                     val product = DataProduct(name.trim(), currentTimeToLong(), false,"")
                      products.add(product)
                      animPosition = products.size
                  }
@@ -180,8 +180,8 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
 
     }
 
-    private fun changeReady(state :String):String{
-        return if (state==true1) falce0 else true1
+    private fun changeReady(state :Boolean):Boolean{
+        return if (state==true) false else true
     }
 
     private  fun sortProducts(products: List<DataProduct>):List<DataProduct>{
