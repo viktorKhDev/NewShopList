@@ -1,10 +1,12 @@
 package com.viktor.kh.dev.shoplist.screens.recipe
 
+import android.app.ActionBar
 import android.app.Dialog
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
@@ -36,6 +38,11 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
     private  lateinit var itemTouchHelper: ItemTouchHelper
     private lateinit var itemTouchCallback: ItemTouchCallback
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
+
 
    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,8 +50,8 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
        val  listId = arguments?.getInt(listId)!!
        model.init(listId)
        initActionbar()
+       initClicks()
        initRv()
-         initClicks()
        onBackCallBack()
        model.recipeText.observe(viewLifecycleOwner, Observer {
              subscribeText(it)
@@ -61,7 +68,6 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
     private fun initClicks() = with(binding){
 
-
         blackoutFrameImgTop.setOnClickListener(View.OnClickListener {
             hideRecipeProducts()
 
@@ -70,8 +76,15 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
             hideRecipeProducts()
 
         })
+          recipeText.setOnClickListener(View.OnClickListener {
+              recipeText.showKeyboard()
+
+          })
 
 
+        appbar.setOnClickListener(View.OnClickListener {
+         recipeText.hideKeyboard()
+        })
 
         productsFab.setOnClickListener(View.OnClickListener {
             recipeProductList.visibility = View.VISIBLE
@@ -79,6 +92,7 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
             recipeProductList.setBackgroundColor(alphaColor)
             val anim = AnimationUtils.loadAnimation(context,R.anim.scale_show_center)
             rv.startAnimation(anim)
+            recipeText.hideKeyboard()
         })
 
 
@@ -160,11 +174,12 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         relativeAddProduct.startAnimation(AnimationUtils.loadAnimation(activity,R.anim.to_start_anim))
         relativeAddProduct.visibility = View.VISIBLE
         addProductFab.hide()
+        textProduct.showKeyboard()
         Log.d("MyLog" , "addButton Hide")
         btnAcceptProduct.setOnClickListener(View.OnClickListener {
             val productName : String = textProduct.text.toString()
-            if(productName.isNotEmpty()){
 
+            if(productName.isNotEmpty()){
                 textProduct.setText("")
                 model.addProduct(productName)
             }else{
@@ -174,8 +189,9 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         })
         btnNoProduct.setOnClickListener(View.OnClickListener {
             textProduct.text.clear()
-            relativeAddProduct.visibility = View.GONE
+            blackoutFrameImgBottom
             addProductFab.show()
+            textProduct.hideKeyboard()
             Log.d("MyLog" , "addButton visible")
         })
     }
@@ -197,7 +213,7 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
             buttonCancel.setOnClickListener(View.OnClickListener {
                 dialog.dismiss()
-                cancelKeyboard(text, activity as AppCompatActivity)
+                text.hideKeyboard()
             })
 
             buttonYes.setOnClickListener(View.OnClickListener {

@@ -64,9 +64,6 @@
                 android:padding="10dp"/>
 
 
-
-
-
         </androidx.core.widget.NestedScrollView>
 
 
@@ -129,7 +126,8 @@
             app:layout_constraintTop_toBottomOf="@id/blackout_frame_img_top"
             app:layout_constraintBottom_toTopOf="@id/blackout_frame_img_bottom"
             app:layout_constraintVertical_bias="0.0"
-            android:padding="5dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
             android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
             />
@@ -147,7 +145,7 @@
             app:layout_constraintBottom_toBottomOf="@id/rv"
             >
             <RelativeLayout
-                android:background="@drawable/background_with_corners"
+                android:background="@drawable/bg_for_recipe_products_add"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingTop="2dp"

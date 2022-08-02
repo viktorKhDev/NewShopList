@@ -1,5 +1,6 @@
 package com.viktor.kh.dev.shoplist.utils
 
+import android.app.Activity
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -17,15 +18,20 @@ fun Fragment.showToast(text:String,context: Context?){
  Toast.makeText(context,text,Toast.LENGTH_LONG).show()
 }
 
- fun EditText.showKeyboard() {
- val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
- imm.showSoftInput(this,InputMethodManager.SHOW_IMPLICIT)
+
+fun EditText.showKeyboard(
+) {
+ requestFocus()
+ val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as
+         InputMethodManager
+ imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
 }
 
-
- fun EditText.hideKeyboard() {
- val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
- imm.hideSoftInputFromWindow(windowToken, 0)
+fun EditText.hideKeyboard(
+) {
+ val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as
+         InputMethodManager
+ imm.hideSoftInputFromWindow(this.windowToken, 0)
 }
 
 

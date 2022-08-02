@@ -64,6 +64,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         relativeAddProduct.startAnimation(AnimationUtils.loadAnimation(activity,R.anim.to_start_anim))
         relativeAddProduct.visibility = View.VISIBLE
         addProduct.hide()
+        textProduct.showKeyboard()
         Log.d("MyLog" , "addButton Hide")
         btnAcceptProduct.setOnClickListener(View.OnClickListener {
             val productName : String = textProduct.text.toString()
@@ -78,6 +79,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         })
         btnNoProduct.setOnClickListener(View.OnClickListener {
             textProduct.text.clear()
+            textProduct.hideKeyboard()
             relativeAddProduct.visibility = View.GONE
             addProduct.show()
             Log.d("MyLog" , "addButton visible")
@@ -98,10 +100,10 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
             val  buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
             dialog.setCancelable(true)
             dialog.show()
-
+             text.showKeyboard()
             buttonCancel.setOnClickListener(View.OnClickListener {
                 dialog.dismiss()
-                cancelKeyboard(text, activity as AppCompatActivity)
+                text.hideKeyboard()
             })
 
             buttonYes.setOnClickListener(View.OnClickListener {

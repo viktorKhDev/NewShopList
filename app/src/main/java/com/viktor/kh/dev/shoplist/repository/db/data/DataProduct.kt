@@ -12,4 +12,5 @@ data class DataProduct(
    val name: String?,
    val date: String?,
    val ready : String?
+
 )

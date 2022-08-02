@@ -20,10 +20,7 @@ import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.RecipesFragmentBinding
 import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
 import com.viktor.kh.dev.shoplist.screens.propuctsists.ProductListsAdapter
-import com.viktor.kh.dev.shoplist.utils.FollowText
-import com.viktor.kh.dev.shoplist.utils.cancelKeyboard
-import com.viktor.kh.dev.shoplist.utils.initFocusAndShowKeyboard
-import com.viktor.kh.dev.shoplist.utils.showToast
+import com.viktor.kh.dev.shoplist.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -120,10 +117,11 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
             val  buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
             dialog.setCancelable(true)
             dialog.show()
+            text.showKeyboard()
 
             buttonCancel.setOnClickListener(View.OnClickListener {
                 dialog.dismiss()
-                cancelKeyboard(text, activity as AppCompatActivity)
+                text.hideKeyboard()
             })
 
             buttonAdd.setOnClickListener(View.OnClickListener {
@@ -151,10 +149,11 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
             val  buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
             dialog.setCancelable(true)
             dialog.show()
+            text.showKeyboard()
 
             buttonCancel.setOnClickListener(View.OnClickListener {
                 dialog.dismiss()
-                cancelKeyboard(text, activity as AppCompatActivity)
+                text.hideKeyboard()
             })
 
             buttonAdd.setOnClickListener(View.OnClickListener {

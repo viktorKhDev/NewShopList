@@ -47,11 +47,6 @@ fun initFocusAndShowKeyboard (et :EditText, activity: AppCompatActivity){
 }
 
 
-fun cancelKeyboard(view: View,activity: AppCompatActivity){
-    val  inputMethodManager :InputMethodManager = activity
-        .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-       inputMethodManager.hideSoftInputFromWindow(view.windowToken,0)
-}
 
 
 fun getClipboard(context: Context): String {
