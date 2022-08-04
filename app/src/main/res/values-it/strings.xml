@@ -56,6 +56,6 @@
     <string name = "sort_summary"> Ordina gli elementi dal primo all\'ultimo </string>
     <string name = "sort_title"> Ordina per ora aggiunta </string>
     <string name = "support_email">viktor.kh.dev@gmail.com </string>
-
+    <string name="amount">Quantità</string>
 
 </resources>

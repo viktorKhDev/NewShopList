@@ -178,10 +178,13 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         Log.d("MyLog" , "addButton Hide")
         btnAcceptProduct.setOnClickListener(View.OnClickListener {
             val productName : String = textProduct.text.toString()
+            val productAmount : String = textAmount.text.toString()
 
             if(productName.isNotEmpty()){
                 textProduct.setText("")
-                model.addProduct(productName)
+                textAmount.setText("")
+                model.addProduct(productName,productAmount)
+                textProduct.showKeyboard()
             }else{
                 showToast(getString(R.string.input_the_title),context)
             }

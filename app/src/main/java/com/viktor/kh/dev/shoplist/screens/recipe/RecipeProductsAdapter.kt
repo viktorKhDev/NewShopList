@@ -25,10 +25,7 @@ class RecipeProductsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
 
-        var view = LayoutInflater.from(parent.context).inflate(R.layout.item,parent,false)
-        if (viewType==1) {
-            view = LayoutInflater.from(parent.context).inflate(R.layout.item_ready,parent,false)
-        }
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item,parent,false)
         return ProductHolder(view)
     }
 
@@ -84,7 +81,7 @@ class RecipeProductsAdapter(
                 text.paintFlags = text.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 text.text = product.name
             } else {
-                text.text = product.name
+                text.text = "${product.name} ${product.amount}"
             }
 
             itemView.setOnClickListener(View.OnClickListener {

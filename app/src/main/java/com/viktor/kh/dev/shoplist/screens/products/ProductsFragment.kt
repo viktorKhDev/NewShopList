@@ -3,6 +3,7 @@ package com.viktor.kh.dev.shoplist.screens.products
 
 
 
+
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
@@ -20,11 +21,13 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.FragmentAddBinding
-import com.viktor.kh.dev.shoplist.utils.*
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
+import com.viktor.kh.dev.shoplist.utils.*
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 
 @AndroidEntryPoint
@@ -218,6 +221,20 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
     }
 
 
+    private fun pasteList(){
+        val list = arrayOf("1","2","3")
+      MaterialAlertDialogBuilder(context!!)
+          .setTitle(R.string.recipes_for_dialog)
+          .setItems(list) {dialog, with ->
+
+          }
+          .show()
+    }
+
+
 
 
 }
+
+
+

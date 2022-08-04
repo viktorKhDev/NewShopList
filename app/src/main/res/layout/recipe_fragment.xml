@@ -105,6 +105,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/rv"
            />
+
         <ImageView
             android:id="@+id/blackout_frame_img_bottom"
             android:layout_width="match_parent"
@@ -134,16 +135,17 @@
 
 
         <RelativeLayout
-            android:layout_alignParentBottom="true"
+            android:visibility="gone"
             android:id="@+id/relative_add_product"
+            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="90dp"
-            android:visibility="gone"
             android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
             app:layout_constraintEnd_toEndOf="@id/rv"
             app:layout_constraintBottom_toBottomOf="@id/rv"
             >
+
             <RelativeLayout
                 android:background="@drawable/bg_for_recipe_products_add"
                 android:layout_width="match_parent"
@@ -161,10 +163,39 @@
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     android:hint="@string/prod_name"
+                    android:textColorHint="@color/text_hint"
                     android:imeOptions="actionDone"
                     android:inputType="text"
                     android:background="@color/background"
                     android:layout_alignParentStart="true"
+                    android:layout_toStartOf="@id/barrier_between_label"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="20sp"
+                    tools:targetApi="o" />
+
+                <ImageView
+                    android:id="@+id/barrier_between_label"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@id/text_amount"
+                    android:background="@color/colorPrimaryDark"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp"
+                    />
+
+
+                <EditText
+                    android:id="@+id/text_amount"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:autofillHints=""
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/amount"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:textColorHint="@color/text_hint"
+                    android:background="@color/background"
                     android:layout_toStartOf="@id/btn_accept_product"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="20sp"
@@ -181,7 +212,6 @@
                     android:src="@drawable/ic_done_white_24dp" />
 
 
-
             </RelativeLayout>
 
             <ImageButton
@@ -193,10 +223,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:layout_alignParentEnd="true"
-
                 />
-
-
 
         </RelativeLayout>
 
@@ -213,7 +240,8 @@
             android:focusable="true"
             app:backgroundTint="@color/colorAccent"
             app:tint ="@color/black"
-            app:srcCompat="@drawable/ic_baseline_add_24" />
+            app:srcCompat="@drawable/ic_baseline_add_24"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

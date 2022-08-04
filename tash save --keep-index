@@ -1,0 +1,275 @@
+[33mcommit 2a2c3869f456ef3370eafc6794124f353b084f9c[m[33m ([m[1;36mHEAD -> [m[1;32mdev[m[33m, [m[1;31morigin/dev[m[33m)[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Tue Aug 2 17:42:36 2022 +0300
+
+    add amount to product data, change values
+
+[33mcommit 895df5e80dd59b02b1686269d74fc917f985e778[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Tue Aug 2 15:56:25 2022 +0300
+
+    fix keyboard visibility
+
+[33mcommit 867f4b4ade38c7c57bc6fdc2f5a760bef3b21fcb[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Fri Jul 29 17:21:13 2022 +0300
+
+    fix bug with recipe products
+
+[33mcommit 4eacf14d771ba363673db65814cbc49a99241bdd[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Thu Jul 28 14:33:14 2022 +0300
+
+    dev recipe model
+
+[33mcommit 685eb3954860ac617de98bc85baa52e3a460cb28[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Tue Jul 26 18:44:31 2022 +0300
+
+    change design in recipe view
+
+[33mcommit 678e309e6f2e1eb64d87eb49fcf53aa7c711ed42[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Mon Jul 25 17:27:21 2022 +0300
+
+    dev recipe fragment
+
+[33mcommit 8c26c2ef6d3a0602d7dde3ca6e4d398bc87619ae[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Wed Jul 20 15:54:13 2022 +0300
+
+    dev recipe fragment
+
+[33mcommit acf788d6a9d9471747784a7400c46ecf11b06f36[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Sat Jul 16 00:01:08 2022 +0300
+
+    dev recipe screen
+
+[33mcommit 119f13bd883cea53ad4fdf5b9c6eb1f793adf9a8[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Thu Jul 14 17:25:32 2022 +0300
+
+    add recipe lists
+
+[33mcommit bf143d2a4638f64a18077b2c17b5ee2086aea287[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Wed Jul 13 23:02:24 2022 +0300
+
+    add search for lists
+
+[33mcommit 066ab8b8fdeacc1bc94afe7559d40886da9dfcbb[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Mon Jul 11 18:43:48 2022 +0300
+
+    fix anim in bottom menu, fix scroll in rv products
+
+[33mcommit 53754e45512f157064e49b1784aafbf1a02df987[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Sun Jul 10 19:14:27 2022 +0300
+
+    dev bottom menu with navigation
+
+[33mcommit e6c9d2fb8fbd57983ab2099b4c142e7bee7f0660[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Sun Jul 10 14:39:19 2022 +0300
+
+    attached nav graph to bottom menu
+
+[33mcommit 0b6b0d38aa462bfa5f4162a489381c240c478b7b[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Thu Jul 7 14:08:45 2022 +0300
+
+    fix bug with moved items
+
+[33mcommit 88f8ba060849a0181ac9d47518e9f716d3abb182[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Mon Jul 4 18:13:00 2022 +0300
+
+    dew item anim in products rv
+
+[33mcommit e6d03ef6983099bf3c9dbe9045e350f05dc0bf39[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Fri Jul 1 18:17:01 2022 +0300
+
+    dev item anim in products rv
+
+[33mcommit 509b793ebd9f8a1576480837640a15f3be03bfa4[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Thu Jun 30 23:41:06 2022 +0300
+
+    fixed bugs and anim in lists
+
+[33mcommit ae295c2c342ade74fe02f95b29a8e2de88a14760[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Thu Jun 30 18:19:12 2022 +0300
+
+    dev logic for option menu
+
+[33mcommit 6b79964f2d6ec993f974c007d703fc937afbec52[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Wed Jun 29 18:10:54 2022 +0300
+
+    dev action bar and menu
+
+[33mcommit 0b720125c851ce52dba2d4a039643e7f8aa02c4e[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Tue Jun 28 17:14:40 2022 +0300
+
+    fixed anim 2
+
+[33mcommit b868bf981b35cc7b31387eccbfadc270214e6ee4[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Mon Jun 27 21:52:28 2022 +0300
+
+    fix layout anim in products
+
+[33mcommit 90857152e38bc4905cb4daa6673bfa81c203cbd4[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Tue Jun 21 12:59:09 2022 +0300
+
+    add click listeners to products
+
+[33mcommit 842f0be018e63c32a389a80364612bcc84b2b284[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Mon Jun 20 18:30:51 2022 +0300
+
+    dev add_product fragment
+
+[33mcommit e6b8b375345c64a854f544598237e8fdadafa2ad[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Fri Jun 17 13:37:15 2022 +0300
+
+    finished add product in products screen
+
+[33mcommit d611fc2c0aa5db4207abac6895e103b5f663b076[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Tue Jun 14 18:27:51 2022 +0300
+
+    dev products screen
+
+[33mcommit e56d8cd95135e0c8eb1e3e845f1628e9efff4e10[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Mon Jun 13 23:01:29 2022 +0300
+
+    dev productList
+
+[33mcommit 278ccd934ae995cee9d4b7a5f62c1f0dbb8bdc28[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Sat Jun 11 17:31:28 2022 +0300
+
+    dew add products screen
+
+[33mcommit 97a2e63a0359541868f4f753e94bed4d432a6e10[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Sat Jun 11 17:05:39 2022 +0300
+
+    fix lists
+
+[33mcommit ae564c90c370c491e05c835aeb785466296d2d94[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Fri Jun 10 22:19:09 2022 +0300
+
+    lists finished
+
+[33mcommit 52297e6bff4d4815acffd12c95298bb5be8df608[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Thu Jun 9 12:41:06 2022 +0300
+
+    add dialog to lists
+
+[33mcommit 35df3a54b62b09eee5a48ae85da82de09f418b67[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Wed Jun 8 22:19:57 2022 +0300
+
+    dev productLists
+
+[33mcommit 0c7124800e3a5033b4ffcbda3cf3d78ed3dbf94e[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Tue Jun 7 23:08:57 2022 +0300
+
+    dev listsModel
+
+[33mcommit 3503cd28bb6c675dafaca53579933a6223d97670[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Sun Jun 5 22:58:19 2022 +0300
+
+    lists screen dev
+
+[33mcommit 3d5c62bafc127d1efcf583e56a2e37e02b0ca35b[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Fri Jun 3 17:56:24 2022 +0300
+
+    dev lists adapter
+
+[33mcommit 256ad24c96a9fa4cbb376a17c910bddcb2985ece[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Thu May 26 17:40:40 2022 +0300
+
+    dev adapter
+
+[33mcommit 7b257f400cb9dacaea884a1371ee366bda2563bc[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Tue May 24 21:58:04 2022 +0300
+
+    add viewbinding
+
+[33mcommit fbb7ad11bb4b9d3582d58f9984f26bc4ccadce3e[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Mon May 23 15:49:27 2022 +0300
+
+    migrate to 32 api fix
+
+[33mcommit 7206b856c6f1cfa4e854f1363880f61dbcf89009[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Mon May 23 13:32:57 2022 +0300
+
+    migrate to 32 api
+
+[33mcommit 99b46b0f5fac765702c09127215a2cf5d4542c34[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Fri May 20 21:21:40 2022 +0300
+
+    migrate
+
+[33mcommit 56eb9b13b4bd95407985cbf3db6467a86871df8f[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Wed Jan 12 22:56:12 2022 +0200
+
+    change nav graph
+
+[33mcommit f14a8f263c8f87705706dd996195c92ee290370e[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Thu Jan 6 22:37:59 2022 +0200
+
+    change db
+
+[33mcommit 4b18fdac16980950da8179db4e2d897851cfc79c[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Wed Dec 22 20:23:42 2021 +0200
+
+    change room
+
+[33mcommit e373c5cd77e2204bc9c36c708b785759ed79dd70[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Fri Dec 3 20:31:44 2021 +0200
+
+    new branch
+
+[33mcommit 01e6c79760be30a642843c5f8930242d17452172[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Mon Nov 29 20:16:03 2021 +0200
+
+    add mvvm and room
+
+[33mcommit a462944be537aec1f1a4d6a130beabc64c22c2b5[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Wed Nov 24 22:20:31 2021 +0200
+
+    added dep hilt
+
+[33mcommit dc3b5fd275bbc90128d4a8be578bed22069351fb[m
+Author: viktorKhDev <viktor.kh.dev@gmail.com>
+Date:   Tue Aug 10 22:46:07 2021 +0300
+
+    create nav

@@ -7,12 +7,14 @@
             android:shape="oval"
 
             >
-            <solid
-                android:color="@color/colorPrimary"
-                ></solid>
+            <solid android:color="@color/colorPrimary"
+                />
 
-
+            <size
+                android:height="45dp"
+                android:width="45dp"/>
         </shape>
+
     </item>
 
 

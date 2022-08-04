@@ -56,5 +56,6 @@
     <string name="sort_summary">Ordenar elementos del primero al último</string>
     <string name="sort_title">Ordenar por tiempo agregado</string>
     <string name="support_email">viktor.kh.dev@gmail.com</string>
+    <string name="amount">Monto</string>
 
 </resources>

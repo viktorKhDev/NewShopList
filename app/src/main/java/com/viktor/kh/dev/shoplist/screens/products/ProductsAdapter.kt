@@ -111,9 +111,9 @@ class ProductsAdapter(
            var text = itemView.findViewById<TextView>(R.id.productName)
             if (itemViewType == 1) {
                 text.paintFlags = text.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-                text.text = product.name
+                text.text = "${product.name} ${product.amount}"
             } else {
-                text.text = product.name
+                text.text = "${product.name} ${product.amount}"
             }
 
             itemView.setOnClickListener(View.OnClickListener {

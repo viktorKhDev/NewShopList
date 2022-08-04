@@ -56,8 +56,7 @@
     <string name="sort_summary">Sort items from first to last</string>
     <string name="sort_title">Sort by time added</string>
     <string name="support_email">viktor.kh.dev@gmail.com</string>
-
-
+    <string name="amount">Amount</string>
 
 
 </resources>

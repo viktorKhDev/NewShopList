@@ -56,6 +56,6 @@
     <string name = "sort_summary"> Classifique itens do primeiro ao último </string>
     <string name = "sort_title"> Classificar por tempo adicionado </string>
     <string name = "support_email">viktor.kh.dev@gmail.com </string>
-
+    <string name="amount">Quantidade</string>
 
 </resources>

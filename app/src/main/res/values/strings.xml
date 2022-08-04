@@ -58,5 +58,6 @@
     <string name="support_email">viktor.kh.dev@gmail.com</string>
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="app_name_test" translatable="false"> ShoplistTest</string>
+    <string name="amount">Amount</string>
 
 </resources>
