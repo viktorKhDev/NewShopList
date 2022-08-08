@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_recipe_products">
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="2dp"
+
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/recipes_for_dialog"
+            android:textSize="30sp"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/black"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_recipes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_margin="5dp"
+
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp">
+
+            <ImageButton
+                android:id="@+id/button_minus"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_baseline_remove_24"
+                android:backgroundTint="@color/colorAccentDark"
+                />
+
+
+            <EditText
+                android:id="@+id/count_portion"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_toStartOf="@id/button_plus"
+                android:layout_toEndOf="@id/button_minus"
+                android:autofillHints=""
+                android:background="@color/white"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:text="1"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+
+            <ImageButton
+                android:id="@+id/button_plus"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_baseline_add_24"
+                android:layout_toStartOf="@id/btn_accept_choice"
+                android:backgroundTint="@color/colorAccentDark"
+                />
+
+            <ImageButton
+                android:layout_alignParentEnd="true"
+                android:id="@+id/btn_accept_choice"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="20dp"
+                android:backgroundTint="@color/colorAccentDark"
+                android:textColor="@android:color/white"
+                android:src="@drawable/ic_done_white_24dp" />
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.constraintlayout.widget.ConstraintLayout>

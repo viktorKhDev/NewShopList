@@ -8,7 +8,9 @@ import androidx.lifecycle.MutableLiveData
 import com.viktor.kh.dev.shoplist.utils.*
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
+import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
 import com.viktor.kh.dev.shoplist.repository.db.room.ProductListsDao
+import com.viktor.kh.dev.shoplist.repository.db.room.RecipesDao
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import javax.inject.Inject
@@ -18,6 +20,8 @@ import javax.inject.Inject
 class ProductsModel @Inject constructor(application: Application) : AndroidViewModel(application) {
 
   @Inject lateinit var productListsDao: ProductListsDao
+  @Inject lateinit var recipeDao: RecipesDao
+  private lateinit var listRecipes: List<DataRecipe>
 
   private var listId :Int? = null
 
@@ -42,6 +46,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
         if (listId!=id) {
             listId = id
             getProducts()
+           setRecipeList()
         }
 
         Log.d("MyLog", "productsModel init with id ${id.toString()}")
@@ -176,8 +181,24 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
          }
 
     }
-    fun addListFromRecipe(){
+    fun addListFromRecipe(position: Int){
+        initAnim = false
 
+
+
+
+        stateChange = updateData
+    }
+
+   private fun setRecipeList(){
+       CoroutineScope(Dispatchers.IO).launch {
+          listRecipes = recipeDao.getAll()
+        }
+    }
+
+
+    fun getRecipesList():List<DataRecipe>{
+      return listRecipes
     }
 
     private fun changeReady(state :Boolean):Boolean{

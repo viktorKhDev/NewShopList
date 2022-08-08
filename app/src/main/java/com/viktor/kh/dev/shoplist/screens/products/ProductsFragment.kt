@@ -4,6 +4,7 @@ package com.viktor.kh.dev.shoplist.screens.products
 
 
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
@@ -21,8 +22,8 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.viktor.kh.dev.shoplist.R
+import com.viktor.kh.dev.shoplist.databinding.DialogAddFromRecipeBinding
 import com.viktor.kh.dev.shoplist.databinding.FragmentAddBinding
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.utils.*
@@ -114,7 +115,6 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
                     model.renameProduct(position,text.text.toString())
                     dialog.dismiss()
                 }else{
-
                     showToast(getString(R.string.input_the_title),activity)
                 }
             })
@@ -183,7 +183,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
           R.id.clean -> cleanList()
           R.id.paste -> model.pasteList()
           R.id.share_item -> activity?.let { model.shareList(it) }
-          R.id.add_recipe -> model.addListFromRecipe()
+          R.id.add_recipe -> addListFromRecipe()
       }
 
         return super.onOptionsItemSelected(item)
@@ -221,14 +221,49 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
     }
 
 
-    private fun pasteList(){
-        val list = arrayOf("1","2","3")
-      MaterialAlertDialogBuilder(context!!)
-          .setTitle(R.string.recipes_for_dialog)
-          .setItems(list) {dialog, with ->
+    private fun addListFromRecipe(){
 
+       var list = mutableListOf<String>()
+        for (i in model.getRecipesList()){
+            list.add(i.name.toString())
+        }
+        val recipes = list.toTypedArray()
+        val view = View.inflate(context,R.layout.dialog_add_from_recipe,null)
+        val dialogBinding = DialogAddFromRecipeBinding.bind(view)
+        val builder = AlertDialog.Builder(context)
+        builder.setView(view)
+
+        val dialog = builder.create()
+        dialog.show()
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        var value = 1
+        dialogBinding.countPortion.setText(value.toString())
+        dialogBinding.buttonPlus.setOnClickListener(View.OnClickListener {
+           value++
+            if (value<1){
+                value = 1
+            }
+            dialogBinding.countPortion.setText(value.toString())
+        })
+        dialogBinding.buttonMinus.setOnClickListener(View.OnClickListener {
+            value--
+            if (value<1){
+                value = 1
+            }
+            dialogBinding.countPortion.setText(value.toString())
+        })
+
+
+
+
+
+      /* MaterialAlertDialogBuilder(context!!)
+          .setTitle(R.string.recipes_for_dialog)
+          .setItems(recipes) {dialog, with ->
+            model.addListFromRecipe(with)
+                dialog.dismiss()
           }
-          .show()
+          .show()*/
     }
 
 
