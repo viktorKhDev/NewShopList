@@ -76,11 +76,6 @@ class MainActivity : AppCompatActivity() {
         bottomNavView.visibility = View.GONE
     }
 
-    override fun onBackPressed() {
-        Log.d("fixLog","current destination = ${navController.currentDestination.toString()}" )
-        super.onBackPressed()
-    }
-
 
     override fun onSupportNavigateUp(): Boolean {
         return super.onSupportNavigateUp()

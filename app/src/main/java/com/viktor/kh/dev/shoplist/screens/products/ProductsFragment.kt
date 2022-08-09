@@ -26,6 +26,7 @@ import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.DialogAddFromRecipeBinding
 import com.viktor.kh.dev.shoplist.databinding.FragmentAddBinding
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
+import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
 import com.viktor.kh.dev.shoplist.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -40,6 +41,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
     private lateinit var productsAdapter: ProductsAdapter
     private  lateinit var itemTouchHelper: ItemTouchHelper
     private lateinit var itemTouchCallback: ItemTouchCallback
+    private lateinit var fromRecipeAdapter: FromRecipeAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -223,11 +225,13 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
 
     private fun addListFromRecipe(){
 
-       var list = mutableListOf<String>()
+       var list = mutableListOf<DataRecipe>()
+        val listValues = mutableListOf<Boolean>()
         for (i in model.getRecipesList()){
-            list.add(i.name.toString())
+            list.add(i)
+            listValues.add(false)
         }
-        val recipes = list.toTypedArray()
+
         val view = View.inflate(context,R.layout.dialog_add_from_recipe,null)
         val dialogBinding = DialogAddFromRecipeBinding.bind(view)
         val builder = AlertDialog.Builder(context)
@@ -239,6 +243,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         var value = 1
         dialogBinding.countPortion.setText(value.toString())
         dialogBinding.buttonPlus.setOnClickListener(View.OnClickListener {
+            value = dialogBinding.countPortion.text.toString().toInt()
            value++
             if (value<1){
                 value = 1
@@ -246,6 +251,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
             dialogBinding.countPortion.setText(value.toString())
         })
         dialogBinding.buttonMinus.setOnClickListener(View.OnClickListener {
+            value = dialogBinding.countPortion.text.toString().toInt()
             value--
             if (value<1){
                 value = 1
@@ -253,11 +259,34 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
             dialogBinding.countPortion.setText(value.toString())
         })
 
+        dialogBinding.btnAcceptChoice.setOnClickListener(View.OnClickListener {
+           model.addListFromRecipe(listValues,value)
+            dialog.dismiss()
+        })
+
+        val onItemClickListener = object : FromRecipeAdapter.OnItemClickListener{
+            override fun onItemClick(position: Int) {
+                listValues[position] = !listValues[position]
+              fromRecipeAdapter.clickPosition(position)
+            }
+        }
+        fromRecipeAdapter  = FromRecipeAdapter(onItemClickListener)
+        fromRecipeAdapter.init(list,listValues)
+
+        val dialogRv = dialogBinding.listRecipes
+
+        dialogRv.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = fromRecipeAdapter
+        }
+
+        fromRecipeAdapter.notifyDataSetChanged()
 
 
 
-
-      /* MaterialAlertDialogBuilder(context!!)
+      /*
+       val recipes = list.toTypedArray()
+      MaterialAlertDialogBuilder(context!!)
           .setTitle(R.string.recipes_for_dialog)
           .setItems(recipes) {dialog, with ->
             model.addListFromRecipe(with)

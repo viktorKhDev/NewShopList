@@ -3,6 +3,7 @@ package com.viktor.kh.dev.shoplist.screens.products
 import android.app.Application
 import android.content.Context
 import android.util.Log
+import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.viktor.kh.dev.shoplist.utils.*
@@ -43,10 +44,10 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
         stateChange = updateData
         animPosition = -1
         initAnim = true
+        setRecipeList()
         if (listId!=id) {
             listId = id
             getProducts()
-           setRecipeList()
         }
 
         Log.d("MyLog", "productsModel init with id ${id.toString()}")
@@ -73,7 +74,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
         CoroutineScope(Dispatchers.IO).launch {
           val currentProduct = productsList.value!![position]
           val newProduct = DataProduct(currentProduct.name,currentProduct.date
-              , currentProduct.ready?.let { changeReady(it) },"")
+              , currentProduct.ready?.let { changeReady(it) },currentProduct.amount)
           val list: DataProductList = productListsDao.get(listId!!)
           val products  = mutableListOf<DataProduct>()
           list.products?.let { products.addAll(it) }
@@ -181,14 +182,50 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
          }
 
     }
-    fun addListFromRecipe(position: Int){
+    fun addListFromRecipe(listClicked:List<Boolean>,portions: Int){
         initAnim = false
 
+        CoroutineScope(Dispatchers.IO).launch {
+            var readyList = mutableListOf<DataProduct>()
+            for (i in listClicked.indices){
+                if (listClicked[i]){
 
+                    if (listRecipes[i].products!=null){
 
+                        for (e in listRecipes[i].products!!){
+                            val product = DataProduct(
+                                "${e.name} (${listRecipes[i].name})"
+                                ,e.date
+                                ,false
+                                , e.amount?.let { countPortions(it,portions) }
+                            )
+                            readyList.add(product)
+                        }
 
-        stateChange = updateData
+                    }
+                }
+            }
+            val list: DataProductList = productListsDao.get(listId!!)
+            list.products?.let { readyList.addAll(it) }
+            productListsDao.update(DataProductList(list.id,list.name,list.date,readyList))
+            stateChange = updateData
+            getProducts()
+
+        }
     }
+
+
+    private fun countPortions(text:String,value:Int):String{
+        //logic for count portions in amount
+        //
+        val amount = text.filter { it.isDigit() }.toInt()*value
+        val text = text.filterNot { it.isDigit() }
+
+
+        return "$amount $text"
+    }
+
+
 
    private fun setRecipeList(){
        CoroutineScope(Dispatchers.IO).launch {
