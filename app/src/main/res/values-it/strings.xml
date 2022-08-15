@@ -57,5 +57,6 @@
     <string name = "sort_title"> Ordina per ora aggiunta </string>
     <string name = "support_email">viktor.kh.dev@gmail.com </string>
     <string name="amount">Quantità</string>
+    <string name="portions">Porzioni</string>
 
 </resources>

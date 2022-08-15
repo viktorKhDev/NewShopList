@@ -57,5 +57,6 @@
     <string name="sort_title">Ordenar por tiempo agregado</string>
     <string name="support_email">viktor.kh.dev@gmail.com</string>
     <string name="amount">Monto</string>
+    <string name="portions">Porciones</string>
 
 </resources>

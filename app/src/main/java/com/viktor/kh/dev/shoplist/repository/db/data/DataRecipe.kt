@@ -1,6 +1,7 @@
 package com.viktor.kh.dev.shoplist.repository.db.data
 
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
@@ -10,10 +11,11 @@ import com.viktor.kh.dev.shoplist.repository.db.converters.ProductsConverter
 
 @Entity
 data class DataRecipe (
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
-     val name: String?,
-     val text: String?,
-     val date: Long?,
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id" ) val id: Int = 0,
+    @ColumnInfo(name = "name" ) val name: String?,
+    @ColumnInfo(name = "text" ) val text: String?,
+    @ColumnInfo(name = "date" ) val date: Long?,
     @TypeConverters(ProductsConverter::class)
-    val products: List<DataProduct>?
+    @ColumnInfo(name = "products" ) val products: List<DataProduct>?
 )

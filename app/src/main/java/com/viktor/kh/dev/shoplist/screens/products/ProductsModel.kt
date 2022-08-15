@@ -14,6 +14,7 @@ import com.viktor.kh.dev.shoplist.repository.db.room.ProductListsDao
 import com.viktor.kh.dev.shoplist.repository.db.room.RecipesDao
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
+import java.util.regex.Pattern
 import javax.inject.Inject
 
 
@@ -217,12 +218,20 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
 
     private fun countPortions(text:String,value:Int):String{
         //logic for count portions in amount
-        //
-        val amount = text.filter { it.isDigit() }.toInt()*value
-        val text = text.filterNot { it.isDigit() }
 
+        val text1 = text.filterNot { it.isDigit() }.replace(".","",false)
 
-        return "$amount $text"
+        val patternNumber = Pattern.compile("[+-]?([0-9]*[.])?[0-9]+")
+
+        val matcherNumber = patternNumber.matcher(text)
+
+        val sb = StringBuilder()
+        while (matcherNumber.find()) {
+               sb.append((matcherNumber.group().toDouble()*value).toString())
+               sb.append(" ")
+        }
+
+        return "$sb $text1".replace("  "," ")
     }
 
 
@@ -245,7 +254,6 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
     private  fun sortProducts(products: List<DataProduct>):List<DataProduct>{
         if (products.isNotEmpty()&&products.size!=1){
             val sortedList: List<DataProduct>
-            val product: DataProduct
             if (typeSortProduct == sortByName) {
                 sortedList = products.sortedWith(compareBy({ it.ready }, { it.name }))
             }else{

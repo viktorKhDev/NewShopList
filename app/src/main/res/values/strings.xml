@@ -59,5 +59,6 @@
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="app_name_test" translatable="false"> ShoplistTest</string>
     <string name="amount">Amount</string>
+    <string name="portions">Portions</string>
 
 </resources>

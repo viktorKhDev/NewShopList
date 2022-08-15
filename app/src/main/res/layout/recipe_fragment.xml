@@ -159,17 +159,16 @@
                     android:id="@+id/text_product"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_toStartOf="@id/barrier_between_label"
                     android:autofillHints=""
+                    android:background="@color/background"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     android:hint="@string/prod_name"
-                    android:textColorHint="@color/text_hint"
-                    android:imeOptions="actionDone"
                     android:inputType="text"
-                    android:background="@color/background"
-                    android:layout_alignParentStart="true"
-                    android:layout_toStartOf="@id/barrier_between_label"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/text_hint"
                     android:textSize="20sp"
                     tools:targetApi="o" />
 
@@ -188,16 +187,15 @@
                     android:id="@+id/text_amount"
                     android:layout_width="120dp"
                     android:layout_height="match_parent"
+                    android:layout_toStartOf="@id/btn_accept_product"
                     android:autofillHints=""
+                    android:background="@color/background"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     android:hint="@string/amount"
-                    android:imeOptions="actionDone"
                     android:inputType="text"
+                    android:textColor="@color/black"
                     android:textColorHint="@color/text_hint"
-                    android:background="@color/background"
-                    android:layout_toStartOf="@id/btn_accept_product"
-                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="20sp"
                     tools:targetApi="o" />
 
@@ -209,7 +207,8 @@
                     android:layout_margin="5dp"
                     android:background="@drawable/button_bg_black_ripple_oval"
                     android:textColor="@android:color/white"
-                    android:src="@drawable/ic_done_white_24dp" />
+                    android:src="@drawable/ic_done_white_24dp"
+                    android:elevation="2dp"/>
 
 
             </RelativeLayout>
@@ -218,12 +217,12 @@
                 android:id="@+id/btn_no_product"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
                 android:background="@drawable/circle_button"
-                android:src="@drawable/ic_clear_white_24dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_alignParentEnd="true"
-                />
+                android:src="@drawable/ic_clear_white_24dp"
+                android:elevation="2dp"/>
 
         </RelativeLayout>
 
@@ -241,6 +240,22 @@
             app:backgroundTint="@color/colorAccent"
             app:tint ="@color/black"
             app:srcCompat="@drawable/ic_baseline_add_24"
+            />
+
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_close_products"
+            android:visibility="gone"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/circle_button"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintEnd_toEndOf="@id/rv"
+            app:layout_constraintTop_toTopOf="@id/rv"
+            android:src="@drawable/ic_clear_white_24dp"
+            android:layout_margin="2dp"
+            android:elevation="4dp"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

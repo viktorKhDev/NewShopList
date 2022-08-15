@@ -40,7 +40,6 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
 
@@ -59,7 +58,6 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
        model.productsList.observe(viewLifecycleOwner, Observer {
            subscribeProducts(it)
-
        })
     }
 
@@ -76,9 +74,12 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
             hideRecipeProducts()
 
         })
+
+        btnCloseProducts.setOnClickListener(View.OnClickListener {
+            hideRecipeProducts()
+        })
           recipeText.setOnClickListener(View.OnClickListener {
               recipeText.showKeyboard()
-
           })
 
 
@@ -93,6 +94,9 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
             val anim = AnimationUtils.loadAnimation(context,R.anim.scale_show_center)
             rv.startAnimation(anim)
             recipeText.hideKeyboard()
+            val buttonAnim = AnimationUtils.loadAnimation(context,R.anim.alpha_anim)
+            btnCloseProducts.startAnimation(buttonAnim)
+            btnCloseProducts.visibility  = View.VISIBLE
         })
 
 
@@ -192,6 +196,7 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         })
         btnNoProduct.setOnClickListener(View.OnClickListener {
             textProduct.text.clear()
+            textAmount.text.clear()
             relativeAddProduct.visibility = View.GONE
             addProductFab.show()
             textProduct.hideKeyboard()

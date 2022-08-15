@@ -243,25 +243,40 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         var value = 1
         dialogBinding.countPortion.setText(value.toString())
         dialogBinding.buttonPlus.setOnClickListener(View.OnClickListener {
-            value = dialogBinding.countPortion.text.toString().toInt()
-           value++
-            if (value<1){
-                value = 1
+            if (dialogBinding.countPortion.text.isNotEmpty()){
+                value = dialogBinding.countPortion.text.toString().toInt()
+                value++
+                if (value<1){
+                    value = 1
+                }
+                dialogBinding.countPortion.setText(value.toString())
+            }else{
+                dialogBinding.countPortion.setText("1")
             }
-            dialogBinding.countPortion.setText(value.toString())
         })
         dialogBinding.buttonMinus.setOnClickListener(View.OnClickListener {
-            value = dialogBinding.countPortion.text.toString().toInt()
-            value--
-            if (value<1){
-                value = 1
+            if (dialogBinding.countPortion.text.isNotEmpty()){
+                value = dialogBinding.countPortion.text.toString().toInt()
+                value--
+                if (value<1){
+                    value = 1
+                }
+
+                dialogBinding.countPortion.setText(value.toString())
+            }else{
+                dialogBinding.countPortion.setText("1")
             }
-            dialogBinding.countPortion.setText(value.toString())
+
         })
 
         dialogBinding.btnAcceptChoice.setOnClickListener(View.OnClickListener {
-           model.addListFromRecipe(listValues,value)
-            dialog.dismiss()
+            if (dialogBinding.countPortion.text.isNotEmpty()){
+                model.addListFromRecipe(listValues,value)
+                dialog.dismiss()
+            }else{
+                dialogBinding.countPortion.setText("1")
+            }
+
         })
 
         val onItemClickListener = object : FromRecipeAdapter.OnItemClickListener{
@@ -282,17 +297,6 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
 
         fromRecipeAdapter.notifyDataSetChanged()
 
-
-
-      /*
-       val recipes = list.toTypedArray()
-      MaterialAlertDialogBuilder(context!!)
-          .setTitle(R.string.recipes_for_dialog)
-          .setItems(recipes) {dialog, with ->
-            model.addListFromRecipe(with)
-                dialog.dismiss()
-          }
-          .show()*/
     }
 
 
