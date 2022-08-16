@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
 import com.viktor.kh.dev.shoplist.repository.db.room.RecipesDao
@@ -181,8 +182,30 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
 
     }
 
-    fun shareRecipe(context: Context){
+    fun shareRecipe(context: Context, name: String){
+        val list = productsList.value
+            val sb = StringBuilder()
 
+        sb.append(name)
+        sb.append("\n")
+        sb.append("\n")
+        sb.append(recipeText.value.toString())
+        sb.append("\n")
+        sb.append("\n")
+        sb.append("${context.getText(R.string.products)}:")
+        sb.append("\n")
+        sb.append("\n")
+        if (list!!.isNotEmpty()){
+                for (product in list) {
+                    sb.append(product.name)
+                    sb.append("\n")
+                }
+
+        }
+
+        if (sb.toString().isNotEmpty()){
+            shareText(sb.toString(),context)
+        }
     }
 
 

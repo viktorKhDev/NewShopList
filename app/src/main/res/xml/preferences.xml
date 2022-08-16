@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <SwitchPreference
-        android:defaultValue="false"
-        android:key="switch_preference_sort"
-        android:title="@string/sort_title"
-        android:summary="@string/sort_summary"/>
+    <PreferenceCategory
+        android:title="@string/setting">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="switch_preference_sort"
+            android:title="@string/sort_title"
+            android:summary="@string/sort_summary"/>
+    </PreferenceCategory>
 
+
+        <PreferenceCategory
+            android:title="@string/backup">
+
+        </PreferenceCategory>
+
+     <PreferenceCategory
+         android:title="@string/reference">
+
+     </PreferenceCategory>
 
 </PreferenceScreen>

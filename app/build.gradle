@@ -76,6 +76,9 @@ dependencies {
 
     //Gson
     implementation("com.google.code.gson:gson:2.8.6")
+    
+    //preferences
+    implementation("androidx.preference:preference:1.2.0")
 }
 
 kapt {

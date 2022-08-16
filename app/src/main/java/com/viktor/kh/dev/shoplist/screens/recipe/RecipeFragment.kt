@@ -160,7 +160,12 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
                R.id.home -> activity!!.onBackPressed()
 
-                R.id.share_item -> showToast("share in recipe",context)
+                R.id.share_item -> listName?.let {
+                    model.shareRecipe(activity as AppCompatActivity,
+                        it
+                    )
+                }
+
             }
             false
         }
