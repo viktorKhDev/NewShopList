@@ -20,6 +20,13 @@
 
     </style>
 
+
+    <style name="MyBottomNav" parent="Widget.MaterialComponents.BottomNavigationView">
+   <item name="android:colorPrimary">@color/colorAccentDark</item>
+        <item name="android:background">@color/colorAccentDark</item>
+        <item name="itemTextColor">@color/white</item>
+    </style>
+
     <style name="Text_andika"/>
 
 </resources>

@@ -1,52 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background"
-    tools:ignore="ScrollViewCount">
+    >
 
-
-   <androidx.cardview.widget.CardView
-       android:id="@+id/setting_layout"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_marginTop="5dp"
-       android:layout_marginBottom="5dp"
-       android:elevation="@dimen/cardview_default_elevation">
-
-       <androidx.constraintlayout.widget.ConstraintLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content">
-
-         <androidx.appcompat.widget.AppCompatTextView
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toTopOf="parent"
-             android:textSize="15sp"
-             android:text="@string/setting"
-             android:gravity="center"
-             android:layout_marginBottom="10dp"
-             />
-           
-
-       </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-   </androidx.cardview.widget.CardView>
-
-
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/backup_layout"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginStart="5dp"
+            android:id="@+id/setting_screen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:elevation="@dimen/cardview_default_elevation">
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/setting_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                android:src="@drawable/ic_orange_settings_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/setting_text"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/setting_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/setting_image"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textSize="20sp"
+                android:layout_marginStart="20dp"
+                android:text="@string/setting"
+                android:gravity="center_vertical"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/start_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
-    </androidx.cardview.widget.CardView>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/backup_screen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:elevation="@dimen/cardview_default_elevation">
 
-</androidx.core.widget.NestedScrollView>
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/backup_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                android:src="@drawable/ic_blue_backup_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/backup_text"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/backup_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/backup_image"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textSize="20sp"
+                android:layout_marginStart="20dp"
+                android:text="@string/backup"
+                android:gravity="center_vertical"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/info_screen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:elevation="@dimen/cardview_default_elevation">
+
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/info_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                android:src="@drawable/ic_green_info_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/info_text"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/info_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/info_image"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textSize="20sp"
+                android:layout_marginStart="20dp"
+                android:text="@string/support"
+                android:gravity="center_vertical"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+</ScrollView>

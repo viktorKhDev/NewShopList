@@ -49,13 +49,19 @@
         android:label="OtherFragment">
         <action
             android:id="@+id/action_otherFragment_to_backupFragment2"
-            app:destination="@id/backupFragment" />
+            app:destination="@id/backupFragment"
+            app:enterAnim="@anim/to_start_anim"
+            app:popEnterAnim="@anim/to_left_anim" />
         <action
             android:id="@+id/action_otherFragment_to_infoFragment2"
-            app:destination="@id/infoFragment" />
+            app:destination="@id/infoFragment"
+            app:enterAnim="@anim/to_start_anim"
+            app:popEnterAnim="@anim/to_left_anim" />
         <action
             android:id="@+id/action_otherFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/to_start_anim"
+            app:popEnterAnim="@anim/to_left_anim" />
     </fragment>
     <fragment
         android:id="@+id/backupFragment"
