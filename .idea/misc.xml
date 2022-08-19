@@ -37,6 +37,7 @@
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/drawable/ic_dot_black_24dp.xml" value="0.1445" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/drawable/ic_edit_black_24dp.xml" value="0.1245" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/drawable/ic_error_outline_black_24dp.xml" value="0.1445" />
+        <entry key="..\:/dev/projects/NewShopList/app/src/main/res/drawable/ic_green_upload_file_24.xml" value="0.1445" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/drawable/ic_keyboard_arrow_right_black_24dp.xml" value="0.1245" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1445" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1445" />
@@ -51,13 +52,14 @@
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/drawable/ic_search_white_24dp.xml" value="0.1445" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/drawable/ic_settings_black_24dp.xml" value="0.1445" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/drawable/ic_share_white_24dp.xml" value="0.1465" />
+        <entry key="..\:/dev/projects/NewShopList/app/src/main/res/drawable/ripple_white.xml" value="0.1445" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/drawable/text_background_gray.xml" value="0.115" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/drawable/text_background_white.xml" value="0.115" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/font/actor.xml" value="0.1" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout-v26/dialog_add.xml" value="0.17552083333333332" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout-v28/recipe_fragment.xml" value="0.1743659420289855" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/activity_lists.xml" value="0.14130434782608695" />
-        <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/backup_fragment.xml" value="0.17552083333333332" />
+        <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/backup_fragment.xml" value="0.22" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/backup_main_fragment.xml" value="0.17552083333333332" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/bottom_container.xml" value="0.17552083333333332" />
         <entry key="..\:/dev/projects/NewShopList/app/src/main/res/layout/dialog_add.xml" value="0.17552083333333332" />

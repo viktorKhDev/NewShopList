@@ -13,7 +13,7 @@
     <string name="recipes">Recetas</string>
     <string name="add_recipe">Agregar receta</string>
     <string name="clean">Limpiar la lista</string>
-    <string name="description1">Haga clic en "editar" para describir la receta.</string>
+    <string name="description1">Describa la receta</string>
     <string name="products">Productos</string>
     <string name="lists">Liza</string>
     <string name="last_open">Último abierto</string>
@@ -45,7 +45,7 @@
     <string name="ok">Оk</string>
     <string name="clear_list">¿Borrar la lista?</string>
     <string name="save_file">Guardar el archivo</string>
-    <string name="download_file">Subir archivo</string>
+    <string name="download_file">Descargar archivo</string>
     <string name="backup_read">Archivo de recuperación cargado</string>
     <string name="input_the_title">Ingrese el título</string>
     <string name="recipes_for_dialog">Recetas:</string>

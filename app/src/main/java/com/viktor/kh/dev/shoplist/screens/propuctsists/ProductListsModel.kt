@@ -43,10 +43,6 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
 
     }
 
-
-
-
-
     private fun getLists(){
         // get all list from DB
        CoroutineScope(Dispatchers.IO).launch {

@@ -6,7 +6,7 @@
     >
     <SwitchPreference
             android:defaultValue="false"
-            android:key="switch_preference_sort"
+            android:key="@string/sort_by_date"
             android:title="@string/sort_title"
             android:summary="@string/sort_summary"
             app:iconSpaceReserved="false"

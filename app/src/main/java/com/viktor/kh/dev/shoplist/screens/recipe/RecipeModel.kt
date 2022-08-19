@@ -30,7 +30,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
     var animPosition = -1
 
     //need get from settings
-    private  var typeSortProduct = sortByName
+
 
 
     val productsList : MutableLiveData<List<DataProduct>> by lazy {
@@ -50,9 +50,8 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
         stateChange = updateData
         if (listId!=id) {
             listId = id
-           getText()
         }
-
+        getText()
     }
 
 
@@ -212,11 +211,11 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
     private  fun sortProducts(products: List<DataProduct>):List<DataProduct>{
         if (products.isNotEmpty()&&products.size!=1){
             val sortedList: List<DataProduct>
-            val product: DataProduct
-            if (typeSortProduct == sortByName) {
-                sortedList = products.sortedWith(compareBy({ it.ready }, { it.name }))
+            if (sortByDate) {
+                sortedList = products.sortedWith(compareBy({it.ready}, { it.date }))
+
             }else{
-                sortedList = products.sortedBy { it.ready }
+                sortedList = products.sortedWith(compareBy({ it.ready }, { it.name }))
             }
 
             return sortedList

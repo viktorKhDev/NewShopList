@@ -13,7 +13,7 @@
     <string name="recipes">Рецепты</string>
     <string name="add_recipe">Добавить рецепт</string>
     <string name="clean">Очистить список</string>
-    <string name="description1">Нажмите на "редактирования" для описания рецепта.</string>
+    <string name="description1">Опишите рецепт</string>
     <string name="products">Продукты</string>
     <string name="lists">Списки</string>
     <string name="last_open">Последний открытый</string>

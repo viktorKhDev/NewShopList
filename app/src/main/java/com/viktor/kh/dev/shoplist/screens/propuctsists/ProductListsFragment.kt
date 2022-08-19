@@ -39,6 +39,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+       context?.let { loadSetting(it) }
         binding = FragmentListsBinding.bind(view)
         rv = binding.lists
          val anim = AnimationUtils.loadLayoutAnimation(context,R.anim.bottom_layout_anim)

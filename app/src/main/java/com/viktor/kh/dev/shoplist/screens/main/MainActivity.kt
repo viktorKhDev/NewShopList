@@ -13,6 +13,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.viktor.kh.dev.shoplist.R
+import com.viktor.kh.dev.shoplist.utils.loadSetting
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
+        loadSetting(this)
         navController = findNavController(R.id.nav_host_fragment)
         bottomNavView =  findViewById(R.id.bottom_nav_view)
         bottomNavView.setupWithNavController(navController)

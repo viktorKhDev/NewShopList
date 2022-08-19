@@ -15,38 +15,50 @@
         android:text="@string/warning_backup"
         android:textSize="30sp"
         android:gravity="center"
-        android:layout_marginTop="80dp">
+        android:layout_marginTop="80dp"/>
 
 
-    </TextView>
 
-    <Button
-        android:id="@+id/btn_download_file"
-        android:layout_width="200dp"
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/download_button"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:textColor="@color/white"
+        android:layout_centerInParent="true"
         android:background="@drawable/button_bg_black_ripple"
-        android:text="@string/download_file">
+        android:orientation="horizontal"
+        android:textAlignment="center"
+        android:text="@string/download_file"
+        android:textColor="@color/white"
+        android:drawableStart="@drawable/ic_red_file_download_24"
+        android:clickable="true"
+        android:paddingStart="10dp"
+        android:focusable="true"/>
 
-    </Button>
-    <Button
+
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/upload_button"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/download_button"
+        android:layout_centerInParent="true"
         android:layout_marginTop="20dp"
-        android:id="@+id/btn_save_file"
-        android:layout_below="@id/btn_download_file"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:textColor="@color/white"
         android:background="@drawable/button_bg_black_ripple"
-        android:text="@string/save_file">
+        android:orientation="horizontal"
+        android:text="@string/save_file"
+        android:textColor="@color/white"
+        android:clickable="true"
+        android:paddingStart="10dp"
+        android:drawableStart="@drawable/ic_green_upload_file_24"
+        android:focusable="true"/>
 
-    </Button>
+
+
+
+
+
 
 
 

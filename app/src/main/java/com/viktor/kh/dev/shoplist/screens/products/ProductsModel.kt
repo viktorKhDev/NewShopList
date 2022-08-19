@@ -32,11 +32,8 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
     var stateChange = updateData
     var animPosition = -1
 
-    //need get from settings
-   private  var typeSortProduct = sortByName
 
-
-  val productsList : MutableLiveData<List<DataProduct>> by lazy {
+    val productsList : MutableLiveData<List<DataProduct>> by lazy {
       MutableLiveData<List<DataProduct>>().also {
           getProducts()
       }
@@ -48,8 +45,8 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
         setRecipeList()
         if (listId!=id) {
             listId = id
-            getProducts()
         }
+        getProducts()
 
         Log.d("MyLog", "productsModel init with id ${id.toString()}")
     }
@@ -254,10 +251,11 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
     private  fun sortProducts(products: List<DataProduct>):List<DataProduct>{
         if (products.isNotEmpty()&&products.size!=1){
             val sortedList: List<DataProduct>
-            if (typeSortProduct == sortByName) {
-                sortedList = products.sortedWith(compareBy({ it.ready }, { it.name }))
+            if (sortByDate) {
+                sortedList = products.sortedWith(compareBy({it.ready}, { it.date }))
+
             }else{
-                sortedList = products.sortedBy { it.ready }
+                sortedList = products.sortedWith(compareBy({ it.ready }, { it.name }))
             }
 
             return sortedList

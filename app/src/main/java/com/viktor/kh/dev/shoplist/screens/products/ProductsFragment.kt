@@ -45,6 +45,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        context?.let { loadSetting(it) }
         binding = FragmentAddBinding.bind(view)
         rv  = binding.listProducts
         binding.addProduct.setOnClickListener(View.OnClickListener {

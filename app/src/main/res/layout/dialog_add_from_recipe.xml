@@ -51,19 +51,18 @@
 
             <ImageButton
                 android:id="@+id/button_minus"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
                 android:background="@drawable/dialog_button"
                 android:elevation="2dp"
-                android:src="@drawable/ic_baseline_remove_24"
-                android:layout_centerVertical="true"
-                />
+                android:src="@drawable/ic_baseline_remove_24" />
 
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/portions_text"
                 android:layout_width="wrap_content"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/button_minus"
                 android:gravity="center"
                 android:layout_centerHorizontal="true"
@@ -71,7 +70,7 @@
                 android:paddingStart="10dp"
                 android:paddingEnd="5dp"
                 android:text="@string/portions"
-                android:textSize="20sp"
+                android:textSize="30sp"
                 android:textColor="@color/black"
                 android:background="@color/white"/>
 
@@ -79,7 +78,7 @@
             <EditText
                 android:id="@+id/count_portion"
                 android:layout_width="10dp"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toStartOf="@id/button_plus"
                 android:layout_toEndOf="@id/portions_text"
@@ -92,13 +91,13 @@
                 android:inputType="number"
                 android:text="1"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="30sp" />
 
 
             <ImageButton
                 android:id="@+id/button_plus"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:src="@drawable/ic_baseline_add_24"
                 android:layout_toStartOf="@id/btn_accept_choice"
                 android:background="@drawable/dialog_button"
@@ -108,8 +107,8 @@
 
             <ImageButton
                 android:id="@+id/btn_accept_choice"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="20dp"
                 android:background="@drawable/dialog_button"

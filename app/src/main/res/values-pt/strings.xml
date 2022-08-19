@@ -13,7 +13,7 @@
     <string name = "recipes"> Receitas </string>
     <string name = "add_recipe"> Adicionar receita </string>
     <string name = "clean"> Limpar lista </string>
-    <string name = "description1"> Clique em "editar" para descrever a receita. </string>
+    <string name = "description1">Descreva a receita</string>
     <string name = "products"> Produtos </string>
     <string name = "lists"> Listas </string>
     <string name = "last_open"> Última abertura </string>
@@ -45,7 +45,7 @@
     <string name = "ok"> Ok </string>
     <string name = "clear_list"> Limpar lista? </string>
     <string name = "save_file"> Salvar arquivo </string>
-    <string name = "download_file"> Carregar arquivo </string>
+    <string name = "download_file">Fazer download do arquivo</string>
     <string name = "backup_read"> Arquivo de recuperação carregado </string>
     <string name = "input_the_title"> Digite um nome </string>
     <string name = "recipes_for_dialog"> Receitas: </string>

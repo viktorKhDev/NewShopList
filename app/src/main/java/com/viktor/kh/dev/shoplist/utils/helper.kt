@@ -9,13 +9,18 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
+import com.viktor.kh.dev.shoplist.R
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 val format = SimpleDateFormat("dd.MM.yyyy")
 
-const val sortByName = "sort_by_name"
+var sortByDate = false
+
+
+
 const val listId = "ListId"
 const val listName = "ListName"
 const val addProduct = 1
@@ -81,6 +86,12 @@ fun shareText(text: String?, context: Context) {
         context.startActivity(intent)
     }
 
+}
+
+
+fun loadSetting(context: Context){
+    val sp = PreferenceManager.getDefaultSharedPreferences(context)
+    sortByDate = sp.getBoolean(context.getString(R.string.sort_by_date),false)
 }
 
 
