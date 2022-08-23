@@ -3,7 +3,6 @@ package com.viktor.kh.dev.shoplist.screens.products
 import android.app.Application
 import android.content.Context
 import android.util.Log
-import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.viktor.kh.dev.shoplist.utils.*
@@ -29,7 +28,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
 
     //variable for check start animation
     var initAnim = false
-    var stateChange = updateData
+    var stateChange = UPDATE_DATA
     var animPosition = -1
 
 
@@ -39,7 +38,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
       }
   }
     fun init(id: Int){
-        stateChange = updateData
+        stateChange = UPDATE_DATA
         animPosition = -1
         initAnim = true
         setRecipeList()
@@ -79,7 +78,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
           products.removeAt(position)
           products.add(newProduct)
           productListsDao.update(DataProductList(list.id,list.name,list.date,products))
-          stateChange = changeReady
+          stateChange = CHANGE_READY
           animPosition = position
           getProducts()
       }
@@ -96,7 +95,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
             products.removeAt(position)
             products.add(newProduct)
             productListsDao.update(DataProductList(list.id,list.name,list.date,products))
-            stateChange = updateData
+            stateChange = UPDATE_DATA
             getProducts()
         }
     }
@@ -109,7 +108,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
          list.products?.let { products.addAll(it) }
          products.removeAt(position)
          productListsDao.update(DataProductList(list.id,list.name,list.date,products))
-            stateChange = deleteProduct
+            stateChange = DELETE_PRODUCT
             animPosition = position
          getProducts()
      }
@@ -124,7 +123,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
             list.products?.let { products.addAll(it) }
             products.add(dataProduct)
             productListsDao.update(DataProductList(list.id,list.name,list.date,products))
-            stateChange = addProduct
+            stateChange = ADD_PRODUCT
             animPosition = products.size-1
             getProducts()
         }
@@ -139,7 +138,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
            list.products?.let { products.addAll(it) }
            products.clear()
            productListsDao.update(DataProductList(list.id,list.name,list.date,products))
-           stateChange = updateData
+           stateChange = UPDATE_DATA
            getProducts()
 
        }
@@ -160,7 +159,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                      animPosition = products.size
                  }
                  productListsDao.update(DataProductList(list.id,list.name,list.date,products))
-                 stateChange =  updateData
+                 stateChange =  UPDATE_DATA
                  getProducts()
              }
 
@@ -206,7 +205,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
             val list: DataProductList = productListsDao.get(listId!!)
             list.products?.let { readyList.addAll(it) }
             productListsDao.update(DataProductList(list.id,list.name,list.date,readyList))
-            stateChange = updateData
+            stateChange = UPDATE_DATA
             getProducts()
 
         }

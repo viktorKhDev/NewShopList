@@ -8,8 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
-import com.viktor.kh.dev.shoplist.utils.addProduct
-import com.viktor.kh.dev.shoplist.utils.deleteProduct
+import com.viktor.kh.dev.shoplist.utils.ADD_PRODUCT
+import com.viktor.kh.dev.shoplist.utils.DELETE_PRODUCT
 
 
 class RecipeProductsAdapter(
@@ -42,7 +42,7 @@ class RecipeProductsAdapter(
         var animPosition = 0
 
         when(stateForAnim){
-            addProduct -> {
+            ADD_PRODUCT -> {
                 for (i in list.indices){
                     if (!data.contains(list[i])){
                         animPosition = i
@@ -52,7 +52,7 @@ class RecipeProductsAdapter(
                 data.addAll(list)
                 notifyItemInserted(animPosition)
             }
-            deleteProduct -> {
+            DELETE_PRODUCT -> {
                 for (i in data.indices){
                     if (!list.contains(data[i])){
                         animPosition = i

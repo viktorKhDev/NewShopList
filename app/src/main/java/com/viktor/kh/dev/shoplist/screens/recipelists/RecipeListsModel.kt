@@ -8,12 +8,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
-import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
 import com.viktor.kh.dev.shoplist.repository.db.room.RecipesDao
 import com.viktor.kh.dev.shoplist.utils.currentTimeToLong
 import com.viktor.kh.dev.shoplist.utils.listId
-import com.viktor.kh.dev.shoplist.utils.listName
+import com.viktor.kh.dev.shoplist.utils.LIST_NAME
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -101,7 +100,7 @@ class RecipeListsModel @Inject constructor(application: Application) :AndroidVie
         isAddClicked = false
         var bundle = Bundle()
         bundle.putInt(listId,dataRecipe.id)
-        bundle.putString(listName,dataRecipe.name)
+        bundle.putString(LIST_NAME,dataRecipe.name)
         controller.navigate(R.id.action_recipeListsFragment_to_recipeFragment,bundle)
     }
 

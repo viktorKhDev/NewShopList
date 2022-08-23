@@ -29,7 +29,6 @@ import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
 import com.viktor.kh.dev.shoplist.utils.*
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
 
 
 @AndroidEntryPoint
@@ -127,7 +126,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
 
     private fun subscribeData(data :List<DataProduct>){
         productsAdapter.setData(data,model.stateChange)
-        if (model.stateChange== addProduct){
+        if (model.stateChange== ADD_PRODUCT){
             rv.scrollToPosition(data.size-1)
         }
 
@@ -168,7 +167,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
     private fun initActionbar(){
         val supportActionBar: androidx.appcompat.app.ActionBar?
                 = (activity as AppCompatActivity).supportActionBar
-        val listName = arguments?.getString(listName)
+        val listName = arguments?.getString(LIST_NAME)
         supportActionBar?.title = listName
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 

@@ -9,7 +9,7 @@ import androidx.navigation.NavController
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.utils.currentTimeToLong
 import com.viktor.kh.dev.shoplist.utils.listId
-import com.viktor.kh.dev.shoplist.utils.listName
+import com.viktor.kh.dev.shoplist.utils.LIST_NAME
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 import com.viktor.kh.dev.shoplist.repository.db.room.ProductListsDao
@@ -98,7 +98,7 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
         isAddClicked = false
         var bundle = Bundle()
        bundle.putInt(listId,dataProductList.id)
-        bundle.putString(listName,dataProductList.name)
+        bundle.putString(LIST_NAME,dataProductList.name)
         controller.navigate(R.id.action_productListsFragment_to_productsFragment,bundle)
     }
 

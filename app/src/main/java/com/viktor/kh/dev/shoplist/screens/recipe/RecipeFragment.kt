@@ -1,12 +1,10 @@
 package com.viktor.kh.dev.shoplist.screens.recipe
 
-import android.app.ActionBar
 import android.app.Dialog
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
@@ -22,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.RecipeFragmentBinding
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
-import com.viktor.kh.dev.shoplist.screens.products.ProductsAdapter
 import com.viktor.kh.dev.shoplist.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -152,7 +149,7 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         val supportActionBar: androidx.appcompat.app.ActionBar
                 = (activity as AppCompatActivity).supportActionBar!!
         supportActionBar.hide()
-        val listName = arguments?.getString(listName)
+        val listName = arguments?.getString(LIST_NAME)
         collapsingToolbar.title = listName
         toolbar.inflateMenu(R.menu.options_menu_in_recipe)
         toolbar.setOnMenuItemClickListener { item ->
@@ -244,7 +241,7 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
     private fun subscribeProducts(data :List<DataProduct>){
         productsAdapter.setData(data,model.stateChange)
-        if (model.stateChange== addProduct){
+        if (model.stateChange== ADD_PRODUCT){
             rv.scrollToPosition(data.size-1)
         }
 

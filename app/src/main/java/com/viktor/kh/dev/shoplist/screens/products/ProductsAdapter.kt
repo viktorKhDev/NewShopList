@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
-import com.viktor.kh.dev.shoplist.utils.addProduct
-import com.viktor.kh.dev.shoplist.utils.changeReady
-import com.viktor.kh.dev.shoplist.utils.deleteProduct
+import com.viktor.kh.dev.shoplist.utils.ADD_PRODUCT
+import com.viktor.kh.dev.shoplist.utils.CHANGE_READY
+import com.viktor.kh.dev.shoplist.utils.DELETE_PRODUCT
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import kotlin.collections.ArrayList
 
@@ -55,7 +55,7 @@ class ProductsAdapter(
         var newPosition = 0
 
             when(stateForAnim){
-                addProduct -> {
+                ADD_PRODUCT -> {
                     for (i in list.indices){
                             if (!data.contains(list[i])){
                                 animPosition = i
@@ -65,7 +65,7 @@ class ProductsAdapter(
                     data.addAll(list)
                     notifyItemInserted(animPosition)
                 }
-                changeReady -> {
+                CHANGE_READY -> {
                     animPosition = positionClick
                    for ( i in list.indices){
                         if (compareProduct(list[i],data[animPosition])){
@@ -84,7 +84,7 @@ class ProductsAdapter(
 
                     //Log.d("fixLog", "moved from $animPosition(${data[animPosition].name}) to $newPosition(${data[newPosition].name}) ")
                 }
-                deleteProduct -> {
+                DELETE_PRODUCT -> {
                     for (i in data.indices){
                         if (!list.contains(data[i])){
                            animPosition = i

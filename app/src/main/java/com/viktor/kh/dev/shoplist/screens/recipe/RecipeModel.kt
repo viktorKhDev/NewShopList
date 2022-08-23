@@ -26,7 +26,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
 
     //variable for check start animation
     var initAnim = false
-    var stateChange = updateData
+    var stateChange = UPDATE_DATA
     var animPosition = -1
 
     //need get from settings
@@ -47,7 +47,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
 
 
     fun init(id: Int){
-        stateChange = updateData
+        stateChange = UPDATE_DATA
         if (listId!=id) {
             listId = id
         }
@@ -109,7 +109,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
             products.removeAt(position)
             products.add(newProduct)
             recipesDao.update(DataRecipe(recipe.id,recipe.name,recipe.text,recipe.date,products))
-            stateChange = updateData
+            stateChange = UPDATE_DATA
             getProducts()
         }
     }
@@ -122,7 +122,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
             recipe.products?.let { products.addAll(it) }
             products.removeAt(position)
             recipesDao.update(DataRecipe(recipe.id,recipe.name,recipe.text,recipe.date,products))
-            stateChange = deleteProduct
+            stateChange = DELETE_PRODUCT
             animPosition = position
             getProducts()
         }
@@ -137,7 +137,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
             recipe.products?.let { products.addAll(it) }
             products.add(dataProduct)
             recipesDao.update(DataRecipe(recipe.id,recipe.name,recipe.text,recipe.date,products))
-            stateChange = addProduct
+            stateChange = ADD_PRODUCT
             animPosition = products.size-1
             getProducts()
         }
@@ -152,7 +152,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
             recipe.products?.let { products.addAll(it) }
             products.clear()
             recipesDao.update(DataRecipe(recipe.id,recipe.name,recipe.text,recipe.date,products))
-            stateChange = updateData
+            stateChange = UPDATE_DATA
             getProducts()
 
         }
@@ -173,7 +173,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
                     animPosition = products.size
                 }
                 recipesDao.update(DataRecipe(recipe.id,recipe.name,recipe.text,recipe.date,products))
-                stateChange =  updateData
+                stateChange =  UPDATE_DATA
                 getProducts()
             }
 

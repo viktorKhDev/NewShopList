@@ -22,11 +22,12 @@ var sortByDate = false
 
 
 const val listId = "ListId"
-const val listName = "ListName"
-const val addProduct = 1
-const val changeReady = 2
-const val deleteProduct = 3
-const val updateData = 0
+const val LIST_NAME = "ListName"
+const val ADD_PRODUCT = 1
+const val CHANGE_READY = 2
+const val DELETE_PRODUCT = 3
+const val UPDATE_DATA = 0
+const val CREATE_FILE_CODE = 1000
 
 fun convertLongToTime(time: Long): String {
     val date = Date(time)
