@@ -20,11 +20,13 @@ class BackupModel @Inject constructor(application: Application) : AndroidViewMod
 
 
     fun createFile(uri: Uri){
+        //create backup file
      Log.d("fixLog","uri = ${uri.toString()}" )
     }
 
 
-   fun readFile(){
-
+   fun readFile(uri: Uri){
+       //read backup file
+       Log.d("fixLog","uri = ${uri.toString()}" )
    }
 }

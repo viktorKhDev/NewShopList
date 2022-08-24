@@ -1,6 +1,5 @@
 package com.viktor.kh.dev.shoplist.screens.other.backup
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -20,32 +19,40 @@ class BackupFragment :  Fragment(R.layout.backup_fragment) {
     private val model: BackupModel by activityViewModels()
     private lateinit var binding: BackupFragmentBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
 
-        binding = BackupFragmentBinding.inflate(inflater,container,false)
-        binding.saveFile.setOnClickListener(View.OnClickListener {
-            showToast("start create file",context)
-            val createFileLauncher = registerForActivityResult(CreateFileContract()){ result ->
-                model.createFile(result)
-            }
+    private val createFileLauncher = registerForActivityResult(CreateFileContract()) { result ->
+        if (result!=null){
+            model.createFile(result)
+            showToast(getString(R.string.backup_file_created),context)
+        }else{
+            showToast(getString(R.string.error),context)
+        }
 
-            createFileLauncher.launch("")
-
-        })
-        binding.downloadFile.setOnClickListener(View.OnClickListener {
-            model.readFile()
-        })
-        return super.onCreateView(inflater, container, savedInstanceState)
     }
+
+    private val readFileLauncher = registerForActivityResult(ReadFileContract()) { result ->
+        if (result!=null){
+            model.readFile(result)
+            showToast(getString(R.string.backup_read),context)
+        }else{
+            showToast(getString(R.string.backup_read_error),context)
+        }
+        }
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)  {
         super.onViewCreated(view, savedInstanceState)
         initActionbar()
         setHasOptionsMenu(true)
+        binding = BackupFragmentBinding.bind(view)
+        binding.saveFile.setOnClickListener(View.OnClickListener {
+            createFileLauncher.launch("ShopList backup")
+
+        })
+        binding.downloadFile.setOnClickListener(View.OnClickListener {
+           readFileLauncher.launch("")
+        })
     }
 
 
