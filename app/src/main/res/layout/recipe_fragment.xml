@@ -173,7 +173,7 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/text_hint"
                     android:textSize="20sp"
-                    tools:targetApi="o" />
+                    android:imeOptions="actionNext" />
 
                 <ImageView
                     android:id="@+id/barrier_between_label"
@@ -183,6 +183,7 @@
                     android:background="@color/colorPrimaryDark"
                     android:layout_marginStart="2dp"
                     android:layout_marginEnd="2dp"
+
                     />
 
 
@@ -200,7 +201,7 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/text_hint"
                     android:textSize="20sp"
-                    tools:targetApi="o" />
+                    android:imeOptions="actionDone" />
 
                 <ImageButton
                     android:layout_alignParentEnd="true"

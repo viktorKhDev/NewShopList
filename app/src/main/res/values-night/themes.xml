@@ -22,5 +22,8 @@
         <!-- Action bar. -->
         <item name="actionBarTheme">@style/MyActionBar</item>
         <!-- Customize your theme here. -->
+
+        <!-- Dialog theme. -->
+
     </style>
 </resources>

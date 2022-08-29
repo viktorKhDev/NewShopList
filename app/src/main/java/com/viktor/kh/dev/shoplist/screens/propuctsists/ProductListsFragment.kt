@@ -102,7 +102,8 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
     private fun addList(){
 
-        val dialog = context?.let { Dialog(it) }
+        val dialog = context?.let { Dialog(it,R.style.MyDialog) }
+        val animation = AnimationUtils.loadLayoutAnimation(context,R.anim.layout_show_bottom)
         if(dialog!=null){
             dialog.setContentView(R.layout.dialog_add)
             val text = dialog.findViewById<EditText>(R.id.dialog_text)

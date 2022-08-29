@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -182,6 +184,15 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         addProductFab.hide()
         textProduct.showKeyboard()
         Log.d("MyLog" , "addButton Hide")
+        textProduct.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+            var handled = false
+            if (actionId == EditorInfo.IME_ACTION_NEXT){
+
+                textAmount.showKeyboard()
+                handled = true
+            }
+            handled
+        })
         btnAcceptProduct.setOnClickListener(View.OnClickListener {
             val productName : String = textProduct.text.toString()
             val productAmount : String = textAmount.text.toString()

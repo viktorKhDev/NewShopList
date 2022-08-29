@@ -6,8 +6,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.viktor.kh.dev.shoplist.repository.db.converters.ProductsConverter
+import kotlinx.serialization.Serializable
 
-
+@Serializable
 @Entity
 data class DataProductList(
         @PrimaryKey(autoGenerate = true)

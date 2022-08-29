@@ -6,8 +6,9 @@ import androidx.room.ColumnInfo
 import androidx.room.TypeConverters
 
 import com.viktor.kh.dev.shoplist.repository.db.converters.ProductsConverter
+import kotlinx.serialization.Serializable
 
-
+@Serializable
 @TypeConverters(ProductsConverter::class)
 data class DataProduct(
    @ColumnInfo(name = "name" ) val name: String?,

@@ -3,6 +3,7 @@ package com.viktor.kh.dev.shoplist.repository.db.room
 import androidx.room.*
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
+import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
 
 
 @Dao
@@ -21,5 +22,16 @@ interface ProductListsDao {
 
     @Insert
     fun insert(dataProducts: DataProductList)
+
+
+    @Query("DELETE FROM dataProductList")
+    fun clearAllTable();
+
+    @Transaction
+    fun updateTable(list: List<DataProductList>){
+        for (i in list){
+            insert(i)
+        }
+    }
 
 }

@@ -21,4 +21,15 @@ interface RecipesDao {
     @Query("SELECT * FROM dataRecipe WHERE id = :listID")
     fun get(listID: Int):DataRecipe
 
+    @Query("DELETE FROM dataRecipe")
+    fun clearAllTable();
+
+    @Transaction
+    fun updateTable(list: List<DataRecipe>){
+       for (i in list){
+           insert(i)
+       }
+    }
+
+
 }
