@@ -28,7 +28,7 @@
     <string name="error">Error</string>
     <string name="backup_read_error">¡El archivo de recuperación está dañado!</string>
     <string name="accept">Confirmar</string>
-    <string name="support">Apoyo técnico</string>
+    <string name="support">Acerca de la aplicación</string>
     <string name="reference">Referencia</string>
     <string name="instruction">Manual de instrucciones</string>
     <string name="support_text">Si tiene preguntas, comentarios o sugerencias sobre la aplicación</string>

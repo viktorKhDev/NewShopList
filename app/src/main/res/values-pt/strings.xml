@@ -28,7 +28,7 @@
     <string name = "error"> Erro </string>
     <string name = "backup_read_error"> O arquivo de recuperação está corrompido! </string>
     <string name = "accept"> Confirme </string>
-    <string name = "support"> Suporte técnico </string>
+    <string name = "support">Sobre o aplicativo</string>
     <string name = "reference"> Ajuda </string>
     <string name = "instruction"> Instrução </string>
     <string name = "support_text"> Se você tiver dúvidas, comentários ou sugestões sobre o aplicativo </string>

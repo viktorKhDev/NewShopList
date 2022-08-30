@@ -221,16 +221,16 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
     private fun setProduct(position: Int){
         //change name for product
         var dataProduct: DataProduct = model.productsList.value!![position]
-        val dialog = context?.let { Dialog(it) }
+        val dialog = context?.let { Dialog(it,R.style.MyDialog) }
         if(dialog!=null){
             dialog.setContentView(R.layout.dialog_add)
             val text = dialog.findViewById<EditText>(R.id.dialog_text)
             text.setText(dataProduct.name)
-            initFocusAndShowKeyboard(text, activity as AppCompatActivity)
             val buttonYes = dialog.findViewById<Button>(R.id.btn_yes)
             val  buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
             dialog.setCancelable(true)
             dialog.show()
+            text.showKeyboard()
 
             buttonCancel.setOnClickListener(View.OnClickListener {
                 dialog.dismiss()

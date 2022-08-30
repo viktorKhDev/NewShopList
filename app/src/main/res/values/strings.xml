@@ -28,7 +28,7 @@
     <string name="error"> Error </string>
     <string name="backup_read_error"> The recovery file is corrupt! </string>
     <string name="accept"> Confirm </string>
-    <string name="support"> Technical Support </string>
+    <string name="support">About the application</string>
     <string name="reference"> Help </string>
     <string name="instruction"> Instruction </string>
     <string name="support_text"> If you have questions, comments or suggestions regarding the application </string>

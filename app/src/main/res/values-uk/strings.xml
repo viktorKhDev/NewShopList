@@ -28,7 +28,7 @@
     <string name="error">Помилка</string>
     <string name="backup_read_error">Файл відновлення пошкоджений!</string>
     <string name="accept">Підтвердити</string>
-    <string name="support">Техпідтримка</string>
+    <string name="support">Про додаток</string>
     <string name="reference">Довідка</string>
     <string name="instruction">Інструкція</string>
     <string name="support_text">При виникненні питань, зауважень або пропозицій щодо програми</string>

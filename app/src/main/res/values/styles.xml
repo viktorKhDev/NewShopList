@@ -39,6 +39,6 @@
         <item name="android:windowEnterAnimation">@anim/view_show_bottom</item>
 
     </style>
-    <style name="Text_andika"/>
+    <style name="Text_andika" />
 
 </resources>

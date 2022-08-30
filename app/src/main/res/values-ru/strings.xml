@@ -28,7 +28,7 @@
     <string name="error">Ошибка</string>
     <string name="backup_read_error">Файл востановления повреждён!</string>
     <string name="accept">Подтвердить</string>
-    <string name="support">Техподдержка</string>
+    <string name="support">О приложении</string>
     <string name="reference">Справка</string>
     <string name="instruction">Инструкция</string>
     <string name="support_text">При возникновении вопросов, замечаний или предложений касательно приложения</string>

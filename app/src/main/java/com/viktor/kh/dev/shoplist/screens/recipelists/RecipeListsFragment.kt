@@ -107,12 +107,11 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
 
     private fun addRecipe(){
 
-        val dialog = context?.let { Dialog(it) }
+        val dialog = context?.let { Dialog(it,R.style.MyDialog) }
         if(dialog!=null){
             dialog.setContentView(R.layout.dialog_add)
             val text = dialog.findViewById<EditText>(R.id.dialog_text)
             text.hint = getString(R.string.input_the_title)
-            initFocusAndShowKeyboard(text, activity as AppCompatActivity)
             val buttonAdd = dialog.findViewById<Button>(R.id.btn_yes)
             val  buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
             dialog.setCancelable(true)
@@ -139,12 +138,11 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
     }
     private fun setRecipe(position:Int){
         var dataList: DataRecipe = model.dataRecipes.value!![position]
-        val dialog = context?.let { Dialog(it) }
+        val dialog = context?.let { Dialog(it,R.style.MyDialog) }
         if(dialog!=null){
             dialog.setContentView(R.layout.dialog_add)
             val text = dialog.findViewById<EditText>(R.id.dialog_text)
             text.setText(dataList.name)
-            initFocusAndShowKeyboard(text, activity as AppCompatActivity)
             val buttonAdd = dialog.findViewById<Button>(R.id.btn_yes)
             val  buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
             dialog.setCancelable(true)
@@ -174,12 +172,11 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
 
 
     private fun deleteRecipe(position: Int){
-        val dialog = context?.let { Dialog(it) }
+        val dialog = context?.let { Dialog(it,R.style.MyDialog) }
         if(dialog!=null) {
             dialog.setContentView(R.layout.dialog_add)
             val text = dialog.findViewById<EditText>(R.id.dialog_text)
             text.setText(R.string.delete_recipe_q)
-            initFocusAndShowKeyboard(text, activity as AppCompatActivity)
             val buttonYes = dialog.findViewById<Button>(R.id.btn_yes)
             val buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
             dialog.setCancelable(true)

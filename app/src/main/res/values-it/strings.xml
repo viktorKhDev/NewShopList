@@ -28,7 +28,7 @@
     <string name = "error"> Errore </string>
     <string name = "backup_read_error"> Il file di ripristino è corrotto! </string>
     <string name = "accept"> Conferma </string>
-    <string name = "support"> Supporto tecnico </string>
+    <string name = "support">Informazioni sull\'app</string>
     <string name = "reference"> Aiuto </string>
     <string name = "instruction"> Istruzione </string>
     <string name = "support_text"> Se hai domande, commenti o suggerimenti sull\'applicazione </string>

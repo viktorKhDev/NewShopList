@@ -103,12 +103,10 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
     private fun addList(){
 
         val dialog = context?.let { Dialog(it,R.style.MyDialog) }
-        val animation = AnimationUtils.loadLayoutAnimation(context,R.anim.layout_show_bottom)
         if(dialog!=null){
             dialog.setContentView(R.layout.dialog_add)
             val text = dialog.findViewById<EditText>(R.id.dialog_text)
             text.hint = getString(R.string.list_title)
-            initFocusAndShowKeyboard(text, activity as AppCompatActivity)
             val buttonAdd = dialog.findViewById<Button>(R.id.btn_yes)
             val  buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
             dialog.setCancelable(true)
@@ -135,12 +133,11 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
     }
     private fun setList(position:Int){
         var dataList: DataProductList = model.dataLists.value!![position]
-        val dialog = context?.let { Dialog(it) }
+        val dialog = context?.let { Dialog(it,R.style.MyDialog) }
         if(dialog!=null){
             dialog.setContentView(R.layout.dialog_add)
             val text = dialog.findViewById<EditText>(R.id.dialog_text)
             text.setText(dataList.name)
-            initFocusAndShowKeyboard(text, activity as AppCompatActivity)
             val buttonAdd = dialog.findViewById<Button>(R.id.btn_yes)
             val  buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
             dialog.setCancelable(true)
@@ -170,12 +167,11 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
 
     private fun deleteList(position: Int){
-        val dialog = context?.let { Dialog(it) }
+        val dialog = context?.let { Dialog(it,R.style.MyDialog) }
         if(dialog!=null) {
             dialog.setContentView(R.layout.dialog_add)
             val text = dialog.findViewById<EditText>(R.id.dialog_text)
             text.setText(R.string.delete_list_q)
-            initFocusAndShowKeyboard(text, activity as AppCompatActivity)
             val buttonYes = dialog.findViewById<Button>(R.id.btn_yes)
             val buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
             dialog.setCancelable(true)
