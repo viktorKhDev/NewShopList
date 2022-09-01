@@ -34,6 +34,9 @@ class OtherFragment : Fragment(R.layout.other_fragment){
         binding.infoScreen.setOnClickListener(View.OnClickListener {
             model.openSupport(findNavController())
         })
+        binding.privacyScreen.setOnClickListener(View.OnClickListener {
+            activity?.let { it1 -> model.openPrivacy(it1) }
+        })
 
 
 

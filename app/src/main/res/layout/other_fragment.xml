@@ -154,6 +154,43 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginStart="5dp"
+            android:id="@+id/privacy_screen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:elevation="@dimen/cardview_default_elevation">
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/privacy_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                android:src="@drawable/ic_yellow_privacy_tip_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/privacy_text"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/privacy_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/privacy_image"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textSize="20sp"
+                android:layout_marginStart="20dp"
+                android:text="@string/privacy_policy"
+                android:gravity="center_vertical"
+                />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 

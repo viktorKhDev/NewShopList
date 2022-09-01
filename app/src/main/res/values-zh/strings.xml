@@ -58,5 +58,7 @@
     <string name="support_email">viktor.kh.dev@gmail.com</string>
     <string name="amount">数量</string>
     <string name="portions">部分</string>
+    <string name="privacy_policy">隐私政策</string>
+
 
 </resources>

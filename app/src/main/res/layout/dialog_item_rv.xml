@@ -7,7 +7,7 @@
     android:elevation="2dp"
     android:layout_margin="4dp"
     android:backgroundTint="@color/white"
-    app:cardCornerRadius="5dp">
+    app:cardCornerRadius="10dp">
 
 
 <LinearLayout
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:textColor="@color/black"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textAlignment="center"
         android:gravity="center"/>
 

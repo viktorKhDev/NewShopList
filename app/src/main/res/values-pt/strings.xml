@@ -58,5 +58,6 @@
     <string name = "support_email">viktor.kh.dev@gmail.com </string>
     <string name="amount">Quantidade</string>
     <string name="portions">Porções</string>
+    <string name="privacy_policy">Política de Privacidade</string>
 
 </resources>
