@@ -13,7 +13,7 @@
     <string name="recipes">Recetas</string>
     <string name="add_recipe">Agregar receta</string>
     <string name="clean">Limpiar la lista</string>
-    <string name="description1">Haga clic en "editar" para describir la receta.</string>
+    <string name="description1">Describa la receta</string>
     <string name="products">Productos</string>
     <string name="lists">Liza</string>
     <string name="last_open">Último abierto</string>
@@ -28,7 +28,7 @@
     <string name="error">Error</string>
     <string name="backup_read_error">¡El archivo de recuperación está dañado!</string>
     <string name="accept">Confirmar</string>
-    <string name="support">Apoyo técnico</string>
+    <string name="support">Acerca de la aplicación</string>
     <string name="reference">Referencia</string>
     <string name="instruction">Manual de instrucciones</string>
     <string name="support_text">Si tiene preguntas, comentarios o sugerencias sobre la aplicación</string>
@@ -45,7 +45,7 @@
     <string name="ok">Оk</string>
     <string name="clear_list">¿Borrar la lista?</string>
     <string name="save_file">Guardar el archivo</string>
-    <string name="download_file">Subir archivo</string>
+    <string name="download_file">Descargar archivo</string>
     <string name="backup_read">Archivo de recuperación cargado</string>
     <string name="input_the_title">Ingrese el título</string>
     <string name="recipes_for_dialog">Recetas:</string>
@@ -56,5 +56,7 @@
     <string name="sort_summary">Ordenar elementos del primero al último</string>
     <string name="sort_title">Ordenar por tiempo agregado</string>
     <string name="support_email">viktor.kh.dev@gmail.com</string>
-
+    <string name="amount">Monto</string>
+    <string name="portions">Porciones</string>
+    <string name="privacy_policy">Política de privacidad</string>
 </resources>

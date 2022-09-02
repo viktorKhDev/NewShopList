@@ -13,7 +13,7 @@
     <string name="recipes">Рецепты</string>
     <string name="add_recipe">Добавить рецепт</string>
     <string name="clean">Очистить список</string>
-    <string name="description1">Нажмите на "редактирования" для описания рецепта.</string>
+    <string name="description1">Опишите рецепт</string>
     <string name="products">Продукты</string>
     <string name="lists">Списки</string>
     <string name="last_open">Последний открытый</string>
@@ -28,7 +28,7 @@
     <string name="error">Ошибка</string>
     <string name="backup_read_error">Файл востановления повреждён!</string>
     <string name="accept">Подтвердить</string>
-    <string name="support">Техподдержка</string>
+    <string name="support">О приложении</string>
     <string name="reference">Справка</string>
     <string name="instruction">Инструкция</string>
     <string name="support_text">При возникновении вопросов, замечаний или предложений касательно приложения</string>
@@ -51,11 +51,14 @@
     <string name="recipes_for_dialog">Рецепты:</string>
     <string name="list_title">Название списка</string>
     <string name="delete_list_q">Удалить список?</string>
-    <string name="delete_recipe_q">Удалить Рецепт?</string>
+    <string name="delete_recipe_q">Удалить рецепт?</string>
     <string name="edit">Изменить</string>
     <string name="sort_summary">Сортировка товаров от первого добавленого к последнему</string>
     <string name="sort_title">Сортировка по времени добавления</string>
     <string name="support_email">viktor.kh.dev@gmail.com</string>
+    <string name="amount">Количество</string>
+    <string name="portions">Порции</string>
+    <string name="privacy_policy">Политика конфиденциальности</string>
 
 
 </resources>

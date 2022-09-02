@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
+
+    >
     <SwitchPreference
-        android:defaultValue="false"
-        android:key="switch_preference_sort"
-        android:title="@string/sort_title"
-        android:summary="@string/sort_summary"/>
+            android:defaultValue="false"
+            android:key="@string/sort_by_date"
+            android:title="@string/sort_title"
+            android:summary="@string/sort_summary"
+            app:iconSpaceReserved="false"
+        />
+
+
+
 
 
 </PreferenceScreen>

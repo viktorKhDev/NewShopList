@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/productListsFragment"
+            android:title="@string/lists"
+            android:icon="@drawable/ic_list_white">
+
+        </item>
+        <item
+            android:id="@+id/recipeListsFragment"
+            android:title="@string/recipes"
+            android:icon="@drawable/ic_recipe_white">
+
+        </item>
+    </group>
+
+
+    <group>
+        <item
+            android:id="@+id/otherFragment"
+            android:title="@string/other"
+            android:icon="@drawable/ic_other_apps_24"
+            >
+        </item>
+    </group>
+
+
+
+</menu>

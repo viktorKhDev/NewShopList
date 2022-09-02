@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+
+    >
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/recipe_coordinator_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        >
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:theme="@style/MyActionBar"
+            >
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:expandedTitleMarginStart="48dp"
+                app:expandedTitleMarginEnd="64dp"
+                android:background="@color/colorPrimary"
+
+                >
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/colorPrimary"
+                    app:popupTheme="@style/MyActionBar"
+                    app:layout_collapseMode = "pin"
+                    app:navigationIcon="@drawable/ic_baseline_arrow_white_24"
+                    />
+
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_recipe_text"
+
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            >
+
+            <EditText
+                android:id="@+id/recipe_text"
+                android:hint="@string/description1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:textColor="@color/black"
+                android:textColorHint="@color/text_hint"
+                android:padding="10dp"/>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/products_fab"
+            android:focusable="true"
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:layout_anchorGravity="bottom|right|end"
+            app:layout_anchor="@id/appbar"
+            app:backgroundTint="@color/colorAccent"
+            app:tint="@color/black"
+            android:src="@drawable/ic_baseline_shopping_basket_24" />
+
+
+
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:visibility="gone"
+        android:id="@+id/recipe_product_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="@dimen/cardview_default_radius"
+        >
+
+
+        <ImageView
+            android:id="@+id/blackout_frame_img_top"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/rv"
+           />
+
+        <ImageView
+            android:id="@+id/blackout_frame_img_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            app:layout_constraintTop_toBottomOf="@id/rv"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_recipe_products"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/blackout_frame_img_top"
+            app:layout_constraintBottom_toTopOf="@id/blackout_frame_img_bottom"
+            app:layout_constraintVertical_bias="0.0"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            />
+
+
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/relative_add_product"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintEnd_toEndOf="@id/rv"
+            app:layout_constraintBottom_toBottomOf="@id/rv"
+            >
+
+            <RelativeLayout
+                android:background="@drawable/bg_for_recipe_products_add"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingStart="10dp"
+                android:layout_marginTop="30dp">
+
+                <EditText
+                    android:id="@+id/text_product"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_toStartOf="@id/barrier_between_label"
+                    android:autofillHints=""
+                    android:background="@color/background"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/prod_name"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="20sp"
+                    android:imeOptions="actionNext" />
+
+                <ImageView
+                    android:id="@+id/barrier_between_label"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@id/text_amount"
+                    android:background="@color/colorPrimaryDark"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp"
+
+                    />
+
+
+                <EditText
+                    android:id="@+id/text_amount"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@id/btn_accept_product"
+                    android:autofillHints=""
+                    android:background="@color/background"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/amount"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="20sp"
+                    android:imeOptions="actionDone" />
+
+                <ImageButton
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/btn_accept_product"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/button_bg_black_ripple_oval"
+                    android:textColor="@android:color/white"
+                    android:src="@drawable/ic_done_white_24dp"
+                    android:elevation="2dp"/>
+
+
+            </RelativeLayout>
+
+            <ImageButton
+                android:id="@+id/btn_no_product"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/circle_button"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_clear_white_24dp"
+                android:elevation="2dp"/>
+
+        </RelativeLayout>
+
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_product_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:layout_constraintEnd_toEndOf="@id/rv"
+            app:layout_constraintBottom_toBottomOf="@id/rv"
+            android:clickable="true"
+            android:focusable="true"
+            app:backgroundTint="@color/colorAccent"
+            app:tint ="@color/black"
+            app:srcCompat="@drawable/ic_baseline_add_24"
+            />
+
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_close_products"
+            android:visibility="gone"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/circle_button"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintEnd_toEndOf="@id/rv"
+            app:layout_constraintTop_toTopOf="@id/rv"
+            android:src="@drawable/ic_clear_white_24dp"
+            android:layout_margin="2dp"
+            android:elevation="4dp"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

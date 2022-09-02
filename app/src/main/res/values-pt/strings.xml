@@ -13,7 +13,7 @@
     <string name = "recipes"> Receitas </string>
     <string name = "add_recipe"> Adicionar receita </string>
     <string name = "clean"> Limpar lista </string>
-    <string name = "description1"> Clique em "editar" para descrever a receita. </string>
+    <string name = "description1">Descreva a receita</string>
     <string name = "products"> Produtos </string>
     <string name = "lists"> Listas </string>
     <string name = "last_open"> Última abertura </string>
@@ -28,7 +28,7 @@
     <string name = "error"> Erro </string>
     <string name = "backup_read_error"> O arquivo de recuperação está corrompido! </string>
     <string name = "accept"> Confirme </string>
-    <string name = "support"> Suporte técnico </string>
+    <string name = "support">Sobre o aplicativo</string>
     <string name = "reference"> Ajuda </string>
     <string name = "instruction"> Instrução </string>
     <string name = "support_text"> Se você tiver dúvidas, comentários ou sugestões sobre o aplicativo </string>
@@ -45,7 +45,7 @@
     <string name = "ok"> Ok </string>
     <string name = "clear_list"> Limpar lista? </string>
     <string name = "save_file"> Salvar arquivo </string>
-    <string name = "download_file"> Carregar arquivo </string>
+    <string name = "download_file">Fazer download do arquivo</string>
     <string name = "backup_read"> Arquivo de recuperação carregado </string>
     <string name = "input_the_title"> Digite um nome </string>
     <string name = "recipes_for_dialog"> Receitas: </string>
@@ -56,6 +56,8 @@
     <string name = "sort_summary"> Classifique itens do primeiro ao último </string>
     <string name = "sort_title"> Classificar por tempo adicionado </string>
     <string name = "support_email">viktor.kh.dev@gmail.com </string>
-
+    <string name="amount">Quantidade</string>
+    <string name="portions">Porções</string>
+    <string name="privacy_policy">Política de Privacidade</string>
 
 </resources>

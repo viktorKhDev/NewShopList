@@ -13,7 +13,7 @@
     <string name = "recipes"> Ricette </string>
     <string name = "add_recipe"> Aggiungi ricetta </string>
     <string name = "clean"> Cancella elenco </string>
-    <string name = "description1"> Fai clic su "modifica" per descrivere la ricetta. </string>
+    <string name = "description1">Descrivi la ricetta</string>
     <string name = "products"> Prodotti </string>
     <string name = "lists"> Liste </string>
     <string name = "last_open"> Ultima apertura </string>
@@ -28,7 +28,7 @@
     <string name = "error"> Errore </string>
     <string name = "backup_read_error"> Il file di ripristino è corrotto! </string>
     <string name = "accept"> Conferma </string>
-    <string name = "support"> Supporto tecnico </string>
+    <string name = "support">Informazioni sull\'app</string>
     <string name = "reference"> Aiuto </string>
     <string name = "instruction"> Istruzione </string>
     <string name = "support_text"> Se hai domande, commenti o suggerimenti sull\'applicazione </string>
@@ -45,7 +45,7 @@
     <string name = "ok"> Ok </string>
     <string name = "clear_list"> Cancella elenco? </string>
     <string name = "save_file"> Salva file </string>
-    <string name = "download_file"> Carica file </string>
+    <string name = "download_file">Download file</string>
     <string name = "backup_read"> File di ripristino caricato </string>
     <string name = "input_the_title"> Inserisci un nome </string>
     <string name = "recipes_for_dialog"> Ricette: </string>
@@ -56,6 +56,8 @@
     <string name = "sort_summary"> Ordina gli elementi dal primo all\'ultimo </string>
     <string name = "sort_title"> Ordina per ora aggiunta </string>
     <string name = "support_email">viktor.kh.dev@gmail.com </string>
-
+    <string name="amount">Quantità</string>
+    <string name="portions">Porzioni</string>
+    <string name="privacy_policy">Politica sulla riservatezza</string>
 
 </resources>

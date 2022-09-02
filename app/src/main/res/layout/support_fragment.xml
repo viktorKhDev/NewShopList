@@ -9,26 +9,36 @@
         android:layout_height="wrap_content">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text_info"
-                android:layout_margin="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:textColor="@color/black">
-            </TextView>
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/support_text"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
-            <TextView
-                android:layout_below="@id/text_info"
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text_email"
-                android:layout_margin="10dp"
-                android:textSize="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:saveEnabled="false">
+                android:layout_below="@id/text_info"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:autoLink="email"
+                android:saveEnabled="false"
+                android:text="@string/support_email"
+                android:textSize="20sp">
 
-            </TextView>
+            </androidx.appcompat.widget.AppCompatTextView>
+
         </RelativeLayout>
 
 

@@ -13,7 +13,7 @@
     <string name="recipes">Rezepte</string>
     <string name="add_recipe">Rezept hinzufügen</string>
     <string name="clean">Löschen Sie die Liste</string>
-    <string name="description1">Klicken Sie auf "Bearbeiten", um das Rezept zu beschreiben.</string>
+    <string name="description1">Beschreiben Sie das Rezept</string>
     <string name="products">Produkte</string>
     <string name="lists">Listen</string>
     <string name="last_open">Zuletzt geöffnet</string>
@@ -28,7 +28,7 @@
     <string name="error">Error</string>
     <string name="backup_read_error">Die Wiederherstellungsdatei ist beschädigt!</string>
     <string name="accept">Bestätigen</string>
-    <string name="support">Technischer Support</string>
+    <string name="support">Über die App</string>
     <string name="reference">Referenz</string>
     <string name="instruction">Bedienungsanleitung</string>
     <string name="support_text">Wenn Sie Fragen, Kommentare oder Vorschläge zur Anwendung haben</string>
@@ -45,7 +45,7 @@
     <string name="ok">Оk</string>
     <string name="clear_list">Liste löschen?</string>
     <string name="save_file">Datei speichern</string>
-    <string name="download_file">Datei hochladen</string>
+    <string name="download_file">Datei herunterladen</string>
     <string name="backup_read">Wiederherstellungsdatei hochgeladen</string>
     <string name="input_the_title">Geben Sie den Titel ein</string>
     <string name="recipes_for_dialog">Rezepte:</string>
@@ -56,6 +56,8 @@
     <string name="sort_summary">Sortieren Sie die Elemente vom ersten bis zum letzten</string>
     <string name="sort_title">Nach hinzugefügter Zeit sortieren</string>
     <string name="support_email">viktor.kh.dev@gmail.com</string>
-
+    <string name="amount">Menge</string>
+    <string name="portions">Portionen</string>
+    <string name="privacy_policy">Datenschutz-Bestimmungen</string>
 
 </resources>

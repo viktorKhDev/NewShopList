@@ -13,7 +13,7 @@
     <string name="recipes">Рецепти</string>
     <string name="add_recipe">Додати рецепт</string>
     <string name="clean">Очистити список</string>
-    <string name="description1">Натисніть на "редагування" для опису рецепта.</string>
+    <string name="description1">Опишіть рецепт</string>
     <string name="products">Продукти</string>
     <string name="lists">Списки</string>
     <string name="last_open">Останній відкритий</string>
@@ -28,7 +28,7 @@
     <string name="error">Помилка</string>
     <string name="backup_read_error">Файл відновлення пошкоджений!</string>
     <string name="accept">Підтвердити</string>
-    <string name="support">Техпідтримка</string>
+    <string name="support">Про додаток</string>
     <string name="reference">Довідка</string>
     <string name="instruction">Інструкція</string>
     <string name="support_text">При виникненні питань, зауважень або пропозицій щодо програми</string>
@@ -56,6 +56,8 @@
     <string name="sort_summary">Сортування товарів від першого доданого до останнього</string>
     <string name="sort_title">Сортування по часу завантаження</string>
     <string name="support_email">viktor.kh.dev@gmail.com</string>
-
+    <string name="amount">Кількість</string>
+    <string name="portions">Порції</string>
+    <string name="privacy_policy">Політика конфіденційності</string>
 
 </resources>

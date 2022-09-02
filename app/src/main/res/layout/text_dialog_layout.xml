@@ -11,7 +11,7 @@
     </include>
 
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_dialog_ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,6 +25,6 @@
         app:fabSize="mini"
         app:srcCompat="@drawable/ic_done_black_24dp">
 
-    </android.support.design.widget.FloatingActionButton>
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
 </RelativeLayout>

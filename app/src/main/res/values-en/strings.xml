@@ -13,7 +13,7 @@
     <string name = "recipes"> Recipes </string>
     <string name = "add_recipe"> Add recipe </string>
     <string name = "clean"> Clear list </string>
-    <string name = "description1"> Click on “edit” to describe the recipe. </string>
+    <string name = "description1">Describe the recipe</string>
     <string name = "products"> Products </string>
     <string name = "lists"> Lists </string>
     <string name = "last_open"> Last opened </string>
@@ -28,7 +28,7 @@
     <string name = "error"> Error </string>
     <string name = "backup_read_error"> The recovery file is corrupt! </string>
     <string name = "accept"> Confirm </string>
-    <string name = "support"> Technical Support </string>
+    <string name = "support">About the application</string>
     <string name = "reference"> Help </string>
     <string name = "instruction"> Instruction </string>
     <string name = "support_text"> If you have questions, comments or suggestions regarding the application </string>
@@ -45,7 +45,7 @@
     <string name = "ok"> Ok </string>
     <string name = "clear_list"> Clear list? </string>
     <string name = "save_file"> Save file </string>
-    <string name = "download_file"> Upload file </string>
+    <string name = "download_file">Download file</string>
     <string name = "backup_read"> Recovery file uploaded </string>
     <string name = "input_the_title"> Enter a name </string>
     <string name = "recipes_for_dialog"> Recipes: </string>
@@ -56,8 +56,8 @@
     <string name="sort_summary">Sort items from first to last</string>
     <string name="sort_title">Sort by time added</string>
     <string name="support_email">viktor.kh.dev@gmail.com</string>
-
-
-
+    <string name="amount">Amount</string>
+    <string name="portions">Portions</string>
+    <string name="privacy_policy">Privacy Policy</string>
 
 </resources>

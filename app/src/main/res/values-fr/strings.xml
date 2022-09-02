@@ -13,7 +13,7 @@
     <string name = "recipes"> Recettes </string>
     <string name = "add_recipe"> Ajouter une recette </string>
     <string name = "clean"> Effacer la liste </string>
-    <string name = "description1"> Cliquez sur «modifier» pour décrire la recette. </string>
+    <string name = "description1">Décrivez la recette</string>
     <string name = "products"> Produits </string>
     <string name = "lists"> Listes </string>
     <string name = "last_open"> Dernière ouverture </string>
@@ -28,7 +28,7 @@
     <string name = "error"> Erreur </string>
     <string name = "backup_read_error"> Le fichier de récupération est corrompu! </string>
     <string name = "accept"> Confirmer </string>
-    <string name = "support"> Support technique </string>
+    <string name = "support">À propos de l\'application</string>
     <string name = "reference"> Aide </string>
     <string name = "instruction"> Instruction </string>
     <string name = "support_text"> Si vous avez des questions, des commentaires ou des suggestions concernant l\'application </string>
@@ -45,7 +45,7 @@
     <string name = "ok"> Ok </string>
     <string name = "clear_list"> Effacer la liste? </string>
     <string name = "save_file"> Enregistrer le fichier </string>
-    <string name = "download_file"> Télécharger un fichier </string>
+    <string name = "download_file">Télécharger un fichier</string>
     <string name = "backup_read"> Fichier de récupération téléchargé </string>
     <string name = "input_the_title"> Entrez un nom </string>
     <string name = "recipes_for_dialog"> Recettes: </string>
@@ -56,6 +56,10 @@
     <string name = "sort_summary"> Trier les éléments du premier au dernier </string>
     <string name = "sort_title"> Trier par heure ajoutée </string>
     <string name = "support_email"> viktor.kh.dev@gmail.com </string>
+    <string name="amount">Montant</string>
+    <string name="portions">Portions</string>
+    <string name="privacy_policy">Politique de confidentialité</string>
+
 
 
 </resources>
