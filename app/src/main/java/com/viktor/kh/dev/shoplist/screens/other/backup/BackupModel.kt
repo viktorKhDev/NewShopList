@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
+import androidx.core.net.toUri
 import androidx.lifecycle.AndroidViewModel
 import com.google.gson.Gson
 import com.google.gson.JsonObject
@@ -16,6 +17,7 @@ import com.viktor.kh.dev.shoplist.repository.db.data.BackupData
 import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
 import com.viktor.kh.dev.shoplist.repository.db.room.ProductListsDao
 import com.viktor.kh.dev.shoplist.repository.db.room.RecipesDao
+import com.viktor.kh.dev.shoplist.utils.showToast
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.internal.synchronized
@@ -59,7 +61,7 @@ class BackupModel @Inject constructor(application: Application) : AndroidViewMod
                     pdf.close()
 
                     withContext(Dispatchers.Main){
-                        Toast.makeText(app,app.getString(R.string.backup_file_created),Toast.LENGTH_SHORT)
+                        showToast(app.getString(R.string.backup_file_created),app)
                     }
                 }catch (e : Exception){
                     e.printStackTrace()
@@ -75,27 +77,34 @@ class BackupModel @Inject constructor(application: Application) : AndroidViewMod
 
    fun readFile(uri: Uri){
        //read backup file
-       CoroutineScope(Dispatchers.IO).launch {
-           runBlocking(Dispatchers.IO) {
-               val objectInputStream = ObjectInputStream(app.contentResolver.openInputStream(uri))
+       if(uri!="".toUri()){
+           CoroutineScope(Dispatchers.IO).launch {
+               runBlocking(Dispatchers.IO) {
+                   val objectInputStream = ObjectInputStream(app.contentResolver.openInputStream(uri))
 
-               try {
-                   val data: String = objectInputStream.readObject() as String
-                   val backupData: BackupData = Json.decodeFromString(data)
-                   objectInputStream.close()
-                   if (data!=null){
-                       productListsDao.clearAllTable()
-                       productListsDao.updateTable(backupData.lists)
-                       recipesDao.clearAllTable()
-                       recipesDao.updateTable(backupData.recipes)
+                   try {
+                       val data: String = objectInputStream.readObject() as String
+                       val backupData: BackupData = Json.decodeFromString(data)
+                       objectInputStream.close()
+                       if (data!=null){
+                           productListsDao.clearAllTable()
+                           productListsDao.updateTable(backupData.lists)
+                           recipesDao.clearAllTable()
+                           recipesDao.updateTable(backupData.recipes)
+                       }else{
+                           withContext(Dispatchers.Main){
+                               showToast(app.getString(R.string.error),app)
+                           }
+                       }
+                   }catch (e :Exception){
+                       e.printStackTrace()
+                   }finally {
+                       objectInputStream.close()
                    }
-               }catch (e :Exception){
-                   e.printStackTrace()
-               }finally {
-                   objectInputStream.close()
                }
-           }
 
+           }
        }
+
    }
 }

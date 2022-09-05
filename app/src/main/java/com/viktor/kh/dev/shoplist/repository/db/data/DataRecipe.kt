@@ -12,14 +12,7 @@ import kotlinx.serialization.Serializable
 @Entity
 @Serializable
 data class DataRecipe (
-<<<<<<< HEAD
-    @PrimaryKey val uid: Int,
-    @ColumnInfo(name = "name") val name: String?,
-    @ColumnInfo(name = "text") val text: String?,
-    @ColumnInfo(name = "products") val products: List<DataProduct>?,
-    @ColumnInfo(name = "date")  val date: Date?
-        )
-=======
+
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id" ) val id: Int = 0,
     @ColumnInfo(name = "name" ) val name: String?,
@@ -28,4 +21,4 @@ data class DataRecipe (
     @TypeConverters(ProductsConverter::class)
     @ColumnInfo(name = "products" ) val products: List<DataProduct>?
 )
->>>>>>> dev
+

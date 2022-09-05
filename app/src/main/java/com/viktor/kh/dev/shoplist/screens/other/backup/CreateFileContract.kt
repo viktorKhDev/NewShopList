@@ -11,7 +11,7 @@ class CreateFileContract: ActivityResultContract<String, Uri>() {
 
 
 
-    override fun createIntent(context: Context, input: String?): Intent {
+    override fun createIntent(context: Context, input: String): Intent {
         val intent = Intent(Intent.ACTION_CREATE_DOCUMENT)
         intent.addCategory(Intent.CATEGORY_OPENABLE)
         intent.type = "*/*"
@@ -19,8 +19,10 @@ class CreateFileContract: ActivityResultContract<String, Uri>() {
         return intent
     }
 
-    override fun parseResult(resultCode: Int, intent: Intent?): Uri? = when {
-       resultCode != Activity.RESULT_OK -> null
+    override fun parseResult(resultCode: Int, intent: Intent?): Uri = when {
+       resultCode != Activity.RESULT_OK -> "".toUri()
         else -> intent!!.data.toString().toUri()
      }
+
+
 }

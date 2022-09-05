@@ -10,8 +10,11 @@ import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -44,7 +47,7 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
         initList()
         model.init()
         initActionbar()
-        setHasOptionsMenu(true)
+        initMenu()
         binding.listsIncludeInRecipes.fabAddList.setOnClickListener(View.OnClickListener {
             addRecipe()
         })
@@ -209,18 +212,25 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
 
     }
 
+    private fun initMenu(){
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.options_menu_in_lists,menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                // Add menu items here
+                menuInflater.inflate(R.menu.options_menu_in_lists, menu)
+            }
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                // Handle the menu selection
+                return when (menuItem.itemId) {
+                    R.id.search_item -> {searchRecipe()
+                        true}
+                    else -> false
+                }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.search_item -> searchRecipe()
-        }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
-        return super.onOptionsItemSelected(item)
     }
 
 

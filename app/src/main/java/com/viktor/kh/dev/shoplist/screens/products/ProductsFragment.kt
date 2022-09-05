@@ -16,8 +16,11 @@ import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -55,7 +58,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         val  listId = arguments?.getInt(listId)!!
         model.init(listId)
         initRv()
-        setHasOptionsMenu(true)
+        initMenu()
         model.productsList.observe(viewLifecycleOwner, Observer {
            if (model.initAnim){
                rv.layoutAnimation = anim
@@ -71,7 +74,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         relativeAddProduct.visibility = View.VISIBLE
         addProduct.hide()
         textProduct.showKeyboard()
-        Log.d("MyLog" , "addButton Hide")
+
         btnAcceptProduct.setOnClickListener(View.OnClickListener {
             val productName : String = textProduct.text.toString()
             if(productName.isNotEmpty()){
@@ -88,7 +91,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
             textProduct.hideKeyboard()
             relativeAddProduct.visibility = View.GONE
             addProduct.show()
-            Log.d("MyLog" , "addButton visible")
+
         })
 
     }
@@ -159,7 +162,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         itemTouchHelper = ItemTouchHelper(itemTouchCallback)
         itemTouchHelper.attachToRecyclerView(rv)
 
-      Log.d("MyLog", "rv init")
+
     }
 
 
@@ -172,23 +175,35 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
 
     }
 
+    private fun initMenu(){
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.options_menu_in_list,menu)
-        super.onCreateOptionsMenu(menu, inflater)
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                // Add menu items here
+                menuInflater.inflate(R.menu.options_menu_in_list, menu)
+            }
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                // Handle the menu selection
+                return when (menuItem.itemId) {
+                    android.R.id.home -> {activity!!.onBackPressed()
+                    true}
+                    R.id.clean ->{ cleanList()
+                    true}
+                    R.id.paste ->{model.pasteList()
+                        true}
+                    R.id.share_item -> {activity?.let { model.shareList(it) }
+                        true}
+                    R.id.add_recipe -> {addListFromRecipe()
+                        true}
+                    else -> false
+                }
+
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-      when(item.itemId){
-          android.R.id.home -> activity!!.onBackPressed()
-          R.id.clean -> cleanList()
-          R.id.paste -> model.pasteList()
-          R.id.share_item -> activity?.let { model.shareList(it) }
-          R.id.add_recipe -> addListFromRecipe()
-      }
-
-        return super.onOptionsItemSelected(item)
-    }
 
     override fun onItemDismiss(position: Int) {
         //activate swipe from ItemTouchHelper
