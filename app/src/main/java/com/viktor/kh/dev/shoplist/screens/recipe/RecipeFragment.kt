@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
@@ -77,14 +78,32 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         btnCloseProducts.setOnClickListener(View.OnClickListener {
             hideRecipeProducts()
         })
-          recipeText.setOnClickListener(View.OnClickListener {
-              recipeText.showKeyboard()
-          })
 
+        recipeText.onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
+            if (hasFocus){
+                productsFab.visibility = View.GONE
+                acceptTextFab.visibility = View.VISIBLE
+            }
+        }
 
-        appbar.setOnClickListener(View.OnClickListener {
-         recipeText.hideKeyboard()
+        recipeText.setOnClickListener(View.OnClickListener {
+            recipeText.showKeyboard()
         })
+
+        acceptTextFab.setOnClickListener(View.OnClickListener {
+            recipeText.hideKeyboard()
+            recipeText.clearFocus()
+            acceptTextFab.visibility = View.GONE
+            productsFab.visibility = View.VISIBLE
+
+        })
+
+
+
+
+
+
+
 
         productsFab.setOnClickListener(View.OnClickListener {
             recipeProductList.visibility = View.VISIBLE
