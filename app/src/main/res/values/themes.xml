@@ -4,6 +4,7 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorOnPrimary">@color/colorAccentDark</item>
         <item name="android:textColor">@color/black</item>
         <item name="bottomNavigationStyle">@style/MyBottomNav</item>
@@ -11,7 +12,8 @@
 
 
 
-
+        <!-- background for system bar. -->
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
 
 
         <!-- Secondary brand color. -->
