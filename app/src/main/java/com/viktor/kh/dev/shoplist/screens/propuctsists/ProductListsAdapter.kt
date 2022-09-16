@@ -1,15 +1,20 @@
 package com.viktor.kh.dev.shoplist.screens.propuctsists
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.ItemListBinding
 import com.viktor.kh.dev.shoplist.utils.convertLongToTime
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
+import com.viktor.kh.dev.shoplist.utils.colorLists
+import com.viktor.kh.dev.shoplist.utils.colors
+import kotlin.random.Random
 
 
 class ProductListsAdapter
@@ -18,17 +23,23 @@ constructor(val onListClickListener: OnListClickListener,
             val onDelClickListener: OnDelClickListener )
     : RecyclerView.Adapter<ProductListsAdapter.ProductListHolder>() {
 
-     var data : ArrayList<DataProductList> = ArrayList()
+
+    var context: Context? = null
+
+
+    private var currentItemColor  = Random.nextInt(0,colors.size-1)
+    var data : ArrayList<DataProductList> = ArrayList()
+    var deletePosition = 0
+    private var colorMap = mutableMapOf<Int,Int>()
+    var isSearch = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductListHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_list,parent,false)
-        Log.d("MyLog" , "onCreateViewHolder in adapter")
         return ProductListHolder(view)
 
     }
 
     override fun onBindViewHolder(holder: ProductListHolder, position: Int) {
-        Log.d("MyLog" , " onBindViewHolder in adapter")
         holder.bind(data[position])
 
     }
@@ -39,20 +50,33 @@ constructor(val onListClickListener: OnListClickListener,
 
 
     fun setData(list: List<DataProductList>){
-        data = ArrayList(list)
-        Log.d("MyLog" , "${data.size} in adapter")
-        notifyDataSetChanged()
+        if (isSearch){
+            data = ArrayList(list)
+            notifyDataSetChanged()
+        }else{
+            if (list.size>data.size){
+                data = ArrayList(list)
+                notifyItemInserted(list.size-1)
+
+            }else if(list.size<data.size){
+                notifyItemRemoved(deletePosition)
+                data = ArrayList(list)
+            }else{
+                data = ArrayList(list)
+                notifyDataSetChanged()
+            }
+        }
+       isSearch = false
 
     }
-
 
     //holder
    inner class ProductListHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = ItemListBinding.bind(itemView)
 
         fun bind (data : DataProductList) = with(binding){
-            Log.d("MyLog", "${data.name} in holder")
-           listName.text = data.name
+            cl.setCardBackgroundColor(cardColor(data.id))
+            listName.text = data.name
             val date  = data.date?.let { convertLongToTime(it) }.toString()
             Log.d("MyLog", "listDate = $date")
             textListDate.text = date
@@ -82,7 +106,26 @@ constructor(val onListClickListener: OnListClickListener,
             Log.d("MyLog", "findReady = $s")
            return s
        }
-    } //holder
+    }
+
+
+   private fun cardColor(listID:Int):Int{
+       if (colorLists){
+           if (colorMap.contains(listID)){
+               return ContextCompat.getColor(context!!, colorMap[listID]!!)
+           }else{
+               if (currentItemColor==colors.size-1) currentItemColor = 0 else currentItemColor++
+               colorMap.put(listID, colors[currentItemColor])
+               return ContextCompat.getColor(context!!, colors[currentItemColor])
+
+           }
+       }else{
+           return  ContextCompat.getColor(context!!,R.color.back_list_item)
+       }
+
+
+   }
+
 
 
     interface  OnDelClickListener{

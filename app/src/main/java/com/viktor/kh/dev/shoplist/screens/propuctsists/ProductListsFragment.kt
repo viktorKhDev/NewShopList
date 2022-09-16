@@ -1,6 +1,7 @@
 package com.viktor.kh.dev.shoplist.screens.propuctsists
 
 import android.app.Dialog
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -65,8 +66,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
     private fun subscribeData(data: List<DataProductList>){
         listAdapter.setData(data)
             if (model.isAddClicked){
-                rv.scrollToPosition(data.size-1)
-
+                //scroll to add pos
             }
     }
 
@@ -92,6 +92,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
        }
        listAdapter = ProductListsAdapter(onListClickListener, onSetClickListener, onDelClickListener)
+       listAdapter.context = context
        rv.apply {
            layoutManager = LinearLayoutManager(context)
            adapter = listAdapter
@@ -182,6 +183,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
             buttonYes.setOnClickListener(View.OnClickListener {
                 goneSearch()
+                listAdapter.deletePosition = position
                 model.deleteList(position)
                 dialog.dismiss()
             })
@@ -244,6 +246,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
             autoCompleteText.setText("")
             searchBar.visibility = View.GONE
             supportActionBar.show()
+            listAdapter.isSearch = true
             model.dataLists.value?.let { it1 -> subscribeData(it1) }
         }
     }
@@ -257,7 +260,10 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
                 list.add(i)
             }
         }
+        listAdapter.isSearch = true
         subscribeData(list)
     }
+
+
 
 }

@@ -7,4 +7,5 @@ import dagger.hilt.android.HiltAndroidApp
 @HiltAndroidApp
 class ShopApp: Application() {
 
+
 }

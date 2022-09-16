@@ -59,6 +59,15 @@
     <string name="amount">Количество</string>
     <string name="portions">Порции</string>
     <string name="privacy_policy">Политика конфиденциальности</string>
+    <string name="paste_products">Вставить продукты</string>
+    <string name="products_added">Продукты добавлены</string>
+    <string name="product_list_cleared">Список товаров очищен</string>
+    <string name="clean_products">Очистить продукты</string>
+    <string name="clean_products_list">Очистить список продуктов?</string>
 
+    <string name="color_lists">Цветные списки</string>
+    <string name="color_lists_summary">Включение цветового заполнения списков</string>
+    <string name="color_items">Цветные элементы</string>
+    <string name="color_items_summary">Включение заливки цветом элементов списка</string>
 
 </resources>

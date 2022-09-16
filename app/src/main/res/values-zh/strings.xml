@@ -59,6 +59,15 @@
     <string name="amount">数量</string>
     <string name="portions">部分</string>
     <string name="privacy_policy">隐私政策</string>
+    <string name="paste_products">粘贴产品</string>
+    <string name="products_added">添加的产品</string>
+    <string name="product_list_cleared">产品清单已清空</string>
+    <string name="clean_products">清除产品</string>
+    <string name="clean_products_list">清除产品列表？</string>
 
+    <string name="color_lists">彩色列表</string>
+    <string name="color_lists_summary">启用列表的颜色填充</string>
+    <string name="color_items">有色元素</string>
+    <string name="color_items_summary">启用列表项的颜色填充</string>
 
 </resources>

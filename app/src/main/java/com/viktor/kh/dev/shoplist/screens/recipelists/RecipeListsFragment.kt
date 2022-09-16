@@ -65,13 +65,13 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
     private fun subscribeData(data: List<DataRecipe>){
         recipesAdapter.setData(data)
         if (model.isAddClicked){
-            rv.scrollToPosition(data.size-1)
+            // scroll to last item
 
         }
     }
 
     private fun initList(){
-        val onListClickListener = object : ProductListsAdapter.OnListClickListener {
+        val onListClickListener = object : RecipesAdapter.OnListClickListener {
             override fun onListClick(position: Int) {
                 val list = model.dataRecipes.value!![position]
                 goneSearch()
@@ -82,12 +82,12 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
             }
         }
 
-        val onDelClickListener = object : ProductListsAdapter.OnDelClickListener{
+        val onDelClickListener = object : RecipesAdapter.OnDelClickListener{
             override fun onDelClick(position: Int) {
                 deleteRecipe(position)
             }
         }
-        val onSetClickListener = object : ProductListsAdapter.OnSetClickListener{
+        val onSetClickListener = object : RecipesAdapter.OnSetClickListener{
             override fun onSet(position: Int) {
                 setRecipe(position)
             }
@@ -95,6 +95,7 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
 
         }
         recipesAdapter = RecipesAdapter(onListClickListener, onSetClickListener, onDelClickListener)
+        recipesAdapter.context = context
         rv.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = recipesAdapter
@@ -187,6 +188,7 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
 
             buttonYes.setOnClickListener(View.OnClickListener {
                 goneSearch()
+                recipesAdapter.deletePosition = position
                 model.deleteRecipe(position)
                 dialog.dismiss()
             })
@@ -254,6 +256,7 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
             autoCompleteText.setText("")
             searchBar.visibility = View.GONE
             supportActionBar.show()
+            recipesAdapter.isSearch = true
             model.dataRecipes.value?.let { it1 -> subscribeData(it1) }
         }
     }
@@ -267,6 +270,7 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
                 list.add(i)
             }
         }
+        recipesAdapter.isSearch = true
         subscribeData(list)
     }
 }

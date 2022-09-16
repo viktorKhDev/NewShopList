@@ -1,23 +1,31 @@
 package com.viktor.kh.dev.shoplist.utils
 
+import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
-import android.view.View
+import android.graphics.Color
+import android.os.Build
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
 import com.viktor.kh.dev.shoplist.R
+import java.io.File
+import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 val format = SimpleDateFormat("dd.MM.yyyy")
+val formatForLog = SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z")
 
 var sortByDate = false
+var colorLists = true
+var colorItems = true
 
 
 
@@ -29,6 +37,25 @@ const val DELETE_PRODUCT = 3
 const val UPDATE_DATA = 0
 const val CREATE_FILE_CODE = 1000
 
+
+
+
+
+
+val colors = listOf(
+    R.color.card_blue,
+    R.color.card_green,
+    R.color.card_orange,
+    R.color.card_red,
+    R.color.card_violet,
+    R.color.card_yellow,
+    R.color.card_dark_blue,
+    R.color.card_pink
+)
+
+
+
+
 fun convertLongToTime(time: Long): String {
     val date = Date(time)
     return format.format(date)
@@ -38,18 +65,6 @@ fun currentTimeToLong(): Long {
     return System.currentTimeMillis()
 }
 
-fun convertDateToLong(date: String): Long {
-    return format.parse(date).time
-}
-
-fun initFocusAndShowKeyboard (et :EditText, activity: AppCompatActivity){
-    et.requestFocus()
-    et.postDelayed(kotlinx.coroutines.Runnable {
-        val  inputMethodManager :InputMethodManager = activity
-            .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.showSoftInput(et,InputMethodManager.SHOW_IMPLICIT)
-    },0)
-}
 
 
 
@@ -93,6 +108,29 @@ fun shareText(text: String?, context: Context) {
 fun loadSetting(context: Context){
     val sp = PreferenceManager.getDefaultSharedPreferences(context)
     sortByDate = sp.getBoolean(context.getString(R.string.sort_by_date),false)
+    colorLists = sp.getBoolean(context.getString(R.string.color_lists_pref),true)
+    colorItems = sp.getBoolean(context.getString(R.string.color_items_pref),true)
+
+
+}
+
+
+fun writeLog(log:String,context: Context,error:Boolean){
+    try {
+         val fileName = "log_" + formatForLog.format(Date(System.currentTimeMillis())) + ".txt"
+        val fileNameWithError = "logcat_" + System.currentTimeMillis() + ".txt"
+        val outputFile  = File(context.externalCacheDir,fileName)
+        val outPutFileError = File(context.externalCacheDir,fileNameWithError)
+        FileOutputStream(outputFile).use {
+            it.write(log.toByteArray())
+        }
+        if (error){
+            Runtime.getRuntime().exec("logcat -f " + outPutFileError.absolutePath)
+        }
+
+    }catch (e: Exception){
+
+    }
 }
 
 

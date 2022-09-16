@@ -52,6 +52,19 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
        initClicks()
        initRv()
        onBackCallBack()
+
+       val callback = object :OnBackPressedCallback(true){
+           override fun handleOnBackPressed() {
+               if (binding.recipeProductList.visibility==View.VISIBLE){
+                  hideRecipeProducts()
+               }else{
+                   findNavController().popBackStack()
+               }
+           }
+
+       }
+
+       requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,callback)
        model.recipeText.observe(viewLifecycleOwner, Observer {
              subscribeText(it)
          })
@@ -132,19 +145,20 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
         val onClickListener = object : RecipeProductsAdapter.OnProductClickListener {
             override fun onProductClick(position: Int) {
-                setProduct(position)
+                // Press action
             }
 
         }
 
         val onLongClickListener = object: RecipeProductsAdapter.OnProductLongClickListener{
             override fun onProductLongClick(position: Int) {
-               // Long press action
+                setProduct(position)
             }
 
         }
 
         productsAdapter = RecipeProductsAdapter(onClickListener,onLongClickListener)
+        productsAdapter.context = context
         rv.apply {
             adapter = productsAdapter
             layoutManager = LinearLayoutManager(context)
@@ -183,6 +197,10 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
                         it
                     )
                 }
+
+                R.id.paste -> model.pasteProducts()
+
+                R.id.clear_products -> clearProducts()
 
             }
             false
@@ -242,9 +260,13 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         var dataProduct: DataProduct = model.productsList.value!![position]
         val dialog = context?.let { Dialog(it,R.style.MyDialog) }
         if(dialog!=null){
-            dialog.setContentView(R.layout.dialog_add)
+            dialog.setContentView(R.layout.dialog_set_recipe)
             val text = dialog.findViewById<EditText>(R.id.dialog_text)
+            val amount = dialog.findViewById<EditText>(R.id.dialog_amount)
             text.setText(dataProduct.name)
+            if (dataProduct.amount!=null){
+                amount.setText(dataProduct.amount)
+            }
             val buttonYes = dialog.findViewById<Button>(R.id.btn_yes)
             val  buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
             dialog.setCancelable(true)
@@ -258,10 +280,9 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
             buttonYes.setOnClickListener(View.OnClickListener {
                 if(text.text.toString().isNotEmpty()){
-                    model.renameProduct(position,text.text.toString())
+                    model.renameProduct(position,text.text.toString(),amount.text.toString())
                     dialog.dismiss()
                 }else{
-
                     showToast(getString(R.string.input_the_title),activity)
                 }
             })
@@ -288,6 +309,30 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
     }
 
 
+    private fun clearProducts(){
+        val dialog = context?.let { Dialog(it,R.style.MyDialog) }
+        if(dialog!=null) {
+            dialog.setContentView(R.layout.dialog_add)
+            val text = dialog.findViewById<EditText>(R.id.dialog_text)
+            text.setText(R.string.clean_products_list)
+            val buttonYes = dialog.findViewById<Button>(R.id.btn_yes)
+            val buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
+            dialog.setCancelable(true)
+            dialog.show()
+
+            buttonYes.setOnClickListener(View.OnClickListener {
+                model.cleanList()
+                dialog.dismiss()
+            })
+
+            buttonCancel.setOnClickListener(View.OnClickListener {
+                dialog.dismiss()
+            })
+
+
+        }
+    }
+
 
 
     private fun onBackCallBack(){
@@ -305,6 +350,12 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
             }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
+
+
+
+
+
+
 
     override fun onPause() {
         model.saveText(binding.recipeText.text.toString())

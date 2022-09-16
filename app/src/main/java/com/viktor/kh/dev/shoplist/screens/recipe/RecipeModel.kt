@@ -24,6 +24,8 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
 
     private var listId :Int? = null
 
+    val app = application
+
     //variable for check start animation
     var initAnim = false
     var stateChange = UPDATE_DATA
@@ -79,7 +81,6 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
             withContext(Dispatchers.Main){
               recipeText.value = newData.text
             }
-            Log.d("MyLog", "recipeModel get list")
         }
     }
 
@@ -94,15 +95,14 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
             withContext(Dispatchers.Main){
                 productsList.value = newData.products
             }
-            Log.d("MyLog", "recipeModel get list in listId $listId")
         }
     }
 
-    fun renameProduct(position: Int,name: String){
+    fun renameProduct(position: Int,name: String,amount: String){
         initAnim = false
         CoroutineScope(Dispatchers.IO).launch {
             val currentProduct = productsList.value!![position]
-            val newProduct = DataProduct(name,currentProduct.date, false,currentProduct.amount)
+            val newProduct = DataProduct(name,currentProduct.date, false,amount)
             val recipe: DataRecipe = recipesDao.get(listId!!)
             val products  = mutableListOf<DataProduct>()
             recipe.products?.let { products.addAll(it) }
@@ -154,7 +154,9 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
             recipesDao.update(DataRecipe(recipe.id,recipe.name,recipe.text,recipe.date,products))
             stateChange = UPDATE_DATA
             getProducts()
-
+            withContext(Dispatchers.Main){
+                showToast(app.getString(R.string.product_list_cleared), getApplication())
+            }
         }
     }
 
@@ -175,6 +177,9 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
                 recipesDao.update(DataRecipe(recipe.id,recipe.name,recipe.text,recipe.date,products))
                 stateChange =  UPDATE_DATA
                 getProducts()
+                withContext(Dispatchers.Main){
+                    showToast(app.getString(R.string.products_added), getApplication())
+                }
             }
 
         }
@@ -196,7 +201,12 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
         sb.append("\n")
         if (list!!.isNotEmpty()){
                 for (product in list) {
-                    sb.append(product.name)
+                    if (product.amount!=null&&product.amount!=""){
+                        sb.append("${product.name} - ${product.amount}")
+                    }else{
+                        sb.append(product.name)
+                    }
+
                     sb.append("\n")
                 }
 
@@ -206,6 +216,8 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
             shareText(sb.toString(),context)
         }
     }
+
+
 
 
     private  fun sortProducts(products: List<DataProduct>):List<DataProduct>{

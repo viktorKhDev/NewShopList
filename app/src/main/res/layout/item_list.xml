@@ -6,8 +6,7 @@
     android:layout_height="wrap_content"
     android:elevation="@dimen/cardview_default_radius"
     android:layout_margin="4dp"
-    android:backgroundTint="@color/background"
-    app:cardCornerRadius="@dimen/cardview_default_radius">
+    app:cardCornerRadius="5dp">
 
 
     <androidx.appcompat.widget.LinearLayoutCompat

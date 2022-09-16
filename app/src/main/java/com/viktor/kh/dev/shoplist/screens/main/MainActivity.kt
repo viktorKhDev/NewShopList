@@ -73,8 +73,6 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun closeBottomMenuWithHideToolbar(){
-        //val animation = AnimationUtils.loadAnimation(this,R.anim.bottom_menu_cler_hide_toolbar)
-        //bottomNavView.startAnimation(animation)
         bottomNavView.visibility = View.GONE
     }
 

@@ -1,13 +1,13 @@
 package com.viktor.kh.dev.shoplist.screens.other.backup
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.BackupFragmentBinding
 import com.viktor.kh.dev.shoplist.utils.showToast
@@ -23,7 +23,6 @@ class BackupFragment :  Fragment(R.layout.backup_fragment) {
     private val createFileLauncher = registerForActivityResult(CreateFileContract()) { result ->
         if (result!=null){
             model.createFile(result)
-            showToast(getString(R.string.backup_file_created),context)
         }else{
             showToast(getString(R.string.error),context)
         }
@@ -33,9 +32,6 @@ class BackupFragment :  Fragment(R.layout.backup_fragment) {
     private val readFileLauncher = registerForActivityResult(ReadFileContract()) { result ->
         if (result!=null){
             model.readFile(result)
-            showToast(getString(R.string.backup_read),context)
-        }else{
-            showToast(getString(R.string.backup_read_error),context)
         }
         }
 
@@ -44,7 +40,7 @@ class BackupFragment :  Fragment(R.layout.backup_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)  {
         super.onViewCreated(view, savedInstanceState)
         initActionbar()
-        setHasOptionsMenu(true)
+        initMenu()
         binding = BackupFragmentBinding.bind(view)
         binding.saveFile.setOnClickListener(View.OnClickListener {
             createFileLauncher.launch("ShopList backup")
@@ -70,12 +66,24 @@ class BackupFragment :  Fragment(R.layout.backup_fragment) {
 
 
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            android.R.id.home -> activity!!.onBackPressed()
+    private fun initMenu(){
 
-        }
-        return super.onOptionsItemSelected(item)
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                // Add menu items here
+            }
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                // Handle the menu selection
+                return when (menuItem.itemId) {
+                    android.R.id.home -> {activity!!.onBackPressed()
+                        true}
+                    else -> false
+                }
+
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
     }
 
 

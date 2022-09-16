@@ -59,4 +59,15 @@
     <string name="amount">Monto</string>
     <string name="portions">Porciones</string>
     <string name="privacy_policy">Política de privacidad</string>
+    <string name="paste_products">Pegar productos/string</string>
+    <string name="products_added">Productos agregados</string>
+    <string name="product_list_cleared">Lista de productos borrada</string>
+    <string name="clean_products">Borrar productos</string>
+    <string name="clean_products_list">¿Borrar la lista de productos?</string>
+
+    <string name="color_lists">Listas de colores</string>
+    <string name="color_lists_summary">Habilitación del relleno de color de las listas</string>
+    <string name="color_items">Elementos coloreados</string>
+    <string name="color_items_summary">Habilitación del relleno de color de los elementos de la lista</string>
+
 </resources>

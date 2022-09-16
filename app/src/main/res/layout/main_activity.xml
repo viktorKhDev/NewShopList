@@ -37,8 +37,6 @@
         android:layout_height="60dp"
         app:itemIconTint="@drawable/bottom_nav_views_item_color"
         app:layout_constraintBottom_toBottomOf="parent"
-
-
         app:menu="@menu/activity_main_nav_menu" />
 
 

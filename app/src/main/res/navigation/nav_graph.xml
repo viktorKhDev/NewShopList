@@ -23,7 +23,8 @@
 
         <action
             android:id="@+id/action_recipeListsFragment_to_recipeFragment"
-            app:destination="@id/recipeFragment" />
+            app:destination="@id/recipeFragment"
+            app:enterAnim="@anim/nav_default_enter_anim" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"

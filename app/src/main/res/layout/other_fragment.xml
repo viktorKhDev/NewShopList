@@ -44,6 +44,7 @@
                 app:layout_constraintStart_toEndOf="@id/setting_image"
                 app:layout_constraintTop_toTopOf="parent"
                 android:textSize="20sp"
+                android:paddingEnd="48dp"
                 android:layout_marginStart="20dp"
                 android:text="@string/setting"
                 android:gravity="center_vertical"
@@ -91,6 +92,7 @@
                 app:layout_constraintStart_toEndOf="@id/backup_image"
                 app:layout_constraintTop_toTopOf="parent"
                 android:textSize="20sp"
+                android:paddingEnd="48dp"
                 android:layout_marginStart="20dp"
                 android:text="@string/backup"
                 android:gravity="center_vertical"
@@ -139,7 +141,9 @@
                 app:layout_constraintStart_toEndOf="@id/info_image"
                 app:layout_constraintTop_toTopOf="parent"
                 android:textSize="20sp"
+                android:paddingEnd="48dp"
                 android:layout_marginStart="20dp"
+
                 android:text="@string/support"
                 android:gravity="center_vertical"
                 />
@@ -172,7 +176,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintTop_toBottomOf="parent"
-                android:src="@drawable/ic_yellow_privacy_tip_24"
+                android:src="@drawable/ic_red_privacy_tip_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/privacy_text"/>
 
@@ -183,6 +187,7 @@
                 app:layout_constraintStart_toEndOf="@id/privacy_image"
                 app:layout_constraintTop_toTopOf="parent"
                 android:textSize="20sp"
+                android:paddingEnd="48dp"
                 android:layout_marginStart="20dp"
                 android:text="@string/privacy_policy"
                 android:gravity="center_vertical"

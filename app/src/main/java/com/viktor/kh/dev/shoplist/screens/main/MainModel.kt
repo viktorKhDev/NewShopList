@@ -20,12 +20,4 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 @HiltViewModel
 class MainModel @Inject  constructor(application: Application) : AndroidViewModel(application) {
 
-
-
-    fun loadSetting(context: Context){
-        val sp = PreferenceManager.getDefaultSharedPreferences(context)
-      sortByDate = sp.getBoolean(context.getString(R.string.sort_by_date),false)
-    }
-
-
 }

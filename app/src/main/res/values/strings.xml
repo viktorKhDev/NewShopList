@@ -61,6 +61,18 @@
     <string name="amount">Amount</string>
     <string name="portions">Portions</string>
     <string name="sort_by_date" translatable="false">switch_preference_sort_by_name</string>
+    <string name="color_lists_pref" translatable="false" >color_lists_pref</string>
+    <string name="color_items_pref" translatable="false">color_items_pref</string>
     <string name="privacy_policy">Privacy Policy</string>
+    <string name="paste_products">Paste products</string>
+    <string name="products_added">Products added</string>
+    <string name="product_list_cleared">Product list cleared</string>
+    <string name="clean_products">Clear products</string>
+    <string name="clean_products_list">Clear the list of products?</string>
+
+    <string name="color_lists">Colored lists</string>
+    <string name="color_lists_summary">Enabling color filling of lists</string>
+    <string name="color_items">Colored elements</string>
+    <string name="color_items_summary">Enabling color filling of list items</string>
 
 </resources>

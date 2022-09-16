@@ -59,5 +59,14 @@
     <string name="amount">Menge</string>
     <string name="portions">Portionen</string>
     <string name="privacy_policy">Datenschutz-Bestimmungen</string>
+    <string name="paste_products">Produkte einfügen</string>
+    <string name="products_added">Produkte hinzugefügt</string>
+    <string name="product_list_cleared">Produktliste gelöscht</string>
+    <string name="clean_products">Klare produkte</string>
+    <string name="clean_products_list">Produktliste löschen?</string>
 
+    <string name="color_lists">Farbige Listen</string>
+    <string name="color_lists_summary">Aktivieren der farbigen Füllung von Listen</string>
+    <string name="color_items">Farbige Elemente</string>
+    <string name="color_items_summary">Aktivieren der Farbfüllung von Listenelementen</string>
 </resources>

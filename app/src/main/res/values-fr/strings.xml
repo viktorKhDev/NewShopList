@@ -59,7 +59,15 @@
     <string name="amount">Montant</string>
     <string name="portions">Portions</string>
     <string name="privacy_policy">Politique de confidentialité</string>
+    <string name="paste_products">Produits en pâte</string>
+    <string name="products_added">Produits ajoutés</string>
+    <string name="product_list_cleared">Liste de produits effacée</string>
+    <string name="clean_products">Produits clairs</string>
+    <string name="clean_products_list">Effacer la liste des produits ?</string>
 
-
+    <string name="color_lists">Listes colorées</string>
+    <string name="color_lists_summary">Activer le remplissage en couleur des listes</string>
+    <string name="color_items">Éléments colorés</string>
+    <string name="color_items_summary">Activer le remplissage en couleur des éléments de la liste</string>
 
 </resources>

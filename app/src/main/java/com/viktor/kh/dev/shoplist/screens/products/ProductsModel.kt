@@ -30,6 +30,8 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
     var initAnim = false
     var stateChange = UPDATE_DATA
     var animPosition = -1
+    var forScrollToPosition = 0
+    var productAdded: DataProduct? = null
 
 
     val productsList : MutableLiveData<List<DataProduct>> by lazy {
@@ -119,6 +121,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
         CoroutineScope(Dispatchers.IO).launch {
             val list: DataProductList = productListsDao.get(listId!!)
             val dataProduct = DataProduct(productName.trim(), currentTimeToLong(), false,"")
+            productAdded = dataProduct
             val products  = mutableListOf<DataProduct>()
             list.products?.let { products.addAll(it) }
             products.add(dataProduct)
@@ -256,6 +259,14 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
             }else{
                 sortedList = products.sortedWith(compareBy({ it.ready }, { it.name }))
             }
+            if (stateChange == ADD_PRODUCT&&productAdded!=null){
+                for (i in products.indices){
+                    if (compareProduct(productAdded!!,sortedList[i])){
+                        forScrollToPosition = i
+                        animPosition = i
+                    }
+                }
+            }
 
             return sortedList
         }else{
@@ -266,7 +277,12 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
 
     }
 
+    private fun compareProduct(product1:DataProduct,product2: DataProduct):Boolean{
+        return (product1.name==product2.name
+                &&product1.date == product2.date
+                )
 
+    }
 
 
 

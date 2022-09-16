@@ -18,16 +18,14 @@ import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
 import com.viktor.kh.dev.shoplist.repository.db.room.ProductListsDao
 import com.viktor.kh.dev.shoplist.repository.db.room.RecipesDao
 import com.viktor.kh.dev.shoplist.utils.showToast
+import com.viktor.kh.dev.shoplist.utils.writeLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.internal.synchronized
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import java.io.FileOutputStream
-import java.io.InputStream
-import java.io.ObjectInputStream
-import java.io.ObjectOutputStream
+import java.io.*
 import java.util.*
 import javax.inject.Inject
 
@@ -45,32 +43,36 @@ class BackupModel @Inject constructor(application: Application) : AndroidViewMod
 
     fun createFile(uri: Uri){
         //create backup file
+if (uri!="".toUri()){
+    CoroutineScope(Dispatchers.IO).launch {
+        val lists = productListsDao.getAll()
+        val recipes = recipesDao.getAll()
+        val backupData = BackupData(lists,recipes)
+        val backupString: String = Json.encodeToString(backupData)
 
-        CoroutineScope(Dispatchers.IO).launch {
-            runBlocking(Dispatchers.IO) {
-                val lists = productListsDao.getAll()
-                val recipes = recipesDao.getAll()
-                val backupData = BackupData(lists,recipes)
-                val backupString: String = Json.encodeToString(backupData)
+        try {
+            val pdf = app.contentResolver.openFileDescriptor(uri,"w")
+            val objectOutputStream = ObjectOutputStream(FileOutputStream(pdf!!.fileDescriptor))
+            objectOutputStream.writeObject(backupString)
+            objectOutputStream.close()
+            pdf.close()
+            writeLog("write backup file to ${uri.toString()}",app,false)
+            withContext(Dispatchers.Main){
+                    showToast(app.getString(R.string.backup_file_created),app)
 
-                val pdf = app.contentResolver.openFileDescriptor(uri,"w")
-                val objectOutputStream = ObjectOutputStream(FileOutputStream(pdf!!.fileDescriptor))
-                try {
-                    objectOutputStream.writeObject(backupString)
-                    objectOutputStream.close()
-                    pdf.close()
-
-                    withContext(Dispatchers.Main){
-                        showToast(app.getString(R.string.backup_file_created),app)
-                    }
-                }catch (e : Exception){
-                    e.printStackTrace()
-                }finally {
-                    objectOutputStream.close()
-                    pdf.close()
-                }
             }
+
+        }catch (e : Exception){
+            writeLog("write backup file to ${uri.toString()} error = ${e.stackTrace.toString()}",app,true)
+            withContext(Dispatchers.Main){
+                showToast(app.getString(R.string.error),app)
             }
+
+        }
+
+    }
+}
+
 
     }
 
@@ -79,10 +81,9 @@ class BackupModel @Inject constructor(application: Application) : AndroidViewMod
        //read backup file
        if(uri!="".toUri()){
            CoroutineScope(Dispatchers.IO).launch {
-               runBlocking(Dispatchers.IO) {
-                   val objectInputStream = ObjectInputStream(app.contentResolver.openInputStream(uri))
 
-                   try {
+               try {
+                   val objectInputStream = ObjectInputStream(app.contentResolver.openInputStream(uri))
                        val data: String = objectInputStream.readObject() as String
                        val backupData: BackupData = Json.decodeFromString(data)
                        objectInputStream.close()
@@ -91,17 +92,26 @@ class BackupModel @Inject constructor(application: Application) : AndroidViewMod
                            productListsDao.updateTable(backupData.lists)
                            recipesDao.clearAllTable()
                            recipesDao.updateTable(backupData.recipes)
+                           writeLog("read backup file from ${uri.toString()}",app,false)
+                           withContext(Dispatchers.Main){
+                               showToast(app.getString(R.string.backup_read),app)
+
+                           }
+
                        }else{
                            withContext(Dispatchers.Main){
+                               writeLog("read backup file from, data = null ${uri.toString()}",app,false)
                                showToast(app.getString(R.string.error),app)
+
                            }
                        }
                    }catch (e :Exception){
-                       e.printStackTrace()
-                   }finally {
-                       objectInputStream.close()
+                   writeLog("read backup file from ${uri.toString()} error = ${e.stackTrace.toString()}",app,true)
+                   withContext(Dispatchers.Main){
+                       showToast(app.getString(R.string.error),app)
                    }
-               }
+                   }
+
 
            }
        }

@@ -4,17 +4,16 @@ package com.viktor.kh.dev.shoplist.screens.products
 
 
 
+import android.app.ActionBar
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -22,6 +21,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -59,6 +59,23 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         model.init(listId)
         initRv()
         initMenu()
+
+         val callback = object :OnBackPressedCallback(true){
+             override fun handleOnBackPressed() {
+                 if (binding.relativeAddProduct.visibility==View.VISIBLE){
+                     binding.textProduct.text.clear()
+                     binding.textProduct.hideKeyboard()
+                     binding.relativeAddProduct.visibility = View.GONE
+                     binding.addProduct.show()
+                 }else{
+                    findNavController().popBackStack()
+                 }
+             }
+
+         }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,callback)
+
         model.productsList.observe(viewLifecycleOwner, Observer {
            if (model.initAnim){
                rv.layoutAnimation = anim
@@ -66,6 +83,8 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
             subscribeData(it)
 
         })
+
+
 
     }
 
@@ -129,7 +148,10 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
     private fun subscribeData(data :List<DataProduct>){
         productsAdapter.setData(data,model.stateChange)
         if (model.stateChange== ADD_PRODUCT){
-            rv.scrollToPosition(data.size-1)
+            rv.scrollToPosition(model.forScrollToPosition)
+        }
+        if (model.stateChange== CHANGE_READY&&model.animPosition==0){
+            rv.scrollToPosition(0)
         }
 
     }
@@ -151,6 +173,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
 
         }
         productsAdapter = ProductsAdapter(onClickListener,onLongClickListener)
+        productsAdapter.context = context
         rv.apply {
             adapter = productsAdapter
             layoutManager = LinearLayoutManager(context)
@@ -249,10 +272,19 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         val dialogBinding = DialogAddFromRecipeBinding.bind(view)
         val builder = AlertDialog.Builder(context)
         builder.setView(view)
-
         val dialog = builder.create()
         dialog.show()
+
+        val mDisplayMetrics = activity!!.windowManager.currentWindowMetrics
+        val mDisplayWidth = mDisplayMetrics.bounds.width()
+        val mDisplayHeight = mDisplayMetrics.bounds.height()
+        val mLayoutParams = WindowManager.LayoutParams()
+        mLayoutParams.width = (mDisplayWidth * 0.8f).toInt()
+        mLayoutParams.height = (mDisplayHeight * 0.5f).toInt()
+        dialog.window?.setLayout(mLayoutParams.width,mLayoutParams.height)
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.window?.setWindowAnimations(R.style.DialogAnimation)
+
         var value = 1
         dialogBinding.countPortion.setText(value.toString())
         dialogBinding.buttonPlus.setOnClickListener(View.OnClickListener {

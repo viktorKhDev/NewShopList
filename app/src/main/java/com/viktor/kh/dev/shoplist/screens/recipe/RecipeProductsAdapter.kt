@@ -1,15 +1,22 @@
 package com.viktor.kh.dev.shoplist.screens.recipe
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.utils.ADD_PRODUCT
 import com.viktor.kh.dev.shoplist.utils.DELETE_PRODUCT
+import com.viktor.kh.dev.shoplist.utils.colorItems
+import com.viktor.kh.dev.shoplist.utils.colors
+import kotlin.random.Random
 
 
 class RecipeProductsAdapter(
@@ -21,8 +28,9 @@ class RecipeProductsAdapter(
 
     var data : ArrayList<DataProduct> = ArrayList()
     private var positionClick = 0
-
-
+    private var currentItemColor  = Random.nextInt(0, colors.size-1)
+    private var colorMap = mutableMapOf<DataProduct,Int>()
+    var context: Context? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
 
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item,parent,false)
@@ -75,14 +83,12 @@ class RecipeProductsAdapter(
 
     inner class ProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
+
         fun bind(product: DataProduct){
             var text = itemView.findViewById<TextView>(R.id.productName)
-            if (itemViewType == 1) {
-                text.paintFlags = text.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-                text.text = product.name
-            } else {
+            var card = itemView.findViewById<CardView>(R.id.cl)
+            card.setCardBackgroundColor(cardColor(product))
                 text.text = "${product.name} ${product.amount}"
-            }
 
             itemView.setOnClickListener(View.OnClickListener {
                 positionClick = layoutPosition
@@ -100,6 +106,24 @@ class RecipeProductsAdapter(
 
     }
 
+
+
+    private fun cardColor(product: DataProduct):Int{
+        if (colorItems){
+            if (colorMap.contains(product)){
+                return ContextCompat.getColor(context!!, colorMap[product]!!)
+            }else{
+                if (currentItemColor==colors.size-1) currentItemColor = 0 else currentItemColor++
+                colorMap.put(product, colors[currentItemColor])
+                return ContextCompat.getColor(context!!, colors[currentItemColor])
+
+            }
+        }else{
+            return ContextCompat.getColor(context!!, R.color.colorAccent)
+        }
+
+
+    }
 
     interface  OnProductClickListener{
         fun onProductClick(position: Int)
