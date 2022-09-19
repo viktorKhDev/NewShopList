@@ -12,6 +12,7 @@
 
     <style name="MyActionBar" parent="ThemeOverlay.MaterialComponents.ActionBar">
         <item name="android:textColor">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
         <item name="height">50dp</item>
         <item name="popupMenuBackground">@color/colorPrimary</item>
 
