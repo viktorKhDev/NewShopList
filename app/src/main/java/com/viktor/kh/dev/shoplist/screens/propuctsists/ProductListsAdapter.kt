@@ -14,6 +14,7 @@ import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 import com.viktor.kh.dev.shoplist.utils.colorLists
 import com.viktor.kh.dev.shoplist.utils.colors
+import com.viktor.kh.dev.shoplist.utils.currentCardColor
 import kotlin.random.Random
 
 
@@ -78,7 +79,6 @@ constructor(val onListClickListener: OnListClickListener,
             cl.setCardBackgroundColor(cardColor(data.id))
             listName.text = data.name
             val date  = data.date?.let { convertLongToTime(it) }.toString()
-            Log.d("MyLog", "listDate = $date")
             textListDate.text = date
             textListReady.text = data.products?.let { findReady(it) }
             itemView.setOnClickListener(View.OnClickListener {

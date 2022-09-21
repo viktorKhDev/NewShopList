@@ -15,6 +15,7 @@ import com.viktor.kh.dev.shoplist.screens.propuctsists.ProductListsAdapter
 import com.viktor.kh.dev.shoplist.utils.colorLists
 import com.viktor.kh.dev.shoplist.utils.colors
 import com.viktor.kh.dev.shoplist.utils.convertLongToTime
+import com.viktor.kh.dev.shoplist.utils.currentCardColor
 import kotlin.random.Random
 
 class RecipesAdapter constructor(val onListClickListener: OnListClickListener,
@@ -76,6 +77,8 @@ class RecipesAdapter constructor(val onListClickListener: OnListClickListener,
             textListDate.text = date
             textListReady.visibility = View.GONE
             itemView.setOnClickListener(View.OnClickListener {
+                currentCardColor = cardColor(data.id)
+                Log.d("fix","currentCardColor in adapter = ${currentCardColor.toString()}" )
                 onListClickListener.onListClick(layoutPosition)
             })
             editImage.setOnClickListener(View.OnClickListener {

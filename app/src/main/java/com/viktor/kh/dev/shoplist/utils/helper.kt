@@ -53,6 +53,8 @@ val colors = listOf(
     R.color.card_pink
 )
 
+var currentCardColor = 0
+
 
 
 

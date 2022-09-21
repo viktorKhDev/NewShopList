@@ -1,6 +1,7 @@
 package com.viktor.kh.dev.shoplist.screens.recipe
 
 import android.app.Dialog
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +14,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -38,12 +40,8 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
     private  lateinit var itemTouchHelper: ItemTouchHelper
     private lateinit var itemTouchCallback: ItemTouchCallback
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
-
-   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = RecipeFragmentBinding.bind(view)
        val  listId = arguments?.getInt(listId)!!
@@ -52,7 +50,7 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
        initClicks()
        initRv()
        onBackCallBack()
-
+       setBackgroundColor()
        val callback = object :OnBackPressedCallback(true){
            override fun handleOnBackPressed() {
                if (binding.recipeProductList.visibility==View.VISIBLE){
@@ -176,6 +174,17 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         Log.d("MyLog", "rv init")
     }
 
+    private fun setBackgroundColor() = with(binding){
+        //set color from recipes lists item
+        if (currentCardColor!=0){
+            Log.d("fix","setBackgroundColor() in recipe" )
+            addProductFab.backgroundTintList = ColorStateList.valueOf(currentCardColor)
+            productsFab.backgroundTintList = ColorStateList.valueOf(currentCardColor)
+            acceptTextFab.backgroundTintList = ColorStateList.valueOf(currentCardColor)
+            btnCloseProducts.setBackgroundColor(currentCardColor)
+
+        }
+    }
 
 
 
@@ -187,6 +196,14 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         val listName = arguments?.getString(LIST_NAME)
         collapsingToolbar.title = listName
         toolbar.inflateMenu(R.menu.options_menu_in_recipe)
+        Log.d("fix","currentCardColor = ${currentCardColor.toString()}" )
+        if (currentCardColor!=0){
+            collapsingToolbar.setBackgroundColor( currentCardColor)
+            toolbar.setBackgroundColor(currentCardColor)
+            recipeCoordinatorLayout.setBackgroundColor(currentCardColor)
+            collapsingToolbar.setCollapsedTitleTextColor(Color.BLACK)
+            collapsingToolbar.setExpandedTitleColor(Color.BLACK)
+        }
         toolbar.setOnMenuItemClickListener { item ->
             when(item.itemId){
 

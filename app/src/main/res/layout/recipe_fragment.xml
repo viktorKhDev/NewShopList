@@ -38,9 +38,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@color/colorPrimary"
-                    app:popupTheme="@style/MyActionBar"
                     app:layout_collapseMode = "pin"
-                    app:navigationIcon="@drawable/ic_baseline_arrow_white_24"
+                    android:theme="@style/RecipeActionBar"
+                    app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
                     />
 
 
