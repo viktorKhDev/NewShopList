@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -209,6 +210,7 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
             title = getString(R.string.recipes)
             setDisplayHomeAsUpEnabled(false)
             setShowHideAnimationEnabled(false)
+            setBackgroundDrawable(context?.getColor(R.color.colorPrimary)?.toDrawable())
             show()
         }
 

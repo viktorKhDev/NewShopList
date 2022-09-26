@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -199,8 +200,13 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
     private fun initActionbar(){
          supportActionBar = (activity as AppCompatActivity).supportActionBar!!
-        supportActionBar.title = getString(R.string.lists)
-        supportActionBar.setDisplayHomeAsUpEnabled(false)
+
+        supportActionBar.apply {
+            title = getString(R.string.lists)
+            setDisplayHomeAsUpEnabled(false)
+            setBackgroundDrawable(context?.getColor(R.color.colorPrimary)?.toDrawable())
+        }
+
 
     }
 

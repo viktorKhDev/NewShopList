@@ -3,6 +3,7 @@ package com.viktor.kh.dev.shoplist.screens.recipe
 import android.app.Dialog
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -111,11 +112,6 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
 
 
-
-
-
-
-
         productsFab.setOnClickListener(View.OnClickListener {
             recipeProductList.visibility = View.VISIBLE
             val alphaColor = Color.argb(50,0,0,0)
@@ -181,7 +177,15 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
             addProductFab.backgroundTintList = ColorStateList.valueOf(currentCardColor)
             productsFab.backgroundTintList = ColorStateList.valueOf(currentCardColor)
             acceptTextFab.backgroundTintList = ColorStateList.valueOf(currentCardColor)
-            btnCloseProducts.setBackgroundColor(currentCardColor)
+
+            val backgroundShape = btnCloseProducts.background as GradientDrawable
+            backgroundShape.setColor(currentCardColor)
+
+            val backNoProd = btnNoProduct.background as GradientDrawable
+            backNoProd.setColor(currentCardColor)
+
+            val backAcceptProd = btnAcceptProduct.background as GradientDrawable
+            backAcceptProd.setColor(currentCardColor)
 
         }
     }
@@ -237,6 +241,9 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         relativeAddProduct.visibility = View.VISIBLE
         addProductFab.hide()
         textProduct.showKeyboard()
+
+
+
         Log.d("MyLog" , "addButton Hide")
         textProduct.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
             var handled = false

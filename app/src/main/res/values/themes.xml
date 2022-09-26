@@ -31,7 +31,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" >@color/colorPrimary</item>
         <!-- Action bar. -->
-        <item name="actionBarTheme">@style/MyActionBar</item>
+        <item name="actionBarTheme">@style/DayActionBar</item>
 
         <!-- Customize your theme here. -->
 

@@ -77,6 +77,7 @@ constructor(val onListClickListener: OnListClickListener,
 
         fun bind (data : DataProductList) = with(binding){
             cl.setCardBackgroundColor(cardColor(data.id))
+            currentCardColor = cardColor(data.id)
             listName.text = data.name
             val date  = data.date?.let { convertLongToTime(it) }.toString()
             textListDate.text = date

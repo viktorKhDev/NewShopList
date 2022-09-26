@@ -7,6 +7,9 @@ package com.viktor.kh.dev.shoplist.screens.products
 import android.app.ActionBar
 import android.app.AlertDialog
 import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -15,6 +18,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -193,8 +197,12 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         val supportActionBar: androidx.appcompat.app.ActionBar?
                 = (activity as AppCompatActivity).supportActionBar
         val listName = arguments?.getString(LIST_NAME)
-        supportActionBar?.title = listName
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.apply {
+            title = listName
+            setBackgroundDrawable(currentCardColor.toDrawable())
+            setDisplayHomeAsUpEnabled(true)
+        }
+
 
     }
 
