@@ -7,9 +7,11 @@ package com.viktor.kh.dev.shoplist.screens.products
 import android.app.ActionBar
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -26,6 +28,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -54,12 +57,13 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         context?.let { loadSetting(it) }
         binding = FragmentAddBinding.bind(view)
         rv  = binding.listProducts
-        binding.addProduct.setOnClickListener(View.OnClickListener {
+        binding.addProductFabInProd.setOnClickListener(View.OnClickListener {
             addProduct()
         })
         initActionbar()
         val anim = AnimationUtils.loadLayoutAnimation(context,R.anim.layout_animation_fall_down)
         val  listId = arguments?.getInt(listId)!!
+        setBackgroundColor()
         model.init(listId)
         initRv()
         initMenu()
@@ -70,7 +74,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
                      binding.textProduct.text.clear()
                      binding.textProduct.hideKeyboard()
                      binding.relativeAddProduct.visibility = View.GONE
-                     binding.addProduct.show()
+                     binding.addProductFabInProd.show()
                  }else{
                     findNavController().popBackStack()
                  }
@@ -95,7 +99,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
     private fun addProduct() = with(binding) {
         relativeAddProduct.startAnimation(AnimationUtils.loadAnimation(activity,R.anim.to_start_anim))
         relativeAddProduct.visibility = View.VISIBLE
-        addProduct.hide()
+        addProductFabInProd.hide()
         textProduct.showKeyboard()
 
         btnAcceptProduct.setOnClickListener(View.OnClickListener {
@@ -113,7 +117,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
             textProduct.text.clear()
             textProduct.hideKeyboard()
             relativeAddProduct.visibility = View.GONE
-            addProduct.show()
+            addProductFabInProd.show()
 
         })
 
@@ -181,6 +185,10 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         rv.apply {
             adapter = productsAdapter
             layoutManager = LinearLayoutManager(context)
+
+            // for dev grid items
+            //layoutManager = GridLayoutManager(context,3)
+
 
         }
 
@@ -264,6 +272,19 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
 
 
         }
+    }
+
+
+
+    private fun setBackgroundColor() = with(binding){
+
+        addProductFabInProd.backgroundTintList = ColorStateList.valueOf(currentCardColor)
+
+        val backNoProd = btnNoProduct.background as GradientDrawable
+        backNoProd.setColor(currentCardColor)
+
+        val backAcceptProd = btnAcceptProduct.background as GradientDrawable
+        backAcceptProd.setColor(currentCardColor)
     }
 
 

@@ -35,7 +35,6 @@ const val ADD_PRODUCT = 1
 const val CHANGE_READY = 2
 const val DELETE_PRODUCT = 3
 const val UPDATE_DATA = 0
-const val CREATE_FILE_CODE = 1000
 
 
 
@@ -44,13 +43,14 @@ const val CREATE_FILE_CODE = 1000
 
 val colors = listOf(
     R.color.card_blue,
+    R.color.card_red,
     R.color.card_green,
     R.color.card_orange,
-    R.color.card_red,
     R.color.card_violet,
     R.color.card_yellow,
     R.color.card_dark_blue,
-    R.color.card_pink
+    R.color.card_pink,
+    R.color.card_cyan
 )
 
 var currentCardColor = 0

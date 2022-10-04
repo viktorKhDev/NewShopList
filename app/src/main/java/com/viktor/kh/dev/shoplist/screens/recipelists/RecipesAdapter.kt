@@ -78,7 +78,6 @@ class RecipesAdapter constructor(val onListClickListener: OnListClickListener,
             textListReady.visibility = View.GONE
             itemView.setOnClickListener(View.OnClickListener {
                 currentCardColor = cardColor(data.id)
-                Log.d("fix","currentCardColor in adapter = ${currentCardColor.toString()}" )
                 onListClickListener.onListClick(layoutPosition)
             })
             editImage.setOnClickListener(View.OnClickListener {

@@ -83,6 +83,7 @@ constructor(val onListClickListener: OnListClickListener,
             textListDate.text = date
             textListReady.text = data.products?.let { findReady(it) }
             itemView.setOnClickListener(View.OnClickListener {
+                currentCardColor = cardColor(data.id)
                 onListClickListener.onListClick(layoutPosition)
             })
             editImage.setOnClickListener(View.OnClickListener {
@@ -121,7 +122,7 @@ constructor(val onListClickListener: OnListClickListener,
 
            }
        }else{
-           return  ContextCompat.getColor(context!!,R.color.back_list_item)
+           return  ContextCompat.getColor(context!!, R.color.back_list_item)
        }
 
 

@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -171,6 +172,8 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
     }
 
 
+
+
     private fun deleteList(position: Int){
         val dialog = context?.let { Dialog(it,R.style.MyDialog) }
         if(dialog!=null) {
@@ -204,7 +207,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
         supportActionBar.apply {
             title = getString(R.string.lists)
             setDisplayHomeAsUpEnabled(false)
-            setBackgroundDrawable(context?.getColor(R.color.colorPrimary)?.toDrawable())
+            setBackgroundDrawable(ContextCompat.getColor(context!!,R.color.colorPrimary).toDrawable())
         }
 
 
@@ -250,6 +253,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
     private fun goneSearch() = with(binding){
         if (searchBar.visibility == View.VISIBLE){
             autoCompleteText.setText("")
+            autoCompleteText.hideKeyboard()
             searchBar.visibility = View.GONE
             supportActionBar.show()
             listAdapter.isSearch = true
