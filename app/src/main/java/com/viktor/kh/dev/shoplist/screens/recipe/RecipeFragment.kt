@@ -207,6 +207,8 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
             recipeCoordinatorLayout.setBackgroundColor(currentCardColor)
             collapsingToolbar.setCollapsedTitleTextColor(Color.BLACK)
             collapsingToolbar.setExpandedTitleColor(Color.BLACK)
+            activity!!.window.statusBarColor = currentCardColor
+            activity!!.window.navigationBarColor = currentCardColor
         }
         toolbar.setOnMenuItemClickListener { item ->
             when(item.itemId){

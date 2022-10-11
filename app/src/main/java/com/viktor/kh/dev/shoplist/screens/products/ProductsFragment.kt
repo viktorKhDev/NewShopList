@@ -210,6 +210,8 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
             setBackgroundDrawable(currentCardColor.toDrawable())
             setDisplayHomeAsUpEnabled(true)
         }
+        activity!!.window.statusBarColor = currentCardColor
+        activity!!.window.navigationBarColor = currentCardColor
 
 
     }
@@ -285,6 +287,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
 
         val backAcceptProd = btnAcceptProduct.background as GradientDrawable
         backAcceptProd.setColor(currentCardColor)
+
     }
 
 

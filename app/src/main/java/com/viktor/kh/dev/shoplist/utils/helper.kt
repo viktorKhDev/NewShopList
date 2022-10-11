@@ -6,6 +6,7 @@ import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Build
 import android.view.inputmethod.InputMethodManager
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
 import com.viktor.kh.dev.shoplist.R
+import kotlinx.serialization.json.Json.Default.configuration
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
@@ -38,6 +40,22 @@ const val UPDATE_DATA = 0
 
 
 
+
+
+
+
+
+fun isNightTheme(context:Context):Boolean{
+ var state = false
+    when (context.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
+        Configuration.UI_MODE_NIGHT_YES -> state =  true
+        Configuration.UI_MODE_NIGHT_NO -> state =  false
+        Configuration.UI_MODE_NIGHT_UNDEFINED -> state = false
+
+    }
+
+    return state
+}
 
 
 

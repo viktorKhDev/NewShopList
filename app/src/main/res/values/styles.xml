@@ -23,13 +23,18 @@
 </style>
 
 
-    <style name="MyBottomNav" parent="Widget.MaterialComponents.BottomNavigationView">
-   <item name="android:colorPrimary">@color/colorPrimary</item>
-        <item name="android:background">@color/colorPrimary</item>
+    <style name="MyBottomNavNight" parent="Widget.MaterialComponents.BottomNavigationView">
+   <item name="android:colorPrimary">@color/colorPrimaryDark</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
         <item name="itemTextColor">@color/white</item>
     </style>
 
 
+    <style name="MyBottomNavDay" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:colorPrimary">@color/colorPrimaryDarkDay</item>
+        <item name="android:background">@color/colorPrimaryDarkDay</item>
+        <item name="itemTextColor">@color/black</item>
+    </style>
 
 
     <style name="MyDialog" parent="Theme.AppCompat.Dialog">

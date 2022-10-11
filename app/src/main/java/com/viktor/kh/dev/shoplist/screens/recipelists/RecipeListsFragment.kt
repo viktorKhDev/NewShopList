@@ -211,7 +211,15 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
             title = getString(R.string.recipes)
             setDisplayHomeAsUpEnabled(false)
             setShowHideAnimationEnabled(false)
-            setBackgroundDrawable(ContextCompat.getColor(context!!,R.color.colorPrimary).toDrawable())
+            if (isNightTheme(context!!)){
+                setBackgroundDrawable(ContextCompat.getColor(context!!,R.color.colorPrimary).toDrawable())
+                activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
+                activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDark)
+            }else{
+                setBackgroundDrawable(ContextCompat.getColor(context!!,R.color.colorPrimaryDay).toDrawable())
+                activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
+                activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDarkDay)
+            }
             show()
         }
 

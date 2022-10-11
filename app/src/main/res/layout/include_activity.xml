@@ -3,14 +3,14 @@
     android:id="@+id/list_Layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="?colorAccent">
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listProducts"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background"
+        android:background="?colorAccent"
         />
 
 

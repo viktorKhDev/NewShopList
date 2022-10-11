@@ -1,7 +1,6 @@
 package com.viktor.kh.dev.shoplist.screens.propuctsists
 
 import android.app.Dialog
-import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -106,6 +105,8 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
    }
 
+
+
     private fun addList(){
 
         val dialog = context?.let { Dialog(it,R.style.MyDialog) }
@@ -207,7 +208,16 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
         supportActionBar.apply {
             title = getString(R.string.lists)
             setDisplayHomeAsUpEnabled(false)
-            setBackgroundDrawable(ContextCompat.getColor(context!!,R.color.colorPrimary).toDrawable())
+            if (isNightTheme(context!!)){
+                setBackgroundDrawable(ContextCompat.getColor(context!!,R.color.colorPrimary).toDrawable())
+                activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
+                activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDark)
+            }else{
+                setBackgroundDrawable(ContextCompat.getColor(context!!,R.color.colorPrimaryDay).toDrawable())
+                activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
+                activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDarkDay)
+            }
+
         }
 
 

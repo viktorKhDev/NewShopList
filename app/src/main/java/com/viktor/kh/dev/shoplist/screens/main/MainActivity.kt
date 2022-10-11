@@ -2,17 +2,21 @@ package com.viktor.kh.dev.shoplist.screens.main
 
 
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.viktor.kh.dev.shoplist.R
+import com.viktor.kh.dev.shoplist.utils.isNightTheme
 import com.viktor.kh.dev.shoplist.utils.loadSetting
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         navController = findNavController(R.id.nav_host_fragment)
         bottomNavView =  findViewById(R.id.bottom_nav_view)
         bottomNavView.setupWithNavController(navController)
-
+        setColors()
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id){
                 R.id.productListsFragment -> {
@@ -77,7 +81,14 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    override fun onSupportNavigateUp(): Boolean {
-        return super.onSupportNavigateUp()
+    private fun setColors(){
+        if (isNightTheme(this)){
+            bottomNavView.setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimaryDark))
+            bottomNavView.itemTextColor = ColorStateList.valueOf(Color.WHITE)
+        }else{
+            bottomNavView.setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimaryDarkDay))
+            bottomNavView.itemTextColor = ColorStateList.valueOf(Color.BLACK)
+        }
+
     }
 }
