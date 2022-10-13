@@ -16,24 +16,22 @@
         <item name="android:textColor">@color/black</item>
         <item name="height">50dp</item>
         <item name="popupMenuBackground">@color/white</item>
+        <item name="background">@color/colorPrimaryDay</item>
     </style>
-
-<style name="MyMenu" parent="TextAppearance.AppCompat.Widget.ActionBar.Menu">
-
-</style>
 
 
     <style name="MyBottomNavNight" parent="Widget.MaterialComponents.BottomNavigationView">
-   <item name="android:colorPrimary">@color/colorPrimaryDark</item>
-        <item name="android:background">@color/colorPrimaryDark</item>
-        <item name="itemTextColor">@color/white</item>
+   <item name="android:colorPrimary">@color/colorPrimary</item>
+        <item name="android:background">@color/colorPrimary</item>
+
+
     </style>
 
 
     <style name="MyBottomNavDay" parent="Widget.MaterialComponents.BottomNavigationView">
-        <item name="android:colorPrimary">@color/colorPrimaryDarkDay</item>
-        <item name="android:background">@color/colorPrimaryDarkDay</item>
-        <item name="itemTextColor">@color/black</item>
+        <item name="android:colorPrimary">@color/colorPrimaryDay</item>
+        <item name="android:background">@color/colorPrimaryDay</item>
+
     </style>
 
 

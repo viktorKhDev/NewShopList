@@ -4,6 +4,9 @@ package com.viktor.kh.dev.shoplist.screens.main
 
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.drawable.Drawable
+import android.os.Build
+import android.os.Build.VERSION.SDK
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -83,12 +86,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun setColors(){
         if (isNightTheme(this)){
-            bottomNavView.setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimaryDark))
-            bottomNavView.itemTextColor = ColorStateList.valueOf(Color.WHITE)
+            bottomNavView.setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimary))
+            bottomNavView.itemTextColor = ColorStateList.valueOf(ContextCompat.getColor(this,R.drawable.bottom_nav_views_item_color))
         }else{
-            bottomNavView.setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimaryDarkDay))
-            bottomNavView.itemTextColor = ColorStateList.valueOf(Color.BLACK)
+            bottomNavView.setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimaryDay))
+            bottomNavView.itemTextColor = ColorStateList.valueOf(ContextCompat.getColor(this,R.drawable.bottom_nav_views_item_color))
         }
 
+       
     }
 }
