@@ -12,10 +12,7 @@ import com.viktor.kh.dev.shoplist.databinding.ItemListBinding
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
 import com.viktor.kh.dev.shoplist.screens.propuctsists.ProductListsAdapter
-import com.viktor.kh.dev.shoplist.utils.colorLists
-import com.viktor.kh.dev.shoplist.utils.colors
-import com.viktor.kh.dev.shoplist.utils.convertLongToTime
-import com.viktor.kh.dev.shoplist.utils.currentCardColor
+import com.viktor.kh.dev.shoplist.utils.*
 import kotlin.random.Random
 
 class RecipesAdapter constructor(val onListClickListener: OnListClickListener,
@@ -102,7 +99,11 @@ class RecipesAdapter constructor(val onListClickListener: OnListClickListener,
 
             }
         }else{
-            return  ContextCompat.getColor(context!!, R.color.back_list_item)
+            if (isNightTheme(context!!)){
+                return  ContextCompat.getColor(context!!, R.color.colorPrimary)
+            }else{
+                return  ContextCompat.getColor(context!!, R.color.colorPrimaryDay)
+            }
         }
 
 

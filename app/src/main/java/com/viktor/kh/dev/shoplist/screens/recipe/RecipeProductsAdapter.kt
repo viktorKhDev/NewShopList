@@ -12,10 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
-import com.viktor.kh.dev.shoplist.utils.ADD_PRODUCT
-import com.viktor.kh.dev.shoplist.utils.DELETE_PRODUCT
-import com.viktor.kh.dev.shoplist.utils.colorItems
-import com.viktor.kh.dev.shoplist.utils.colors
+import com.viktor.kh.dev.shoplist.utils.*
 import kotlin.random.Random
 
 
@@ -119,7 +116,11 @@ class RecipeProductsAdapter(
 
             }
         }else{
-            return ContextCompat.getColor(context!!, R.color.colorAccent)
+            if (isNightTheme(context!!)){
+                return  ContextCompat.getColor(context!!, R.color.colorPrimary)
+            }else{
+                return  ContextCompat.getColor(context!!, R.color.colorPrimaryDay)
+            }
         }
 
 

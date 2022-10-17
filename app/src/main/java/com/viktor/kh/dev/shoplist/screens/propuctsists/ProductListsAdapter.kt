@@ -9,12 +9,9 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.ItemListBinding
-import com.viktor.kh.dev.shoplist.utils.convertLongToTime
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
-import com.viktor.kh.dev.shoplist.utils.colorLists
-import com.viktor.kh.dev.shoplist.utils.colors
-import com.viktor.kh.dev.shoplist.utils.currentCardColor
+import com.viktor.kh.dev.shoplist.utils.*
 import kotlin.random.Random
 
 
@@ -122,7 +119,12 @@ constructor(val onListClickListener: OnListClickListener,
 
            }
        }else{
-           return  ContextCompat.getColor(context!!, R.color.back_list_item)
+           if (isNightTheme(context!!)){
+               return  ContextCompat.getColor(context!!, R.color.colorPrimary)
+           }else{
+               return  ContextCompat.getColor(context!!, R.color.colorPrimaryDay)
+           }
+
        }
 
 

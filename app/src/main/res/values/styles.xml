@@ -20,17 +20,7 @@
     </style>
 
 
-    <style name="MyBottomNavNight" parent="Widget.MaterialComponents.BottomNavigationView">
-   <item name="android:colorPrimary">@color/colorPrimary</item>
-        <item name="android:background">@color/colorPrimary</item>
-
-
-    </style>
-
-
-    <style name="MyBottomNavDay" parent="Widget.MaterialComponents.BottomNavigationView">
-        <item name="android:colorPrimary">@color/colorPrimaryDay</item>
-        <item name="android:background">@color/colorPrimaryDay</item>
+    <style name="MyBottomNav" parent="Widget.MaterialComponents.BottomNavigationView">
 
     </style>
 

@@ -157,7 +157,11 @@ class ProductsAdapter(
 
             }
         }else{
-            return ContextCompat.getColor(context!!, R.color.colorAccent)
+            if (isNightTheme(context!!)){
+                return  ContextCompat.getColor(context!!, R.color.colorPrimary)
+            }else{
+                return  ContextCompat.getColor(context!!, R.color.colorPrimaryDay)
+            }
         }
 
 

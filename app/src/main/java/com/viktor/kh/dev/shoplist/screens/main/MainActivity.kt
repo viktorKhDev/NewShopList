@@ -13,6 +13,7 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -30,11 +31,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavView : BottomNavigationView
     private val model: MainModel by viewModels()
     private lateinit var navController: NavController
+    private lateinit var rootLayout: ConstraintLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
         loadSetting(this)
+        rootLayout = findViewById(R.id.main_root_layout)
         navController = findNavController(R.id.nav_host_fragment)
         bottomNavView =  findViewById(R.id.bottom_nav_view)
         bottomNavView.setupWithNavController(navController)
@@ -69,6 +72,7 @@ class MainActivity : AppCompatActivity() {
            val animation = AnimationUtils.loadAnimation(this,R.anim.bottom_menu_start)
            bottomNavView.startAnimation(animation)
        }
+       setColors()
    }
 
 
@@ -76,6 +80,7 @@ class MainActivity : AppCompatActivity() {
        val animation = AnimationUtils.loadAnimation(this,R.anim.bottom_menu_clear)
        bottomNavView.startAnimation(animation)
        bottomNavView.visibility = View.GONE
+
    }
 
 
@@ -84,15 +89,24 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    override fun onResume() {
+        super.onResume()
+        setColors()
+    }
+
+
     private fun setColors(){
         if (isNightTheme(this)){
             bottomNavView.setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimary))
+            rootLayout.setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimary))
             bottomNavView.itemTextColor = ColorStateList.valueOf(ContextCompat.getColor(this,R.drawable.bottom_nav_views_item_color))
         }else{
             bottomNavView.setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimaryDay))
+            rootLayout.setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimaryDay))
             bottomNavView.itemTextColor = ColorStateList.valueOf(ContextCompat.getColor(this,R.drawable.bottom_nav_views_item_color))
         }
 
-       
     }
+
+
 }
