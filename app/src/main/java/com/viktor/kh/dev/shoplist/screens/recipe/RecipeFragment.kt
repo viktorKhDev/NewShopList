@@ -167,27 +167,29 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
 
         model.getProducts()
-        Log.d("MyLog", "rv init")
+
     }
 
     private fun setBackgroundColor() = with(binding){
         //set color from recipes lists item
-        if (currentCardColor!=0){
-            Log.d("fix","setBackgroundColor() in recipe" )
-            addProductFab.backgroundTintList = ColorStateList.valueOf(currentCardColor)
-            productsFab.backgroundTintList = ColorStateList.valueOf(currentCardColor)
-            acceptTextFab.backgroundTintList = ColorStateList.valueOf(currentCardColor)
+        if (colorLists){
+            if (currentCardColor!=0){
+                addProductFab.backgroundTintList = ColorStateList.valueOf(currentCardColor)
+                productsFab.backgroundTintList = ColorStateList.valueOf(currentCardColor)
+                acceptTextFab.backgroundTintList = ColorStateList.valueOf(currentCardColor)
 
-            val backgroundShape = btnCloseProducts.background as GradientDrawable
-            backgroundShape.setColor(currentCardColor)
+                val backgroundShape = btnCloseProducts.background as GradientDrawable
+                backgroundShape.setColor(currentCardColor)
 
-            val backNoProd = btnNoProduct.background as GradientDrawable
-            backNoProd.setColor(currentCardColor)
+                val backNoProd = btnNoProduct.background as GradientDrawable
+                backNoProd.setColor(currentCardColor)
 
-            val backAcceptProd = btnAcceptProduct.background as GradientDrawable
-            backAcceptProd.setColor(currentCardColor)
+                val backAcceptProd = btnAcceptProduct.background as GradientDrawable
+                backAcceptProd.setColor(currentCardColor)
 
+            }
         }
+
     }
 
 
@@ -201,15 +203,21 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         collapsingToolbar.title = listName
         toolbar.inflateMenu(R.menu.options_menu_in_recipe)
         Log.d("fix","currentCardColor = ${currentCardColor.toString()}" )
-        if (currentCardColor!=0){
-            collapsingToolbar.setBackgroundColor( currentCardColor)
-            toolbar.setBackgroundColor(currentCardColor)
-            recipeCoordinatorLayout.setBackgroundColor(currentCardColor)
+
+            if (colorLists){
+                if (currentCardColor!=0) {
+                    activity!!.window.statusBarColor = currentCardColor
+                    activity!!.window.navigationBarColor = currentCardColor
+                    collapsingToolbar.setBackgroundColor(currentCardColor)
+                    toolbar.setBackgroundColor(currentCardColor)
+                    recipeCoordinatorLayout.setBackgroundColor(currentCardColor)
+                }
+            }
+
             collapsingToolbar.setCollapsedTitleTextColor(Color.BLACK)
             collapsingToolbar.setExpandedTitleColor(Color.BLACK)
-            activity!!.window.statusBarColor = currentCardColor
-            activity!!.window.navigationBarColor = currentCardColor
-        }
+
+
         toolbar.setOnMenuItemClickListener { item ->
             when(item.itemId){
 

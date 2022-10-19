@@ -207,11 +207,14 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         val listName = arguments?.getString(LIST_NAME)
         supportActionBar?.apply {
             title = listName
-            setBackgroundDrawable(currentCardColor.toDrawable())
             setDisplayHomeAsUpEnabled(true)
+            if (colorLists)  setBackgroundDrawable(currentCardColor.toDrawable())
         }
-        activity!!.window.statusBarColor = currentCardColor
-        activity!!.window.navigationBarColor = currentCardColor
+        if (colorLists){
+            activity!!.window.statusBarColor = currentCardColor
+            activity!!.window.navigationBarColor = currentCardColor
+        }
+
 
 
     }
@@ -280,13 +283,15 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
 
     private fun setBackgroundColor() = with(binding){
 
-        addProductFabInProd.backgroundTintList = ColorStateList.valueOf(currentCardColor)
+        if (colorLists){
+            addProductFabInProd.backgroundTintList = ColorStateList.valueOf(currentCardColor)
 
-        val backNoProd = btnNoProduct.background as GradientDrawable
-        backNoProd.setColor(currentCardColor)
+            val backNoProd = btnNoProduct.background as GradientDrawable
+            backNoProd.setColor(currentCardColor)
 
-        val backAcceptProd = btnAcceptProduct.background as GradientDrawable
-        backAcceptProd.setColor(currentCardColor)
+            val backAcceptProd = btnAcceptProduct.background as GradientDrawable
+            backAcceptProd.setColor(currentCardColor)
+        }
 
     }
 

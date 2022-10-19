@@ -21,6 +21,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.utils.isNightTheme
+//import com.viktor.kh.dev.shoplist.utils.isNightTheme
 import com.viktor.kh.dev.shoplist.utils.loadSetting
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -67,12 +68,12 @@ class MainActivity : AppCompatActivity() {
     }
 
    private fun openBottomMenu(){
+       setColors()
        if (bottomNavView.visibility == View.GONE){
            bottomNavView.visibility = View.VISIBLE
            val animation = AnimationUtils.loadAnimation(this,R.anim.bottom_menu_start)
            bottomNavView.startAnimation(animation)
        }
-       setColors()
    }
 
 
@@ -88,11 +89,6 @@ class MainActivity : AppCompatActivity() {
         bottomNavView.visibility = View.GONE
     }
 
-
-    override fun onResume() {
-        super.onResume()
-        setColors()
-    }
 
 
     private fun setColors(){

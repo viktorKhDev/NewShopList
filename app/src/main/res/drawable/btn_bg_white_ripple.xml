@@ -9,7 +9,7 @@
 
             >
             <solid
-                android:color="?colorAccent"
+                android:color="?colorPrimary"
 
                 />
            <corners android:radius="3dp"/>

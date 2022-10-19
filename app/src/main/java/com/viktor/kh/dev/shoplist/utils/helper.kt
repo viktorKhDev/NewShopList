@@ -12,6 +12,7 @@ import android.os.Build
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
 import com.viktor.kh.dev.shoplist.R
@@ -45,6 +46,7 @@ const val UPDATE_DATA = 0
 
 
 
+
 fun isNightTheme(context:Context):Boolean{
  var state = false
     when (context.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
@@ -56,6 +58,9 @@ fun isNightTheme(context:Context):Boolean{
 
     return state
 }
+
+
+
 
 
 

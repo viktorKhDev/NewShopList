@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?colorAccent">
+    android:background="?colorPrimary">
 
     <ScrollView
         android:id="@+id/support_scroll"
@@ -22,7 +22,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 android:text="@string/support_text"
-                android:textColor="@color/black"
+                android:textColor="?android:textColor"
                 android:textSize="20sp" />
 
             <androidx.appcompat.widget.AppCompatTextView

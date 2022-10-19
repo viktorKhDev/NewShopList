@@ -57,7 +57,7 @@ class ProductsAdapter(
     fun setData(list: List<DataProduct>, stateForAnim: Int){
         //Log.d("fixLog", "state  = $stateForAnim")
         var animPosition = 0
-        var newPosition = 0
+          var newPosition = 0
 
             when(stateForAnim){
                 ADD_PRODUCT -> {
