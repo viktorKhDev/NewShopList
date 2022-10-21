@@ -66,7 +66,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         setBackgroundColor()
         model.init(listId)
         initRv()
-        initMenu()
+        //initMenu()
 
          val callback = object :OnBackPressedCallback(true){
              override fun handleOnBackPressed() {
@@ -201,15 +201,39 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
     }
 
 
-    private fun initActionbar(){
-        val supportActionBar: androidx.appcompat.app.ActionBar?
-                = (activity as AppCompatActivity).supportActionBar
+    private fun initActionbar() = with(binding){
+        val supportActionBar: androidx.appcompat.app.ActionBar
+                = (activity as AppCompatActivity).supportActionBar!!
+        supportActionBar.hide()
         val listName = arguments?.getString(LIST_NAME)
-        supportActionBar?.apply {
+        toolbar.setBackgroundColor(currentCardColor)
+        toolbar.title = listName
+        toolbar.inflateMenu(R.menu.options_menu_in_list)
+        toolbar.setOnMenuItemClickListener { item ->
+            when(item.itemId){
+
+                android.R.id.home -> {activity!!.onBackPressed()
+                    true}
+                R.id.clean ->{ cleanList()
+                    true}
+                R.id.paste ->{model.pasteList()
+                    true}
+                R.id.share_item -> {activity?.let { model.shareList(it) }
+                    true}
+                R.id.add_recipe -> {addListFromRecipe()
+                    true}
+                else -> false
+            }
+        }
+        toolbar.setNavigationOnClickListener(View.OnClickListener {
+            activity!!.onBackPressed()
+        })
+
+        /*supportActionBar?.apply {
             title = listName
             setDisplayHomeAsUpEnabled(true)
             if (colorLists)  setBackgroundDrawable(currentCardColor.toDrawable())
-        }
+        }*/
         if (colorLists){
             activity!!.window.statusBarColor = currentCardColor
             activity!!.window.navigationBarColor = currentCardColor
@@ -219,7 +243,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
 
     }
 
-    private fun initMenu(){
+    /*private fun initMenu(){
 
         val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(object : MenuProvider {
@@ -246,7 +270,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
-    }
+    }*/
 
 
     override fun onItemDismiss(position: Int) {

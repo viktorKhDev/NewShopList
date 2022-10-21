@@ -204,10 +204,10 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
     private fun initActionbar(){
          supportActionBar = (activity as AppCompatActivity).supportActionBar!!
-
         supportActionBar.apply {
             title = getString(R.string.lists)
             setDisplayHomeAsUpEnabled(false)
+            setShowHideAnimationEnabled(false)
             if (isNightTheme(context!!)){
                 setBackgroundDrawable(ContextCompat.getColor(context!!,R.color.colorPrimary).toDrawable())
                 activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
@@ -217,7 +217,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
                 activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
                 activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
             }
-
+           show()
         }
 
 
@@ -284,6 +284,9 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
         subscribeData(list)
     }
 
-
+    override fun onStop() {
+        goneSearch()
+        super.onStop()
+    }
 
 }

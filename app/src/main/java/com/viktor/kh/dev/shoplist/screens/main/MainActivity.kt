@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         navController = findNavController(R.id.nav_host_fragment)
         bottomNavView =  findViewById(R.id.bottom_nav_view)
         bottomNavView.setupWithNavController(navController)
+        bottomNavView.clearAnimation()
         setColors()
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id){
@@ -57,6 +58,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.recipeFragment ->{
                     closeBottomMenuWithHideToolbar()
                 }
+                R.id.productsFragment ->{
+                    closeBottomMenuWithHideToolbar()
+                }
+
                 else -> {
                    closeBottomMenu()
                 }
@@ -86,6 +91,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun closeBottomMenuWithHideToolbar(){
+        bottomNavView.clearAnimation()
         bottomNavView.visibility = View.GONE
     }
 

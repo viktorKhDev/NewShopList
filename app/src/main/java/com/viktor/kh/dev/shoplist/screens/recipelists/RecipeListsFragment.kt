@@ -205,7 +205,6 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
     }
 
     private fun initActionbar() {
-        val activity = activity as AppCompatActivity
         supportActionBar = (activity as AppCompatActivity).supportActionBar!!
         supportActionBar.apply {
             title = getString(R.string.recipes)
@@ -284,5 +283,10 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
         }
         recipesAdapter.isSearch = true
         subscribeData(list)
+    }
+
+    override fun onStop() {
+        goneSearch()
+        super.onStop()
     }
 }
