@@ -64,10 +64,10 @@
     <string name="product_list_cleared">Lista de productos borrada</string>
     <string name="clean_products">Borrar productos</string>
     <string name="clean_products_list">¿Borrar la lista de productos?</string>
-
     <string name="color_lists">Listas de colores</string>
     <string name="color_lists_summary">Habilitación del relleno de color de las listas</string>
     <string name="color_items">Elementos coloreados</string>
     <string name="color_items_summary">Habilitación del relleno de color de los elementos de la lista</string>
+    <string name="list_is_empty">La lista esta vacía</string>
 
 </resources>

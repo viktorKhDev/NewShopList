@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <attr name="titleColor" format="reference|color" />
-    <attr name="introColor" format="reference|color"/>
-     <attr name="bottom_nav_activated_color" format ="reference|color"/>
+    <attr name="bottom_nav_activated_color" format ="reference|color"/>
     <attr name="bottom_nav_no_activated_color" format ="reference|color"/>
+
+
+    <attr name="dialog_clicked_item_color" format="reference|color"/>
+    <attr name="dialog_no_clicked_item_color" format="reference|color"/>
+
+
+
 
 
 </resources>

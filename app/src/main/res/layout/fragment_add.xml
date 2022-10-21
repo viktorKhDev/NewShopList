@@ -61,7 +61,7 @@
                     android:background="?colorAccent"
                     android:layout_alignParentStart="true"
                     android:layout_toStartOf="@id/btn_accept_product"
-                    android:textColor="@color/black"
+                    android:textColor="?android:textColor"
                    android:textSize="20sp"
                    tools:targetApi="o" />
 

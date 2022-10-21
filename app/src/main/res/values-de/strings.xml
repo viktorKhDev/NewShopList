@@ -64,9 +64,10 @@
     <string name="product_list_cleared">Produktliste gelöscht</string>
     <string name="clean_products">Klare produkte</string>
     <string name="clean_products_list">Produktliste löschen?</string>
-
     <string name="color_lists">Farbige Listen</string>
     <string name="color_lists_summary">Aktivieren der farbigen Füllung von Listen</string>
     <string name="color_items">Farbige Elemente</string>
     <string name="color_items_summary">Aktivieren der Farbfüllung von Listenelementen</string>
+    <string name="list_is_empty">Liste ist leer</string>
+
 </resources>

@@ -64,10 +64,10 @@
     <string name="product_list_cleared">Product list cleared</string>
     <string name="clean_products">Clear products</string>
     <string name="clean_products_list">Clear the list of products?</string>
-
     <string name="color_lists">Colored lists</string>
     <string name="color_lists_summary">Enabling color filling of lists</string>
     <string name="color_items">Colored elements</string>
     <string name="color_items_summary">Enabling color filling of list items</string>
+    <string name="list_is_empty">List is empty</string>
 
 </resources>

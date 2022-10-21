@@ -188,8 +188,8 @@
                     android:focusableInTouchMode="true"
                     android:hint="@string/prod_name"
                     android:inputType="text"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/text_hint"
+                    android:textColor="?android:textColor"
+                    android:textColorHint="@color/gray_item"
                     android:textSize="20sp"
                     android:imeOptions="actionNext" />
 
@@ -216,8 +216,8 @@
                     android:focusableInTouchMode="true"
                     android:hint="@string/amount"
                     android:inputType="text"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/text_hint"
+                    android:textColor="?android:textColor"
+                    android:textColorHint="@color/gray_item"
                     android:textSize="20sp"
                     android:paddingStart="10dp"
                     android:imeOptions="actionDone" />

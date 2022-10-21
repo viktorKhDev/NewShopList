@@ -59,7 +59,7 @@ class ProductsAdapter(
         var animPosition = 0
           var newPosition = 0
 
-            when(stateForAnim){
+        when(stateForAnim){
                 ADD_PRODUCT -> {
                     for (i in list.indices){
                             if (!data.contains(list[i])){

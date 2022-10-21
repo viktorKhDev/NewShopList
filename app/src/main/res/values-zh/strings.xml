@@ -64,10 +64,10 @@
     <string name="product_list_cleared">产品清单已清空</string>
     <string name="clean_products">清除产品</string>
     <string name="clean_products_list">清除产品列表？</string>
-
     <string name="color_lists">彩色列表</string>
     <string name="color_lists_summary">启用列表的颜色填充</string>
     <string name="color_items">有色元素</string>
     <string name="color_items_summary">启用列表项的颜色填充</string>
+    <string name="list_is_empty">列表为空</string>
 
 </resources>

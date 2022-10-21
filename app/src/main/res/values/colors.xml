@@ -30,6 +30,11 @@
     <color name="card_cyan">#B9F6CA</color>
 
 
+    <!-- for dialogs -->
+    <color name="card_clicked_day">#c7c7c7</color>
+    <color name="card_clicked_night">#546e7a</color>
+
+
     <!-- other colors -->
     <color name="gray_item">#c7c7c7</color>
     <color name="background">#fafafa</color>
@@ -42,6 +47,9 @@
     <color name="text_hint">#939393</color>
     <color name="blue_text">#4DB6AC</color>
     <color name="transparent">#00000000</color>
+
+
+
 
 
 

@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.utils.*
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
@@ -179,6 +180,8 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                  stringBuilder.append("\n")
              }
              shareText(stringBuilder.toString(),context)
+         }else{
+             showToast(context.getString(R.string.list_is_empty),context)
          }
 
     }

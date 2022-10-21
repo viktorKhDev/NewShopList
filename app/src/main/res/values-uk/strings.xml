@@ -64,10 +64,10 @@
     <string name="product_list_cleared">Список продуктів очищено</string>
     <string name="clean_products">Очистити продукти</string>
     <string name="clean_products_list">Очистити список продуктів?</string>
-
     <string name="color_lists">Кольорові списки</string>
     <string name="color_lists_summary">Увімкнення кольорового заповнення списків</string>
     <string name="color_items">Кольорові елементи</string>
     <string name="color_items_summary">Увімкнення кольорового заповнення елементів списку</string>
+    <string name="list_is_empty">Список порожній</string>
 
 </resources>

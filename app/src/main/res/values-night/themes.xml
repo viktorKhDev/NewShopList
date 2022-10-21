@@ -41,6 +41,7 @@
         <!-- Customize your theme here. -->
 
         <!-- Dialog theme. -->
+        <item name="dialog_clicked_item_color">@color/card_clicked_night</item>
 
     </style>
 </resources>

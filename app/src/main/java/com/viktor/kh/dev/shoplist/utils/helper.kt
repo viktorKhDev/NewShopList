@@ -68,12 +68,13 @@ val colors = listOf(
     R.color.card_blue,
     R.color.card_red,
     R.color.card_green,
+    R.color.card_cyan,
     R.color.card_orange,
     R.color.card_violet,
     R.color.card_yellow,
     R.color.card_dark_blue,
-    R.color.card_pink,
-    R.color.card_cyan
+    R.color.card_pink
+
 )
 
 var currentCardColor = 0

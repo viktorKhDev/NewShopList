@@ -36,6 +36,7 @@
                 android:autoLink="email"
                 android:saveEnabled="false"
                 android:textColor="@color/blue_text"
+                android:textColorLink="@color/blue_text"
                 android:text="@string/support_email"
                 android:textSize="20sp">
 
