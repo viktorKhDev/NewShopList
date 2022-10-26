@@ -3,7 +3,7 @@
 
 
    <solid
-       android:color="?colorAccent"
+       android:color="?colorPrimary"
        />
 
     <corners

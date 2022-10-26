@@ -76,6 +76,8 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
            override fun onListClick(position: Int) {
                val list = model.dataLists.value!![position]
                goneSearch()
+               supportActionBar.setShowHideAnimationEnabled(false)
+               supportActionBar.hide()
                model.openList(findNavController(),list)
            }
        }

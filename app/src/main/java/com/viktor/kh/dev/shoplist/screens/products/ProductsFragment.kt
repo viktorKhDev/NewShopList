@@ -202,8 +202,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
 
 
     private fun initActionbar() = with(binding){
-        val supportActionBar: androidx.appcompat.app.ActionBar
-                = (activity as AppCompatActivity).supportActionBar!!
+        val supportActionBar = (activity as AppCompatActivity).supportActionBar!!
         supportActionBar.hide()
         val listName = arguments?.getString(LIST_NAME)
         toolbar.setBackgroundColor(currentCardColor)

@@ -11,8 +11,7 @@
         android:label="ProductListsFragment">
         <action
             android:id="@+id/action_productListsFragment_to_productsFragment"
-            app:destination="@id/productsFragment"
-            app:enterAnim="@anim/nav_default_enter_anim" />
+            app:destination="@id/productsFragment" />
 
     </fragment>
     <fragment
@@ -23,8 +22,7 @@
 
         <action
             android:id="@+id/action_recipeListsFragment_to_recipeFragment"
-            app:destination="@id/recipeFragment"
-            app:enterAnim="@anim/nav_default_enter_anim" />
+            app:destination="@id/recipeFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"

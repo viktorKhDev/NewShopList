@@ -77,6 +77,8 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
             override fun onListClick(position: Int) {
                 val list = model.dataRecipes.value!![position]
                 goneSearch()
+                supportActionBar.setShowHideAnimationEnabled(false)
+                supportActionBar.hide()
                 model.openRecipe(findNavController(),list)
 
 

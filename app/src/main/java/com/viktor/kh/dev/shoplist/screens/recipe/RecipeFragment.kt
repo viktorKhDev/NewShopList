@@ -196,12 +196,12 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
 
     private fun initActionbar() = with(binding){
-        val supportActionBar: androidx.appcompat.app.ActionBar
-                = (activity as AppCompatActivity).supportActionBar!!
+        val supportActionBar = (activity as AppCompatActivity).supportActionBar!!
         supportActionBar.hide()
         val listName = arguments?.getString(LIST_NAME)
         collapsingToolbar.title = listName
         toolbar.inflateMenu(R.menu.options_menu_in_recipe)
+        
         Log.d("fix","currentCardColor = ${currentCardColor.toString()}" )
 
             if (colorLists){

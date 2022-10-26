@@ -5,12 +5,12 @@
     android:id="@+id/cl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?colorAccent">
+    android:background="?colorPrimary">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:background="?colorPrimary"
         app:layout_collapseMode = "pin"
         android:theme="@style/DayActionBar"
@@ -41,7 +41,7 @@
             android:id="@+id/listProducts"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?colorAccent"
+            android:background="?colorPrimary"
             android:paddingBottom="60dp"
             android:clipToPadding="false"
             />

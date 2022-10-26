@@ -6,7 +6,7 @@
         android:color="@color/colorPrimaryDark"
         android:width="1dp"/>
     <solid
-        android:color="?colorAccent"/>
+        android:color="?colorPrimary"/>
 
 
     <corners

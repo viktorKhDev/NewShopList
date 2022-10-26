@@ -42,28 +42,27 @@ class MainActivity : AppCompatActivity() {
         navController = findNavController(R.id.nav_host_fragment)
         bottomNavView =  findViewById(R.id.bottom_nav_view)
         bottomNavView.setupWithNavController(navController)
-        bottomNavView.clearAnimation()
         setColors()
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id){
                 R.id.productListsFragment -> {
-                    openBottomMenu()
+                   openBottomMenuWithoutAnim()
                 }
                 R.id.recipeListsFragment -> {
-                  openBottomMenu()
+                 openBottomMenuWithoutAnim()
                 }
                 R.id.otherFragment -> {
-                    openBottomMenu()
+                    openBottomMenuWithoutAnim()
                 }
                 R.id.recipeFragment ->{
-                    closeBottomMenuWithHideToolbar()
+                   closeBottomMenuWithoutAnim()
                 }
                 R.id.productsFragment ->{
-                    closeBottomMenuWithHideToolbar()
+                   closeBottomMenuWithoutAnim()
                 }
 
                 else -> {
-                   closeBottomMenu()
+                  closeBottomMenuWithoutAnim()
                 }
             }
         }
@@ -82,17 +81,12 @@ class MainActivity : AppCompatActivity() {
    }
 
 
-   private fun closeBottomMenu(){
-       val animation = AnimationUtils.loadAnimation(this,R.anim.bottom_menu_clear)
-       bottomNavView.startAnimation(animation)
-       bottomNavView.visibility = View.GONE
-
-   }
-
-
-    private fun closeBottomMenuWithHideToolbar(){
-        bottomNavView.clearAnimation()
+    private fun closeBottomMenuWithoutAnim(){
         bottomNavView.visibility = View.GONE
+    }
+
+    private fun openBottomMenuWithoutAnim(){
+        bottomNavView.visibility = View.VISIBLE
     }
 
 

@@ -5,8 +5,8 @@
     <!-- colors for day theme -->
     <color name="colorPrimaryDay">#fafafa</color>
     <color name="colorPrimaryDarkDay">#c7c7c7</color>
-    <color name="colorAccentDay">#ffffff</color>
-    <color name="colorAccentDarkDay">#f5f5f5</color>
+    <color name="colorAccentDay">#FFFFFF</color>
+    <color name="colorAccentDarkDay">#E1F5F5F5</color>
 
 
 

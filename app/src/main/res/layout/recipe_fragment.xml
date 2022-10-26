@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?colorAccent"
+    android:background="?colorPrimary"
 
     >
 
@@ -35,7 +35,7 @@
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="55dp"
                     android:background="?colorPrimary"
                     app:layout_collapseMode = "pin"
                     android:theme="@style/DayActionBar"
@@ -60,8 +60,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/transparent"
-                android:textColor="@color/black"
-                android:textColorHint="@color/text_hint"
+                android:textColor="?android:textColor"
+                android:textColorHint="@color/gray_item"
                 android:padding="10dp"
                 android:focusable="true"
                 />
@@ -183,7 +183,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_toStartOf="@id/barrier_between_label"
                     android:autofillHints=""
-                    android:background="?colorAccent"
+                    android:background="?colorPrimary"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     android:hint="@string/prod_name"
