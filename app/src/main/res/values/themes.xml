@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.ShopList" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.ShopList" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colorPrimaryDay</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryDarkDay</item>
@@ -34,8 +34,10 @@
 
         <!-- Status bar color. -->
         <item name="android:statusBarColor" >@color/black</item>
+
+
         <!-- Action bar. -->
-        <item name="actionBarTheme">@style/DayActionBar</item>
+
 
         <!-- Customize your theme here. -->
 

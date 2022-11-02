@@ -196,11 +196,11 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
 
     private fun initActionbar() = with(binding){
-        val supportActionBar = (activity as AppCompatActivity).supportActionBar!!
-        supportActionBar.hide()
+     /*   val supportActionBar = (activity as AppCompatActivity).supportActionBar!!
+        supportActionBar.hide()*/
         val listName = arguments?.getString(LIST_NAME)
         collapsingToolbar.title = listName
-        toolbar.inflateMenu(R.menu.options_menu_in_recipe)
+        recipeToolbar.inflateMenu(R.menu.options_menu_in_recipe)
         
         Log.d("fix","currentCardColor = ${currentCardColor.toString()}" )
 
@@ -209,7 +209,7 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
                     activity!!.window.statusBarColor = currentCardColor
                     activity!!.window.navigationBarColor = currentCardColor
                     collapsingToolbar.setBackgroundColor(currentCardColor)
-                    toolbar.setBackgroundColor(currentCardColor)
+                    recipeToolbar.setBackgroundColor(currentCardColor)
                     recipeCoordinatorLayout.setBackgroundColor(currentCardColor)
                 }
             }
@@ -218,7 +218,7 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
             collapsingToolbar.setExpandedTitleColor(Color.BLACK)
 
 
-        toolbar.setOnMenuItemClickListener { item ->
+        recipeToolbar.setOnMenuItemClickListener { item ->
             when(item.itemId){
 
                R.id.home -> activity!!.onBackPressed()
@@ -237,7 +237,7 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
             false
         }
 
-        toolbar.setNavigationOnClickListener(View.OnClickListener {
+        recipeToolbar.setNavigationOnClickListener(View.OnClickListener {
             activity!!.onBackPressed()
         })
 

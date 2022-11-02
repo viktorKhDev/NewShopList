@@ -37,7 +37,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
      private lateinit var binding : FragmentListsBinding
      private lateinit var rv: RecyclerView
     private lateinit var listAdapter: ProductListsAdapter
-   lateinit var supportActionBar: androidx.appcompat.app.ActionBar
+   //lateinit var supportActionBar: androidx.appcompat.app.ActionBar
 
 
 
@@ -51,7 +51,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
          initList()
          model.init()
          initActionbar()
-         initMenu()
+         //initMenu()
          binding.fabAddList.setOnClickListener(View.OnClickListener {
              addList()
          })
@@ -76,8 +76,8 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
            override fun onListClick(position: Int) {
                val list = model.dataLists.value!![position]
                goneSearch()
-               supportActionBar.setShowHideAnimationEnabled(false)
-               supportActionBar.hide()
+               /*supportActionBar.setShowHideAnimationEnabled(false)
+               supportActionBar.hide()*/
                model.openList(findNavController(),list)
            }
        }
@@ -204,8 +204,8 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
     }
 
-    private fun initActionbar(){
-         supportActionBar = (activity as AppCompatActivity).supportActionBar!!
+    private fun initActionbar() = with(binding){
+       /*  supportActionBar = (activity as AppCompatActivity).supportActionBar!!
         supportActionBar.apply {
             title = getString(R.string.lists)
             setDisplayHomeAsUpEnabled(false)
@@ -220,12 +220,35 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
                 activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
             }
            show()
+        }*/
+
+
+        if (isNightTheme(context!!)){
+            activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
+            activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
+        }else{
+            activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
+            activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
         }
 
+        listsToolbar.title = getString(R.string.lists)
+        listsToolbar.inflateMenu(R.menu.options_menu_in_lists)
+        listsToolbar.setOnMenuItemClickListener { item ->
+            when(item.itemId){
 
+                android.R.id.home -> {activity!!.onBackPressed()
+                    true}
+                R.id.search_item -> {searchList()
+                    true}
+                else -> false
+            }
+        }
+        listsToolbar.setNavigationOnClickListener(View.OnClickListener {
+            activity!!.onBackPressed()
+        })
     }
 
-    private fun initMenu(){
+   /* private fun initMenu(){
 
         val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(object : MenuProvider {
@@ -244,12 +267,13 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
-    }
+    }*/
 
 
     private fun searchList() = with(binding){
-        supportActionBar.hide()
-        supportActionBar.setShowHideAnimationEnabled(false)
+       /* supportActionBar.hide()
+        supportActionBar.setShowHideAnimationEnabled(false)*/
+        listsToolbar.visibility = View.GONE
         val animation = AnimationUtils.loadAnimation(context,R.anim.to_start_anim)
         searchBar.animation = animation
         animation.start()
@@ -267,7 +291,8 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
             autoCompleteText.setText("")
             autoCompleteText.hideKeyboard()
             searchBar.visibility = View.GONE
-            supportActionBar.show()
+            //supportActionBar.show()
+            listsToolbar.visibility = View.VISIBLE
             listAdapter.isSearch = true
             model.dataLists.value?.let { it1 -> subscribeData(it1) }
         }

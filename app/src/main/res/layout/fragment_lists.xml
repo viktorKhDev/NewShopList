@@ -8,16 +8,29 @@
     android:background="?colorPrimary"
     >
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/lists_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="?colorPrimary"
+        app:layout_collapseMode = "pin"
+        app:navigationIcon="@drawable/ic_baseline_arrow_day_night"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/lists"
+        />
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="55dp"
         android:background="?colorPrimary"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/lists">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/lists"
+        >
 
         <EditText
             android:id="@+id/auto_complete_text"
@@ -45,8 +58,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-
-
             android:layout_alignParentEnd="true"
             >
         </ImageButton>
@@ -67,7 +78,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_bar"
+        app:layout_constraintTop_toBottomOf="@id/lists_toolbar"
         app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

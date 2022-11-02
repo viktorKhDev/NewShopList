@@ -38,7 +38,7 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
     private lateinit var binding : RecipesFragmentBinding
     private lateinit var rv: RecyclerView
     private lateinit var recipesAdapter: RecipesAdapter
-    lateinit var supportActionBar: androidx.appcompat.app.ActionBar
+    //lateinit var supportActionBar: androidx.appcompat.app.ActionBar
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -77,8 +77,8 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
             override fun onListClick(position: Int) {
                 val list = model.dataRecipes.value!![position]
                 goneSearch()
-                supportActionBar.setShowHideAnimationEnabled(false)
-                supportActionBar.hide()
+                /*   supportActionBar.setShowHideAnimationEnabled(false)
+                supportActionBar.hide()*/
                 model.openRecipe(findNavController(),list)
 
 
@@ -206,8 +206,8 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
 
     }
 
-    private fun initActionbar() {
-        supportActionBar = (activity as AppCompatActivity).supportActionBar!!
+    private fun initActionbar() = with(binding.listsIncludeInRecipes) {
+     /*   supportActionBar = (activity as AppCompatActivity).supportActionBar!!
         supportActionBar.apply {
             title = getString(R.string.recipes)
             setDisplayHomeAsUpEnabled(false)
@@ -222,7 +222,31 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
                 activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
             }
             show()
+        }*/
+
+        if (isNightTheme(context!!)){
+            activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
+            activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
+        }else{
+            activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
+            activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
         }
+
+        listsToolbar.title = getString(R.string.lists)
+        listsToolbar.inflateMenu(R.menu.options_menu_in_lists)
+        listsToolbar.setOnMenuItemClickListener { item ->
+            when(item.itemId){
+
+                android.R.id.home -> {activity!!.onBackPressed()
+                    true}
+                R.id.search_item -> {searchRecipe()
+                    true}
+                else -> false
+            }
+        }
+        listsToolbar.setNavigationOnClickListener(View.OnClickListener {
+            activity!!.onBackPressed()
+        })
 
     }
 
@@ -249,8 +273,8 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
 
 
     private fun searchRecipe() = with(binding.listsIncludeInRecipes){
-        supportActionBar.hide()
-        supportActionBar.setShowHideAnimationEnabled(false)
+       /* supportActionBar.hide()
+        supportActionBar.setShowHideAnimationEnabled(false)*/
         val animation = AnimationUtils.loadAnimation(context,R.anim.to_start_anim)
         searchBar.animation = animation
         animation.start()
@@ -268,7 +292,8 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
             autoCompleteText.setText("")
             autoCompleteText.hideKeyboard()
             searchBar.visibility = View.GONE
-            supportActionBar.show()
+            //supportActionBar.show()
+            listsToolbar.visibility = View.VISIBLE
             recipesAdapter.isSearch = true
             model.dataRecipes.value?.let { it1 -> subscribeData(it1) }
         }

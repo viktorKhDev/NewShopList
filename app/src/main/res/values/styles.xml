@@ -22,6 +22,25 @@
     </style>
 
 
+    <style name="MyActionBar" parent="ThemeOverlay.MaterialComponents.ActionBar">
+        <item name="android:textColorPrimary">?android:textColor</item>
+        <item name="android:textColor">?android:textColor</item>
+        <item name="endIconTint">?android:textColor</item>
+        <item name="height">50dp</item>
+        <item name="popupMenuBackground">?colorAccent</item>
+        <item name="background">?colorPrimary</item>
+    </style>
+
+    <style name="MyActionBarTest" parent="ThemeOverlay.MaterialComponents.ActionBar">
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="endIconTint">@color/black</item>
+        <item name="height">50dp</item>
+        <item name="popupMenuBackground">@color/colorAccentDay</item>
+        <item name="background">@color/colorPrimaryDay</item>
+    </style>
+
+
     <style name="MyBottomNav" parent="Widget.MaterialComponents.BottomNavigationView">
     </style>
 
