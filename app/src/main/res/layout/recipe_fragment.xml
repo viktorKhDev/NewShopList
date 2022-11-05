@@ -211,7 +211,7 @@
                     android:layout_height="match_parent"
                     android:layout_toStartOf="@id/btn_accept_product"
                     android:autofillHints=""
-                    android:background="?colorAccent"
+                    android:background="?colorPrimary"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     android:hint="@string/amount"

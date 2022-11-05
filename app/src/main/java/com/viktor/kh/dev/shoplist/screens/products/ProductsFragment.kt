@@ -228,48 +228,18 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
             activity!!.onBackPressed()
         })
 
-        /*supportActionBar?.apply {
-            title = listName
-            setDisplayHomeAsUpEnabled(true)
-            if (colorLists)  setBackgroundDrawable(currentCardColor.toDrawable())
-        }*/
+
         if (colorLists){
             activity!!.window.statusBarColor = currentCardColor
             activity!!.window.navigationBarColor = currentCardColor
+            activity!!.window.insetsController!!.setSystemBarsAppearance(
+                WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+                WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
         }
 
 
 
     }
-
-    /*private fun initMenu(){
-
-        val menuHost: MenuHost = requireActivity()
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                // Add menu items here
-                menuInflater.inflate(R.menu.options_menu_in_list, menu)
-            }
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                // Handle the menu selection
-                return when (menuItem.itemId) {
-                    android.R.id.home -> {activity!!.onBackPressed()
-                    true}
-                    R.id.clean ->{ cleanList()
-                    true}
-                    R.id.paste ->{model.pasteList()
-                        true}
-                    R.id.share_item -> {activity?.let { model.shareList(it) }
-                        true}
-                    R.id.add_recipe -> {addListFromRecipe()
-                        true}
-                    else -> false
-                }
-
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
-
-    }*/
 
 
     override fun onItemDismiss(position: Int) {
@@ -405,7 +375,23 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
     }
 
 
+    override fun onStop() {
+        val hideAnim = AnimationUtils.loadAnimation(context,R.anim.fab_hide_anim)
+        hideAnim.startOffset = 200
+        binding.addProductFabInProd.animation = hideAnim
+        hideAnim.start()
+        binding.addProductFabInProd.hide()
+        super.onStop()
+    }
 
+    override fun onResume() {
+        val showAnim = AnimationUtils.loadAnimation(context,R.anim.fab_show_anim)
+        showAnim.startOffset = 200
+        binding.addProductFabInProd.animation = showAnim
+        showAnim.start()
+        binding.addProductFabInProd.show()
+        super.onResume()
+    }
 
 }
 

@@ -22,9 +22,8 @@ class OtherFragment : Fragment(R.layout.other_fragment){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initActionbar()
         binding = OtherFragmentBinding.bind(view)
-
+        initActionbar()
         binding.settingScreen.setOnClickListener(View.OnClickListener {
             model.openSetting(findNavController())
         })
@@ -45,12 +44,8 @@ class OtherFragment : Fragment(R.layout.other_fragment){
 
 
 
-    private fun initActionbar(){
-        val supportActionBar: androidx.appcompat.app.ActionBar?
-                = (activity as AppCompatActivity).supportActionBar
-        supportActionBar?.title = getString(R.string.other)
-        supportActionBar?.setDisplayHomeAsUpEnabled(false)
-
+    private fun initActionbar() = with(binding){
+     toolbar.title = getString(R.string.other)
     }
 
 

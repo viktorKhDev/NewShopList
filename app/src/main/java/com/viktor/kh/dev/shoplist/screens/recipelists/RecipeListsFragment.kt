@@ -38,27 +38,22 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
     private lateinit var binding : RecipesFragmentBinding
     private lateinit var rv: RecyclerView
     private lateinit var recipesAdapter: RecipesAdapter
-    //lateinit var supportActionBar: androidx.appcompat.app.ActionBar
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = RecipesFragmentBinding.bind(view)
         rv = binding.listsIncludeInRecipes.lists
-        val anim = AnimationUtils.loadLayoutAnimation(context,R.anim.bottom_layout_anim)
+
         initList()
         model.init()
         initActionbar()
-        initMenu()
         binding.listsIncludeInRecipes.fabAddList.setOnClickListener(View.OnClickListener {
             addRecipe()
         })
         model.dataRecipes.observe(viewLifecycleOwner, Observer {
-            if (model.initAnim){
-                rv.layoutAnimation = anim
-            }
             subscribeData(it)
-
         })
     }
 
@@ -77,11 +72,7 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
             override fun onListClick(position: Int) {
                 val list = model.dataRecipes.value!![position]
                 goneSearch()
-                /*   supportActionBar.setShowHideAnimationEnabled(false)
-                supportActionBar.hide()*/
                 model.openRecipe(findNavController(),list)
-
-
 
             }
         }
@@ -103,8 +94,6 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
         rv.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = recipesAdapter
-
-
         }
 
         rv.adapter!!.notifyDataSetChanged()
@@ -207,22 +196,6 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
     }
 
     private fun initActionbar() = with(binding.listsIncludeInRecipes) {
-     /*   supportActionBar = (activity as AppCompatActivity).supportActionBar!!
-        supportActionBar.apply {
-            title = getString(R.string.recipes)
-            setDisplayHomeAsUpEnabled(false)
-            setShowHideAnimationEnabled(false)
-            if (isNightTheme(context!!)){
-                setBackgroundDrawable(ContextCompat.getColor(context!!,R.color.colorPrimary).toDrawable())
-                activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
-                activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
-            }else{
-                setBackgroundDrawable(ContextCompat.getColor(context!!,R.color.colorPrimaryDay).toDrawable())
-                activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
-                activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
-            }
-            show()
-        }*/
 
         if (isNightTheme(context!!)){
             activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
@@ -232,49 +205,23 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
             activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
         }
 
-        listsToolbar.title = getString(R.string.lists)
+        listsToolbar.title = getString(R.string.recipes)
         listsToolbar.inflateMenu(R.menu.options_menu_in_lists)
         listsToolbar.setOnMenuItemClickListener { item ->
             when(item.itemId){
 
-                android.R.id.home -> {activity!!.onBackPressed()
-                    true}
                 R.id.search_item -> {searchRecipe()
                     true}
                 else -> false
             }
         }
-        listsToolbar.setNavigationOnClickListener(View.OnClickListener {
-            activity!!.onBackPressed()
-        })
 
     }
 
-    private fun initMenu(){
 
-        val menuHost: MenuHost = requireActivity()
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                // Add menu items here
-                menuInflater.inflate(R.menu.options_menu_in_lists, menu)
-            }
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                // Handle the menu selection
-                return when (menuItem.itemId) {
-                    R.id.search_item -> {searchRecipe()
-                        true}
-                    else -> false
-                }
-
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
-
-    }
 
 
     private fun searchRecipe() = with(binding.listsIncludeInRecipes){
-       /* supportActionBar.hide()
-        supportActionBar.setShowHideAnimationEnabled(false)*/
         val animation = AnimationUtils.loadAnimation(context,R.anim.to_start_anim)
         searchBar.animation = animation
         animation.start()
@@ -292,8 +239,6 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
             autoCompleteText.setText("")
             autoCompleteText.hideKeyboard()
             searchBar.visibility = View.GONE
-            //supportActionBar.show()
-            listsToolbar.visibility = View.VISIBLE
             recipesAdapter.isSearch = true
             model.dataRecipes.value?.let { it1 -> subscribeData(it1) }
         }
@@ -313,7 +258,21 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
     }
 
     override fun onStop() {
+        val fabHideAnim = AnimationUtils.loadAnimation(context,R.anim.fab_hide_anim)
+        fabHideAnim.startOffset = 200
+        binding.listsIncludeInRecipes.fabAddList.animation = fabHideAnim
+        fabHideAnim.start()
+        binding.listsIncludeInRecipes.fabAddList.hide()
         goneSearch()
         super.onStop()
+    }
+
+    override fun onResume() {
+        val fabHideAnim = AnimationUtils.loadAnimation(context,R.anim.fab_show_anim)
+        fabHideAnim.startOffset = 200
+        binding.listsIncludeInRecipes.fabAddList.animation = fabHideAnim
+        fabHideAnim.start()
+        binding.listsIncludeInRecipes.fabAddList.show()
+        super.onResume()
     }
 }

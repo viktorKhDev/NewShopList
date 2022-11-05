@@ -14,7 +14,6 @@
         android:layout_height="55dp"
         android:background="?colorPrimary"
         app:layout_collapseMode = "pin"
-        app:navigationIcon="@drawable/ic_baseline_arrow_day_night"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/lists"
@@ -83,6 +82,7 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddList"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"

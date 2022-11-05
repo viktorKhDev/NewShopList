@@ -396,6 +396,7 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         super.onPause()
     }
 
+
     override fun onItemDismiss(position: Int) {
        model.deleteProduct(position)
     }

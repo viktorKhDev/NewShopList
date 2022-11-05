@@ -37,27 +37,24 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
      private lateinit var binding : FragmentListsBinding
      private lateinit var rv: RecyclerView
     private lateinit var listAdapter: ProductListsAdapter
-   //lateinit var supportActionBar: androidx.appcompat.app.ActionBar
 
 
 
-
-   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
        context?.let { loadSetting(it) }
         binding = FragmentListsBinding.bind(view)
         rv = binding.lists
-         val anim = AnimationUtils.loadLayoutAnimation(context,R.anim.bottom_layout_anim)
+            //val anim = AnimationUtils.loadLayoutAnimation(context,R.anim.bottom_layout_anim)
          initList()
          model.init()
          initActionbar()
-         //initMenu()
-         binding.fabAddList.setOnClickListener(View.OnClickListener {
+        binding.fabAddList.setOnClickListener(View.OnClickListener {
              addList()
          })
          model.dataLists.observe(viewLifecycleOwner, Observer {
              if (model.initAnim){
-                 rv.layoutAnimation = anim
+                // rv.layoutAnimation = anim
              }
             subscribeData(it)
 
@@ -76,8 +73,6 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
            override fun onListClick(position: Int) {
                val list = model.dataLists.value!![position]
                goneSearch()
-               /*supportActionBar.setShowHideAnimationEnabled(false)
-               supportActionBar.hide()*/
                model.openList(findNavController(),list)
            }
        }
@@ -205,23 +200,6 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
     }
 
     private fun initActionbar() = with(binding){
-       /*  supportActionBar = (activity as AppCompatActivity).supportActionBar!!
-        supportActionBar.apply {
-            title = getString(R.string.lists)
-            setDisplayHomeAsUpEnabled(false)
-            setShowHideAnimationEnabled(false)
-            if (isNightTheme(context!!)){
-                setBackgroundDrawable(ContextCompat.getColor(context!!,R.color.colorPrimary).toDrawable())
-                activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
-                activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
-            }else{
-                setBackgroundDrawable(ContextCompat.getColor(context!!,R.color.colorPrimaryDay).toDrawable())
-                activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
-                activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
-            }
-           show()
-        }*/
-
 
         if (isNightTheme(context!!)){
             activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
@@ -248,32 +226,9 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
         })
     }
 
-   /* private fun initMenu(){
-
-        val menuHost: MenuHost = requireActivity()
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                // Add menu items here
-                menuInflater.inflate(R.menu.options_menu_in_lists, menu)
-            }
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                // Handle the menu selection
-                return when (menuItem.itemId) {
-                    R.id.search_item -> {searchList()
-                        true}
-                else -> false
-                }
-
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
-
-    }*/
 
 
     private fun searchList() = with(binding){
-       /* supportActionBar.hide()
-        supportActionBar.setShowHideAnimationEnabled(false)*/
-        listsToolbar.visibility = View.GONE
         val animation = AnimationUtils.loadAnimation(context,R.anim.to_start_anim)
         searchBar.animation = animation
         animation.start()
@@ -291,8 +246,6 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
             autoCompleteText.setText("")
             autoCompleteText.hideKeyboard()
             searchBar.visibility = View.GONE
-            //supportActionBar.show()
-            listsToolbar.visibility = View.VISIBLE
             listAdapter.isSearch = true
             model.dataLists.value?.let { it1 -> subscribeData(it1) }
         }
@@ -312,8 +265,23 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
     }
 
     override fun onStop() {
+        val fabHideAnim = AnimationUtils.loadAnimation(context,R.anim.fab_hide_anim)
+        fabHideAnim.startOffset = 200
+        binding.fabAddList.animation = fabHideAnim
+        fabHideAnim.start()
+        binding.fabAddList.hide()
         goneSearch()
         super.onStop()
+
+    }
+
+    override fun onResume() {
+        val fabShowAnim = AnimationUtils.loadAnimation(context,R.anim.fab_show_anim)
+        fabShowAnim.startOffset = 200
+        binding.fabAddList.animation = fabShowAnim
+        fabShowAnim.start()
+        binding.fabAddList.show()
+        super.onResume()
     }
 
 }
