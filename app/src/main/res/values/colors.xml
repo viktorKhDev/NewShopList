@@ -35,7 +35,9 @@
     <color name="card_clicked_night">#546e7a</color>
 
 
+
     <!-- other colors -->
+    <color name="icon_brand_color">#00ACC1</color>
     <color name="gray_item">#c7c7c7</color>
     <color name="background">#fafafa</color>
     <color name="back_list_item">#ffffff</color>

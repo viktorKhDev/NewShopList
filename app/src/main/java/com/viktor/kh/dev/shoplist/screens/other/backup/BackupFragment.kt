@@ -39,9 +39,8 @@ class BackupFragment :  Fragment(R.layout.backup_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)  {
         super.onViewCreated(view, savedInstanceState)
-        initActionbar()
-        initMenu()
         binding = BackupFragmentBinding.bind(view)
+        initActionbar()
         binding.saveFile.setOnClickListener(View.OnClickListener {
             createFileLauncher.launch("ShopList backup")
 
@@ -53,38 +52,21 @@ class BackupFragment :  Fragment(R.layout.backup_fragment) {
 
 
 
-    private fun initActionbar(){
-        val supportActionBar: androidx.appcompat.app.ActionBar?
-                = (activity as AppCompatActivity).supportActionBar
-        supportActionBar?.title = getString(R.string.backup)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-
-    }
-
-
-
-
-
-    private fun initMenu(){
-
-        val menuHost: MenuHost = requireActivity()
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                // Add menu items here
-            }
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                // Handle the menu selection
-                return when (menuItem.itemId) {
-                    android.R.id.home -> {activity!!.onBackPressed()
-                        true}
-                    else -> false
-                }
-
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    private fun initActionbar() = with(binding!!){
+        toolbar.apply {
+            title = getString(R.string.backup)
+            setNavigationOnClickListener(View.OnClickListener {
+                requireActivity().onBackPressed()
+            })
+        }
 
     }
+
+
+
+
+
+
 
 
 

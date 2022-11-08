@@ -46,23 +46,23 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id){
                 R.id.productListsFragment -> {
-                   openBottomMenuWithoutAnim()
+                   openBottomMenu()
                 }
                 R.id.recipeListsFragment -> {
-                 openBottomMenuWithoutAnim()
+                openBottomMenu()
                 }
                 R.id.otherFragment -> {
-                    openBottomMenuWithoutAnim()
+                    openBottomMenu()
                 }
                 R.id.recipeFragment ->{
                    closeBottomMenuWithoutAnim()
                 }
                 R.id.productsFragment ->{
-                   closeBottomMenuWithoutAnim()
+                   closeBottomMenu()
                 }
 
                 else -> {
-                  closeBottomMenuWithoutAnim()
+                  closeBottomMenu()
                 }
             }
         }
@@ -76,9 +76,18 @@ class MainActivity : AppCompatActivity() {
        if (bottomNavView.visibility == View.GONE){
            bottomNavView.visibility = View.VISIBLE
            val animation = AnimationUtils.loadAnimation(this,R.anim.bottom_menu_start)
+           animation.startOffset = 200
            bottomNavView.startAnimation(animation)
        }
    }
+
+
+    private fun closeBottomMenu(){
+        val animation = AnimationUtils.loadAnimation(this,R.anim.bottom_menu_clear)
+        animation.startOffset = 200
+        bottomNavView.startAnimation(animation)
+        bottomNavView.visibility = View.GONE
+    }
 
 
     private fun closeBottomMenuWithoutAnim(){

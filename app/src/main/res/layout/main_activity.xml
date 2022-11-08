@@ -30,7 +30,8 @@
         app:itemIconTint="@drawable/bottom_nav_views_item_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/activity_main_nav_menu"
-        app:itemTextAppearanceActive="?bottom_nav_activated_color"
+        app:itemTextColor="@drawable/bottom_nav_text_color"
+        app:itemTextAppearanceActive="@color/icon_brand_color"
         app:itemTextAppearanceInactive="@color/no_checked_item"/>
 
 

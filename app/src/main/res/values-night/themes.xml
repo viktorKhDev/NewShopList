@@ -18,6 +18,8 @@
 
 
 
+        <!-- for edit text. -->
+        <item name="editTextStyle">@style/myEditText</item>
 
 
         <!-- background for system bar. -->
@@ -42,6 +44,9 @@
 
         <!-- Dialog theme. -->
         <item name="dialog_clicked_item_color">@color/card_clicked_night</item>
+
+        <!-- For pref toolbar. -->
+        <item name="preferenceTheme">@style/AppTheme.PreferenceThemeOverlay</item>
 
     </style>
 </resources>

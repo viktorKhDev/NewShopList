@@ -39,6 +39,7 @@
             android:textColor="?android:textColor"
             app:layout_constraintTop_toTopOf="parent"
             android:textColorHint="@color/gray_item"
+            app:backgroundTint="@color/gray_item"
             android:layout_marginEnd="60dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/close_search"

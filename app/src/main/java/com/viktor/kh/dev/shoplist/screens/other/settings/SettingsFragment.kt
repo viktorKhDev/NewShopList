@@ -3,6 +3,7 @@ package com.viktor.kh.dev.shoplist.screens.other.settings
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -17,28 +18,31 @@ class SettingsFragment: PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences,rootKey)
-        initActionbar()
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initMenu()
+       val toolbar = view.findViewById<Toolbar>(R.id.pref_toolbar)
+        toolbar.apply {
+            title = getString(R.string.setting)
+            setNavigationOnClickListener(View.OnClickListener {
+                requireActivity().onBackPressed()
+            })
+        }
     }
 
-    private fun initActionbar(){
+   /* private fun initActionbar(){
         val supportActionBar: androidx.appcompat.app.ActionBar?
                 = (activity as AppCompatActivity).supportActionBar
         supportActionBar?.title = getString(R.string.setting)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-    }
+    }*/
 
 
 
-
-
-    private fun initMenu(){
+/* private fun initMenu(){
 
         val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(object : MenuProvider {
@@ -56,5 +60,5 @@ class SettingsFragment: PreferenceFragmentCompat() {
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
-    }
+    }*/
 }

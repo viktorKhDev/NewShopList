@@ -11,49 +11,37 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import com.viktor.kh.dev.shoplist.R
+import com.viktor.kh.dev.shoplist.databinding.SupportFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class InfoFragment: Fragment(R.layout.support_fragment) {
 
 
+
+   private var binding :SupportFragmentBinding? = null
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = SupportFragmentBinding.bind(view)
         initActionbar()
-        initMenu()
-    }
-
-
-
-
-    private fun initActionbar(){
-        val supportActionBar: androidx.appcompat.app.ActionBar?
-                = (activity as AppCompatActivity).supportActionBar
-        supportActionBar?.title = getString(R.string.support)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
     }
 
 
-    private fun initMenu(){
 
-        val menuHost: MenuHost = requireActivity()
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                // Add menu items here
 
-            }
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                // Handle the menu selection
-                return when (menuItem.itemId) {
-                    android.R.id.home -> {activity!!.onBackPressed()
-                        true}
-                    else -> false
-                }
-
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    private fun initActionbar() = with(binding!!){
+        toolbar.apply {
+            title = getString(R.string.support)
+            setNavigationOnClickListener(View.OnClickListener {
+                requireActivity().onBackPressed()
+            })
+        }
 
     }
+
+
 
 }

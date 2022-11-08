@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:state_checked="true" android:color = "?bottom_nav_activated_color"/>
+<item android:state_checked="true" android:color = "@color/icon_brand_color"/>
     <item android:state_checked="false" android:color = "?bottom_nav_no_activated_color"/>
+
 
 </selector>
