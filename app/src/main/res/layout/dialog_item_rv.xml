@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:elevation="2dp"
     android:layout_margin="4dp"
-    android:backgroundTint="?colorAccent"
+    android:backgroundTint="?colorPrimary"
     app:cardCornerRadius="10dp">
 
 
@@ -16,15 +16,15 @@
 
 
     <TextView
-        android:padding="5dp"
         android:id="@+id/text_recipe_in_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?colorAccent"
-        android:textColor="?android:textColor"
-        android:textSize="25sp"
+        android:background="?colorPrimary"
+        android:gravity="center"
+        android:padding="5dp"
         android:textAlignment="center"
-        android:gravity="center"/>
+        android:textColor="?android:textColor"
+        android:textSize="25sp" />
 
 </LinearLayout>
 

@@ -25,7 +25,7 @@ class RecipeProductsAdapter(
 
     var data : ArrayList<DataProduct> = ArrayList()
     private var positionClick = 0
-    private var currentItemColor  = Random.nextInt(0, colors.size-1)
+    private var currentItemColor  = ColorId.get()
     private var colorMap = mutableMapOf<DataProduct,Int>()
     var context: Context? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
@@ -110,9 +110,9 @@ class RecipeProductsAdapter(
             if (colorMap.contains(product)){
                 return ContextCompat.getColor(context!!, colorMap[product]!!)
             }else{
-                if (currentItemColor==colors.size-1) currentItemColor = 0 else currentItemColor++
-                colorMap.put(product, colors[currentItemColor])
-                return ContextCompat.getColor(context!!, colors[currentItemColor])
+                if (currentItemColor==getColors(context!!).size-1) currentItemColor = 0 else currentItemColor++
+                colorMap.put(product, getColors(context!!)[currentItemColor])
+                return ContextCompat.getColor(context!!, getColors(context!!)[currentItemColor])
 
             }
         }else{

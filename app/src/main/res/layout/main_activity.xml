@@ -31,8 +31,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/activity_main_nav_menu"
         app:itemTextColor="@drawable/bottom_nav_text_color"
-        app:itemTextAppearanceActive="@color/icon_brand_color"
-        app:itemTextAppearanceInactive="@color/no_checked_item"/>
+        app:itemTextAppearanceActive="?bottom_nav_activated_color"
+        app:itemTextAppearanceInactive="?bottom_nav_no_activated_color"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

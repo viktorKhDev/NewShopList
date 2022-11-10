@@ -147,7 +147,6 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
             dialog.setCancelable(true)
             dialog.show()
             text.showKeyboard()
-
             buttonCancel.setOnClickListener(View.OnClickListener {
                 dialog.dismiss()
                 text.hideKeyboard()

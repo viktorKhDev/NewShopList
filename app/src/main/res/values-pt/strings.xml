@@ -69,6 +69,9 @@
     <string name="color_items">Elementos coloridos</string>
     <string name="color_items_summary">Habilitando o preenchimento de cores dos itens da lista</string>
     <string name="list_is_empty">A lista está vazia</string>
+    <string name="element_position">Posição dos elementos</string>
+    <string name="color">Cor</string>
+
 
 
 

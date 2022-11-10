@@ -69,5 +69,8 @@
     <string name="color_items">Цветные элементы</string>
     <string name="color_items_summary">Включение заливки цветом элементов списка</string>
     <string name="list_is_empty">Список пустой</string>
+    <string name="element_position">Позиция элементов</string>
+    <string name="color">Цвет</string>
+
 
 </resources>

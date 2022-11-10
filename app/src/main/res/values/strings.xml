@@ -74,5 +74,7 @@
     <string name="color_items">Colored elements</string>
     <string name="color_items_summary">Enabling color filling of list items</string>
     <string name="list_is_empty">List is empty</string>
+    <string name="element_position">Element placement</string>
+    <string name="color">Color</string>
 
 </resources>

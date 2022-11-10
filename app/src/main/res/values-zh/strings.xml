@@ -69,5 +69,7 @@
     <string name="color_items">有色元素</string>
     <string name="color_items_summary">启用列表项的颜色填充</string>
     <string name="list_is_empty">列表为空</string>
+    <string name="element_position">元素的位置</string>
+    <string name="color">颜色</string>
 
 </resources>

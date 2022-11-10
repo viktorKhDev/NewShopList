@@ -26,7 +26,7 @@ class RecipesAdapter constructor(val onListClickListener: OnListClickListener,
     var context: Context? = null
     var deletePosition = 0
     var isSearch = false
-    private var currentItemColor  = Random.nextInt(0, colors.size-1)
+    private var currentItemColor  = ColorId.get()
     private var colorMap = mutableMapOf<Int,Int>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeHolder {
@@ -93,9 +93,9 @@ class RecipesAdapter constructor(val onListClickListener: OnListClickListener,
             if (colorMap.contains(listID)){
                 return ContextCompat.getColor(context!!, colorMap[listID]!!)
             }else{
-                if (currentItemColor==colors.size-1) currentItemColor = 0 else currentItemColor++
-                colorMap.put(listID, colors[currentItemColor])
-                return ContextCompat.getColor(context!!, colors[currentItemColor])
+                if (currentItemColor==getColors(context!!).size-1) currentItemColor = 0 else currentItemColor++
+                colorMap.put(listID, getColors(context!!)[currentItemColor])
+                return ContextCompat.getColor(context!!, getColors(context!!)[currentItemColor])
 
             }
         }else{

@@ -9,6 +9,7 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Build
+import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +22,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.random.Random
 
 
 val format = SimpleDateFormat("dd.MM.yyyy")
@@ -60,11 +62,7 @@ fun isNightTheme(context:Context):Boolean{
 }
 
 
-
-
-
-
-val colors = listOf(
+val colorsLight = listOf(
     R.color.card_blue,
     R.color.card_red,
     R.color.card_green,
@@ -74,13 +72,50 @@ val colors = listOf(
     R.color.card_yellow,
     R.color.card_dark_blue,
     R.color.card_pink
-
 )
+
+
+
+val colorsDark = listOf(
+    R.color.card_blue_dark,
+    R.color.card_red_dark,
+    R.color.card_green_dark,
+    R.color.card_cyan_dark,
+    R.color.card_orange_dark,
+    R.color.card_violet_dark,
+    R.color.card_yellow_dark,
+    R.color.card_dark_blue_dark,
+    R.color.card_pink_dark
+)
+
+fun getColors(context: Context):kotlin.collections.List<Int>{
+   if (isNightTheme(context)){
+       return colorsDark
+   }else{
+       return colorsLight
+   }
+}
+
 
 var currentCardColor = 0
 
 
 
+
+
+
+
+class ColorId{
+
+    companion object{
+        fun get():Int{
+            var number  = MyRandom.random(colorsLight.size-1)
+            return number
+        }
+    }
+
+
+}
 
 fun convertLongToTime(time: Long): String {
     val date = Date(time)

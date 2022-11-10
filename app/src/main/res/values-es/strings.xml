@@ -69,5 +69,7 @@
     <string name="color_items">Elementos coloreados</string>
     <string name="color_items_summary">Habilitación del relleno de color de los elementos de la lista</string>
     <string name="list_is_empty">La lista esta vacía</string>
+    <string name="element_position">Posición de los elementos</string>
+    <string name="color">Color</string>
 
 </resources>

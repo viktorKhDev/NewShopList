@@ -17,7 +17,7 @@
         <item name="android:textColor">@color/black</item>
         <item name="endIconTint">@color/black</item>
         <item name="height">50dp</item>
-        <item name="popupMenuBackground">@color/colorAccentDay</item>
+        <item name="popupMenuStyle">@style/MyToolbarStyle</item>
         <item name="background">@color/colorPrimaryDay</item>
     </style>
 
@@ -29,12 +29,12 @@
 
     <style name="MyDialog" parent="Theme.AppCompat.Dialog">
    <item name="android:windowAnimationStyle">@style/DialogAnimation</item>
+       <item name="colorPrimary">@color/colorPrimaryDark</item>
     </style>
 
 
     <style name="DialogAnimation">
         <item name="android:windowEnterAnimation">@anim/view_show_bottom</item>
-
     </style>
 
 
@@ -49,6 +49,15 @@
         <item name="background">?colorPrimary</item>
         <item name="android:textCursorDrawable">@drawable/cursor</item>
 
+    </style>
+
+
+
+    <style name="MyToolbarStyle" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:colorBackground">?colorPrimary</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="colorAccent">@color/colorPrimaryDay</item>
+        <item name="colorPrimary">@color/colorPrimaryDay</item>
     </style>
 
     <style name="Text_andika" />

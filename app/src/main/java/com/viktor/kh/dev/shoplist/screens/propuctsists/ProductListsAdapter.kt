@@ -25,7 +25,10 @@ constructor(val onListClickListener: OnListClickListener,
     var context: Context? = null
 
 
-    private var currentItemColor  = Random.nextInt(0,colors.size-1)
+    private var currentItemColor  = ColorId.get()
+
+
+
     var data : ArrayList<DataProductList> = ArrayList()
     var deletePosition = 0
     private var colorMap = mutableMapOf<Int,Int>()
@@ -34,6 +37,7 @@ constructor(val onListClickListener: OnListClickListener,
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductListHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_list,parent,false)
         return ProductListHolder(view)
+
 
     }
 
@@ -113,9 +117,10 @@ constructor(val onListClickListener: OnListClickListener,
            if (colorMap.contains(listID)){
                return ContextCompat.getColor(context!!, colorMap[listID]!!)
            }else{
-               if (currentItemColor==colors.size-1) currentItemColor = 0 else currentItemColor++
-               colorMap.put(listID, colors[currentItemColor])
-               return ContextCompat.getColor(context!!, colors[currentItemColor])
+              // Log.d("fix", "current color item =  $currentItemColor" )
+               if (currentItemColor==getColors(context!!).size-1) currentItemColor = 0 else currentItemColor++
+               colorMap.put(listID, getColors(context!!)[currentItemColor])
+               return ContextCompat.getColor(context!!, getColors(context!!)[currentItemColor])
 
            }
        }else{

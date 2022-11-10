@@ -9,6 +9,8 @@
     <attr name="dialog_no_clicked_item_color" format="reference|color"/>
 
 
+    <attr name="grad_app_bar_start" format="reference|color"/>
+    <attr name="grad_app_bar_end" format="reference|color"/>
 
 
 

@@ -69,5 +69,8 @@
     <string name="color_items">Elementi colorati</string>
     <string name="color_items_summary">Abilitazione del riempimento a colori delle voci dell\'elenco</string>
     <string name="list_is_empty">L\'elenco è vuoto</string>
+    <string name="element_position">Posizione degli elementi</string>
+    <string name="color">Colore</string>
+
 
 </resources>
