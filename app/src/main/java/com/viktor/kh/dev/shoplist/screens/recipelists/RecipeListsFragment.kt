@@ -104,7 +104,10 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
 
     private fun addRecipe(){
 
-        val dialog = context?.let { Dialog(it,R.style.MyDialog) }
+        var dialog = context?.let { Dialog(it,R.style.MyDialog) }
+        if (isNightTheme(context!!)){
+            dialog = context?.let { Dialog(it,R.style.MyDialogDark) }
+        }
         if(dialog!=null){
             dialog.setContentView(R.layout.dialog_add)
             val text = dialog.findViewById<EditText>(R.id.dialog_text)
@@ -135,7 +138,10 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
     }
     private fun setRecipe(position:Int){
         var dataList: DataRecipe = model.dataRecipes.value!![position]
-        val dialog = context?.let { Dialog(it,R.style.MyDialog) }
+        var dialog = context?.let { Dialog(it,R.style.MyDialog) }
+        if (isNightTheme(context!!)){
+            dialog = context?.let { Dialog(it,R.style.MyDialogDark) }
+        }
         if(dialog!=null){
             dialog.setContentView(R.layout.dialog_add)
             val text = dialog.findViewById<EditText>(R.id.dialog_text)
@@ -169,7 +175,10 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
 
 
     private fun deleteRecipe(position: Int){
-        val dialog = context?.let { Dialog(it,R.style.MyDialog) }
+        var dialog = context?.let { Dialog(it,R.style.MyDialog) }
+        if (isNightTheme(context!!)){
+            dialog = context?.let { Dialog(it,R.style.MyDialogDark) }
+        }
         if(dialog!=null) {
             dialog.setContentView(R.layout.dialog_add)
             val text = dialog.findViewById<EditText>(R.id.dialog_text)

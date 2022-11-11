@@ -5,44 +5,41 @@
 
     >
 
-    <PreferenceCategory
-        app:title="@string/element_position"
-        android:icon="@drawable/ic_baseline_sort_day_night_24"
-        >
 
-        <SwitchPreference
+    <SwitchPreference
             android:defaultValue="false"
             android:key="@string/sort_by_date"
             android:title="@string/sort_title"
             android:summary="@string/sort_summary"
             app:iconSpaceReserved="false"
             />
-    </PreferenceCategory>
+    <!--
 
-<PreferenceCategory
-    app:title="@string/color"
-    android:icon="@drawable/ic_baseline_palette_day_night_24">
-    <SwitchPreference
-        android:defaultValue="true"
-        android:key="@string/color_lists_pref"
-        android:title="@string/color_lists"
-        android:summary="@string/color_lists_summary"
-        app:iconSpaceReserved="false"
-        />
+ <PreferenceCategory
+     app:title="@string/color"
+     android:icon="@drawable/ic_baseline_palette_day_night_24">
+     <SwitchPreference
+         android:defaultValue="true"
+         android:key="@string/color_lists_pref"
+         android:title="@string/color_lists"
+         android:summary="@string/color_lists_summary"
+         app:iconSpaceReserved="false"
+         />
 
-    <SwitchPreference
-        android:defaultValue="true"
-        android:key="@string/color_items_pref"
-        android:title="@string/color_items"
-        android:summary="@string/color_items_summary"
-        app:iconSpaceReserved="false"
-        />
-</PreferenceCategory>
-
-
-
+     <SwitchPreference
+         android:defaultValue="true"
+         android:key="@string/color_items_pref"
+         android:title="@string/color_items"
+         android:summary="@string/color_items_summary"
+         app:iconSpaceReserved="false"
+         />
+ </PreferenceCategory>
+ -->
 
 
 
 
-</PreferenceScreen>
+
+
+
+ </PreferenceScreen>

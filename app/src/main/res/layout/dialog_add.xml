@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?android:colorPrimary"
     >
 
     <androidx.appcompat.widget.AppCompatEditText
@@ -19,7 +20,8 @@
         android:imeOptions="actionDone"
         android:inputType="text"
         android:minHeight="48dp"
-        android:textColor="@color/white"
+        android:textColor="?android:textColor"
+        android:textColorHint="@color/text_hint"
         android:textSize="20sp"
         tools:targetApi="o" />
 
@@ -29,6 +31,7 @@
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:layout_height="wrap_content"
+        android:background="?android:colorPrimary"
         >
 
         <androidx.appcompat.widget.AppCompatButton
@@ -58,7 +61,7 @@
             android:background="@drawable/button_bg"
             android:backgroundTint="?colorPrimary"
             android:text="@string/yes"
-            android:textColor="@color/white" />
+            android:textColor="?android:textColor" />
 
 
 

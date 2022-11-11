@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorPrimaryDark">
+    android:background="?android:colorPrimary">
 
     <RelativeLayout
         android:id="@+id/text_fields"
@@ -25,15 +25,16 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
+            android:textColorHint="@color/text_hint"
             android:autofillHints=""
-            android:background="@color/colorPrimaryDark"
+            android:background="?android:colorPrimary"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:gravity="center_horizontal"
             android:hint="@string/list_title"
             android:imeOptions="actionDone"
             android:inputType="text"
-            android:textColor="@color/white"
+            android:textColor="?android:textColor"
             android:textSize="20sp" />
 
         <androidx.appcompat.widget.AppCompatEditText
@@ -48,14 +49,15 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:autofillHints=""
-            android:background="@color/colorPrimaryDark"
+            android:background="?colorPrimary"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:gravity="center_horizontal"
             android:hint="@string/amount"
             android:imeOptions="actionDone"
             android:inputType="text"
-            android:textColor="@color/white"
+            android:textColorHint="@color/text_hint"
+            android:textColor="?android:textColor"
             android:textSize="20sp" />
     </RelativeLayout>
 
@@ -81,21 +83,24 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:layout_toStartOf="@id/btn_yes"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:backgroundTint="?colorPrimary"
             android:text="@string/no"
             android:textColor="@color/red" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_yes"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/button_bg"
+            android:backgroundTint="?colorPrimary"
             android:text="@string/yes"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/colorPrimaryDark"
-            style="?android:attr/buttonBarButtonStyle" />
+            android:textColor="?android:textColor" />
 
 
 

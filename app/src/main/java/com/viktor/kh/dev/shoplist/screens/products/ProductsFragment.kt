@@ -126,7 +126,10 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
     private fun setProduct(position: Int){
         //change name for product
         var dataProduct: DataProduct = model.productsList.value!![position]
-        val dialog = context?.let { Dialog(it,R.style.MyDialog) }
+        var dialog = context?.let { Dialog(it,R.style.MyDialog) }
+        if (isNightTheme(context!!)){
+            dialog = context?.let { Dialog(it,R.style.MyDialogDark) }
+        }
         if(dialog!=null){
             dialog.setContentView(R.layout.dialog_add)
             val text = dialog.findViewById<EditText>(R.id.dialog_text)
@@ -249,7 +252,10 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
 
 
     private fun cleanList(){
-        val dialog = context?.let { Dialog(it,R.style.MyDialog) }
+        var dialog = context?.let { Dialog(it,R.style.MyDialog) }
+        if (isNightTheme(context!!)){
+            dialog = context?.let { Dialog(it,R.style.MyDialogDark) }
+        }
         if(dialog!=null) {
             dialog.setContentView(R.layout.dialog_add)
             val text = dialog.findViewById<EditText>(R.id.dialog_text)

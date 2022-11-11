@@ -106,7 +106,10 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
     private fun addList(){
 
-        val dialog = context?.let { Dialog(it,R.style.MyDialog) }
+        var dialog = context?.let { Dialog(it,R.style.MyDialog) }
+        if (isNightTheme(context!!)){
+            dialog = context?.let { Dialog(it,R.style.MyDialogDark) }
+        }
         if(dialog!=null){
             dialog.setContentView(R.layout.dialog_add)
             val text = dialog.findViewById<EditText>(R.id.dialog_text)
@@ -137,7 +140,10 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
     }
     private fun setList(position:Int){
         var dataList: DataProductList = model.dataLists.value!![position]
-        val dialog = context?.let { Dialog(it,R.style.MyDialog) }
+        var dialog = context?.let { Dialog(it,R.style.MyDialog) }
+        if (isNightTheme(context!!)){
+            dialog = context?.let { Dialog(it,R.style.MyDialogDark) }
+        }
         if(dialog!=null){
             dialog.setContentView(R.layout.dialog_add)
             val text = dialog.findViewById<EditText>(R.id.dialog_text)
@@ -172,7 +178,10 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
 
     private fun deleteList(position: Int){
-        val dialog = context?.let { Dialog(it,R.style.MyDialog) }
+        var dialog = context?.let { Dialog(it,R.style.MyDialog) }
+        if (isNightTheme(context!!)){
+            dialog = context?.let { Dialog(it,R.style.MyDialogDark) }
+        }
         if(dialog!=null) {
             dialog.setContentView(R.layout.dialog_add)
             val text = dialog.findViewById<EditText>(R.id.dialog_text)

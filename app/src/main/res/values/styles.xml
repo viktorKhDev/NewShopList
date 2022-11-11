@@ -29,7 +29,12 @@
 
     <style name="MyDialog" parent="Theme.AppCompat.Dialog">
    <item name="android:windowAnimationStyle">@style/DialogAnimation</item>
-       <item name="colorPrimary">@color/colorPrimaryDark</item>
+       <item name="colorPrimary">@color/colorPrimaryDay</item>
+    </style>
+
+    <style name="MyDialogDark" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowAnimationStyle">@style/DialogAnimation</item>
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
     </style>
 
 
