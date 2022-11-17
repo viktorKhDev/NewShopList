@@ -91,6 +91,7 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
         }
         recipesAdapter = RecipesAdapter(onListClickListener, onSetClickListener, onDelClickListener)
         recipesAdapter.context = context
+        recipesAdapter.nightTheme = isNightTheme(context!!)
         rv.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = recipesAdapter

@@ -48,16 +48,17 @@
                 android:layout_marginBottom="8dp"
                 android:layout_gravity="bottom"
                 >
+
                 <TextView
                     android:id="@+id/text_list_date"
+                    style="@style/Text_andika"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:inputType="date"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:textColor="@color/gray"
-                    style="@style/Text_andika"
-                    android:text="yyyy-mm-dd HH:mm">
+                    android:text="yyyy-mm-dd HH:mm"
+                    android:textColor="@color/gray">
 
                 </TextView>
 

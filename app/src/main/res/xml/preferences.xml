@@ -5,17 +5,21 @@
 
     >
 
-
-    <SwitchPreference
+    <PreferenceCategory
+        app:title="@string/element_position"
+        android:icon="@drawable/ic_baseline_sort_day_night_24">
+        <SwitchPreference
             android:defaultValue="false"
             android:key="@string/sort_by_date"
             android:title="@string/sort_title"
             android:summary="@string/sort_summary"
             app:iconSpaceReserved="false"
             />
-    <!--
+    </PreferenceCategory>
 
- <PreferenceCategory
+
+
+    <PreferenceCategory
      app:title="@string/color"
      android:icon="@drawable/ic_baseline_palette_day_night_24">
      <SwitchPreference
@@ -34,7 +38,7 @@
          app:iconSpaceReserved="false"
          />
  </PreferenceCategory>
- -->
+
 
 
 

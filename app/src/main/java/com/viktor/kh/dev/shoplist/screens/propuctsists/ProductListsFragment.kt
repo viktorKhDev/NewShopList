@@ -91,6 +91,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
        }
        listAdapter = ProductListsAdapter(onListClickListener, onSetClickListener, onDelClickListener)
        listAdapter.context = context
+       listAdapter.nightTheme = isNightTheme(context!!)
        rv.apply {
            layoutManager = LinearLayoutManager(context)
            adapter = listAdapter

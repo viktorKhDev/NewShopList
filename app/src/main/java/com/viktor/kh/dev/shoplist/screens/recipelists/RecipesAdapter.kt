@@ -1,6 +1,7 @@
 package com.viktor.kh.dev.shoplist.screens.recipelists
 
 import android.content.Context
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +25,7 @@ class RecipesAdapter constructor(val onListClickListener: OnListClickListener,
 
     var data : ArrayList<DataRecipe> = ArrayList()
     var context: Context? = null
+    var nightTheme: Boolean = false
     var deletePosition = 0
     var isSearch = false
     private var currentItemColor  = ColorId.get()
@@ -73,6 +75,12 @@ class RecipesAdapter constructor(val onListClickListener: OnListClickListener,
             val date  = data.date?.let { convertLongToTime(it) }.toString()
             textListDate.text = date
             textListReady.visibility = View.GONE
+            if (nightTheme&&!colorLists){
+                listName.setTextColor(Color.WHITE)
+                textListDate.setTextColor(Color.WHITE)
+                editImage.setImageResource(R.drawable.ic_baseline_edit_white_24)
+                deleteImage.setImageResource(R.drawable.ic_baseline_delete_white_24)
+            }
             itemView.setOnClickListener(View.OnClickListener {
                 currentCardColor = cardColor(data.id)
                 onListClickListener.onListClick(layoutPosition)

@@ -20,6 +20,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -211,6 +212,12 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         toolbar.setBackgroundColor(currentCardColor)
         toolbar.title = listName
         toolbar.inflateMenu(R.menu.options_menu_in_list)
+        if (isNightTheme(context!!)&&!colorLists){
+            toolbar.apply {
+                setNavigationIcon(R.drawable.ic_baseline_arrow_white_24)
+                setTitleTextColor(Color.WHITE)
+            }
+        }
         toolbar.setOnMenuItemClickListener { item ->
             when(item.itemId){
 

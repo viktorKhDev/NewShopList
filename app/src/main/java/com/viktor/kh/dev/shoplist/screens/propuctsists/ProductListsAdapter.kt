@@ -1,6 +1,8 @@
 package com.viktor.kh.dev.shoplist.screens.propuctsists
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -23,7 +25,7 @@ constructor(val onListClickListener: OnListClickListener,
 
 
     var context: Context? = null
-
+    var nightTheme: Boolean = false
 
     private var currentItemColor  = ColorId.get()
 
@@ -33,6 +35,7 @@ constructor(val onListClickListener: OnListClickListener,
     var deletePosition = 0
     private var colorMap = mutableMapOf<Int,Int>()
     var isSearch = false
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductListHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_list,parent,false)
@@ -83,6 +86,13 @@ constructor(val onListClickListener: OnListClickListener,
             val date  = data.date?.let { convertLongToTime(it) }.toString()
             textListDate.text = date
             textListReady.text = data.products?.let { findReady(it) }
+            if (nightTheme&&!colorLists){
+                listName.setTextColor(Color.WHITE)
+                textListDate.setTextColor(Color.WHITE)
+                textListReady.setTextColor(Color.WHITE)
+                editImage.setImageResource(R.drawable.ic_baseline_edit_white_24)
+                deleteImage.setImageResource(R.drawable.ic_baseline_delete_white_24)
+            }
             itemView.setOnClickListener(View.OnClickListener {
                 currentCardColor = cardColor(data.id)
                 onListClickListener.onListClick(layoutPosition)
