@@ -4,32 +4,22 @@ package com.viktor.kh.dev.shoplist.screens.products
 
 
 
-import android.app.ActionBar
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toDrawable
-import androidx.core.view.MenuHost
-import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -206,21 +196,28 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
 
 
     private fun initActionbar() = with(binding){
-      /*  val supportActionBar = (activity as AppCompatActivity).supportActionBar!!
-        supportActionBar.hide()*/
         val listName = arguments?.getString(LIST_NAME)
-        toolbar.setBackgroundColor(currentCardColor)
-        toolbar.title = listName
-        toolbar.inflateMenu(R.menu.options_menu_in_list)
+        if(colorLists) toolbar.setBackgroundColor(currentCardColor)
+        toolbar.apply {
+            title = listName
+            inflateMenu(R.menu.options_menu_in_list)
+            setNavigationIcon(R.drawable.ic_baseline_arrow_black_24)
+            setTitleTextColor(Color.BLACK)
+            val itemShare = menu.findItem(R.id.share_item)
+            itemShare.icon = ContextCompat.getDrawable(context!!,R.drawable.ic_black_share_24)
+
+        }
         if (isNightTheme(context!!)&&!colorLists){
             toolbar.apply {
                 setNavigationIcon(R.drawable.ic_baseline_arrow_white_24)
                 setTitleTextColor(Color.WHITE)
+                val itemShare = menu.findItem(R.id.share_item)
+                itemShare.icon = ContextCompat.getDrawable(context!!,R.drawable.ic_day_night_share_24)
+                overflowIcon = ContextCompat.getDrawable(context,R.drawable.ic_black_share_24)
             }
         }
         toolbar.setOnMenuItemClickListener { item ->
             when(item.itemId){
-
                 android.R.id.home -> {activity!!.onBackPressed()
                     true}
                 R.id.clean ->{ cleanList()
@@ -239,12 +236,22 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         })
 
 
+
+
         if (colorLists){
             activity!!.window.statusBarColor = currentCardColor
             activity!!.window.navigationBarColor = currentCardColor
             activity!!.window.insetsController!!.setSystemBarsAppearance(
                 WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
                 WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
+        }else{
+            if (isNightTheme(context!!)){
+                activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
+                activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
+            }else{
+                activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
+                activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
+            }
         }
 
 
