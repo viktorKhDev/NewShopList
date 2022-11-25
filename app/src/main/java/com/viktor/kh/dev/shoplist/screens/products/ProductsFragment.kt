@@ -213,7 +213,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
                 setTitleTextColor(Color.WHITE)
                 val itemShare = menu.findItem(R.id.share_item)
                 itemShare.icon = ContextCompat.getDrawable(context!!,R.drawable.ic_day_night_share_24)
-                overflowIcon = ContextCompat.getDrawable(context,R.drawable.ic_black_share_24)
+                overflowIcon = ContextCompat.getDrawable(context,R.drawable.ic_baseline_more_vert_white_24)
             }
         }
         toolbar.setOnMenuItemClickListener { item ->

@@ -188,6 +188,8 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
                 backAcceptProd.setColor(currentCardColor)
 
             }
+        }else{
+            
         }
 
     }
