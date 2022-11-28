@@ -176,6 +176,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
         }
         productsAdapter = ProductsAdapter(onClickListener,onLongClickListener)
         productsAdapter.context = context
+        productsAdapter.nightTheme = isNightTheme(context!!)
         rv.apply {
             adapter = productsAdapter
             layoutManager = LinearLayoutManager(context)

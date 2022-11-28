@@ -1,6 +1,7 @@
 package com.viktor.kh.dev.shoplist.screens.products
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +24,7 @@ class ProductsAdapter(
 
     var data : ArrayList<DataProduct> = ArrayList()
     private var positionClick = 0
+    var nightTheme: Boolean = false
     private var currentItemColor  = ColorId.get()
     private var colorMap = mutableMapOf<DataProduct,Int>()
     var context: Context? = null
@@ -117,11 +119,20 @@ class ProductsAdapter(
             if (itemViewType == 1) {
                 text.paintFlags = text.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 text.text = "${product.name} ${product.amount}"
+                if (nightTheme){
+                    text.setTextColor(Color.WHITE)
+                }
             } else {
                 val card = itemView.findViewById<CardView>(R.id.cl)
-                card.setCardBackgroundColor(cardColor(product))
+                if (colorItems) card.setCardBackgroundColor(cardColor(product))
                 text.text = "${product.name} ${product.amount}"
             }
+
+            if (nightTheme&&!colorLists){
+                text.setTextColor(Color.WHITE)
+            }
+
+
 
             itemView.setOnClickListener(View.OnClickListener {
                 positionClick = layoutPosition
@@ -147,8 +158,7 @@ class ProductsAdapter(
 
 
     private fun cardColor(product: DataProduct):Int{
-        if (colorItems){
-            if (colorMap.contains(product)){
+        if (colorMap.contains(product)){
                 return ContextCompat.getColor(context!!, colorMap[product]!!)
             }else{
                 if (currentItemColor== getColors(context!!).size-1) currentItemColor = 0 else currentItemColor++
@@ -156,13 +166,6 @@ class ProductsAdapter(
                 return ContextCompat.getColor(context!!, getColors(context!!)[currentItemColor])
 
             }
-        }else{
-            if (isNightTheme(context!!)){
-                return  ContextCompat.getColor(context!!, R.color.colorPrimary)
-            }else{
-                return  ContextCompat.getColor(context!!, R.color.colorPrimaryDay)
-            }
-        }
 
 
     }

@@ -43,7 +43,7 @@
         <!-- Customize your theme here. -->
 
         <!-- Dialog theme. -->
-        <item name="dialog_clicked_item_color">@color/colorPrimaryDark</item>
+        <item name="dialog_clicked_item_color">@color/card_clicked_night</item>
 
         <!-- For pref toolbar. -->
         <item name="preferenceTheme">@style/AppTheme.PreferenceThemeOverlay</item>
@@ -52,6 +52,10 @@
         <!-- For pref collapsing appbar. -->
         <item name="grad_app_bar_start">@color/colorPrimaryDark</item>
         <item name="grad_app_bar_end">@color/colorPrimary</item>
+
+        <!-- For items. -->
+        <item name="item_color">@color/colorPrimaryDark</item>
+        <item name="item_ready_color">@color/colorPrimary</item>
 
     </style>
 </resources>

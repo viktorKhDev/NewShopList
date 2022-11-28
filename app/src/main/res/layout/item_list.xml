@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:elevation="@dimen/cardview_default_radius"
     android:layout_margin="4dp"
-    app:cardCornerRadius="5dp">
+    app:cardCornerRadius="5dp"
+    app:cardBackgroundColor="?colorPrimary">
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -22,7 +23,6 @@
 
             <TextView
                 android:id="@+id/listName"
-                style="@style/Text_andika"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
@@ -35,7 +35,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:text="@string/text_view"
-                android:textColor="@android:color/background_dark"
+                android:textColor="@android:color/black"
                 android:textColorHint="@android:color/black"
                 android:textColorLink="@color/colorPrimary"
                 android:textSize="25sp"
@@ -54,10 +54,8 @@
                     style="@style/Text_andika"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:inputType="date"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:text="yyyy-mm-dd HH:mm"
                     android:textColor="@color/gray">
 
                 </TextView>
@@ -67,7 +65,6 @@
                     android:layout_marginStart="20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10/10"
                     android:lines="1"
                     android:textColor="@color/gray"
                     style="@style/Text_andika">

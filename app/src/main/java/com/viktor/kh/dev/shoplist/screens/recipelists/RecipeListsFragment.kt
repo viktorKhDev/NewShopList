@@ -2,6 +2,7 @@ package com.viktor.kh.dev.shoplist.screens.recipelists
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -43,9 +44,9 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        context?.let { loadSetting(it) }
         binding = RecipesFragmentBinding.bind(view)
         rv = binding.listsIncludeInRecipes.lists
-
         initList()
         model.init()
         initActionbar()
@@ -98,8 +99,6 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
         }
 
         rv.adapter!!.notifyDataSetChanged()
-
-
 
     }
 
@@ -274,6 +273,7 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
         fabHideAnim.start()
         binding.listsIncludeInRecipes.fabAddList.hide()
         goneSearch()
+        Log.d("fix", "(onStop) colorLists in recipesFragment!! =  $colorLists" )
         super.onStop()
     }
 
@@ -283,6 +283,7 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
         binding.listsIncludeInRecipes.fabAddList.animation = fabHideAnim
         fabHideAnim.start()
         binding.listsIncludeInRecipes.fabAddList.show()
+        Log.d("fix", "(onResume) colorLists in recipesFragment!! =  $colorLists" )
         super.onResume()
     }
 }

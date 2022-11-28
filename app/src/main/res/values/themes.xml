@@ -25,8 +25,6 @@
         <!-- background for system bar. -->
         <item name="android:navigationBarColor">@color/colorPrimaryDay</item>
 
-
-
         <!-- Secondary brand color. -->
         <item name="android:textColorSecondary">@color/text_hint</item>
         <item name="colorSecondary">@color/colorAccentDay</item>
@@ -43,16 +41,20 @@
         <!-- Customize your theme here. -->
 
         <!-- Dialog theme. -->
-        <item name="dialog_clicked_item_color">@color/text_hint</item>
+        <item name="dialog_clicked_item_color">@color/card_clicked_day</item>
 
 
         <!-- For pref toolbar. -->
         <item name="preferenceTheme">@style/AppTheme.PreferenceThemeOverlay</item>
 
         <!-- For pref collapsing appbar. -->
-        <item name="grad_app_bar_start">@color/text_hint</item>
+        <item name="grad_app_bar_start">@color/card_clicked_day</item>
         <item name="grad_app_bar_end">@color/colorPrimaryDay</item>
 
+
+        <!-- For items. -->
+       <item name="item_color">@color/card_clicked_day</item>
+        <item name="item_ready_color">@color/white</item>
 
     </style>
 </resources>

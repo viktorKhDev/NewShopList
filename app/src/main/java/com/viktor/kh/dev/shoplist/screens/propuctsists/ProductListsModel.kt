@@ -1,18 +1,18 @@
 package com.viktor.kh.dev.shoplist.screens.propuctsists
 
 import android.app.Application
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
+import androidx.preference.PreferenceManager
 import com.viktor.kh.dev.shoplist.R
-import com.viktor.kh.dev.shoplist.utils.currentTimeToLong
-import com.viktor.kh.dev.shoplist.utils.listId
-import com.viktor.kh.dev.shoplist.utils.LIST_NAME
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 import com.viktor.kh.dev.shoplist.repository.db.room.ProductListsDao
+import com.viktor.kh.dev.shoplist.utils.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -41,14 +41,13 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
         initAnim = true
         getLists()
 
+
     }
 
     private fun getLists(){
         // get all list from DB
        CoroutineScope(Dispatchers.IO).launch {
      dataLists.postValue(productListsDao.getAll())
-           Log.d("MyLog", dataLists.value?.size.toString())
-           Log.d("MyLog", "getLists() in model")
        }
 
     }

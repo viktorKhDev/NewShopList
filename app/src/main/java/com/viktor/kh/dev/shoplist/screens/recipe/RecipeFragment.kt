@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.View.OnFocusChangeListener
+import android.view.WindowInsetsController
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
@@ -23,6 +24,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.RecipeFragmentBinding
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
@@ -44,8 +46,9 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        context?.let { loadSetting(it) }
         binding = RecipeFragmentBinding.bind(view)
-       val  listId = arguments?.getInt(listId)!!
+        val  listId = arguments?.getInt(listId)!!
        model.init(listId)
        initActionbar()
        initClicks()
@@ -198,26 +201,75 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
 
     private fun initActionbar() = with(binding){
-     /*   val supportActionBar = (activity as AppCompatActivity).supportActionBar!!
-        supportActionBar.hide()*/
+
         val listName = arguments?.getString(LIST_NAME)
         collapsingToolbar.title = listName
         recipeToolbar.inflateMenu(R.menu.options_menu_in_recipe)
-        
-        Log.d("fix","currentCardColor = ${currentCardColor.toString()}" )
+        recipeToolbar. setNavigationIcon(R.drawable.ic_baseline_arrow_black_24)
 
             if (colorLists){
-                if (currentCardColor!=0) {
-                    activity!!.window.statusBarColor = currentCardColor
-                    activity!!.window.navigationBarColor = currentCardColor
-                    collapsingToolbar.setBackgroundColor(currentCardColor)
-                    recipeToolbar.setBackgroundColor(currentCardColor)
-                    recipeCoordinatorLayout.setBackgroundColor(currentCardColor)
+                activity!!.window.statusBarColor = currentCardColor
+                activity!!.window.navigationBarColor = currentCardColor
+                activity!!.window.insetsController!!.setSystemBarsAppearance(
+                        WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+                        WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
+                collapsingToolbar.setBackgroundColor(currentCardColor)
+                recipeToolbar.setBackgroundColor(currentCardColor)
+                recipeCoordinatorLayout.setBackgroundColor(currentCardColor)
+
+            }else{
+                if (isNightTheme(context!!)){
+                    activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
+                    activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
+                }else{
+                    activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
+                    activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
                 }
             }
 
+
+        if (isNightTheme(context!!)&&!colorLists){
+            collapsingToolbar.setCollapsedTitleTextColor(Color.WHITE)
+            collapsingToolbar.setExpandedTitleColor(Color.WHITE)
+            recipeToolbar.apply {
+                setNavigationIcon(R.drawable.ic_baseline_arrow_white_24)
+                setTitleTextColor(Color.WHITE)
+                val itemShare = menu.findItem(R.id.share_item)
+                itemShare.icon = ContextCompat.getDrawable(context!!,R.drawable.ic_day_night_share_24)
+                overflowIcon = ContextCompat.getDrawable(context,R.drawable.ic_baseline_more_vert_white_24)
+            }
+        }else{
             collapsingToolbar.setCollapsedTitleTextColor(Color.BLACK)
             collapsingToolbar.setExpandedTitleColor(Color.BLACK)
+        }
+
+
+        if (!colorLists){
+            appbar.addOnOffsetChangedListener(OnOffsetChangedListener { appBarLayout, verticalOffset ->
+                if (Math.abs(verticalOffset) - appBarLayout.totalScrollRange == 0) {
+                    //  Collapsed
+
+
+                    if (isNightTheme(context!!)){
+                        activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDark)
+                        appbar.setBackgroundColor(ContextCompat.getColor(context!!,R.color.colorPrimaryDark))
+                    }else{
+                        activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.card_clicked_day)
+                        appbar.setBackgroundColor(ContextCompat.getColor(context!!,R.color.card_clicked_day))
+                    }
+
+                } else {
+                    //Expanded
+                    if (isNightTheme(context!!)){
+                        activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
+                        appbar.background = ContextCompat.getDrawable(context!!,R.drawable.gradient_dor_colapsing_apbar)
+                    }else{
+                        activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
+                        appbar.background = ContextCompat.getDrawable(context!!,R.drawable.gradient_dor_colapsing_apbar)
+                    }
+                }
+            })
+        }
 
 
         recipeToolbar.setOnMenuItemClickListener { item ->
@@ -242,6 +294,10 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         recipeToolbar.setNavigationOnClickListener(View.OnClickListener {
             activity!!.onBackPressed()
         })
+
+
+
+
 
 
     }

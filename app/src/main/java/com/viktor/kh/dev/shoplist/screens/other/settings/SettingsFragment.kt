@@ -32,33 +32,5 @@ class SettingsFragment: PreferenceFragmentCompat() {
         }
     }
 
-   /* private fun initActionbar(){
-        val supportActionBar: androidx.appcompat.app.ActionBar?
-                = (activity as AppCompatActivity).supportActionBar
-        supportActionBar?.title = getString(R.string.setting)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-    }*/
-
-
-
-/* private fun initMenu(){
-
-        val menuHost: MenuHost = requireActivity()
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                // Add menu items here
-            }
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                // Handle the menu selection
-                return when (menuItem.itemId) {
-                    android.R.id.home -> {activity!!.onBackPressed()
-                        true}
-                    else -> false
-                }
-
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
-
-    }*/
 }

@@ -70,7 +70,10 @@ class RecipesAdapter constructor(val onListClickListener: OnListClickListener,
 
         private val binding = ItemListBinding.bind(itemView)
         fun bind(data : DataRecipe) = with(binding){
-            cl.setCardBackgroundColor(cardColor(data.id))
+            if (colorLists){
+                cl.setCardBackgroundColor(cardColor(data.id))
+                currentCardColor = cardColor(data.id)
+            }
             listName.text = data.name
             val date  = data.date?.let { convertLongToTime(it) }.toString()
             textListDate.text = date
@@ -82,7 +85,9 @@ class RecipesAdapter constructor(val onListClickListener: OnListClickListener,
                 deleteImage.setImageResource(R.drawable.ic_baseline_delete_white_24)
             }
             itemView.setOnClickListener(View.OnClickListener {
-                currentCardColor = cardColor(data.id)
+                if (colorLists){
+                    currentCardColor = cardColor(data.id)
+                }
                 onListClickListener.onListClick(layoutPosition)
             })
             editImage.setOnClickListener(View.OnClickListener {
@@ -97,8 +102,7 @@ class RecipesAdapter constructor(val onListClickListener: OnListClickListener,
     }
 
     private fun cardColor(listID :Int):Int{
-        if (colorLists){
-            if (colorMap.contains(listID)){
+        if (colorMap.contains(listID)){
                 return ContextCompat.getColor(context!!, colorMap[listID]!!)
             }else{
                 if (currentItemColor==getColors(context!!).size-1) currentItemColor = 0 else currentItemColor++
@@ -106,15 +110,6 @@ class RecipesAdapter constructor(val onListClickListener: OnListClickListener,
                 return ContextCompat.getColor(context!!, getColors(context!!)[currentItemColor])
 
             }
-        }else{
-            if (isNightTheme(context!!)){
-                return  ContextCompat.getColor(context!!, R.color.colorPrimary)
-            }else{
-                return  ContextCompat.getColor(context!!, R.color.colorPrimaryDay)
-            }
-        }
-
-
     }
 
     interface  OnDelClickListener{

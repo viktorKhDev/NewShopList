@@ -2,6 +2,7 @@ package com.viktor.kh.dev.shoplist.screens.propuctsists
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -45,8 +46,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
        context?.let { loadSetting(it) }
         binding = FragmentListsBinding.bind(view)
         rv = binding.lists
-            //val anim = AnimationUtils.loadLayoutAnimation(context,R.anim.bottom_layout_anim)
-         initList()
+        initList()
          model.init()
          initActionbar()
         binding.fabAddList.setOnClickListener(View.OnClickListener {

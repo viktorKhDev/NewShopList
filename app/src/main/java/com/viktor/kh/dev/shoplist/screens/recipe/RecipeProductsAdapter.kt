@@ -84,9 +84,8 @@ class RecipeProductsAdapter(
         fun bind(product: DataProduct){
             var text = itemView.findViewById<TextView>(R.id.productName)
             var card = itemView.findViewById<CardView>(R.id.cl)
-            card.setCardBackgroundColor(cardColor(product))
-                text.text = "${product.name} ${product.amount}"
-
+            if (colorItems)  card.setCardBackgroundColor(cardColor(product))
+            text.text = "${product.name} ${product.amount}"
             itemView.setOnClickListener(View.OnClickListener {
                 positionClick = layoutPosition
                 onProductClickListener.onProductClick(layoutPosition)
@@ -106,8 +105,7 @@ class RecipeProductsAdapter(
 
 
     private fun cardColor(product: DataProduct):Int{
-        if (colorItems){
-            if (colorMap.contains(product)){
+        if (colorMap.contains(product)){
                 return ContextCompat.getColor(context!!, colorMap[product]!!)
             }else{
                 if (currentItemColor==getColors(context!!).size-1) currentItemColor = 0 else currentItemColor++
@@ -115,14 +113,6 @@ class RecipeProductsAdapter(
                 return ContextCompat.getColor(context!!, getColors(context!!)[currentItemColor])
 
             }
-        }else{
-            if (isNightTheme(context!!)){
-                return  ContextCompat.getColor(context!!, R.color.colorPrimary)
-            }else{
-                return  ContextCompat.getColor(context!!, R.color.colorPrimaryDay)
-            }
-        }
-
 
     }
 

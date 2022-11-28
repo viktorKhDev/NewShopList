@@ -4,7 +4,7 @@
     android:id="@+id/cl"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/gray_item"
+    app:cardBackgroundColor="?item_ready_color"
     app:cardCornerRadius="10dp"
     android:elevation="5dp"
     android:layout_margin="8dp">
@@ -26,7 +26,7 @@
         style="@style/Text_andika"
         android:textColor="@android:color/background_dark"
         android:textColorHint="@android:color/black"
-        android:textColorLink="@color/colorPrimary"
+        android:textColorLink="?item_ready_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
