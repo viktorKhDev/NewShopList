@@ -156,6 +156,7 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
         productsAdapter = RecipeProductsAdapter(onClickListener,onLongClickListener)
         productsAdapter.context = context
+        productsAdapter.nightTheme = isNightTheme(context!!)
         rv.apply {
             adapter = productsAdapter
             layoutManager = LinearLayoutManager(context)
@@ -221,9 +222,11 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
                 if (isNightTheme(context!!)){
                     activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
                     activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
+                    recipeCoordinatorLayout.setBackgroundColor(ContextCompat.getColor(context!!,R.color.colorPrimaryDark))
                 }else{
                     activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
                     activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
+                    recipeCoordinatorLayout.setBackgroundColor(ContextCompat.getColor(context!!,R.color.card_clicked_day))
                 }
             }
 
@@ -248,8 +251,6 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
             appbar.addOnOffsetChangedListener(OnOffsetChangedListener { appBarLayout, verticalOffset ->
                 if (Math.abs(verticalOffset) - appBarLayout.totalScrollRange == 0) {
                     //  Collapsed
-
-
                     if (isNightTheme(context!!)){
                         activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDark)
                         appbar.setBackgroundColor(ContextCompat.getColor(context!!,R.color.colorPrimaryDark))
@@ -413,6 +414,8 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
             dialog.setContentView(R.layout.dialog_add)
             val text = dialog.findViewById<EditText>(R.id.dialog_text)
             text.setText(R.string.clean_products_list)
+            text.isFocusable = false
+            text.isClickable = false
             val buttonYes = dialog.findViewById<Button>(R.id.btn_yes)
             val buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
             dialog.setCancelable(true)

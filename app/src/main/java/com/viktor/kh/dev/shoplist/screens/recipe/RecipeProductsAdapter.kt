@@ -2,6 +2,7 @@ package com.viktor.kh.dev.shoplist.screens.recipe
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +29,8 @@ class RecipeProductsAdapter(
     private var currentItemColor  = ColorId.get()
     private var colorMap = mutableMapOf<DataProduct,Int>()
     var context: Context? = null
+    var nightTheme: Boolean = false
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
 
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item,parent,false)
@@ -86,6 +89,9 @@ class RecipeProductsAdapter(
             var card = itemView.findViewById<CardView>(R.id.cl)
             if (colorItems)  card.setCardBackgroundColor(cardColor(product))
             text.text = "${product.name} ${product.amount}"
+            if (nightTheme&&!colorItems){
+                text.setTextColor(Color.WHITE)
+            }
             itemView.setOnClickListener(View.OnClickListener {
                 positionClick = layoutPosition
                 onProductClickListener.onProductClick(layoutPosition)

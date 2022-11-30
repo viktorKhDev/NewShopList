@@ -2,6 +2,7 @@ package com.viktor.kh.dev.shoplist.screens.propuctsists
 
 import android.app.Dialog
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
@@ -187,6 +188,9 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
             dialog.setContentView(R.layout.dialog_add)
             val text = dialog.findViewById<EditText>(R.id.dialog_text)
             text.setText(R.string.delete_list_q)
+            text.isFocusable = false
+            text.isClickable = false
+
             val buttonYes = dialog.findViewById<Button>(R.id.btn_yes)
             val buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
             dialog.setCancelable(true)

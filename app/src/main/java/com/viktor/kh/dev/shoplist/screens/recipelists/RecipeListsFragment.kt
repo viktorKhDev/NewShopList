@@ -183,6 +183,8 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
             dialog.setContentView(R.layout.dialog_add)
             val text = dialog.findViewById<EditText>(R.id.dialog_text)
             text.setText(R.string.delete_recipe_q)
+            text.isFocusable = false
+            text.isClickable = false
             val buttonYes = dialog.findViewById<Button>(R.id.btn_yes)
             val buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
             dialog.setCancelable(true)

@@ -128,7 +128,7 @@ class ProductsAdapter(
                 text.text = "${product.name} ${product.amount}"
             }
 
-            if (nightTheme&&!colorLists){
+            if (nightTheme&&!colorItems){
                 text.setTextColor(Color.WHITE)
             }
 
