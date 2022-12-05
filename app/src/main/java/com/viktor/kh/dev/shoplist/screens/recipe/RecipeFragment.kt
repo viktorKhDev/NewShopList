@@ -42,6 +42,7 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
     private lateinit var productsAdapter: RecipeProductsAdapter
     private  lateinit var itemTouchHelper: ItemTouchHelper
     private lateinit var itemTouchCallback: ItemTouchCallback
+    private val alphaColor = Color.argb(50,0,0,0)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -81,14 +82,6 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
     private fun initClicks() = with(binding){
 
-        blackoutFrameImgTop.setOnClickListener(View.OnClickListener {
-            hideRecipeProducts()
-
-        })
-        blackoutFrameImgBottom.setOnClickListener(View.OnClickListener {
-            hideRecipeProducts()
-
-        })
 
         btnCloseProducts.setOnClickListener(View.OnClickListener {
             hideRecipeProducts()
@@ -117,14 +110,16 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
         productsFab.setOnClickListener(View.OnClickListener {
             recipeProductList.visibility = View.VISIBLE
-            val alphaColor = Color.argb(50,0,0,0)
-            recipeProductList.setBackgroundColor(alphaColor)
-            val anim = AnimationUtils.loadAnimation(context,R.anim.scale_show_center)
+            val anim = AnimationUtils.loadAnimation(context,R.anim.show_products_in_recipe_anim)
             rv.startAnimation(anim)
             recipeText.hideKeyboard()
             val buttonAnim = AnimationUtils.loadAnimation(context,R.anim.alpha_anim)
+            buttonAnim.startOffset = 300
             btnCloseProducts.startAnimation(buttonAnim)
             btnCloseProducts.visibility  = View.VISIBLE
+            addProductFab.startAnimation(buttonAnim)
+
+
         })
 
 
