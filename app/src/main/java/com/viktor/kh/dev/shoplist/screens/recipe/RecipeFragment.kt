@@ -110,7 +110,7 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
         productsFab.setOnClickListener(View.OnClickListener {
             recipeProductList.visibility = View.VISIBLE
-            val anim = AnimationUtils.loadAnimation(context,R.anim.show_products_in_recipe_anim)
+            val anim = AnimationUtils.loadAnimation(context,R.anim.scale_show_center)
             rv.startAnimation(anim)
             recipeText.hideKeyboard()
             val buttonAnim = AnimationUtils.loadAnimation(context,R.anim.alpha_anim)

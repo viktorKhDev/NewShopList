@@ -3,10 +3,7 @@ package com.viktor.kh.dev.shoplist.screens.recipelists
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
@@ -115,6 +112,7 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
             val buttonAdd = dialog.findViewById<Button>(R.id.btn_yes)
             val  buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
             dialog.setCancelable(true)
+            dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
             dialog.show()
             text.showKeyboard()
 
@@ -149,6 +147,7 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
             val buttonAdd = dialog.findViewById<Button>(R.id.btn_yes)
             val  buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
             dialog.setCancelable(true)
+            dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
             dialog.show()
             text.showKeyboard()
 

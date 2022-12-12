@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.DialogAddFromRecipeBinding
-import com.viktor.kh.dev.shoplist.databinding.FragmentAddBinding
+import com.viktor.kh.dev.shoplist.databinding.ProductsFragmentBinding
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
 import com.viktor.kh.dev.shoplist.utils.*
@@ -33,10 +33,10 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
+class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter {
 
     private val model: ProductsModel by activityViewModels()
-    private lateinit var binding: FragmentAddBinding
+    private lateinit var binding: ProductsFragmentBinding
     private lateinit var rv: RecyclerView
     private lateinit var productsAdapter: ProductsAdapter
     private  lateinit var itemTouchHelper: ItemTouchHelper
@@ -46,7 +46,7 @@ class ProductsFragment : Fragment(R.layout.fragment_add), ItemTouchAdapter {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         context?.let { loadSetting(it) }
-        binding = FragmentAddBinding.bind(view)
+        binding = ProductsFragmentBinding.bind(view)
         rv  = binding.listProducts
         binding.addProductFabInProd.setOnClickListener(View.OnClickListener {
             addProduct()
