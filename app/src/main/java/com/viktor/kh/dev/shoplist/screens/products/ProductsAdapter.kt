@@ -13,9 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.utils.*
-import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.random.Random
 
 class ProductsAdapter(
     val onProductClickListener: OnProductClickListener,
@@ -161,9 +159,9 @@ class ProductsAdapter(
         if (colorMap.contains(product)){
                 return ContextCompat.getColor(context!!, colorMap[product]!!)
             }else{
-                if (currentItemColor== getColors(context!!).size-1) currentItemColor = 0 else currentItemColor++
-                colorMap.put(product, getColors(context!!)[currentItemColor])
-                return ContextCompat.getColor(context!!, getColors(context!!)[currentItemColor])
+                if (currentItemColor==getColors().size-1) currentItemColor = 0 else currentItemColor++
+                colorMap.put(product, getColors()[currentItemColor])
+                return ContextCompat.getColor(context!!, getColors()[currentItemColor])
 
             }
 

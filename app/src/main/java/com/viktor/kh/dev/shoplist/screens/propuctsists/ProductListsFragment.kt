@@ -110,7 +110,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
             dialog = context?.let { Dialog(it,R.style.MyDialogDark) }
         }
         if(dialog!=null){
-            dialog.setContentView(R.layout.dialog_add)
+            dialog.setContentView(R.layout.color_dialog_add)
             val text = dialog.findViewById<EditText>(R.id.dialog_text)
             text.hint = getString(R.string.list_title)
             val buttonAdd = dialog.findViewById<Button>(R.id.btn_yes)

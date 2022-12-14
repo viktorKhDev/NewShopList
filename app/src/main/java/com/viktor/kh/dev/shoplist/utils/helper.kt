@@ -74,23 +74,8 @@ val colorsLight = listOf(
     R.color.card_pink
 )
 
-
-
-val colorsDark = listOf(
-    R.color.card_blue_dark,
-    R.color.card_red_dark,
-    R.color.card_green_dark,
-    R.color.card_cyan_dark,
-    R.color.card_orange_dark,
-    R.color.card_violet_dark,
-    R.color.card_yellow_dark,
-    R.color.card_dark_blue_dark,
-    R.color.card_pink_dark
-)
-
-fun getColors(context: Context):kotlin.collections.List<Int>{
+fun getColors():List<Int>{
     return colorsLight
-
 }
 
 

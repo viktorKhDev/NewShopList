@@ -10,11 +10,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.ItemListBinding
-import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
-import com.viktor.kh.dev.shoplist.screens.propuctsists.ProductListsAdapter
 import com.viktor.kh.dev.shoplist.utils.*
-import kotlin.random.Random
 
 class RecipesAdapter constructor(val onListClickListener: OnListClickListener,
                                  val onSetClickListener: OnSetClickListener,
@@ -105,9 +102,9 @@ class RecipesAdapter constructor(val onListClickListener: OnListClickListener,
         if (colorMap.contains(listID)){
                 return ContextCompat.getColor(context!!, colorMap[listID]!!)
             }else{
-                if (currentItemColor==getColors(context!!).size-1) currentItemColor = 0 else currentItemColor++
-                colorMap.put(listID, getColors(context!!)[currentItemColor])
-                return ContextCompat.getColor(context!!, getColors(context!!)[currentItemColor])
+                if (currentItemColor== getColors().size-1) currentItemColor = 0 else currentItemColor++
+                colorMap.put(listID, getColors()[currentItemColor])
+                return ContextCompat.getColor(context!!, getColors()[currentItemColor])
 
             }
     }

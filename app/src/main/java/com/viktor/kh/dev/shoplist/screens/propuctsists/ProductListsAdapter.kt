@@ -1,9 +1,7 @@
 package com.viktor.kh.dev.shoplist.screens.propuctsists
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +12,6 @@ import com.viktor.kh.dev.shoplist.databinding.ItemListBinding
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 import com.viktor.kh.dev.shoplist.utils.*
-import kotlin.random.Random
 
 
 class ProductListsAdapter
@@ -126,9 +123,9 @@ constructor(val onListClickListener: OnListClickListener,
        if (colorMap.contains(listID)){
                return ContextCompat.getColor(context!!, colorMap[listID]!!)
            }else{
-               if (currentItemColor==getColors(context!!).size-1) currentItemColor = 0 else currentItemColor++
-               colorMap.put(listID, getColors(context!!)[currentItemColor])
-               return ContextCompat.getColor(context!!, getColors(context!!)[currentItemColor])
+               if (currentItemColor==getColors().size-1) currentItemColor = 0 else currentItemColor++
+               colorMap.put(listID, getColors()[currentItemColor])
+               return ContextCompat.getColor(context!!, getColors()[currentItemColor])
 
            }
 

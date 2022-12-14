@@ -1,9 +1,7 @@
 package com.viktor.kh.dev.shoplist.screens.recipe
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
-import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.utils.*
-import kotlin.random.Random
 
 
 class RecipeProductsAdapter(
@@ -114,9 +111,9 @@ class RecipeProductsAdapter(
         if (colorMap.contains(product)){
                 return ContextCompat.getColor(context!!, colorMap[product]!!)
             }else{
-                if (currentItemColor==getColors(context!!).size-1) currentItemColor = 0 else currentItemColor++
-                colorMap.put(product, getColors(context!!)[currentItemColor])
-                return ContextCompat.getColor(context!!, getColors(context!!)[currentItemColor])
+                if (currentItemColor==getColors().size-1) currentItemColor = 0 else currentItemColor++
+                colorMap.put(product, getColors()[currentItemColor])
+                return ContextCompat.getColor(context!!, getColors()[currentItemColor])
 
             }
 
