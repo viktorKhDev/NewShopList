@@ -118,6 +118,20 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
             dialog.setCancelable(true)
             dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
             dialog.show()
+
+
+            //init colors
+            val colorAdapter = ColorsAdapter(context!!)
+            val colorPanel = dialog.findViewById<RecyclerView>(R.id.colors_panel)
+            colorPanel.apply {
+                layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
+                adapter = colorAdapter
+                adapter!!.notifyDataSetChanged()
+            }
+
+            ////
+
+
             text.showKeyboard()
 
             buttonCancel.setOnClickListener(View.OnClickListener {

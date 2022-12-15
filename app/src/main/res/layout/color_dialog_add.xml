@@ -14,7 +14,9 @@
         android:background="?colorPrimary"
         android:orientation="horizontal"
         android:layout_below="@id/dialog_text"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="5dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -36,13 +38,13 @@
         android:textColorHint="@color/text_hint"
         android:textSize="20sp"
         tools:targetApi="o"
-        android:paddingEnd="3dp"
-        android:paddingStart="3dp"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp"
+        android:layout_marginBottom="10dp"
         />
 
     <RelativeLayout
         android:layout_below="@+id/colors_panel"
-        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:layout_height="wrap_content"
