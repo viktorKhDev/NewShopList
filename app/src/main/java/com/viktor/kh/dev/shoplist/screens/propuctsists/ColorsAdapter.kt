@@ -1,25 +1,22 @@
 package com.viktor.kh.dev.shoplist.screens.propuctsists
 
 import android.content.Context
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.SetColorItemBinding
-import com.viktor.kh.dev.shoplist.utils.currentCardColor
+import com.viktor.kh.dev.shoplist.utils.ColorClickedList
 import com.viktor.kh.dev.shoplist.utils.getColors
 
 
-class ColorsAdapter(val context: Context): RecyclerView.Adapter<ColorsAdapter.ColorHolder>() {
+class ColorsAdapter(val context: Context,
+val onColorClick: OnColorClickListener): RecyclerView.Adapter<ColorsAdapter.ColorHolder>() {
 
-
+     var data = ColorClickedList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ColorHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.set_color_item,parent,false)
@@ -27,7 +24,7 @@ class ColorsAdapter(val context: Context): RecyclerView.Adapter<ColorsAdapter.Co
     }
 
     override fun onBindViewHolder(holder: ColorHolder, position: Int) {
-       holder.bind(getColors()[position],context)
+       holder.bind(getColors()[position])
     }
 
     override fun getItemCount(): Int {
@@ -38,21 +35,34 @@ class ColorsAdapter(val context: Context): RecyclerView.Adapter<ColorsAdapter.Co
 
 
 
-    class ColorHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ColorHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val binding = SetColorItemBinding.bind(itemView)
 
 
-        fun bind(color : Int,context: Context) = with(binding){
+        fun bind(color : Int) = with(binding){
             Log.d("fix", "color in circle = $color" )
 
-            colorCircle.setColorFilter(ContextCompat.getColor(context, color));
-            colorStroke.setColorFilter(ContextCompat.getColor(context,R.color.black))
 
+            colorCircle.setColorFilter(ContextCompat.getColor(context, color));
+            if (data.isClickedColor(color)){
+                colorStroke.setColorFilter(ContextCompat.getColor(context,R.color.black))
+            }else{
+                colorStroke.setColorFilter(ContextCompat.getColor(context,color))
+            }
+            colorCircle.setOnClickListener(View.OnClickListener {
+                onColorClick.onClick(layoutPosition)
+                data.clickColor(layoutPosition)
+            })
         // colorCircle.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, color))
 
         }
 
+    }
+
+
+    interface OnColorClickListener{
+        fun onClick(position: Int)
     }
 
 }

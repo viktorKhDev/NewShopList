@@ -16,6 +16,7 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -106,6 +107,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
     private fun addList(){
 
         var dialog = context?.let { Dialog(it,R.style.MyDialog) }
+        var listColor: Int? = null
         if (isNightTheme(context!!)){
             dialog = context?.let { Dialog(it,R.style.MyDialogDark) }
         }
@@ -116,18 +118,36 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
             val buttonAdd = dialog.findViewById<Button>(R.id.btn_yes)
             val  buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
             dialog.setCancelable(true)
+            dialog.setOnCancelListener {
+                model.dataColors.removeObservers(viewLifecycleOwner)
+            }
             dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
             dialog.show()
 
 
             //init colors
-            val colorAdapter = ColorsAdapter(context!!)
+            val onColorClickListener = object : ColorsAdapter.OnColorClickListener{
+                override fun onClick(position: Int) {
+                 model.clickColor(position)
+
+                }
+
+            }
+            val colorAdapter = ColorsAdapter(context!!,onColorClickListener)
             val colorPanel = dialog.findViewById<RecyclerView>(R.id.colors_panel)
             colorPanel.apply {
                 layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
                 adapter = colorAdapter
                 adapter!!.notifyDataSetChanged()
             }
+
+            model.dataColors.observe(viewLifecycleOwner, Observer {
+               colorAdapter.data = it
+               colorAdapter.notifyDataSetChanged()
+
+            })
+
+            colorPanel.scrollToPosition(colorAdapter.data.getCurrentColorPosition()-1)
 
             ////
 
@@ -137,6 +157,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
             buttonCancel.setOnClickListener(View.OnClickListener {
                 dialog.dismiss()
                 text.hideKeyboard()
+                model.dataColors.removeObservers(viewLifecycleOwner)
             })
 
             buttonAdd.setOnClickListener(View.OnClickListener {
@@ -144,6 +165,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
                     goneSearch()
                     model.addList(text.text.toString())
                     dialog.dismiss()
+                    model.dataColors.removeObservers(viewLifecycleOwner)
 
                 }else{
                     showToast(getString(R.string.input_the_title),context)

@@ -28,7 +28,12 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
     //variable for check start animation
     var initAnim = false
     var isAddClicked = false
+    var currentColor: Int? = null
 
+
+   val dataColors :MutableLiveData<ColorClickedList> by lazy {
+       MutableLiveData<ColorClickedList>()
+   }
 
    val dataLists : MutableLiveData <List<DataProductList>> by lazy {
        MutableLiveData <List<DataProductList>>().also {
@@ -40,8 +45,18 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
         isAddClicked = false
         initAnim = true
         getLists()
+        dataColors.value = ColorClickedList()
 
 
+    }
+
+
+    fun clickColor(position: Int){
+     var data = dataColors.value
+        data!!.clickColor(position)
+        dataColors.value = data
+        dataColors.hasActiveObservers()
+        currentColor = dataColors.value!!.getCurrentColor()
     }
 
     private fun getLists(){
