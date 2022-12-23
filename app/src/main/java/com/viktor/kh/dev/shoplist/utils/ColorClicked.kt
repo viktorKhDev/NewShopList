@@ -32,9 +32,15 @@ class ColorClickedList {
 
     fun getCurrentColorPosition():Int{
         var currentColorPosition = 0
+        var count = 0
         for(color in colorsSwitch){
-            currentColorPosition++
-            if (color.value) break
+            count++
+            if (color.value){
+                currentColorPosition = count
+                break
+
+            }
+
         }
         return currentColorPosition
     }

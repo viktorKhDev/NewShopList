@@ -10,11 +10,10 @@
         android:id="@+id/colors_panel"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_marginBottom="20dp"
         android:background="?colorPrimary"
         android:orientation="horizontal"
-        android:layout_below="@id/dialog_text"
         android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:paddingStart="5dp"
         android:paddingEnd="5dp">
 
@@ -25,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_below="@id/colors_panel"
         android:autofillHints=""
         android:background="?colorPrimary"
         android:focusable="true"
@@ -44,11 +43,12 @@
         />
 
     <RelativeLayout
-        android:layout_below="@+id/colors_panel"
+        android:layout_below="@+id/dialog_text"
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:layout_height="wrap_content"
         android:background="?android:colorPrimary"
+
         >
 
         <androidx.appcompat.widget.AppCompatButton
@@ -59,6 +59,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
             android:layout_toStartOf="@id/btn_yes"
             android:backgroundTint="?colorPrimary"
             android:text="@string/no"
@@ -71,6 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/button_bg"

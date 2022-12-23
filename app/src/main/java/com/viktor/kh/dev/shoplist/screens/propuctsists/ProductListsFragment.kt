@@ -147,8 +147,12 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
             })
 
-            colorPanel.scrollToPosition(colorAdapter.data.getCurrentColorPosition()-1)
-
+            val currentPosition = colorAdapter.data.getCurrentColorPosition()
+            if(currentPosition>0){
+                colorPanel.smoothScrollToPosition(currentPosition)
+            }else{
+                colorPanel.smoothScrollToPosition(0)
+            }
             ////
 
 
