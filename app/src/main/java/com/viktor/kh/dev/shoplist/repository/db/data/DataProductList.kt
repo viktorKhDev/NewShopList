@@ -15,6 +15,7 @@ data class DataProductList(
         @ColumnInfo(name = "id" )val id: Int = 0,
         @ColumnInfo(name = "name" ) val name: String?,
         @ColumnInfo(name = "date" ) val date: Long?,
+        @ColumnInfo(name = "color") val color: Int?,
         @TypeConverters(ProductsConverter::class)
         @ColumnInfo(name = "products" ) val products: List<DataProduct>?
 )

@@ -20,10 +20,20 @@ android {
         applicationId "com.viktor.kh.dev.shoplist"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 10
-        versionName "2.1.5"
+        versionCode 11
+        versionName "2.2.6"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas")
+            }
+        }
+
+        sourceSets {
+            androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+        }
     }
             buildFeatures{
                viewBinding = true

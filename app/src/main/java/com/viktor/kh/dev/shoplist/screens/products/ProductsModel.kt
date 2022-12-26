@@ -59,9 +59,9 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
     private fun getProducts(){
         CoroutineScope(Dispatchers.IO).launch {
             val data : DataProductList = productListsDao.get(listId!!)
-            val newData  = DataProductList(data.id,data.name,data.date,
-                data.products?.let { sortProducts(it) })
-            productListsDao.update(DataProductList(newData.id,newData.name,newData.date,newData.products))
+            val newData  = DataProductList(data.id,data.name,data.date,data.color
+                ,data.products?.let { sortProducts(it) })
+            productListsDao.update(DataProductList(newData.id,newData.name,newData.date,newData.color,newData.products))
             withContext(Dispatchers.Main){
                 productsList.value = newData.products
             }
@@ -80,7 +80,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
           list.products?.let { products.addAll(it) }
           products.removeAt(position)
           products.add(newProduct)
-          productListsDao.update(DataProductList(list.id,list.name,list.date,products))
+          productListsDao.update(DataProductList(list.id,list.name,list.date,list.color,products))
           stateChange = CHANGE_READY
           animPosition = position
           getProducts()
@@ -97,7 +97,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
             list.products?.let { products.addAll(it) }
             products.removeAt(position)
             products.add(newProduct)
-            productListsDao.update(DataProductList(list.id,list.name,list.date,products))
+            productListsDao.update(DataProductList(list.id,list.name,list.date,list.color,products))
             stateChange = UPDATE_DATA
             getProducts()
         }
@@ -110,7 +110,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
          val products  = mutableListOf<DataProduct>()
          list.products?.let { products.addAll(it) }
          products.removeAt(position)
-         productListsDao.update(DataProductList(list.id,list.name,list.date,products))
+         productListsDao.update(DataProductList(list.id,list.name,list.date,list.color,products))
             stateChange = DELETE_PRODUCT
             animPosition = position
          getProducts()
@@ -126,7 +126,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
             val products  = mutableListOf<DataProduct>()
             list.products?.let { products.addAll(it) }
             products.add(dataProduct)
-            productListsDao.update(DataProductList(list.id,list.name,list.date,products))
+            productListsDao.update(DataProductList(list.id,list.name,list.date,list.color,products))
             stateChange = ADD_PRODUCT
             animPosition = products.size-1
             getProducts()
@@ -141,7 +141,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
            val products  = mutableListOf<DataProduct>()
            list.products?.let { products.addAll(it) }
            products.clear()
-           productListsDao.update(DataProductList(list.id,list.name,list.date,products))
+           productListsDao.update(DataProductList(list.id,list.name,list.date,list.color,products))
            stateChange = UPDATE_DATA
            getProducts()
 
@@ -162,7 +162,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                      products.add(product)
                      animPosition = products.size
                  }
-                 productListsDao.update(DataProductList(list.id,list.name,list.date,products))
+                 productListsDao.update(DataProductList(list.id,list.name,list.date,list.color,products))
                  stateChange =  UPDATE_DATA
                  getProducts()
              }
@@ -210,7 +210,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
             }
             val list: DataProductList = productListsDao.get(listId!!)
             list.products?.let { readyList.addAll(it) }
-            productListsDao.update(DataProductList(list.id,list.name,list.date,readyList))
+            productListsDao.update(DataProductList(list.id,list.name,list.date,list.color,readyList))
             stateChange = UPDATE_DATA
             getProducts()
 

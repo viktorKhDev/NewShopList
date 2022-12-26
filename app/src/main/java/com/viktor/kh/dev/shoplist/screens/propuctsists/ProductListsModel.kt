@@ -1,13 +1,10 @@
 package com.viktor.kh.dev.shoplist.screens.propuctsists
 
 import android.app.Application
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
-import androidx.preference.PreferenceManager
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
@@ -28,7 +25,7 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
     //variable for check start animation
     var initAnim = false
     var isAddClicked = false
-    var currentColor: Int? = null
+    private var currentColor: Int? = null
 
 
    val dataColors :MutableLiveData<ColorClickedList> by lazy {
@@ -52,7 +49,7 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
 
 
     fun clickColor(position: Int){
-     var data = dataColors.value
+     val data = dataColors.value
         data!!.clickColor(position)
         dataColors.value = data
         dataColors.hasActiveObservers()
@@ -85,7 +82,7 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
         initAnim = false
         isAddClicked = true
         val listProduct :List<DataProduct> = emptyList()
-        val productList = DataProductList(0,name, currentTimeToLong(),listProduct)
+        val productList = DataProductList(0,name, currentTimeToLong(),currentColor,listProduct)
         CoroutineScope(Dispatchers.IO).launch {
             productListsDao.insert(productList)
             getLists()
@@ -100,7 +97,7 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
         CoroutineScope(Dispatchers.IO).launch {
          productListsDao.update(
              DataProductList(
-             list.id, name, list.date,list.products
+             list.id, name, list.date,currentColor,list.products
          )
          )
            getLists()
