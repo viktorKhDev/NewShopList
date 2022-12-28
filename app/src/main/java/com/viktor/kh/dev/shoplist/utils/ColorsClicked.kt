@@ -12,9 +12,15 @@ class ColorClickedList {
 
     fun clickColor(position: Int){
         for (id in getColors().indices){
-            colorsSwitch[getColors()[id]] = id==position
+            if(id!=position){
+                colorsSwitch[getColors()[id]] = false
+            }
         }
+        colorsSwitch[getColors()[position]] = true
+
     }
+
+
 
 
    fun isClickedColor(color: Int):Boolean{
@@ -44,4 +50,7 @@ class ColorClickedList {
         }
         return currentColorPosition
     }
+
+
+
 }

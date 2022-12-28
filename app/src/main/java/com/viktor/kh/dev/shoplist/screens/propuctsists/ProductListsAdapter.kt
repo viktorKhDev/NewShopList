@@ -73,24 +73,25 @@ constructor(val onListClickListener: OnListClickListener,
         private val binding = ItemListBinding.bind(itemView)
 
         fun bind (data : DataProductList) = with(binding){
-            if (colorLists){
-                cl.setCardBackgroundColor(cardColor(data.id))
-                currentCardColor = cardColor(data.id)
+            currentCardColor = cardColor(data.color)
+            if (colorLists&&currentCardColor!=0){
+                cl.setCardBackgroundColor(cardColor(data.color))
             }
             listName.text = data.name
             val date  = data.date?.let { convertLongToTime(it) }.toString()
             textListDate.text = date
             textListReady.text = data.products?.let { findReady(it) }
-            if (nightTheme&&!colorLists){
+            if (nightTheme&&(!colorLists||currentCardColor==0)){
                 listName.setTextColor(Color.WHITE)
                 textListDate.setTextColor(Color.WHITE)
                 textListReady.setTextColor(Color.WHITE)
                 editImage.setImageResource(R.drawable.ic_baseline_edit_white_24)
                 deleteImage.setImageResource(R.drawable.ic_baseline_delete_white_24)
             }
+
             itemView.setOnClickListener(View.OnClickListener {
                 if (colorLists){
-                    currentCardColor = cardColor(data.id)
+                    currentCardColor = cardColor(data.color)
                 }
                 onListClickListener.onListClick(layoutPosition)
             })
@@ -118,14 +119,12 @@ constructor(val onListClickListener: OnListClickListener,
     }
 
 
-   private fun cardColor(listID:Int):Int{
+   private fun cardColor(color:Int?):Int{
 
-       if (colorMap.contains(listID)){
-               return ContextCompat.getColor(context!!, colorMap[listID]!!)
+       if (color!=null){
+               return ContextCompat.getColor(context!!, color)
            }else{
-               if (currentItemColor==getColors().size-1) currentItemColor = 0 else currentItemColor++
-               colorMap.put(listID, getColors()[currentItemColor])
-               return ContextCompat.getColor(context!!, getColors()[currentItemColor])
+               return 0
 
            }
 

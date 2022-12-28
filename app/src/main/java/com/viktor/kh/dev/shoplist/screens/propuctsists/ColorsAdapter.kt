@@ -42,8 +42,6 @@ val onColorClick: OnColorClickListener): RecyclerView.Adapter<ColorsAdapter.Colo
 
         fun bind(color : Int) = with(binding){
             Log.d("fix", "color in circle = $color" )
-
-
             colorCircle.setColorFilter(ContextCompat.getColor(context, color));
             if (data.isClickedColor(color)){
                 colorStroke.setColorFilter(ContextCompat.getColor(context,R.color.black))

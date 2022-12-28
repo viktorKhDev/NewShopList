@@ -123,7 +123,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
             }
             dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
             dialog.show()
-
+            text.showKeyboard()
 
             //init colors
             val onColorClickListener = object : ColorsAdapter.OnColorClickListener{
@@ -156,7 +156,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
             ////
 
 
-            text.showKeyboard()
+
 
             buttonCancel.setOnClickListener(View.OnClickListener {
                 dialog.dismiss()
@@ -185,7 +185,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
             dialog = context?.let { Dialog(it,R.style.MyDialogDark) }
         }
         if(dialog!=null){
-            dialog.setContentView(R.layout.dialog_add)
+            dialog.setContentView(R.layout.color_dialog_add)
             val text = dialog.findViewById<EditText>(R.id.dialog_text)
             text.setText(dataList.name)
             val buttonAdd = dialog.findViewById<Button>(R.id.btn_yes)
@@ -194,6 +194,39 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
             dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
             dialog.show()
             text.showKeyboard()
+
+
+
+            //init colors
+            val onColorClickListener = object : ColorsAdapter.OnColorClickListener{
+                override fun onClick(position: Int) {
+                    model.clickColor(position)
+
+                }
+
+            }
+            val colorAdapter = ColorsAdapter(context!!,onColorClickListener)
+            val colorPanel = dialog.findViewById<RecyclerView>(R.id.colors_panel)
+            colorPanel.apply {
+                layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
+                adapter = colorAdapter
+                adapter!!.notifyDataSetChanged()
+            }
+
+            model.dataColors.observe(viewLifecycleOwner, Observer {
+                colorAdapter.data = it
+                colorAdapter.notifyDataSetChanged()
+
+            })
+
+            val currentPosition = colorAdapter.data.getCurrentColorPosition()
+            if(currentPosition>0){
+                colorPanel.smoothScrollToPosition(currentPosition)
+            }else{
+                colorPanel.smoothScrollToPosition(0)
+            }
+            ////
+
             buttonCancel.setOnClickListener(View.OnClickListener {
                 dialog.dismiss()
                 text.hideKeyboard()

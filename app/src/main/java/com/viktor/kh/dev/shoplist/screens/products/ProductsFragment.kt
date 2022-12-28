@@ -208,7 +208,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
             itemShare.icon = ContextCompat.getDrawable(context!!,R.drawable.ic_black_share_24)
 
         }
-        if (isNightTheme(context!!)&&!colorLists){
+        if (isNightTheme(context!!)&&(!colorLists||currentCardColor==0)){
             toolbar.apply {
                 setNavigationIcon(R.drawable.ic_baseline_arrow_white_24)
                 setTitleTextColor(Color.WHITE)
@@ -239,7 +239,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
 
 
 
-        if (colorLists){
+        if (colorLists&& currentCardColor!=0){
             activity!!.window.statusBarColor = currentCardColor
             activity!!.window.navigationBarColor = currentCardColor
             activity!!.window.insetsController!!.setSystemBarsAppearance(
@@ -299,7 +299,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
 
     private fun setBackgroundColor() = with(binding){
 
-        if (colorLists){
+        if (colorLists&& currentCardColor!=0){
             addProductFabInProd.backgroundTintList = ColorStateList.valueOf(currentCardColor)
 
             val backNoProd = btnNoProduct.background as GradientDrawable
