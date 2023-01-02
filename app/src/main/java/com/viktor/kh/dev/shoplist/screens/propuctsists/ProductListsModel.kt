@@ -25,7 +25,7 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
     //variable for check start animation
     var initAnim = false
     var isAddClicked = false
-    private var currentColor: Int? = null
+    var currentColor: Int? = null
 
 
    val dataColors :MutableLiveData<ColorClickedList> by lazy {
@@ -124,6 +124,8 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
         bundle.putString(LIST_NAME,dataProductList.name)
         controller.navigate(R.id.action_productListsFragment_to_productsFragment,bundle)
     }
+
+
 
 }
 

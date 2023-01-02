@@ -404,18 +404,17 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
         binding.addProductFabInProd.animation = hideAnim
         hideAnim.start()
         binding.addProductFabInProd.hide()
-        binding.textProduct.text.clear()
-        binding.textProduct.hideKeyboard()
-        binding.relativeAddProduct.visibility = View.GONE
         super.onStop()
     }
 
     override fun onResume() {
-        val showAnim = AnimationUtils.loadAnimation(context,R.anim.fab_show_anim)
-        showAnim.startOffset = 200
-        binding.addProductFabInProd.animation = showAnim
-        showAnim.start()
-        binding.addProductFabInProd.show()
+        if (binding.relativeAddProduct.visibility != View.VISIBLE){
+            val showAnim = AnimationUtils.loadAnimation(context,R.anim.fab_show_anim)
+            showAnim.startOffset = 200
+            binding.addProductFabInProd.animation = showAnim
+            showAnim.start()
+            binding.addProductFabInProd.show()
+        }
         super.onResume()
     }
 

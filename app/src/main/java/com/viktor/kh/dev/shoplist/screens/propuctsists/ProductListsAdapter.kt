@@ -1,6 +1,7 @@
 package com.viktor.kh.dev.shoplist.screens.propuctsists
 
 import android.content.Context
+import android.content.res.Resources.NotFoundException
 import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
@@ -134,9 +135,15 @@ constructor(val onListClickListener: OnListClickListener,
 
 
    private fun cardColor(color:Int?):Int{
-       return if (color!=null){
-           ContextCompat.getColor(context!!, color)
-       }else{
+       return try {
+           if (color!=null){
+               ContextCompat.getColor(context!!, color)
+           }else{
+               0
+           }
+       }catch (e :NotFoundException){
+           writeLog("error color selected = ${e.printStackTrace()}",
+               context!!.applicationContext,true)
            0
        }
    }

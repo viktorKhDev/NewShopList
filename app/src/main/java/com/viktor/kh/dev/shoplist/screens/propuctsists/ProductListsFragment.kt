@@ -354,6 +354,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
         fabHideAnim.start()
         binding.fabAddList.hide()
         goneSearch()
+        model.currentColor = null
         super.onStop()
 
     }
