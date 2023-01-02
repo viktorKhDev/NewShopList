@@ -105,7 +105,6 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
 
     private fun addList(){
-
         var dialog = context?.let { Dialog(it,R.style.MyDialog) }
         var listColor: Int? = null
         if (isNightTheme(context!!)){
@@ -129,7 +128,6 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
             val onColorClickListener = object : ColorsAdapter.OnColorClickListener{
                 override fun onClick(position: Int) {
                  model.clickColor(position)
-
                 }
 
             }
@@ -198,10 +196,10 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
 
             //init colors
+
             val onColorClickListener = object : ColorsAdapter.OnColorClickListener{
                 override fun onClick(position: Int) {
                     model.clickColor(position)
-
                 }
 
             }
@@ -213,12 +211,12 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
                 adapter!!.notifyDataSetChanged()
             }
 
+            model.clickColorWithColor(dataList.color)
             model.dataColors.observe(viewLifecycleOwner, Observer {
                 colorAdapter.data = it
                 colorAdapter.notifyDataSetChanged()
 
             })
-
             val currentPosition = colorAdapter.data.getCurrentColorPosition()
             if(currentPosition>0){
                 colorPanel.smoothScrollToPosition(currentPosition)

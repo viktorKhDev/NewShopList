@@ -2,6 +2,7 @@ package com.viktor.kh.dev.shoplist.screens.propuctsists
 
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -76,17 +77,30 @@ constructor(val onListClickListener: OnListClickListener,
             currentCardColor = cardColor(data.color)
             if (colorLists&&currentCardColor!=0){
                 cl.setCardBackgroundColor(cardColor(data.color))
+            }else{
+                if (nightTheme){
+                    cl.setCardBackgroundColor(ContextCompat.getColor(context!!,R.color.colorPrimary))
+                }else{
+                    cl.setCardBackgroundColor(ContextCompat.getColor(context!!,R.color.colorPrimaryDay))
+                }
             }
             listName.text = data.name
             val date  = data.date?.let { convertLongToTime(it) }.toString()
             textListDate.text = date
             textListReady.text = data.products?.let { findReady(it) }
-            if (nightTheme&&(!colorLists||currentCardColor==0)){
+            Log.d("fixLog","currentCardColor in list ${data.name} = $currentCardColor " )
+            if (nightTheme&&currentCardColor==0){
                 listName.setTextColor(Color.WHITE)
                 textListDate.setTextColor(Color.WHITE)
                 textListReady.setTextColor(Color.WHITE)
                 editImage.setImageResource(R.drawable.ic_baseline_edit_white_24)
                 deleteImage.setImageResource(R.drawable.ic_baseline_delete_white_24)
+            }else{
+                listName.setTextColor(Color.BLACK)
+                textListDate.setTextColor(Color.BLACK)
+                textListReady.setTextColor(Color.BLACK)
+                editImage.setImageResource(R.drawable.ic_edit_black_24dp)
+                deleteImage.setImageResource(R.drawable.ic_delete_forever_black_24dp)
             }
 
             itemView.setOnClickListener(View.OnClickListener {
@@ -120,14 +134,11 @@ constructor(val onListClickListener: OnListClickListener,
 
 
    private fun cardColor(color:Int?):Int{
-
-       if (color!=null){
-               return ContextCompat.getColor(context!!, color)
-           }else{
-               return 0
-
-           }
-
+       return if (color!=null){
+           ContextCompat.getColor(context!!, color)
+       }else{
+           0
+       }
    }
 
 

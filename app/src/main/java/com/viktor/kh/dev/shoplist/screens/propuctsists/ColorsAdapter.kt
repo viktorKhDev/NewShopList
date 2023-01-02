@@ -50,9 +50,7 @@ val onColorClick: OnColorClickListener): RecyclerView.Adapter<ColorsAdapter.Colo
             }
             colorCircle.setOnClickListener(View.OnClickListener {
                 onColorClick.onClick(layoutPosition)
-                data.clickColor(layoutPosition)
             })
-        // colorCircle.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, color))
 
         }
 

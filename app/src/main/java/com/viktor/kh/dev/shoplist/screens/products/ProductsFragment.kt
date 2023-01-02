@@ -404,6 +404,9 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
         binding.addProductFabInProd.animation = hideAnim
         hideAnim.start()
         binding.addProductFabInProd.hide()
+        binding.textProduct.text.clear()
+        binding.textProduct.hideKeyboard()
+        binding.relativeAddProduct.visibility = View.GONE
         super.onStop()
     }
 

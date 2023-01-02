@@ -1,5 +1,7 @@
 package com.viktor.kh.dev.shoplist.utils
 
+
+
 class ColorClickedList {
 
     private val colorsSwitch = mutableMapOf<Int,Boolean>()
@@ -11,19 +13,34 @@ class ColorClickedList {
     }
 
     fun clickColor(position: Int){
+        val currentPosition = getCurrentColorPosition()
         for (id in getColors().indices){
-            if(id!=position){
-                colorsSwitch[getColors()[id]] = false
-            }
+            colorsSwitch[getColors()[id]] = false
         }
-        colorsSwitch[getColors()[position]] = true
 
+        if (position!=currentPosition-1){
+            colorsSwitch[getColors()[position]] = true
+        }
+    }
+
+
+    fun clickColorWithColor(color: Int){
+        for (id in getColors().indices){
+            colorsSwitch[getColors()[id]] = false
+        }
+        colorsSwitch[color] = true
+    }
+
+
+    fun clearClick(){
+        for (id in getColors().indices){
+            colorsSwitch[getColors()[id]] = false
+        }
     }
 
 
 
-
-   fun isClickedColor(color: Int):Boolean{
+    fun isClickedColor(color: Int):Boolean{
       return colorsSwitch[color]!!
    }
 
@@ -34,6 +51,7 @@ class ColorClickedList {
             if (color.value) currentColor = color.key
         }
         return currentColor
+
     }
 
     fun getCurrentColorPosition():Int{
@@ -44,7 +62,6 @@ class ColorClickedList {
             if (color.value){
                 currentColorPosition = count
                 break
-
             }
 
         }

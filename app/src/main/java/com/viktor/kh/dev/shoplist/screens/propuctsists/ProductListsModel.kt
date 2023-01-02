@@ -43,8 +43,6 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
         initAnim = true
         getLists()
         dataColors.value = ColorClickedList()
-
-
     }
 
 
@@ -54,6 +52,20 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
         dataColors.value = data
         dataColors.hasActiveObservers()
         currentColor = dataColors.value!!.getCurrentColor()
+    }
+
+    fun clickColorWithColor(color: Int?){
+        if (color!=null){
+            val data = dataColors.value
+            data!!.clickColorWithColor(color)
+            dataColors.value = data
+            dataColors.hasActiveObservers()
+            currentColor = dataColors.value!!.getCurrentColor()
+        }else{
+            dataColors.value!!.clearClick()
+            dataColors.hasActiveObservers()
+            currentColor = dataColors.value!!.getCurrentColor()
+        }
     }
 
     private fun getLists(){
