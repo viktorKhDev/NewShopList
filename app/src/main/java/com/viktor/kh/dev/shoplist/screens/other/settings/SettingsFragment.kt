@@ -2,14 +2,12 @@ package com.viktor.kh.dev.shoplist.screens.other.settings
 
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.app.AppCompatActivity
+
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.MenuHost
-import androidx.core.view.MenuProvider
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
+import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceFragmentCompat
 import com.viktor.kh.dev.shoplist.R
+import com.viktor.kh.dev.shoplist.utils.isNightTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,8 +25,15 @@ class SettingsFragment: PreferenceFragmentCompat() {
         toolbar.apply {
             title = getString(R.string.setting)
             setNavigationOnClickListener(View.OnClickListener {
-                requireActivity().onBackPressed()
+                requireActivity().onBackPressedDispatcher.onBackPressed()
             })
+        }
+        if (isNightTheme(requireContext())){
+            requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimary)
+            requireActivity().window.navigationBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimary)
+        }else{
+            requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimaryDay)
+            requireActivity().window.navigationBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimaryDay)
         }
     }
 

@@ -2,13 +2,13 @@ package com.viktor.kh.dev.shoplist.screens.other
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.preference.PreferenceFragmentCompat
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.OtherFragmentBinding
+import com.viktor.kh.dev.shoplist.utils.isNightTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -46,6 +46,13 @@ class OtherFragment : Fragment(R.layout.other_fragment){
 
     private fun initActionbar() = with(binding){
      toolbar.title = getString(R.string.other)
+        if (isNightTheme(context!!)){
+            activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
+            activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
+        }else{
+            activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
+            activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
+        }
     }
 
 

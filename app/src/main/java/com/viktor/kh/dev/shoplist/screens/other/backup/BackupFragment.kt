@@ -2,14 +2,12 @@ package com.viktor.kh.dev.shoplist.screens.other.backup
 
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.MenuHost
-import androidx.core.view.MenuProvider
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.BackupFragmentBinding
+import com.viktor.kh.dev.shoplist.utils.isNightTheme
 import com.viktor.kh.dev.shoplist.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -56,8 +54,16 @@ class BackupFragment :  Fragment(R.layout.backup_fragment) {
         toolbar.apply {
             title = getString(R.string.backup)
             setNavigationOnClickListener(View.OnClickListener {
-                requireActivity().onBackPressed()
+                requireActivity().onBackPressedDispatcher.onBackPressed()
             })
+        }
+
+        if (isNightTheme(requireContext())){
+            requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimary)
+            requireActivity().window.navigationBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimary)
+        }else{
+            requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimaryDay)
+            requireActivity().window.navigationBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimaryDay)
         }
 
     }

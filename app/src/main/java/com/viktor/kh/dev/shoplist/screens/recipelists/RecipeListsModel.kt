@@ -11,7 +11,7 @@ import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
 import com.viktor.kh.dev.shoplist.repository.db.room.RecipesDao
 import com.viktor.kh.dev.shoplist.utils.currentTimeToLong
-import com.viktor.kh.dev.shoplist.utils.listId
+import com.viktor.kh.dev.shoplist.utils.LIST_ID
 import com.viktor.kh.dev.shoplist.utils.LIST_NAME
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -99,7 +99,7 @@ class RecipeListsModel @Inject constructor(application: Application) :AndroidVie
         // open recipe on position
         isAddClicked = false
         var bundle = Bundle()
-        bundle.putInt(listId,dataRecipe.id)
+        bundle.putInt(LIST_ID,dataRecipe.id)
         bundle.putString(LIST_NAME,dataRecipe.name)
         controller.navigate(R.id.action_recipeListsFragment_to_recipeFragment,bundle)
     }

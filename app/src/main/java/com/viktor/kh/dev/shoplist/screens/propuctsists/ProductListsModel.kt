@@ -2,6 +2,7 @@ package com.viktor.kh.dev.shoplist.screens.propuctsists
 
 import android.app.Application
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
@@ -120,8 +121,13 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
         // open list on position
         isAddClicked = false
         var bundle = Bundle()
-       bundle.putInt(listId,dataProductList.id)
+       bundle.putInt(LIST_ID,dataProductList.id)
         bundle.putString(LIST_NAME,dataProductList.name)
+        if (dataProductList.color!=null){
+            bundle.putInt(LIST_COLOR, ContextCompat.getColor(getApplication(), dataProductList.color))
+        }else{
+            bundle.putInt(LIST_COLOR,0)
+        }
         controller.navigate(R.id.action_productListsFragment_to_productsFragment,bundle)
     }
 

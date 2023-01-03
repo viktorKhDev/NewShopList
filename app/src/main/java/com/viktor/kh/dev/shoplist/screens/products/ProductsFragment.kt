@@ -42,18 +42,21 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
     private  lateinit var itemTouchHelper: ItemTouchHelper
     private lateinit var itemTouchCallback: ItemTouchCallback
     private lateinit var fromRecipeAdapter: FromRecipeAdapter
+    private var cardColor : Int? = null
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         context?.let { loadSetting(it) }
         binding = ProductsFragmentBinding.bind(view)
+        cardColor = arguments?.getInt(LIST_COLOR)!!
+        val  listId = arguments?.getInt(LIST_ID)!!
         rv  = binding.listProducts
         binding.addProductFabInProd.setOnClickListener(View.OnClickListener {
             addProduct()
         })
         initActionbar()
         val anim = AnimationUtils.loadLayoutAnimation(context,R.anim.layout_animation_fall_down)
-        val  listId = arguments?.getInt(listId)!!
         setBackgroundColor()
         model.init(listId)
         initRv()
@@ -198,7 +201,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
 
     private fun initActionbar() = with(binding){
         val listName = arguments?.getString(LIST_NAME)
-        if(colorLists) toolbar.setBackgroundColor(currentCardColor)
+        if(cardColor!=0) toolbar.setBackgroundColor(cardColor!!)
         toolbar.apply {
             title = listName
             inflateMenu(R.menu.options_menu_in_list)
@@ -208,7 +211,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
             itemShare.icon = ContextCompat.getDrawable(context!!,R.drawable.ic_black_share_24)
 
         }
-        if (isNightTheme(context!!)&&(!colorLists||currentCardColor==0)){
+        if (isNightTheme(context!!)&&cardColor==0){
             toolbar.apply {
                 setNavigationIcon(R.drawable.ic_baseline_arrow_white_24)
                 setTitleTextColor(Color.WHITE)
@@ -219,7 +222,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
         }
         toolbar.setOnMenuItemClickListener { item ->
             when(item.itemId){
-                android.R.id.home -> {activity!!.onBackPressed()
+                android.R.id.home -> {activity!!.onBackPressedDispatcher.onBackPressed()
                     true}
                 R.id.clean ->{ cleanList()
                     true}
@@ -233,15 +236,15 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
             }
         }
         toolbar.setNavigationOnClickListener(View.OnClickListener {
-            activity!!.onBackPressed()
+            activity!!.onBackPressedDispatcher.onBackPressed()
         })
 
 
 
 
-        if (colorLists&& currentCardColor!=0){
-            activity!!.window.statusBarColor = currentCardColor
-            activity!!.window.navigationBarColor = currentCardColor
+        if (cardColor!=0){
+            activity!!.window.statusBarColor = cardColor as Int
+            activity!!.window.navigationBarColor = cardColor as Int
             activity!!.window.insetsController!!.setSystemBarsAppearance(
                 WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
                 WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
@@ -299,14 +302,20 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
 
     private fun setBackgroundColor() = with(binding){
 
-        if (colorLists&& currentCardColor!=0){
-            addProductFabInProd.backgroundTintList = ColorStateList.valueOf(currentCardColor)
-
-            val backNoProd = btnNoProduct.background as GradientDrawable
-            backNoProd.setColor(currentCardColor)
-
-            val backAcceptProd = btnAcceptProduct.background as GradientDrawable
-            backAcceptProd.setColor(currentCardColor)
+        val backNoProd = btnNoProduct.background as GradientDrawable
+        val backAcceptProd = btnAcceptProduct.background as GradientDrawable
+        if (cardColor!=0){
+            addProductFabInProd.backgroundTintList = ColorStateList.valueOf(cardColor!!)
+            backNoProd.setColor(cardColor!!)
+            backAcceptProd.setColor(cardColor!!)
+        }else{
+            if (isNightTheme(context!!)){
+                backNoProd.setColor(ContextCompat.getColor(context!!,R.color.colorPrimary))
+                backAcceptProd.setColor(ContextCompat.getColor(context!!,R.color.colorPrimary))
+            }else{
+                backNoProd.setColor(ContextCompat.getColor(context!!,R.color.colorPrimaryDay))
+                backAcceptProd.setColor(ContextCompat.getColor(context!!,R.color.colorPrimaryDay))
+            }
         }
 
     }

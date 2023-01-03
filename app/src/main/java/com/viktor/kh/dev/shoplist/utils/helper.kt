@@ -1,28 +1,18 @@
 package com.viktor.kh.dev.shoplist.utils
 
-import android.annotation.SuppressLint
+
 import android.content.ClipData
 import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
-import android.graphics.Color
-import android.os.Build
-import android.util.Log
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
 import com.viktor.kh.dev.shoplist.R
-import kotlinx.serialization.json.Json.Default.configuration
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.random.Random
 
 
 val format = SimpleDateFormat("dd.MM.yyyy")
@@ -34,8 +24,9 @@ var colorItems = true
 
 
 
-const val listId = "ListId"
+const val LIST_ID = "ListId"
 const val LIST_NAME = "ListName"
+const val LIST_COLOR = "ListColor"
 const val ADD_PRODUCT = 1
 const val CHANGE_READY = 2
 const val DELETE_PRODUCT = 3

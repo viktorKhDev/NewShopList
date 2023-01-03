@@ -49,7 +49,7 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         super.onViewCreated(view, savedInstanceState)
         context?.let { loadSetting(it) }
         binding = RecipeFragmentBinding.bind(view)
-        val  listId = arguments?.getInt(listId)!!
+        val  listId = arguments?.getInt(LIST_ID)!!
        model.init(listId)
        initActionbar()
        initClicks()
@@ -271,7 +271,7 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         recipeToolbar.setOnMenuItemClickListener { item ->
             when(item.itemId){
 
-               R.id.home -> activity!!.onBackPressed()
+               R.id.home -> activity!!.onBackPressedDispatcher.onBackPressed()
 
                 R.id.share_item -> listName?.let {
                     model.shareRecipe(activity as AppCompatActivity,
@@ -288,7 +288,7 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         }
 
         recipeToolbar.setNavigationOnClickListener(View.OnClickListener {
-            activity!!.onBackPressed()
+            activity!!.onBackPressedDispatcher.onBackPressed()
         })
 
 

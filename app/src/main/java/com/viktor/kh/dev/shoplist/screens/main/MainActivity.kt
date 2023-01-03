@@ -21,7 +21,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.utils.isNightTheme
-//import com.viktor.kh.dev.shoplist.utils.isNightTheme
 import com.viktor.kh.dev.shoplist.utils.loadSetting
 import dagger.hilt.android.AndroidEntryPoint
 

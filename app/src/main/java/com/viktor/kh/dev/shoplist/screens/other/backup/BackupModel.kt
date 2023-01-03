@@ -1,32 +1,21 @@
 package com.viktor.kh.dev.shoplist.screens.other.backup
 
 import android.app.Application
-import android.content.Context
-import android.content.Intent
 import android.net.Uri
-import android.util.Log
-import android.widget.Toast
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultLauncher
 import androidx.core.net.toUri
 import androidx.lifecycle.AndroidViewModel
-import com.google.gson.Gson
-import com.google.gson.JsonObject
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.repository.db.data.BackupData
-import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
 import com.viktor.kh.dev.shoplist.repository.db.room.ProductListsDao
 import com.viktor.kh.dev.shoplist.repository.db.room.RecipesDao
 import com.viktor.kh.dev.shoplist.utils.showToast
 import com.viktor.kh.dev.shoplist.utils.writeLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
-import kotlinx.coroutines.internal.synchronized
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.*
-import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel

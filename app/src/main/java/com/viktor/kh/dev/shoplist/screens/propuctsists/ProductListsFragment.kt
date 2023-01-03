@@ -2,21 +2,13 @@ package com.viktor.kh.dev.shoplist.screens.propuctsists
 
 import android.app.Dialog
 import android.os.Bundle
-import android.text.Editable
-import android.util.Log
 import android.view.*
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toDrawable
-import androidx.core.view.MenuHost
-import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -297,7 +289,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
         listsToolbar.setOnMenuItemClickListener { item ->
             when(item.itemId){
 
-                android.R.id.home -> {activity!!.onBackPressed()
+                android.R.id.home -> {activity!!.onBackPressedDispatcher.onBackPressed()
                     true}
                 R.id.search_item -> {searchList()
                     true}
@@ -305,7 +297,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
             }
         }
         listsToolbar.setNavigationOnClickListener(View.OnClickListener {
-            activity!!.onBackPressed()
+            activity!!.onBackPressedDispatcher.onBackPressed()
         })
     }
 
