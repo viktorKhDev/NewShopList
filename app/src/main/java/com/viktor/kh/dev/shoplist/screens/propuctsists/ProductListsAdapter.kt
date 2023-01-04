@@ -87,7 +87,6 @@ constructor(val onListClickListener: OnListClickListener,
             val date  = data.date?.let { convertLongToTime(it) }.toString()
             textListDate.text = date
             textListReady.text = data.products?.let { findReady(it) }
-            Log.d("fixLog","currentCardColor in list ${data.name} = $currentCardColor " )
             if (nightTheme&&currentCardColor==0){
                 listName.setTextColor(Color.WHITE)
                 textListDate.setTextColor(Color.WHITE)
@@ -103,9 +102,9 @@ constructor(val onListClickListener: OnListClickListener,
             }
 
             itemView.setOnClickListener(View.OnClickListener {
-                if (colorLists){
-                    currentCardColor = cardColor(data.color)
-                }
+
+                currentCardColor = cardColor(data.color)
+
                 onListClickListener.onListClick(layoutPosition)
             })
             editImage.setOnClickListener(View.OnClickListener {

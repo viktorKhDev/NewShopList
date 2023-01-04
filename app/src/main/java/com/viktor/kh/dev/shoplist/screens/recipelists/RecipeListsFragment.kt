@@ -334,7 +334,6 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
         fabHideAnim.start()
         binding.listsIncludeInRecipes.fabAddList.hide()
         goneSearch()
-        Log.d("fix", "(onStop) colorLists in recipesFragment!! =  $colorLists" )
         super.onStop()
     }
 
@@ -344,7 +343,6 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
         binding.listsIncludeInRecipes.fabAddList.animation = fabHideAnim
         fabHideAnim.start()
         binding.listsIncludeInRecipes.fabAddList.show()
-        Log.d("fix", "(onResume) colorLists in recipesFragment!! =  $colorLists" )
         super.onResume()
     }
 }

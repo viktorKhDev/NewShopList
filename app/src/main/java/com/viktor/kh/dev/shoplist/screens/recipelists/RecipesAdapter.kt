@@ -66,10 +66,10 @@ class RecipesAdapter constructor(val onListClickListener: OnListClickListener,
 
         private val binding = ItemListBinding.bind(itemView)
         fun bind(data : DataRecipe) = with(binding){
-            currentCardColor = cardColor(data.id)
+            currentCardColor = cardColor(data.color)
             Log.d("fixLog", "card color in recipe = $currentCardColor")
             if (currentCardColor!=0){
-                cl.setCardBackgroundColor(cardColor(data.id))
+                cl.setCardBackgroundColor(cardColor(data.color))
             }else{
                 if (nightTheme){
                     cl.setCardBackgroundColor(ContextCompat.getColor(context!!,R.color.colorPrimary))
@@ -94,9 +94,8 @@ class RecipesAdapter constructor(val onListClickListener: OnListClickListener,
 
             }
             itemView.setOnClickListener(View.OnClickListener {
-                if (colorLists){
-                    currentCardColor = cardColor(data.id)
-                }
+
+                currentCardColor = cardColor(data.color)
                 onListClickListener.onListClick(layoutPosition)
             })
             editImage.setOnClickListener(View.OnClickListener {

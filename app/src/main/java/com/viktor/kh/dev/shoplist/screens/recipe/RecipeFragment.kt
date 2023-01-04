@@ -231,7 +231,7 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
             }
 
 
-        if (isNightTheme(context!!)&&!colorLists){
+        if (isNightTheme(context!!)&&cardColor==0){
             collapsingToolbar.setCollapsedTitleTextColor(Color.WHITE)
             collapsingToolbar.setExpandedTitleColor(Color.WHITE)
             recipeToolbar.apply {

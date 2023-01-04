@@ -19,7 +19,7 @@ val format = SimpleDateFormat("dd.MM.yyyy")
 val formatForLog = SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z")
 
 var sortByDate = false
-var colorLists = true
+//var colorLists = true
 var colorItems = true
 
 
@@ -142,7 +142,7 @@ fun shareText(text: String?, context: Context) {
 fun loadSetting(context: Context){
     val sp = PreferenceManager.getDefaultSharedPreferences(context)
     sortByDate = sp.getBoolean(context.getString(R.string.sort_by_date),false)
-    colorLists = sp.getBoolean(context.getString(R.string.color_lists_pref),true)
+    //colorLists = sp.getBoolean(context.getString(R.string.color_lists_pref),true)
     colorItems = sp.getBoolean(context.getString(R.string.color_items_pref),true)
 
 
