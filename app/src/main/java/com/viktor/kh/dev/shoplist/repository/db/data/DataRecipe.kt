@@ -18,6 +18,7 @@ data class DataRecipe (
     @ColumnInfo(name = "name" ) val name: String?,
     @ColumnInfo(name = "text" ) val text: String?,
     @ColumnInfo(name = "date" ) val date: Long?,
+    @ColumnInfo(name = "color") val color: Int?,
     @TypeConverters(ProductsConverter::class)
     @ColumnInfo(name = "products" ) val products: List<DataProduct>?
 )

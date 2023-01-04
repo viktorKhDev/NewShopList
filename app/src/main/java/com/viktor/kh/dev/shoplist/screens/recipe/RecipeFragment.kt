@@ -42,13 +42,14 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
     private lateinit var productsAdapter: RecipeProductsAdapter
     private  lateinit var itemTouchHelper: ItemTouchHelper
     private lateinit var itemTouchCallback: ItemTouchCallback
-    private val alphaColor = Color.argb(50,0,0,0)
+    private var cardColor : Int? = null
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         context?.let { loadSetting(it) }
         binding = RecipeFragmentBinding.bind(view)
+        cardColor = arguments?.getInt(LIST_COLOR)!!
         val  listId = arguments?.getInt(LIST_ID)!!
        model.init(listId)
        initActionbar()
@@ -171,24 +172,28 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
     private fun setBackgroundColor() = with(binding){
         //set color from recipes lists item
-        if (colorLists){
-            if (currentCardColor!=0){
-                addProductFab.backgroundTintList = ColorStateList.valueOf(currentCardColor)
-                productsFab.backgroundTintList = ColorStateList.valueOf(currentCardColor)
-                acceptTextFab.backgroundTintList = ColorStateList.valueOf(currentCardColor)
+        val backgroundShape = btnCloseProducts.background as GradientDrawable
+        val backNoProd = btnNoProduct.background as GradientDrawable
+        val backAcceptProd = btnAcceptProduct.background as GradientDrawable
+        if (cardColor!=0){
 
-                val backgroundShape = btnCloseProducts.background as GradientDrawable
-                backgroundShape.setColor(currentCardColor)
+            addProductFab.backgroundTintList = ColorStateList.valueOf(cardColor!!)
+                productsFab.backgroundTintList = ColorStateList.valueOf(cardColor!!)
+                acceptTextFab.backgroundTintList = ColorStateList.valueOf(cardColor!!)
 
-                val backNoProd = btnNoProduct.background as GradientDrawable
-                backNoProd.setColor(currentCardColor)
-
-                val backAcceptProd = btnAcceptProduct.background as GradientDrawable
-                backAcceptProd.setColor(currentCardColor)
-
-            }
+            backgroundShape.setColor(cardColor!!)
+            backNoProd.setColor(cardColor!!)
+            backAcceptProd.setColor(cardColor!!)
         }else{
-            
+            if (isNightTheme(context!!)){
+                backgroundShape.setColor(ContextCompat.getColor(context!!,R.color.colorPrimary))
+                backNoProd.setColor(ContextCompat.getColor(context!!,R.color.colorPrimary))
+                backAcceptProd.setColor(ContextCompat.getColor(context!!,R.color.colorPrimary))
+            }else{
+                backgroundShape.setColor(ContextCompat.getColor(context!!,R.color.colorPrimaryDay))
+                backNoProd.setColor(ContextCompat.getColor(context!!,R.color.colorPrimaryDay))
+                backAcceptProd.setColor(ContextCompat.getColor(context!!,R.color.colorPrimaryDay))
+            }
         }
 
     }
@@ -203,15 +208,15 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         recipeToolbar.inflateMenu(R.menu.options_menu_in_recipe)
         recipeToolbar. setNavigationIcon(R.drawable.ic_baseline_arrow_black_24)
 
-            if (colorLists){
-                activity!!.window.statusBarColor = currentCardColor
-                activity!!.window.navigationBarColor = currentCardColor
+            if (cardColor!=0){
+                activity!!.window.statusBarColor = cardColor!!
+                activity!!.window.navigationBarColor = cardColor!!
                 activity!!.window.insetsController!!.setSystemBarsAppearance(
                         WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
                         WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
-                collapsingToolbar.setBackgroundColor(currentCardColor)
-                recipeToolbar.setBackgroundColor(currentCardColor)
-                recipeCoordinatorLayout.setBackgroundColor(currentCardColor)
+                collapsingToolbar.setBackgroundColor(cardColor!!)
+                recipeToolbar.setBackgroundColor(cardColor!!)
+                recipeCoordinatorLayout.setBackgroundColor(cardColor!!)
 
             }else{
                 if (isNightTheme(context!!)){
@@ -242,7 +247,7 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         }
 
 
-        if (!colorLists){
+        if (cardColor==0){
             appbar.addOnOffsetChangedListener(OnOffsetChangedListener { appBarLayout, verticalOffset ->
                 if (Math.abs(verticalOffset) - appBarLayout.totalScrollRange == 0) {
                     //  Collapsed

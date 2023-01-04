@@ -1,4 +1,4 @@
-package com.viktor.kh.dev.shoplist.screens.propuctsists
+package com.viktor.kh.dev.shoplist.utils
 
 import android.content.Context
 import android.util.Log
@@ -9,12 +9,11 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.SetColorItemBinding
-import com.viktor.kh.dev.shoplist.utils.ColorClickedList
-import com.viktor.kh.dev.shoplist.utils.getColors
 
 
 class ColorsAdapter(val context: Context,
-val onColorClick: OnColorClickListener): RecyclerView.Adapter<ColorsAdapter.ColorHolder>() {
+val onColorClick: OnColorClickListener
+): RecyclerView.Adapter<ColorsAdapter.ColorHolder>() {
 
      var data = ColorClickedList()
 

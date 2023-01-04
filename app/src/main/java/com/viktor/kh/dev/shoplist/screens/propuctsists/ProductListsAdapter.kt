@@ -25,10 +25,8 @@ constructor(val onListClickListener: OnListClickListener,
 
     var context: Context? = null
     var nightTheme: Boolean = false
-    private var currentItemColor  = ColorId.get()
     var data : ArrayList<DataProductList> = ArrayList()
     var deletePosition = 0
-    private var colorMap = mutableMapOf<Int,Int>()
     var isSearch = false
 
 
@@ -76,7 +74,7 @@ constructor(val onListClickListener: OnListClickListener,
 
         fun bind (data : DataProductList) = with(binding){
             currentCardColor = cardColor(data.color)
-            if (colorLists&&currentCardColor!=0){
+            if (currentCardColor!=0){
                 cl.setCardBackgroundColor(cardColor(data.color))
             }else{
                 if (nightTheme){

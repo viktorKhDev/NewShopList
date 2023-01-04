@@ -3,6 +3,7 @@ package com.viktor.kh.dev.shoplist.screens.recipelists
 import android.app.Application
 import android.os.Bundle
 import android.util.Log
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
@@ -10,9 +11,7 @@ import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
 import com.viktor.kh.dev.shoplist.repository.db.room.RecipesDao
-import com.viktor.kh.dev.shoplist.utils.currentTimeToLong
-import com.viktor.kh.dev.shoplist.utils.LIST_ID
-import com.viktor.kh.dev.shoplist.utils.LIST_NAME
+import com.viktor.kh.dev.shoplist.utils.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,6 +24,7 @@ class RecipeListsModel @Inject constructor(application: Application) :AndroidVie
     @Inject lateinit var recipesDao: RecipesDao
     var initAnim = false
     var isAddClicked = false
+    var currentColor: Int? = null
 
 
    val dataRecipes : MutableLiveData <List<DataRecipe>> by lazy {
@@ -35,22 +35,48 @@ class RecipeListsModel @Inject constructor(application: Application) :AndroidVie
   }
 
 
+    val dataColors :MutableLiveData<ColorClickedList> by lazy {
+        MutableLiveData<ColorClickedList>()
+    }
+
+
     fun init(){
         isAddClicked = false
         initAnim = true
         getRecipes()
+        dataColors.value = ColorClickedList()
     }
 
 
 
+    fun clickColor(position: Int){
+        val data = dataColors.value
+        data!!.clickColor(position)
+        dataColors.value = data
+        dataColors.hasActiveObservers()
+        currentColor = dataColors.value!!.getCurrentColor()
+    }
 
+
+
+    fun clickColorWithColor(color: Int?){
+        if (color!=null){
+            val data = dataColors.value
+            data!!.clickColorWithColor(color)
+            dataColors.value = data
+            dataColors.hasActiveObservers()
+            currentColor = dataColors.value!!.getCurrentColor()
+        }else{
+            dataColors.value!!.clearClick()
+            dataColors.hasActiveObservers()
+            currentColor = dataColors.value!!.getCurrentColor()
+        }
+    }
 
     private fun getRecipes(){
         // get all recipes from DB
         CoroutineScope(Dispatchers.IO).launch {
             dataRecipes.postValue(recipesDao.getAll())
-            Log.d("MyLog", dataRecipes.value?.size.toString())
-            Log.d("MyLog", "getLists() in model")
         }
 
     }
@@ -73,7 +99,7 @@ class RecipeListsModel @Inject constructor(application: Application) :AndroidVie
         initAnim = false
         isAddClicked = true
         val listProduct :List<DataProduct> = emptyList()
-        val productList = DataRecipe(0,name,"", currentTimeToLong(),listProduct)
+        val productList = DataRecipe(0,name,"", currentTimeToLong(),currentColor,listProduct)
         CoroutineScope(Dispatchers.IO).launch {
             recipesDao.insert(productList)
             getRecipes()
@@ -88,7 +114,7 @@ class RecipeListsModel @Inject constructor(application: Application) :AndroidVie
         CoroutineScope(Dispatchers.IO).launch {
             recipesDao.update(
                 DataRecipe(
-                    list.id, name,list.text, list.date,list.products
+                    list.id, name,list.text, list.date, currentColor,list.products
                 )
             )
             getRecipes()
@@ -101,6 +127,11 @@ class RecipeListsModel @Inject constructor(application: Application) :AndroidVie
         var bundle = Bundle()
         bundle.putInt(LIST_ID,dataRecipe.id)
         bundle.putString(LIST_NAME,dataRecipe.name)
+        if (dataRecipe.color!=null){
+            bundle.putInt(LIST_COLOR, ContextCompat.getColor(getApplication(), dataRecipe.color))
+        }else{
+            bundle.putInt(LIST_COLOR,0)
+        }
         controller.navigate(R.id.action_recipeListsFragment_to_recipeFragment,bundle)
     }
 
