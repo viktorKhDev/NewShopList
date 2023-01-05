@@ -282,6 +282,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
         }else{
             activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
             activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
+
         }
 
         listsToolbar.title = getString(R.string.lists)
@@ -304,9 +305,6 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
 
     private fun searchList() = with(binding){
-        val animation = AnimationUtils.loadAnimation(context,R.anim.to_start_anim)
-        searchBar.animation = animation
-        animation.start()
         searchBar.visibility  = View.VISIBLE
         autoCompleteText.addTextChangedListener(FollowText(this@ProductListsFragment))
         closeSearch.setOnClickListener(View.OnClickListener {

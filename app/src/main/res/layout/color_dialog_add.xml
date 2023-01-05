@@ -15,9 +15,9 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:paddingStart="5dp"
-        android:paddingEnd="5dp">
+        android:paddingEnd="5dp"/>
 
-    </androidx.recyclerview.widget.RecyclerView>
+
 
     <EditText
         android:id="@+id/dialog_text"

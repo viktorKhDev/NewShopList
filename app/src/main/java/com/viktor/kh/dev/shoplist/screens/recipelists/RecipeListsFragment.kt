@@ -292,9 +292,6 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
 
 
     private fun searchRecipe() = with(binding.listsIncludeInRecipes){
-        val animation = AnimationUtils.loadAnimation(context,R.anim.to_start_anim)
-        searchBar.animation = animation
-        animation.start()
         searchBar.visibility  = View.VISIBLE
         autoCompleteText.addTextChangedListener(FollowText(this@RecipeListsFragment))
         closeSearch.setOnClickListener(View.OnClickListener {

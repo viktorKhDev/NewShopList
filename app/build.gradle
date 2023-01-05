@@ -20,8 +20,8 @@ android {
         applicationId "com.viktor.kh.dev.shoplist"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 11
-        versionName "2.2.6"
+        versionCode 12
+        versionName "2.2.7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -41,7 +41,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

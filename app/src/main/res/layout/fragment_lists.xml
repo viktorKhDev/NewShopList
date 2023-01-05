@@ -34,7 +34,7 @@
             android:id="@+id/auto_complete_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/list_title"
+            android:hint="@string/input_the_title"
             android:textColor="?android:textColor"
             app:layout_constraintTop_toTopOf="parent"
             android:textColorHint="@color/gray_item"
