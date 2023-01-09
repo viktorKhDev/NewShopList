@@ -96,6 +96,20 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
         addProductFabInProd.hide()
         textProduct.showKeyboard()
 
+        val onColorClickListener = object : ColorsAdapter.OnColorClickListener{
+            override fun onClick(position: Int) {
+                //model.clickColor(position)
+            }
+
+        }
+        val colorAdapter = ColorsAdapter(context!!,onColorClickListener)
+
+        colorsPanel.apply {
+            layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
+            adapter = colorAdapter
+            adapter!!.notifyDataSetChanged()
+        }
+
         btnAcceptProduct.setOnClickListener(View.OnClickListener {
             val productName : String = textProduct.text.toString()
             if(productName.isNotEmpty()){
