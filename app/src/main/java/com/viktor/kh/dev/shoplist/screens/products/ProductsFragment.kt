@@ -96,9 +96,11 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
         addProductFabInProd.hide()
         textProduct.showKeyboard()
 
+
+        //for colors panel
         val onColorClickListener = object : ColorsAdapter.OnColorClickListener{
             override fun onClick(position: Int) {
-                //model.clickColor(position)
+                model.clickColor(position)
             }
 
         }
@@ -109,6 +111,22 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
             adapter = colorAdapter
             adapter!!.notifyDataSetChanged()
         }
+
+        model.dataColors.observe(viewLifecycleOwner, Observer {
+            colorAdapter.data = it
+            colorAdapter.notifyDataSetChanged()
+        })
+
+
+        val currentPosition = colorAdapter.data.getCurrentColorPosition()
+        if(currentPosition>0){
+            colorsPanel.smoothScrollToPosition(currentPosition)
+        }else{
+            colorsPanel.smoothScrollToPosition(0)
+        }
+        //////////
+
+
 
         btnAcceptProduct.setOnClickListener(View.OnClickListener {
             val productName : String = textProduct.text.toString()
@@ -126,41 +144,69 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
             textProduct.hideKeyboard()
             relativeAddProduct.visibility = View.GONE
             addProductFabInProd.show()
-
+            model.dataColors.removeObservers(viewLifecycleOwner)
         })
 
     }
 
-    private fun setProduct(position: Int){
+    private fun setProduct(position: Int) = with(binding){
         //change name for product
         var dataProduct: DataProduct = model.productsList.value!![position]
-        var dialog = context?.let { Dialog(it,R.style.MyDialog) }
-        if (isNightTheme(context!!)){
-            dialog = context?.let { Dialog(it,R.style.MyDialogDark) }
-        }
-        if(dialog!=null){
-            dialog.setContentView(R.layout.dialog_add)
-            val text = dialog.findViewById<EditText>(R.id.dialog_text)
-            text.setText(dataProduct.name)
-            val buttonYes = dialog.findViewById<Button>(R.id.btn_yes)
-            val  buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
-            dialog.setCancelable(true)
-            dialog.show()
-             text.showKeyboard()
-            buttonCancel.setOnClickListener(View.OnClickListener {
-                dialog.dismiss()
-                text.hideKeyboard()
-            })
+        relativeAddProduct.startAnimation(AnimationUtils.loadAnimation(activity,R.anim.to_start_anim))
+        relativeAddProduct.visibility = View.VISIBLE
+        addProductFabInProd.hide()
+        textProduct.setText(dataProduct.name)
+        textProduct.showKeyboard()
 
-            buttonYes.setOnClickListener(View.OnClickListener {
-                if(text.text.toString().isNotEmpty()){
-                    model.renameProduct(position,text.text.toString())
-                    dialog.dismiss()
-                }else{
-                    showToast(getString(R.string.input_the_title),activity)
-                }
-            })
+
+
+
+        //init colors
+        val onColorClickListener = object : ColorsAdapter.OnColorClickListener{
+            override fun onClick(position: Int) {
+                model.clickColor(position)
+            }
+
         }
+        val colorAdapter = ColorsAdapter(context!!,onColorClickListener)
+
+        colorsPanel.apply {
+            layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
+            adapter = colorAdapter
+            adapter!!.notifyDataSetChanged()
+        }
+
+        //model.clickColorWithColor(dataProduct.color)
+        model.dataColors.observe(viewLifecycleOwner, Observer {
+            colorAdapter.data = it
+            colorAdapter.notifyDataSetChanged()
+
+        })
+        val currentPosition = colorAdapter.data.getCurrentColorPosition()
+        if(currentPosition>0){
+            colorsPanel.smoothScrollToPosition(currentPosition)
+        }else{
+            colorsPanel.smoothScrollToPosition(0)
+        }
+        ////
+
+        btnAcceptProduct.setOnClickListener(View.OnClickListener {
+            val productName : String = textProduct.text.toString()
+            if(productName.isNotEmpty()){
+                model.renameProduct(position,textProduct.text.toString())
+                textProduct.setText("")
+            }else{
+                showToast(getString(R.string.input_the_title),context)
+            }
+
+        })
+        btnNoProduct.setOnClickListener(View.OnClickListener {
+            textProduct.text.clear()
+            textProduct.hideKeyboard()
+            relativeAddProduct.visibility = View.GONE
+            addProductFabInProd.show()
+            model.dataColors.removeObservers(viewLifecycleOwner)
+        })
 
     }
 

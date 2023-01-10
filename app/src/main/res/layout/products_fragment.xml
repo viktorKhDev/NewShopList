@@ -64,7 +64,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/colors_panel"
             android:layout_width="match_parent"
-            android:layout_height="39dp"
+            android:layout_height="42dp"
             android:background="@drawable/background_with_corners"
             android:orientation="horizontal"
             android:layout_marginTop="5dp"

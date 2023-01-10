@@ -188,7 +188,6 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
 
             //init colors
-
             val onColorClickListener = object : ColorsAdapter.OnColorClickListener{
                 override fun onClick(position: Int) {
                     model.clickColor(position)

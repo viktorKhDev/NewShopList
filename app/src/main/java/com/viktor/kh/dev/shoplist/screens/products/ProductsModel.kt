@@ -33,6 +33,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
     var animPosition = -1
     var forScrollToPosition = 0
     var productAdded: DataProduct? = null
+    var currentColor: Int? = null
 
 
     val productsList : MutableLiveData<List<DataProduct>> by lazy {
@@ -40,6 +41,13 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
           getProducts()
       }
   }
+
+
+    val dataColors :MutableLiveData<ColorClickedList> by lazy {
+        MutableLiveData<ColorClickedList>()
+    }
+
+
     fun init(id: Int){
         stateChange = UPDATE_DATA
         animPosition = -1
@@ -49,11 +57,33 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
             listId = id
         }
         getProducts()
-
-        Log.d("MyLog", "productsModel init with id ${id.toString()}")
+        dataColors.value = ColorClickedList()
     }
 
 
+
+    fun clickColor(position: Int){
+        val data = dataColors.value
+        data!!.clickColor(position)
+        dataColors.value = data
+        dataColors.hasActiveObservers()
+        currentColor = dataColors.value!!.getCurrentColor()
+    }
+
+
+    fun clickColorWithColor(color: Int?){
+        if (color!=null){
+            val data = dataColors.value
+            data!!.clickColorWithColor(color)
+            dataColors.value = data
+            dataColors.hasActiveObservers()
+            currentColor = dataColors.value!!.getCurrentColor()
+        }else{
+            dataColors.value!!.clearClick()
+            dataColors.hasActiveObservers()
+            currentColor = dataColors.value!!.getCurrentColor()
+        }
+    }
 
 
     private fun getProducts(){
