@@ -10,6 +10,7 @@ object ProductsConverter {
 
     private val gson = Gson()
 
+
         @TypeConverter
         fun fromProductList( productList: List<DataProduct>?): String?{
            return if(productList == null) null else gson.toJson(productList)
@@ -32,7 +33,6 @@ object ProductsConverter {
     @TypeConverter
     fun toProduct(s: String?):DataProduct?{
        return if (s == null) null else gson.fromJson(s,DataProduct::class.java)
-
     }
 
 

@@ -6,7 +6,7 @@ import androidx.room.TypeConverters
 import com.viktor.kh.dev.shoplist.repository.db.converters.ProductsConverter
 import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
 
-@Database(entities = [DataRecipe::class], version = 2,
+@Database(entities = [DataRecipe::class], version = 3,
         autoMigrations = [androidx.room.AutoMigration(from = 1, to = 2)])
 @TypeConverters(ProductsConverter::class)
 abstract class RecipesDB: RoomDatabase() {

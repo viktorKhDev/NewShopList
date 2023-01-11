@@ -14,5 +14,6 @@ data class DataProduct(
    @ColumnInfo(name = "name" ) val name: String?,
    @ColumnInfo(name = "date" ) val date: Long?,
    @ColumnInfo(name = "ready" ) val ready: Boolean?,
-   @ColumnInfo(name = "amount" ) val amount: String?
+   @ColumnInfo(name = "amount" ) val amount: String?,
+   @ColumnInfo(name = "color") val color: Int?
    )
