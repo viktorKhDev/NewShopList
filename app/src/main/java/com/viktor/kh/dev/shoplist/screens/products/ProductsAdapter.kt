@@ -1,6 +1,7 @@
 package com.viktor.kh.dev.shoplist.screens.products
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.Paint
 import android.view.LayoutInflater
@@ -121,12 +122,21 @@ class ProductsAdapter(
                     text.setTextColor(Color.WHITE)
                 }
             } else {
+               val color = cardColor(product.color)
                 val card = itemView.findViewById<CardView>(R.id.cl)
-                if (colorItems) card.setCardBackgroundColor(cardColor(product))
+                if (color!=null){
+                    card.setCardBackgroundColor(color)
+                }else{
+                    if (nightTheme){
+                        card.setCardBackgroundColor(ContextCompat.getColor(context!!,R.color.colorPrimary))
+                    }else{
+                        card.setCardBackgroundColor(ContextCompat.getColor(context!!,R.color.colorPrimaryDay))
+                    }
+                }
                 text.text = "${product.name} ${product.amount}"
             }
 
-            if (nightTheme&&!colorItems){
+            if (nightTheme){
                 text.setTextColor(Color.WHITE)
             }
 
@@ -155,15 +165,18 @@ class ProductsAdapter(
     }
 
 
-    private fun cardColor(product: DataProduct):Int{
-        if (colorMap.contains(product)){
-                return ContextCompat.getColor(context!!, colorMap[product]!!)
+    private fun cardColor(color: Int?):Int?{
+        return try {
+            if (color!=null){
+                ContextCompat.getColor(context!!, color)
             }else{
-                if (currentItemColor==getColors().size-1) currentItemColor = 0 else currentItemColor++
-                colorMap.put(product, getColors()[currentItemColor])
-                return ContextCompat.getColor(context!!, getColors()[currentItemColor])
-
+                null
             }
+        }catch (e : Resources.NotFoundException){
+            writeLog("error color selected = ${e.printStackTrace()}",
+                context!!.applicationContext,true)
+            null
+        }
 
 
     }

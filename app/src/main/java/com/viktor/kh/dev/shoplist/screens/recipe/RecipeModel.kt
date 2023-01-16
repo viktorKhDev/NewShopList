@@ -30,6 +30,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
     var initAnim = false
     var stateChange = UPDATE_DATA
     var animPosition = -1
+    var currentColor: Int? = null
 
     //need get from settings
 
@@ -102,7 +103,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
         initAnim = false
         CoroutineScope(Dispatchers.IO).launch {
             val currentProduct = productsList.value!![position]
-            val newProduct = DataProduct(name,currentProduct.date, false,amount)
+            val newProduct = DataProduct(name,currentProduct.date, false,amount,currentColor)
             val recipe: DataRecipe = recipesDao.get(listId!!)
             val products  = mutableListOf<DataProduct>()
             recipe.products?.let { products.addAll(it) }
@@ -132,7 +133,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
         initAnim = false
         CoroutineScope(Dispatchers.IO).launch {
             val recipe: DataRecipe = recipesDao.get(listId!!)
-            val dataProduct = DataProduct(productName.trim(), currentTimeToLong(), false,amount)
+            val dataProduct = DataProduct(productName.trim(), currentTimeToLong(), false,amount,currentColor)
             val products  = mutableListOf<DataProduct>()
             recipe.products?.let { products.addAll(it) }
             products.add(dataProduct)
@@ -170,7 +171,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
                 val recipe: DataRecipe = recipesDao.get(listId!!)
                 products.addAll(recipe.products!!)
                 for (name in strings) {
-                    val product = DataProduct(name.trim(), currentTimeToLong(), false,"")
+                    val product = DataProduct(name.trim(), currentTimeToLong(), false,"",null)
                     products.add(product)
                     animPosition = products.size
                 }

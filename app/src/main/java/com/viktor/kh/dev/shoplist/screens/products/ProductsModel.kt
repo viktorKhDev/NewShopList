@@ -104,7 +104,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
         CoroutineScope(Dispatchers.IO).launch {
           val currentProduct = productsList.value!![position]
           val newProduct = DataProduct(currentProduct.name,currentProduct.date
-              , currentProduct.ready?.let { changeReady(it) },currentProduct.amount)
+              , currentProduct.ready?.let { changeReady(it) },currentProduct.amount,currentProduct.color)
           val list: DataProductList = productListsDao.get(listId!!)
           val products  = mutableListOf<DataProduct>()
           list.products?.let { products.addAll(it) }
@@ -121,7 +121,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
         initAnim = false
         CoroutineScope(Dispatchers.IO).launch {
             val currentProduct = productsList.value!![position]
-            val newProduct = DataProduct(name,currentProduct.date,currentProduct.ready,"")
+            val newProduct = DataProduct(name,currentProduct.date,currentProduct.ready,"",currentColor)
             val list: DataProductList = productListsDao.get(listId!!)
             val products  = mutableListOf<DataProduct>()
             list.products?.let { products.addAll(it) }
@@ -151,7 +151,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
       initAnim = false
         CoroutineScope(Dispatchers.IO).launch {
             val list: DataProductList = productListsDao.get(listId!!)
-            val dataProduct = DataProduct(productName.trim(), currentTimeToLong(), false,"")
+            val dataProduct = DataProduct(productName.trim(), currentTimeToLong(), false,"",currentColor)
             productAdded = dataProduct
             val products  = mutableListOf<DataProduct>()
             list.products?.let { products.addAll(it) }
@@ -188,7 +188,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                  val list: DataProductList = productListsDao.get(listId!!)
                  products.addAll(list.products!!)
                  for (name in strings) {
-                     val product = DataProduct(name.trim(), currentTimeToLong(), false,"")
+                     val product = DataProduct(name.trim(), currentTimeToLong(), false,"",null)
                      products.add(product)
                      animPosition = products.size
                  }
@@ -230,7 +230,8 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                                 "${e.name} (${listRecipes[i].name})"
                                 ,e.date
                                 ,false
-                                , e.amount?.let { countPortions(it,portions) }
+                                , e.amount?.let { countPortions(it,portions) },
+                                e.color
                             )
                             readyList.add(product)
                         }
