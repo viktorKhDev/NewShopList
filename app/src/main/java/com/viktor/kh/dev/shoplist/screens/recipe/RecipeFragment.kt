@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -36,13 +37,13 @@ import dagger.hilt.android.AndroidEntryPoint
 class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
 
-   private lateinit var binding : RecipeFragmentBinding
-   private val model: RecipeModel by activityViewModels()
+    private lateinit var binding: RecipeFragmentBinding
+    private val model: RecipeModel by activityViewModels()
     private lateinit var rv: RecyclerView
     private lateinit var productsAdapter: RecipeProductsAdapter
-    private  lateinit var itemTouchHelper: ItemTouchHelper
+    private lateinit var itemTouchHelper: ItemTouchHelper
     private lateinit var itemTouchCallback: ItemTouchCallback
-    private var cardColor : Int? = null
+    private var cardColor: Int? = null
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,38 +51,36 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         context?.let { loadSetting(it) }
         binding = RecipeFragmentBinding.bind(view)
         cardColor = arguments?.getInt(LIST_COLOR)!!
-        val  listId = arguments?.getInt(LIST_ID)!!
-       model.init(listId)
-       initActionbar()
-       initClicks()
-       initRv()
-       onBackCallBack()
-       setBackgroundColor()
-       val callback = object :OnBackPressedCallback(true){
-           override fun handleOnBackPressed() {
-               if (binding.recipeProductList.visibility==View.VISIBLE){
-                  hideRecipeProducts()
-               }else{
-                   findNavController().popBackStack()
-               }
-           }
+        val listId = arguments?.getInt(LIST_ID)!!
+        model.init(listId)
+        initActionbar()
+        initClicks()
+        initRv()
+        onBackCallBack()
+        setBackgroundColor()
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (binding.recipeProductList.visibility == View.VISIBLE) {
+                    hideRecipeProducts()
+                } else {
+                    findNavController().popBackStack()
+                }
+            }
 
-       }
+        }
 
-       requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,callback)
-       model.recipeText.observe(viewLifecycleOwner, Observer {
-             subscribeText(it)
-         })
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+        model.recipeText.observe(viewLifecycleOwner, Observer {
+            subscribeText(it)
+        })
 
-       model.productsList.observe(viewLifecycleOwner, Observer {
-           subscribeProducts(it)
-       })
+        model.productsList.observe(viewLifecycleOwner, Observer {
+            subscribeProducts(it)
+        })
     }
 
 
-
-
-    private fun initClicks() = with(binding){
+    private fun initClicks() = with(binding) {
 
 
         btnCloseProducts.setOnClickListener(View.OnClickListener {
@@ -89,7 +88,7 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         })
 
         recipeText.onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
-            if (hasFocus){
+            if (hasFocus) {
                 productsFab.visibility = View.GONE
                 acceptTextFab.visibility = View.VISIBLE
             }
@@ -111,13 +110,13 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
         productsFab.setOnClickListener(View.OnClickListener {
             recipeProductList.visibility = View.VISIBLE
-            val anim = AnimationUtils.loadAnimation(context,R.anim.scale_show_center)
+            val anim = AnimationUtils.loadAnimation(context, R.anim.scale_show_center)
             rv.startAnimation(anim)
             recipeText.hideKeyboard()
-            val buttonAnim = AnimationUtils.loadAnimation(context,R.anim.alpha_anim)
+            val buttonAnim = AnimationUtils.loadAnimation(context, R.anim.alpha_anim)
             buttonAnim.startOffset = 300
             btnCloseProducts.startAnimation(buttonAnim)
-            btnCloseProducts.visibility  = View.VISIBLE
+            btnCloseProducts.visibility = View.VISIBLE
             addProductFab.startAnimation(buttonAnim)
 
 
@@ -125,16 +124,15 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
 
         addProductFab.setOnClickListener(View.OnClickListener {
-           addProduct()
+            addProduct()
         })
 
     }
 
 
-
-    private fun initRv(){
+    private fun initRv() {
         //init recyclerView
-        rv  = binding.rv
+        rv = binding.rv
 
         val onClickListener = object : RecipeProductsAdapter.OnProductClickListener {
             override fun onProductClick(position: Int) {
@@ -143,16 +141,16 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
         }
 
-        val onLongClickListener = object: RecipeProductsAdapter.OnProductLongClickListener{
+        val onLongClickListener = object : RecipeProductsAdapter.OnProductLongClickListener {
             override fun onProductLongClick(position: Int) {
                 setProduct(position)
             }
 
         }
 
-        productsAdapter = RecipeProductsAdapter(onClickListener,onLongClickListener)
+        productsAdapter = RecipeProductsAdapter(onClickListener, onLongClickListener)
         productsAdapter.context = context
-        productsAdapter.nightTheme = isNightTheme(context!!)
+        productsAdapter.nightTheme = isNightTheme(requireContext())
         rv.apply {
             adapter = productsAdapter
             layoutManager = LinearLayoutManager(context)
@@ -170,103 +168,140 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
     }
 
-    private fun setBackgroundColor() = with(binding){
+    private fun setBackgroundColor() = with(binding) {
         //set color from recipes lists item
         val backgroundShape = btnCloseProducts.background as GradientDrawable
         val backNoProd = btnNoProduct.background as GradientDrawable
         val backAcceptProd = btnAcceptProduct.background as GradientDrawable
-        if (cardColor!=0){
+        if (cardColor != 0) {
 
             addProductFab.backgroundTintList = ColorStateList.valueOf(cardColor!!)
-                productsFab.backgroundTintList = ColorStateList.valueOf(cardColor!!)
-                acceptTextFab.backgroundTintList = ColorStateList.valueOf(cardColor!!)
+            productsFab.backgroundTintList = ColorStateList.valueOf(cardColor!!)
+            acceptTextFab.backgroundTintList = ColorStateList.valueOf(cardColor!!)
 
             backgroundShape.setColor(cardColor!!)
             backNoProd.setColor(cardColor!!)
             backAcceptProd.setColor(cardColor!!)
-        }else{
-            if (isNightTheme(context!!)){
-                backgroundShape.setColor(ContextCompat.getColor(context!!,R.color.colorPrimary))
-                backNoProd.setColor(ContextCompat.getColor(context!!,R.color.colorPrimary))
-                backAcceptProd.setColor(ContextCompat.getColor(context!!,R.color.colorPrimary))
-            }else{
-                backgroundShape.setColor(ContextCompat.getColor(context!!,R.color.colorPrimaryDay))
-                backNoProd.setColor(ContextCompat.getColor(context!!,R.color.colorPrimaryDay))
-                backAcceptProd.setColor(ContextCompat.getColor(context!!,R.color.colorPrimaryDay))
+        } else {
+            if (isNightTheme(requireContext())) {
+                backgroundShape.setColor(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
+                backNoProd.setColor(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
+                backAcceptProd.setColor(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
+            } else {
+                backgroundShape.setColor(ContextCompat.getColor(requireContext(), R.color.colorPrimaryDay))
+                backNoProd.setColor(ContextCompat.getColor(requireContext(), R.color.colorPrimaryDay))
+                backAcceptProd.setColor(ContextCompat.getColor(requireContext(), R.color.colorPrimaryDay))
             }
         }
 
     }
 
 
-
-
-    private fun initActionbar() = with(binding){
+    private fun initActionbar() = with(binding) {
 
         val listName = arguments?.getString(LIST_NAME)
         collapsingToolbar.title = listName
         recipeToolbar.inflateMenu(R.menu.options_menu_in_recipe)
-        recipeToolbar. setNavigationIcon(R.drawable.ic_baseline_arrow_black_24)
+        recipeToolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_black_24)
 
-            if (cardColor!=0){
-                activity!!.window.statusBarColor = cardColor!!
-                activity!!.window.navigationBarColor = cardColor!!
-                activity!!.window.insetsController!!.setSystemBarsAppearance(
-                        WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
-                        WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
-                collapsingToolbar.setBackgroundColor(cardColor!!)
-                recipeToolbar.setBackgroundColor(cardColor!!)
-                recipeCoordinatorLayout.setBackgroundColor(cardColor!!)
-
-            }else{
-                if (isNightTheme(context!!)){
-                    activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
-                    activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
-                    recipeCoordinatorLayout.setBackgroundColor(ContextCompat.getColor(context!!,R.color.colorPrimaryDark))
-                }else{
-                    activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
-                    activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
-                    recipeCoordinatorLayout.setBackgroundColor(ContextCompat.getColor(context!!,R.color.card_clicked_day))
-                }
+        if (cardColor != 0) {
+            requireActivity().window.statusBarColor = cardColor!!
+            requireActivity().window.navigationBarColor = cardColor!!
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                requireActivity().window.insetsController!!.setSystemBarsAppearance(
+                    WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+                    WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+                )
             }
+            collapsingToolbar.setBackgroundColor(cardColor!!)
+            recipeToolbar.setBackgroundColor(cardColor!!)
+            recipeCoordinatorLayout.setBackgroundColor(cardColor!!)
+
+        } else {
+            if (isNightTheme(requireContext())) {
+                requireActivity().window.statusBarColor =
+                    ContextCompat.getColor(requireContext(), R.color.colorPrimary)
+                requireActivity().window.navigationBarColor =
+                    ContextCompat.getColor(requireContext(), R.color.colorPrimary)
+                recipeCoordinatorLayout.setBackgroundColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.colorPrimaryDark
+                    )
+                )
+            } else {
+                requireActivity().window.statusBarColor =
+                    ContextCompat.getColor(requireContext(), R.color.colorPrimaryDay)
+                requireActivity().window.navigationBarColor =
+                    ContextCompat.getColor(requireContext(), R.color.colorPrimaryDay)
+                recipeCoordinatorLayout.setBackgroundColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.card_clicked_day
+                    )
+                )
+            }
+        }
 
 
-        if (isNightTheme(context!!)&&cardColor==0){
+        if (isNightTheme(requireContext()) && cardColor == 0) {
             collapsingToolbar.setCollapsedTitleTextColor(Color.WHITE)
             collapsingToolbar.setExpandedTitleColor(Color.WHITE)
             recipeToolbar.apply {
                 setNavigationIcon(R.drawable.ic_baseline_arrow_white_24)
                 setTitleTextColor(Color.WHITE)
                 val itemShare = menu.findItem(R.id.share_item)
-                itemShare.icon = ContextCompat.getDrawable(context!!,R.drawable.ic_day_night_share_24)
-                overflowIcon = ContextCompat.getDrawable(context,R.drawable.ic_baseline_more_vert_white_24)
+                itemShare.icon =
+                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_day_night_share_24)
+                overflowIcon =
+                    ContextCompat.getDrawable(context, R.drawable.ic_baseline_more_vert_white_24)
             }
-        }else{
+        } else {
             collapsingToolbar.setCollapsedTitleTextColor(Color.BLACK)
             collapsingToolbar.setExpandedTitleColor(Color.BLACK)
         }
 
 
-        if (cardColor==0){
+        if (cardColor == 0) {
             appbar.addOnOffsetChangedListener(OnOffsetChangedListener { appBarLayout, verticalOffset ->
                 if (Math.abs(verticalOffset) - appBarLayout.totalScrollRange == 0) {
                     //  Collapsed
-                    if (isNightTheme(context!!)){
-                        activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDark)
-                        appbar.setBackgroundColor(ContextCompat.getColor(context!!,R.color.colorPrimaryDark))
-                    }else{
-                        activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.card_clicked_day)
-                        appbar.setBackgroundColor(ContextCompat.getColor(context!!,R.color.card_clicked_day))
+                    if (isNightTheme(requireContext())) {
+                        requireActivity().window.statusBarColor =
+                            ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark)
+                        appbar.setBackgroundColor(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                R.color.colorPrimaryDark
+                            )
+                        )
+                    } else {
+                        requireActivity().window.statusBarColor =
+                            ContextCompat.getColor(requireContext(), R.color.card_clicked_day)
+                        appbar.setBackgroundColor(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                R.color.card_clicked_day
+                            )
+                        )
                     }
 
                 } else {
                     //Expanded
-                    if (isNightTheme(context!!)){
-                        activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
-                        appbar.background = ContextCompat.getDrawable(context!!,R.drawable.gradient_dor_colapsing_apbar)
-                    }else{
-                        activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
-                        appbar.background = ContextCompat.getDrawable(context!!,R.drawable.gradient_dor_colapsing_apbar)
+                    if (isNightTheme(requireContext())) {
+                        requireActivity().window.statusBarColor =
+                            ContextCompat.getColor(requireContext(), R.color.colorPrimary)
+                        appbar.background = ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.gradient_dor_colapsing_apbar
+                        )
+                    } else {
+                        requireActivity().window.statusBarColor =
+                            ContextCompat.getColor(requireContext(), R.color.colorPrimaryDay)
+                        appbar.background = ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.gradient_dor_colapsing_apbar
+                        )
                     }
                 }
             })
@@ -274,12 +309,13 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
 
         recipeToolbar.setOnMenuItemClickListener { item ->
-            when(item.itemId){
+            when (item.itemId) {
 
-               R.id.home -> activity!!.onBackPressedDispatcher.onBackPressed()
+                R.id.home -> requireActivity().onBackPressedDispatcher.onBackPressed()
 
                 R.id.share_item -> listName?.let {
-                    model.shareRecipe(activity as AppCompatActivity,
+                    model.shareRecipe(
+                        activity as AppCompatActivity,
                         it
                     )
                 }
@@ -293,30 +329,30 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         }
 
         recipeToolbar.setNavigationOnClickListener(View.OnClickListener {
-            activity!!.onBackPressedDispatcher.onBackPressed()
+            requireActivity().onBackPressedDispatcher.onBackPressed()
         })
-
-
-
-
 
 
     }
 
 
-
-    private fun addProduct() = with(binding){
-        relativeAddProduct.startAnimation(AnimationUtils.loadAnimation(activity,R.anim.to_start_anim))
+    private fun addProduct() = with(binding) {
+        relativeAddProduct.startAnimation(
+            AnimationUtils.loadAnimation(
+                activity,
+                R.anim.to_start_anim
+            )
+        )
         relativeAddProduct.visibility = View.VISIBLE
         addProductFab.hide()
         textProduct.showKeyboard()
 
 
 
-        Log.d("MyLog" , "addButton Hide")
+        Log.d("MyLog", "addButton Hide")
         textProduct.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
             var handled = false
-            if (actionId == EditorInfo.IME_ACTION_NEXT){
+            if (actionId == EditorInfo.IME_ACTION_NEXT) {
 
                 textAmount.showKeyboard()
                 handled = true
@@ -324,16 +360,16 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
             handled
         })
         btnAcceptProduct.setOnClickListener(View.OnClickListener {
-            val productName : String = textProduct.text.toString()
-            val productAmount : String = textAmount.text.toString()
+            val productName: String = textProduct.text.toString()
+            val productAmount: String = textAmount.text.toString()
 
-            if(productName.isNotEmpty()){
+            if (productName.isNotEmpty()) {
                 textProduct.setText("")
                 textAmount.setText("")
-                model.addProduct(productName,productAmount)
+                model.addProduct(productName, productAmount)
                 textProduct.showKeyboard()
-            }else{
-                showToast(getString(R.string.input_the_title),context)
+            } else {
+                showToast(getString(R.string.input_the_title), context)
             }
 
         })
@@ -343,28 +379,28 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
             relativeAddProduct.visibility = View.GONE
             addProductFab.show()
             textProduct.hideKeyboard()
-            Log.d("MyLog" , "addButton visible")
+            Log.d("MyLog", "addButton visible")
         })
     }
 
 
-    private fun setProduct(position: Int){
+    private fun setProduct(position: Int) {
         //change name for product
         var dataProduct: DataProduct = model.productsList.value!![position]
-        var dialog = context?.let { Dialog(it,R.style.MyDialog) }
-        if (isNightTheme(context!!)){
-            dialog = context?.let { Dialog(it,R.style.MyDialogDark) }
+        var dialog = context?.let { Dialog(it, R.style.MyDialog) }
+        if (isNightTheme(requireContext())) {
+            dialog = context?.let { Dialog(it, R.style.MyDialogDark) }
         }
-        if(dialog!=null){
+        if (dialog != null) {
             dialog.setContentView(R.layout.dialog_set_recipe)
             val text = dialog.findViewById<EditText>(R.id.dialog_text)
             val amount = dialog.findViewById<EditText>(R.id.dialog_amount)
             text.setText(dataProduct.name)
-            if (dataProduct.amount!=null){
+            if (dataProduct.amount != null) {
                 amount.setText(dataProduct.amount)
             }
             val buttonYes = dialog.findViewById<Button>(R.id.btn_yes)
-            val  buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
+            val buttonCancel = dialog.findViewById<Button>(R.id.btn_no)
             dialog.setCancelable(true)
             dialog.show()
             text.showKeyboard()
@@ -375,42 +411,42 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
             })
 
             buttonYes.setOnClickListener(View.OnClickListener {
-                if(text.text.toString().isNotEmpty()){
-                    model.renameProduct(position,text.text.toString(),amount.text.toString())
+                if (text.text.toString().isNotEmpty()) {
+                    model.renameProduct(position, text.text.toString(), amount.text.toString())
                     dialog.dismiss()
-                }else{
-                    showToast(getString(R.string.input_the_title),activity)
+                } else {
+                    showToast(getString(R.string.input_the_title), activity)
                 }
             })
         }
 
     }
 
-    private fun subscribeProducts(data :List<DataProduct>){
-        productsAdapter.setData(data,model.stateChange)
-        if (model.stateChange== ADD_PRODUCT){
-            rv.scrollToPosition(data.size-1)
+    private fun subscribeProducts(data: List<DataProduct>) {
+        productsAdapter.setData(data, model.stateChange)
+        if (model.stateChange == ADD_PRODUCT) {
+            rv.scrollToPosition(data.size - 1)
         }
 
     }
 
-    private fun subscribeText(text: String){
+    private fun subscribeText(text: String) {
         binding.recipeText.setText(text)
     }
 
 
-    private fun hideRecipeProducts() = with(binding){
+    private fun hideRecipeProducts() = with(binding) {
         recipeProductList.visibility = View.GONE
         scrollText.isNestedScrollingEnabled = true
     }
 
 
-    private fun clearProducts(){
-        var dialog = context?.let { Dialog(it,R.style.MyDialog) }
-        if (isNightTheme(context!!)){
-            dialog = context?.let { Dialog(it,R.style.MyDialogDark) }
+    private fun clearProducts() {
+        var dialog = context?.let { Dialog(it, R.style.MyDialog) }
+        if (isNightTheme(requireContext())) {
+            dialog = context?.let { Dialog(it, R.style.MyDialogDark) }
         }
-        if(dialog!=null) {
+        if (dialog != null) {
             dialog.setContentView(R.layout.dialog_add)
             val text = dialog.findViewById<EditText>(R.id.dialog_text)
             text.setText(R.string.clean_products_list)
@@ -435,27 +471,21 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
     }
 
 
-
-    private fun onBackCallBack(){
+    private fun onBackCallBack() {
         val callback: OnBackPressedCallback =
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                   if (binding.recipeProductList.visibility == View.VISIBLE){
-                       hideRecipeProducts()
-                   }else{
-                       findNavController().navigate(R.id.action_recipeFragment_to_recipeListsFragment)
-                   }
+                    if (binding.recipeProductList.visibility == View.VISIBLE) {
+                        hideRecipeProducts()
+                    } else {
+                        findNavController().navigate(R.id.action_recipeFragment_to_recipeListsFragment)
+                    }
 
                 }
 
             }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
-
-
-
-
-
 
 
     override fun onPause() {
@@ -465,6 +495,6 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
 
     override fun onItemDismiss(position: Int) {
-       model.deleteProduct(position)
+        model.deleteProduct(position)
     }
 }

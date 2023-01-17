@@ -1,6 +1,7 @@
 package com.viktor.kh.dev.shoplist.utils
 
 
+
 import android.content.ClipData
 import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
 import android.content.ClipboardManager
@@ -40,6 +41,7 @@ const val UPDATE_DATA = 0
 
 
 
+
 fun isNightTheme(context:Context):Boolean{
  var state = false
     when (context.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
@@ -62,7 +64,9 @@ val colorsLight = listOf(
     R.color.card_violet,
     R.color.card_yellow,
     R.color.card_dark_blue,
-    R.color.card_pink
+    R.color.card_pink,
+    R.color.card_red_400,
+    R.color.card_blue_400
 )
 
 fun getColors():List<Int>{

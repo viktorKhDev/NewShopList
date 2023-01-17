@@ -1,5 +1,6 @@
 package com.viktor.kh.dev.shoplist.screens.propuctsists
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.view.*
@@ -82,7 +83,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
        }
        listAdapter = ProductListsAdapter(onListClickListener, onSetClickListener, onDelClickListener)
        listAdapter.context = context
-       listAdapter.nightTheme = isNightTheme(context!!)
+       listAdapter.nightTheme = isNightTheme(requireContext())
        rv.apply {
            layoutManager = LinearLayoutManager(context)
            adapter = listAdapter
@@ -99,7 +100,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
     private fun addList(){
         var dialog = context?.let { Dialog(it,R.style.MyDialog) }
         var listColor: Int? = null
-        if (isNightTheme(context!!)){
+        if (isNightTheme(requireContext())){
             dialog = context?.let { Dialog(it,R.style.MyDialogDark) }
         }
         if(dialog!=null){
@@ -123,7 +124,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
                 }
 
             }
-            val colorAdapter = ColorsAdapter(context!!,onColorClickListener)
+            val colorAdapter = ColorsAdapter(requireContext(),onColorClickListener)
             val colorPanel = dialog.findViewById<RecyclerView>(R.id.colors_panel)
             colorPanel.apply {
                 layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
@@ -168,10 +169,11 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
         }
 
     }
+  
     private fun setList(position:Int){
         var dataList: DataProductList = model.dataLists.value!![position]
         var dialog = context?.let { Dialog(it,R.style.MyDialog) }
-        if (isNightTheme(context!!)){
+        if (isNightTheme(requireContext())){
             dialog = context?.let { Dialog(it,R.style.MyDialogDark) }
         }
         if(dialog!=null){
@@ -194,7 +196,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
                 }
 
             }
-            val colorAdapter = ColorsAdapter(context!!,onColorClickListener)
+            val colorAdapter = ColorsAdapter(requireContext(),onColorClickListener)
             val colorPanel = dialog.findViewById<RecyclerView>(R.id.colors_panel)
             colorPanel.apply {
                 layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
@@ -242,7 +244,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
     private fun deleteList(position: Int){
         var dialog = context?.let { Dialog(it,R.style.MyDialog) }
-        if (isNightTheme(context!!)){
+        if (isNightTheme(requireContext())){
             dialog = context?.let { Dialog(it,R.style.MyDialogDark) }
         }
         if(dialog!=null) {
@@ -275,12 +277,12 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
     private fun initActionbar() = with(binding){
 
-        if (isNightTheme(context!!)){
-            activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
-            activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
+        if (isNightTheme(requireContext())){
+            requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimary)
+            requireActivity().window.navigationBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimary)
         }else{
-            activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
-            activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
+            requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimaryDay)
+            requireActivity().window.navigationBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimaryDay)
 
         }
 
@@ -289,7 +291,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
         listsToolbar.setOnMenuItemClickListener { item ->
             when(item.itemId){
 
-                android.R.id.home -> {activity!!.onBackPressedDispatcher.onBackPressed()
+                android.R.id.home -> {requireActivity().onBackPressedDispatcher.onBackPressed()
                     true}
                 R.id.search_item -> {searchList()
                     true}
@@ -297,7 +299,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
             }
         }
         listsToolbar.setNavigationOnClickListener(View.OnClickListener {
-            activity!!.onBackPressedDispatcher.onBackPressed()
+            requireActivity().onBackPressedDispatcher.onBackPressed()
         })
     }
 

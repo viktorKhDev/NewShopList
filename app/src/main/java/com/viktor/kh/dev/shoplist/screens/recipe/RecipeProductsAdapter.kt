@@ -88,14 +88,16 @@ class RecipeProductsAdapter(
             val card = itemView.findViewById<CardView>(R.id.cl)
             if (color!=null){
                 card.setCardBackgroundColor(color)
+                text.setTextColor(Color.BLACK)
             }else{
                 if (nightTheme){
+                    text.setTextColor(Color.WHITE)
                     card.setCardBackgroundColor(ContextCompat.getColor(context!!,R.color.colorPrimary))
                 }else{
+                    text.setTextColor(Color.BLACK)
                     card.setCardBackgroundColor(ContextCompat.getColor(context!!,R.color.colorPrimaryDay))
                 }
             }
-
 
             text.text = "${product.name} ${product.amount}"
             if (nightTheme&&!colorItems){

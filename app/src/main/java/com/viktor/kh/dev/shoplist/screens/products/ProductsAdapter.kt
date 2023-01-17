@@ -119,26 +119,31 @@ class ProductsAdapter(
                 text.paintFlags = text.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 text.text = "${product.name} ${product.amount}"
                 if (nightTheme){
-                    text.setTextColor(Color.WHITE)
+                    text.setTextColor(Color.LTGRAY)
+                }else{
+                    text.setTextColor(Color.GRAY)
                 }
+
             } else {
+
                val color = cardColor(product.color)
                 val card = itemView.findViewById<CardView>(R.id.cl)
                 if (color!=null){
                     card.setCardBackgroundColor(color)
+                    text.setTextColor(Color.BLACK)
                 }else{
+
                     if (nightTheme){
                         card.setCardBackgroundColor(ContextCompat.getColor(context!!,R.color.colorPrimary))
+                        text.setTextColor(Color.WHITE)
                     }else{
                         card.setCardBackgroundColor(ContextCompat.getColor(context!!,R.color.colorPrimaryDay))
+                        text.setTextColor(Color.BLACK)
                     }
                 }
                 text.text = "${product.name} ${product.amount}"
             }
 
-            if (nightTheme){
-                text.setTextColor(Color.WHITE)
-            }
 
 
 

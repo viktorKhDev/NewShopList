@@ -104,7 +104,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
             }
 
         }
-        val colorAdapter = ColorsAdapter(context!!,onColorClickListener)
+        val colorAdapter = ColorsAdapter(requireContext(),onColorClickListener)
 
         colorsPanel.apply {
             layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
@@ -168,7 +168,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
             }
 
         }
-        val colorAdapter = ColorsAdapter(context!!,onColorClickListener)
+        val colorAdapter = ColorsAdapter(requireContext(),onColorClickListener)
 
         colorsPanel.apply {
             layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
@@ -176,7 +176,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
             adapter!!.notifyDataSetChanged()
         }
 
-        //model.clickColorWithColor(dataProduct.color)
+        model.clickColorWithColor(dataProduct.color)
         model.dataColors.observe(viewLifecycleOwner, Observer {
             colorAdapter.data = it
             colorAdapter.notifyDataSetChanged()
@@ -194,10 +194,16 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
             val productName : String = textProduct.text.toString()
             if(productName.isNotEmpty()){
                 model.renameProduct(position,textProduct.text.toString())
-                textProduct.setText("")
+                textProduct.text.clear()
+                textProduct.hideKeyboard()
+                relativeAddProduct.visibility = View.GONE
+                addProductFabInProd.show()
+                model.dataColors.removeObservers(viewLifecycleOwner)
             }else{
                 showToast(getString(R.string.input_the_title),context)
             }
+
+
 
         })
         btnNoProduct.setOnClickListener(View.OnClickListener {
@@ -239,7 +245,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
         }
         productsAdapter = ProductsAdapter(onClickListener,onLongClickListener)
         productsAdapter.context = context
-        productsAdapter.nightTheme = isNightTheme(context!!)
+        productsAdapter.nightTheme = isNightTheme(requireContext())
         rv.apply {
             adapter = productsAdapter
             layoutManager = LinearLayoutManager(context)
@@ -268,21 +274,21 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
             setNavigationIcon(R.drawable.ic_baseline_arrow_black_24)
             setTitleTextColor(Color.BLACK)
             val itemShare = menu.findItem(R.id.share_item)
-            itemShare.icon = ContextCompat.getDrawable(context!!,R.drawable.ic_black_share_24)
+            itemShare.icon = ContextCompat.getDrawable(requireContext(),R.drawable.ic_black_share_24)
 
         }
-        if (isNightTheme(context!!)&&cardColor==0){
+        if (isNightTheme(requireContext())&&cardColor==0){
             toolbar.apply {
                 setNavigationIcon(R.drawable.ic_baseline_arrow_white_24)
                 setTitleTextColor(Color.WHITE)
                 val itemShare = menu.findItem(R.id.share_item)
-                itemShare.icon = ContextCompat.getDrawable(context!!,R.drawable.ic_day_night_share_24)
+                itemShare.icon = ContextCompat.getDrawable(requireContext(),R.drawable.ic_day_night_share_24)
                 overflowIcon = ContextCompat.getDrawable(context,R.drawable.ic_baseline_more_vert_white_24)
             }
         }
         toolbar.setOnMenuItemClickListener { item ->
             when(item.itemId){
-                android.R.id.home -> {activity!!.onBackPressedDispatcher.onBackPressed()
+                android.R.id.home -> {requireActivity().onBackPressedDispatcher.onBackPressed()
                     true}
                 R.id.clean ->{ cleanList()
                     true}
@@ -296,25 +302,25 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
             }
         }
         toolbar.setNavigationOnClickListener(View.OnClickListener {
-            activity!!.onBackPressedDispatcher.onBackPressed()
+            requireActivity().onBackPressedDispatcher.onBackPressed()
         })
 
 
 
 
         if (cardColor!=0){
-            activity!!.window.statusBarColor = cardColor as Int
-            activity!!.window.navigationBarColor = cardColor as Int
-            activity!!.window.insetsController!!.setSystemBarsAppearance(
+            requireActivity().window.statusBarColor = cardColor as Int
+            requireActivity().window.navigationBarColor = cardColor as Int
+            requireActivity().window.insetsController!!.setSystemBarsAppearance(
                 WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
                 WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
         }else{
-            if (isNightTheme(context!!)){
-                activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
-                activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
+            if (isNightTheme(requireContext())){
+                requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimary)
+                requireActivity().window.navigationBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimary)
             }else{
-                activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
-                activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
+                requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimaryDay)
+                requireActivity().window.navigationBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimaryDay)
             }
         }
 
@@ -331,7 +337,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
 
     private fun cleanList(){
         var dialog = context?.let { Dialog(it,R.style.MyDialog) }
-        if (isNightTheme(context!!)){
+        if (isNightTheme(requireContext())){
             dialog = context?.let { Dialog(it,R.style.MyDialogDark) }
         }
         if(dialog!=null) {
@@ -369,12 +375,15 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
             backNoProd.setColor(cardColor!!)
             backAcceptProd.setColor(cardColor!!)
         }else{
-            if (isNightTheme(context!!)){
-                backNoProd.setColor(ContextCompat.getColor(context!!,R.color.colorPrimary))
-                backAcceptProd.setColor(ContextCompat.getColor(context!!,R.color.colorPrimary))
+            if (isNightTheme(requireContext())){
+                backNoProd.setColor(ContextCompat.getColor(requireContext(),R.color.colorPrimary))
+                backAcceptProd.setColor(ContextCompat.getColor(requireContext(),R.color.colorPrimary))
+                addProductFabInProd.imageTintList = ColorStateList.valueOf(Color.WHITE)
+
             }else{
-                backNoProd.setColor(ContextCompat.getColor(context!!,R.color.colorPrimaryDay))
-                backAcceptProd.setColor(ContextCompat.getColor(context!!,R.color.colorPrimaryDay))
+                backNoProd.setColor(ContextCompat.getColor(requireContext(),R.color.colorPrimaryDay))
+                backAcceptProd.setColor(ContextCompat.getColor(requireContext(),R.color.colorPrimaryDay))
+                addProductFabInProd.imageTintList = ColorStateList.valueOf(Color.BLACK)
             }
         }
 
@@ -397,7 +406,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
         val dialog = builder.create()
         dialog.show()
 
-        val mDisplayMetrics = activity!!.windowManager.currentWindowMetrics
+        val mDisplayMetrics = requireActivity().windowManager.currentWindowMetrics
         val mDisplayWidth = mDisplayMetrics.bounds.width()
         val mDisplayHeight = mDisplayMetrics.bounds.height()
         val mLayoutParams = WindowManager.LayoutParams()

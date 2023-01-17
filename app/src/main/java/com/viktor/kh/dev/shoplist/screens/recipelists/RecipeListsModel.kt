@@ -2,7 +2,6 @@ package com.viktor.kh.dev.shoplist.screens.recipelists
 
 import android.app.Application
 import android.os.Bundle
-import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
@@ -124,7 +123,7 @@ class RecipeListsModel @Inject constructor(application: Application) :AndroidVie
     fun openRecipe(controller: NavController, dataRecipe: DataRecipe){
         // open recipe on position
         isAddClicked = false
-        var bundle = Bundle()
+        val bundle = Bundle()
         bundle.putInt(LIST_ID,dataRecipe.id)
         bundle.putString(LIST_NAME,dataRecipe.name)
         if (dataRecipe.color!=null){
