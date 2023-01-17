@@ -71,5 +71,6 @@
     <string name="list_is_empty">Liste ist leer</string>
     <string name="element_position">Position der Elemente</string>
     <string name="color">Farbe</string>
+    <string name="app_version">Anwendungsversion</string>
 
 </resources>

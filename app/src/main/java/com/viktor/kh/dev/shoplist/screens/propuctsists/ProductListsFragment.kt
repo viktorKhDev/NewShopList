@@ -2,6 +2,8 @@ package com.viktor.kh.dev.shoplist.screens.propuctsists
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import android.view.animation.AnimationUtils
@@ -41,6 +43,11 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
         initList()
          model.init()
          initActionbar()
+        if (isNightTheme(requireContext())){
+            binding.fabAddList.imageTintList = ColorStateList.valueOf(Color.WHITE)
+        }else{
+            binding.fabAddList.imageTintList = ColorStateList.valueOf(Color.BLACK)
+        }
         binding.fabAddList.setOnClickListener(View.OnClickListener {
              addList()
          })

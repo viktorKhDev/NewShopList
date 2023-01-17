@@ -71,6 +71,8 @@
     <string name="list_is_empty">Список пустой</string>
     <string name="element_position">Позиция элементов</string>
     <string name="color">Цвет</string>
+    <string name="app_version">Версия приложения</string>
+
 
 
 </resources>

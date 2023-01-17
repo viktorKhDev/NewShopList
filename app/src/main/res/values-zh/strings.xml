@@ -71,5 +71,6 @@
     <string name="list_is_empty">列表为空</string>
     <string name="element_position">元素的位置</string>
     <string name="color">颜色</string>
+    <string name="app_version">应用版本</string>
 
 </resources>

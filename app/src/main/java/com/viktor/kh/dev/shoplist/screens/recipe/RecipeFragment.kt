@@ -183,15 +183,23 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
             backNoProd.setColor(cardColor!!)
             backAcceptProd.setColor(cardColor!!)
         } else {
-            if (isNightTheme(requireContext())) {
-                backgroundShape.setColor(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
-                backNoProd.setColor(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
-                backAcceptProd.setColor(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
-            } else {
-                backgroundShape.setColor(ContextCompat.getColor(requireContext(), R.color.colorPrimaryDay))
-                backNoProd.setColor(ContextCompat.getColor(requireContext(), R.color.colorPrimaryDay))
-                backAcceptProd.setColor(ContextCompat.getColor(requireContext(), R.color.colorPrimaryDay))
+            var colorImage =  ColorStateList.valueOf(Color.BLACK)
+            var colorBackGround = ContextCompat.getColor(requireContext(),R.color.colorPrimaryDay)
+            if (isNightTheme(requireContext())){
+                colorImage = ColorStateList.valueOf(Color.WHITE)
+                colorBackGround = ContextCompat.getColor(requireContext(),R.color.colorPrimary)
             }
+            addProductFab.imageTintList = colorImage
+            acceptTextFab.imageTintList = colorImage
+            productsFab.imageTintList = colorImage
+
+            backgroundShape.setColor(colorBackGround)
+            backNoProd.setColor(colorBackGround)
+            backAcceptProd.setColor(colorBackGround)
+
+            btnCloseProducts.imageTintList = colorImage
+            btnNoProduct.imageTintList = colorImage
+            btnAcceptProduct.imageTintList = colorImage
         }
 
     }

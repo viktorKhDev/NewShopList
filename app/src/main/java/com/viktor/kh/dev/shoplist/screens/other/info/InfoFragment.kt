@@ -1,10 +1,10 @@
 package com.viktor.kh.dev.shoplist.screens.other.info
 
 import android.os.Bundle
-
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.viktor.kh.dev.shoplist.BuildConfig
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.SupportFragmentBinding
 import com.viktor.kh.dev.shoplist.utils.isNightTheme
@@ -22,7 +22,7 @@ class InfoFragment: Fragment(R.layout.support_fragment) {
         super.onViewCreated(view, savedInstanceState)
         binding = SupportFragmentBinding.bind(view)
         initActionbar()
-
+        binding!!.textVersion.text = "${requireContext().getString(R.string.app_version)}  ${BuildConfig.VERSION_NAME}"
     }
 
 

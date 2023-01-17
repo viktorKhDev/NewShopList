@@ -375,17 +375,21 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
             backNoProd.setColor(cardColor!!)
             backAcceptProd.setColor(cardColor!!)
         }else{
-            if (isNightTheme(requireContext())){
-                backNoProd.setColor(ContextCompat.getColor(requireContext(),R.color.colorPrimary))
-                backAcceptProd.setColor(ContextCompat.getColor(requireContext(),R.color.colorPrimary))
-                addProductFabInProd.imageTintList = ColorStateList.valueOf(Color.WHITE)
+            var colorImage =  ColorStateList.valueOf(Color.BLACK)
+            var colorBackGround = ContextCompat.getColor(requireContext(),R.color.colorPrimaryDay)
 
-            }else{
-                backNoProd.setColor(ContextCompat.getColor(requireContext(),R.color.colorPrimaryDay))
-                backAcceptProd.setColor(ContextCompat.getColor(requireContext(),R.color.colorPrimaryDay))
-                addProductFabInProd.imageTintList = ColorStateList.valueOf(Color.BLACK)
+            if (isNightTheme(requireContext())){
+            colorImage = ColorStateList.valueOf(Color.WHITE)
+            colorBackGround = ContextCompat.getColor(requireContext(),R.color.colorPrimary)
             }
+            backNoProd.setColor(colorBackGround)
+            backAcceptProd.setColor(colorBackGround)
+            addProductFabInProd.imageTintList = colorImage
+            btnNoProduct.imageTintList = colorImage
+            btnAcceptProduct.imageTintList = colorImage
         }
+
+
 
     }
 

@@ -65,8 +65,8 @@ val colorsLight = listOf(
     R.color.card_yellow,
     R.color.card_dark_blue,
     R.color.card_pink,
-    R.color.card_red_400,
-    R.color.card_blue_400
+    R.color.card_red_variant,
+    R.color.card_blue_variant
 )
 
 fun getColors():List<Int>{

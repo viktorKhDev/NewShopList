@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp">
 
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text_info"
                 android:layout_width="match_parent"
@@ -50,9 +51,22 @@
                 android:textColor="@color/blue_text"
                 android:textColorLink="@color/blue_text"
                 android:text="@string/support_email"
-                android:textSize="20sp">
+                android:textSize="20sp"/>
 
-            </androidx.appcompat.widget.AppCompatTextView>
+            <TextView
+                android:id="@+id/text_version"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_email"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/app_version"
+                android:textColor="?android:textColor"
+                android:textSize="20sp" />
+
+
 
         </RelativeLayout>
 
