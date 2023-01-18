@@ -1,6 +1,8 @@
 package com.viktor.kh.dev.shoplist.screens.recipelists
 
 import android.app.Dialog
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -41,6 +43,11 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
         initList()
         model.init()
         initActionbar()
+        if (isNightTheme(requireContext())){
+            binding.listsIncludeInRecipes.fabAddList.imageTintList = ColorStateList.valueOf(Color.WHITE)
+        }else{
+            binding.listsIncludeInRecipes.fabAddList.imageTintList = ColorStateList.valueOf(Color.BLACK)
+        }
         binding.listsIncludeInRecipes.fabAddList.setOnClickListener(View.OnClickListener {
             addRecipe()
         })
@@ -83,7 +90,7 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
         }
         recipesAdapter = RecipesAdapter(onListClickListener, onSetClickListener, onDelClickListener)
         recipesAdapter.context = context
-        recipesAdapter.nightTheme = isNightTheme(context!!)
+        recipesAdapter.nightTheme = isNightTheme(requireContext())
         rv.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = recipesAdapter
@@ -96,7 +103,7 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
     private fun addRecipe(){
 
         var dialog = context?.let { Dialog(it,R.style.MyDialog) }
-        if (isNightTheme(context!!)){
+        if (isNightTheme(requireContext())){
             dialog = context?.let { Dialog(it,R.style.MyDialogDark) }
         }
         if(dialog!=null){
@@ -117,7 +124,7 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
                 }
 
             }
-            val colorAdapter = ColorsAdapter(context!!,onColorClickListener)
+            val colorAdapter = ColorsAdapter(requireContext(),onColorClickListener)
             val colorPanel = dialog.findViewById<RecyclerView>(R.id.colors_panel)
             colorPanel.apply {
                 layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
@@ -164,7 +171,7 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
     private fun setRecipe(position:Int){
         var dataList: DataRecipe = model.dataRecipes.value!![position]
         var dialog = context?.let { Dialog(it,R.style.MyDialog) }
-        if (isNightTheme(context!!)){
+        if (isNightTheme(requireContext())){
             dialog = context?.let { Dialog(it,R.style.MyDialogDark) }
         }
         if(dialog!=null){
@@ -189,7 +196,7 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
                 }
 
             }
-            val colorAdapter = ColorsAdapter(context!!,onColorClickListener)
+            val colorAdapter = ColorsAdapter(requireContext(),onColorClickListener)
             val colorPanel = dialog.findViewById<RecyclerView>(R.id.colors_panel)
             colorPanel.apply {
                 layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
@@ -235,7 +242,7 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
 
     private fun deleteRecipe(position: Int){
         var dialog = context?.let { Dialog(it,R.style.MyDialog) }
-        if (isNightTheme(context!!)){
+        if (isNightTheme(requireContext())){
             dialog = context?.let { Dialog(it,R.style.MyDialogDark) }
         }
         if(dialog!=null) {
@@ -267,12 +274,12 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
 
     private fun initActionbar() = with(binding.listsIncludeInRecipes) {
 
-        if (isNightTheme(context!!)){
-            activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
-            activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
+        if (isNightTheme(requireContext())){
+            requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimary)
+            requireActivity().window.navigationBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimary)
         }else{
-            activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
-            activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
+            requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimaryDay)
+            requireActivity().window.navigationBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimaryDay)
         }
 
         listsToolbar.title = getString(R.string.recipes)

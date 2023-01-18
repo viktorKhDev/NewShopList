@@ -73,5 +73,12 @@
     <string name="color">Couleur</string>
     <string name="app_version">Version de l\'application</string>
 
+    <string name="sorting_lists">Listes de tri</string>
+    <string name="sorting_items">Trier les éléments</string>
+    <string name="time">Temps</string>
+    <string name="title">Titre</string>
+    <string name="color_title_pref">Couleur -> Titre</string>
+    <string name="color_time_pref">Couleur -> Temps</string>
+
 
 </resources>

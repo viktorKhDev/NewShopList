@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="sort_pref_array">
+        <item>@string/title</item>
+        <item>@string/time</item>
+        <item>@string/color_title_pref</item>
+        <item>@string/color_time_pref</item>
+    </array>
+</resources>

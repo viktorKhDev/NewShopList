@@ -100,7 +100,7 @@ class RecipeProductsAdapter(
             }
 
             text.text = "${product.name} ${product.amount}"
-            if (nightTheme&&!colorItems){
+            if (nightTheme){
                 text.setTextColor(Color.WHITE)
             }
             itemView.setOnClickListener(View.OnClickListener {

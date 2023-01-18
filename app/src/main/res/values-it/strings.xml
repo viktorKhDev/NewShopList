@@ -73,5 +73,12 @@
     <string name="color">Colore</string>
     <string name="app_version">Versione dell\'applicazione</string>
 
+    <string name="sorting_lists">Liste di ordinamento</string>
+    <string name="sorting_items">Ordinamento degli articoli</string>
+    <string name="time">Tempo</string>
+    <string name="title">Titolo</string>
+    <string name="color_title_pref">Colore -> Titolo</string>
+    <string name="color_time_pref">Colore -> Tempo</string>
+
 
 </resources>

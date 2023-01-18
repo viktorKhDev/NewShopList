@@ -73,5 +73,12 @@
     <string name="color">Колір</string>
     <string name="app_version">Версія додатку</string>
 
+    <string name="sorting_lists">Сортування списків</string>
+    <string name="sorting_items">Сортування предметів</string>
+    <string name="time">Час</string>
+    <string name="title">Назва</string>
+    <string name="color_title_pref">Колір -> Назва</string>
+    <string name="color_time_pref">Колір -> Час</string>
+
 
 </resources>

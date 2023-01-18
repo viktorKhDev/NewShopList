@@ -73,6 +73,13 @@
     <string name="color">Цвет</string>
     <string name="app_version">Версия приложения</string>
 
+    <string name="sorting_lists">Сортировка списков</string>
+    <string name="sorting_items">Сортировка предметов</string>
+    <string name="time">Время</string>
+    <string name="title">Заголовок</string>
+    <string name="color_title_pref">Цвет -> Заголовок</string>
+    <string name="color_time_pref">Цвет -> Время</string>
+
 
 
 </resources>

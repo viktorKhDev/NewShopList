@@ -74,6 +74,13 @@
     <string name="app_version">Versão do aplicativo</string>
 
 
+    <string name="sorting_lists">Listas de classificação</string>
+    <string name="sorting_items">Classificando itens</string>
+    <string name="time">Tempo</string>
+    <string name="title">Título</string>
+    <string name="color_title_pref">Cor -> Título</string>
+    <string name="color_time_pref">Cor -> Tempo</string>
+
 
 
 
