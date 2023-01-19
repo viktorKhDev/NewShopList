@@ -57,5 +57,10 @@
         <item name="item_color">@color/colorPrimaryDark</item>
         <item name="item_ready_color">@color/colorPrimary</item>
 
+
+
+        <!-- For list pref. -->
+        <item name="alertDialogTheme">@style/MyListPrefWindowDark</item>
+
     </style>
 </resources>

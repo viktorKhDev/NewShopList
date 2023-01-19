@@ -57,5 +57,11 @@
        <item name="item_color">@color/card_clicked_day</item>
         <item name="item_ready_color">@color/white</item>
 
+
+        <!-- For list pref. -->
+        <item name="alertDialogTheme">@style/MyListPrefWindow</item>
+
+
+
     </style>
 </resources>

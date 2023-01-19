@@ -9,7 +9,7 @@
             android:entryValues="@array/sort_pref_array"
             android:key="@string/sorting_lists"
             android:title="@string/sorting_lists"
-            android:summary="@string/title"
+            app:useSimpleSummaryProvider="true"
             app:iconSpaceReserved="false"
             />
     <ListPreference
@@ -18,7 +18,7 @@
         android:entryValues="@array/sort_pref_array"
         android:key="@string/sorting_items"
         android:title="@string/sorting_items"
-        android:summary="@string/title"
+        app:useSimpleSummaryProvider="true"
         app:iconSpaceReserved="false"/>
 
 

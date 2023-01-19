@@ -44,6 +44,18 @@
 
 
 
+    <style name="MyListPrefWindow" parent="Theme.MaterialComponents.DayNight.Dialog">
+        <item name="colorPrimary">@color/black</item>
+
+    </style>
+
+    <style name="MyListPrefWindowDark" parent="Theme.MaterialComponents.DayNight.Dialog">
+        <item name="colorPrimary">@color/white</item>
+
+    </style>
+
+
+
     <style name="Text_andika" />
 
 </resources>

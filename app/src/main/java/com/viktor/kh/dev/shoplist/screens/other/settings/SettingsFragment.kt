@@ -1,21 +1,25 @@
 package com.viktor.kh.dev.shoplist.screens.other.settings
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.*
-
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.utils.isNightTheme
+import com.viktor.kh.dev.shoplist.utils.loadSetting
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SettingsFragment: PreferenceFragmentCompat() {
 
 
+
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences,rootKey)
+
 
     }
 
@@ -28,6 +32,7 @@ class SettingsFragment: PreferenceFragmentCompat() {
                 requireActivity().onBackPressedDispatcher.onBackPressed()
             })
         }
+
         if (isNightTheme(requireContext())){
             requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimary)
             requireActivity().window.navigationBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimary)
@@ -35,7 +40,12 @@ class SettingsFragment: PreferenceFragmentCompat() {
             requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimaryDay)
             requireActivity().window.navigationBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimaryDay)
         }
+
+
     }
+
+
+
 
 
 }
