@@ -24,8 +24,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
 
     private var listId :Int? = null
 
-    val app = application
-
+    private val app = application
     //variable for check start animation
     var initAnim = false
     var stateChange = UPDATE_DATA
@@ -224,11 +223,22 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
     private  fun sortProducts(products: List<DataProduct>):List<DataProduct>{
         if (products.isNotEmpty()&&products.size!=1){
             val sortedList: List<DataProduct>
-            if (sortItems==R.string.time.toString()) {
-                sortedList = products.sortedWith(compareBy({it.ready}, { it.date }))
-
-            }else{
-                sortedList = products.sortedWith(compareBy({ it.ready }, { it.name }))
+            when(sortItems){
+                app.getString(R.string.time) ->{
+                    sortedList = products.sortedWith(compareBy({it.ready}, { it.date }))
+                }
+                app.getString(R.string.title) -> {
+                    sortedList = products.sortedWith(compareBy({ it.ready }, { it.name }))
+                }
+                app.getString(R.string.color_time_pref) ->{
+                    sortedList = products.sortedWith(compareBy({ it.ready }, { it.color },{it.date}))
+                }
+                app.getString(R.string.color_title_pref) -> {
+                    sortedList = products.sortedWith(compareBy({ it.ready }, { it.color },{it.name}))
+                }
+                else -> {
+                    sortedList = products.sortedWith(compareBy({ it.ready }, { it.name }))
+                }
             }
 
             return sortedList

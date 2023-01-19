@@ -231,9 +231,9 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
             })
 
             buttonAdd.setOnClickListener(View.OnClickListener {
-                goneSearch()
                 if(text.text.toString().isNotEmpty()){
                     model.setList(position,text.text.toString())
+                    goneSearch()
                     dialog.dismiss()
                 }else{
 
@@ -267,9 +267,9 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
             dialog.show()
 
             buttonYes.setOnClickListener(View.OnClickListener {
-                goneSearch()
                 listAdapter.deletePosition = position
                 model.deleteList(position)
+                goneSearch()
                 dialog.dismiss()
             })
 
@@ -314,6 +314,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
     private fun searchList() = with(binding){
         searchBar.visibility  = View.VISIBLE
+        model.setSearchData()
         autoCompleteText.addTextChangedListener(FollowText(this@ProductListsFragment))
         closeSearch.setOnClickListener(View.OnClickListener {
            goneSearch()
@@ -328,21 +329,24 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
             autoCompleteText.hideKeyboard()
             searchBar.visibility = View.GONE
             listAdapter.isSearch = true
-            model.dataLists.value?.let { it1 -> subscribeData(it1) }
+            model.clearSearchData()
+           // model.dataLists.value?.let { it1 -> subscribeData(it1) }
         }
     }
 
 
     override fun textChange(s: String) {
-        val currentList = model.dataLists.value
+        val currentList = model.dataForSearch
         val list: ArrayList<DataProductList> = ArrayList()
         for (i in currentList!!) {
             if (i.name!!.lowercase(Locale.getDefault()).contains(s.lowercase(Locale.getDefault()))) {
                 list.add(i)
             }
         }
+
         listAdapter.isSearch = true
-        subscribeData(list)
+        model.searchData(list)
+        //subscribeData(list)
     }
 
     override fun onStop() {

@@ -1,5 +1,6 @@
 package com.viktor.kh.dev.shoplist.screens.products
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.util.Log
@@ -34,7 +35,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
     var forScrollToPosition = 0
     var productAdded: DataProduct? = null
     var currentColor: Int? = null
-    var _app = application
+    private val app = application
 
 
     val productsList : MutableLiveData<List<DataProduct>> by lazy {
@@ -149,6 +150,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
     }
 
 
+
     fun addProduct(productName: String){
       initAnim = false
         CoroutineScope(Dispatchers.IO).launch {
@@ -229,10 +231,12 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
 
                         for (e in listRecipes[i].products!!){
                             val product = DataProduct(
-                                "${e.name} (${listRecipes[i].name})"
+                                "${e.name}" +
+                                        " ${e.amount?.let { countPortions(it,portions) }}" +
+                                        " (${listRecipes[i].name})"
                                 ,e.date
                                 ,false
-                                , e.amount?.let { countPortions(it,portions) },
+                                , "",
                                 e.color
                             )
                             readyList.add(product)
@@ -289,12 +293,23 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
     private  fun sortProducts(products: List<DataProduct>):List<DataProduct>{
         if (products.isNotEmpty()&&products.size!=1){
             val sortedList: List<DataProduct>
-            Log.d("fix", sortItems)
-            if (sortItems==_app.getString(R.string.time)) {
-                sortedList = products.sortedWith(compareBy({it.ready}, { it.date }))
 
-            }else{
-                sortedList = products.sortedWith(compareBy({ it.ready }, { it.name }))
+            when(sortItems){
+                app.getString(R.string.time) ->{
+                    sortedList = products.sortedWith(compareBy({it.ready}, { it.date }))
+                }
+                app.getString(R.string.title) -> {
+                    sortedList = products.sortedWith(compareBy({ it.ready }, { it.name }))
+                }
+                app.getString(R.string.color_time_pref) ->{
+                    sortedList = products.sortedWith(compareBy({ it.ready }, { it.color },{it.date}))
+                }
+                app.getString(R.string.color_title_pref) -> {
+                    sortedList = products.sortedWith(compareBy({ it.ready }, { it.color },{it.name}))
+                }
+                else -> {
+                    sortedList = products.sortedWith(compareBy({ it.ready }, { it.name }))
+                }
             }
             if (stateChange == ADD_PRODUCT&&productAdded!=null){
                 for (i in products.indices){
