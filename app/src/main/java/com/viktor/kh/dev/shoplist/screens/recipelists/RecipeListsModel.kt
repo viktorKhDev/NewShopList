@@ -24,7 +24,7 @@ class RecipeListsModel @Inject constructor(application: Application) :AndroidVie
     var initAnim = false
     var isAddClicked = false
     var currentColor: Int? = null
-
+    private val app = application
 
    val dataRecipes : MutableLiveData <List<DataRecipe>> by lazy {
       MutableLiveData<List<DataRecipe>>().also {
@@ -32,6 +32,8 @@ class RecipeListsModel @Inject constructor(application: Application) :AndroidVie
       }
 
   }
+
+    var dataForSearch = mutableListOf<DataRecipe>()
 
 
     val dataColors :MutableLiveData<ColorClickedList> by lazy {
@@ -75,7 +77,8 @@ class RecipeListsModel @Inject constructor(application: Application) :AndroidVie
     private fun getRecipes(){
         // get all recipes from DB
         CoroutineScope(Dispatchers.IO).launch {
-            dataRecipes.postValue(recipesDao.getAll())
+
+            dataRecipes.postValue(sortLists(recipesDao.getAll()))
         }
 
     }
@@ -134,6 +137,46 @@ class RecipeListsModel @Inject constructor(application: Application) :AndroidVie
         controller.navigate(R.id.action_recipeListsFragment_to_recipeFragment,bundle)
     }
 
+    fun searchData(list: List<DataRecipe>){
+        dataRecipes.value = list
+    }
 
+    fun clearSearchData(){
+        getRecipes()
+        dataForSearch.clear()
+    }
+
+
+    fun setSearchData(){
+        dataRecipes.value?.let { dataForSearch.addAll(it) }
+    }
+
+    private fun sortLists(data: List<DataRecipe>):List<DataRecipe>{
+        if (data.isNotEmpty()&&data.size!=1){
+            val sorted: List<DataRecipe>
+            when(sortLists){
+                app.getString(R.string.time) ->{
+                    sorted = data.sortedWith(compareBy({ it.date }, { it.name }))
+                }
+                app.getString(R.string.title) -> {
+                    sorted = data.sortedWith(compareBy({ it.name }, { it.date }))
+                }
+                app.getString(R.string.color_time_pref) ->{
+                    sorted = data.sortedWith(compareBy({ it.color },{ it.date }, { it.name }))
+                }
+                app.getString(R.string.color_title_pref) -> {
+                    sorted = data.sortedWith(compareBy({ it.color },{ it.name }, { it.date }))
+                }
+                else -> {
+                    sorted = data.sortedWith(compareBy({ it.date }, { it.name }))
+                }
+
+            }
+
+            return sorted
+        }else{
+            return data
+        }
+    }
 
 }

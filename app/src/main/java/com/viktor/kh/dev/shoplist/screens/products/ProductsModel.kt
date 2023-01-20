@@ -1,9 +1,8 @@
 package com.viktor.kh.dev.shoplist.screens.products
 
-import android.annotation.SuppressLint
+
 import android.app.Application
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.viktor.kh.dev.shoplist.R
@@ -97,7 +96,6 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
             withContext(Dispatchers.Main){
                 productsList.value = newData.products
             }
-            Log.d("MyLog", "productsModel get list")
         }
     }
 
@@ -308,7 +306,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                     sortedList = products.sortedWith(compareBy({ it.ready }, { it.color },{it.name}))
                 }
                 else -> {
-                    sortedList = products.sortedWith(compareBy({ it.ready }, { it.name }))
+                    sortedList = products.sortedWith(compareBy({ it.ready }, { it.date }))
                 }
             }
             if (stateChange == ADD_PRODUCT&&productAdded!=null){

@@ -1,7 +1,6 @@
 package com.viktor.kh.dev.shoplist.utils
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,7 +39,6 @@ val onColorClick: OnColorClickListener
 
 
         fun bind(color : Int) = with(binding){
-            Log.d("fix", "color in circle = $color" )
             colorCircle.setColorFilter(ContextCompat.getColor(context, color));
             if (data.isClickedColor(color)){
                 colorStroke.setColorFilter(ContextCompat.getColor(context,R.color.black))

@@ -6,4 +6,6 @@
         <item>@string/color_title_pref</item>
         <item>@string/color_time_pref</item>
     </array>
+
+
 </resources>

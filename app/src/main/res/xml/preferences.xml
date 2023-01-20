@@ -4,19 +4,19 @@
     >
 
     <ListPreference
-            android:defaultValue="@string/title"
-            android:entries="@array/sort_pref_array"
-            android:entryValues="@array/sort_pref_array"
-            android:key="@string/sorting_lists"
-            android:title="@string/sorting_lists"
-            app:useSimpleSummaryProvider="true"
-            app:iconSpaceReserved="false"
-            />
-    <ListPreference
-        android:defaultValue="@string/title"
+        android:key="@string/sorting_lists"
+        app:defaultValue="@string/time"
         android:entries="@array/sort_pref_array"
         android:entryValues="@array/sort_pref_array"
+        android:title="@string/sorting_lists"
+        app:useSimpleSummaryProvider="true"
+        app:iconSpaceReserved="false"
+            />
+    <ListPreference
         android:key="@string/sorting_items"
+        app:defaultValue="@string/time"
+        android:entries="@array/sort_pref_array"
+        android:entryValues="@array/sort_pref_array"
         android:title="@string/sorting_items"
         app:useSimpleSummaryProvider="true"
         app:iconSpaceReserved="false"/>

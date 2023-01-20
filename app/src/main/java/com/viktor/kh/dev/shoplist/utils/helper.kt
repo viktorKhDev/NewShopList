@@ -47,7 +47,6 @@ fun isNightTheme(context:Context):Boolean{
         Configuration.UI_MODE_NIGHT_YES -> state =  true
         Configuration.UI_MODE_NIGHT_NO -> state =  false
         Configuration.UI_MODE_NIGHT_UNDEFINED -> state = false
-
     }
 
     return state
@@ -78,20 +77,6 @@ var currentCardColor = 0
 
 
 
-
-
-
-class ColorId{
-
-    companion object{
-        fun get():Int{
-            var number  = MyRandom.random(colorsLight.size-1)
-            return number
-        }
-    }
-
-
-}
 
 fun convertLongToTime(time: Long): String {
     val date = Date(time)
@@ -144,8 +129,8 @@ fun shareText(text: String?, context: Context) {
 
 fun loadSetting(context: Context){
     val sp = PreferenceManager.getDefaultSharedPreferences(context)
-    sortItems = sp.getString(context.getString(R.string.sorting_items).toString(),"")!!
-    sortLists = sp.getString(context.getString(R.string.sorting_lists).toString(),"")!!
+    sortItems = sp.getString(context.getString(R.string.sorting_items),"")!!
+    sortLists = sp.getString(context.getString(R.string.sorting_lists),"")!!
 
 
 }

@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.view.WindowInsetsController
@@ -357,7 +356,6 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
 
 
-        Log.d("MyLog", "addButton Hide")
         textProduct.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
             var handled = false
             if (actionId == EditorInfo.IME_ACTION_NEXT) {
@@ -387,7 +385,6 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
             relativeAddProduct.visibility = View.GONE
             addProductFab.show()
             textProduct.hideKeyboard()
-            Log.d("MyLog", "addButton visible")
         })
     }
 

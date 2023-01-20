@@ -1,6 +1,6 @@
 package com.viktor.kh.dev.shoplist.screens.propuctsists
 
-import android.annotation.SuppressLint
+
 import android.app.Dialog
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -71,7 +71,6 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
        val onListClickListener = object : ProductListsAdapter.OnListClickListener {
            override fun onListClick(position: Int) {
                val list = model.dataLists.value!![position]
-               goneSearch()
                model.openList(findNavController(),list)
            }
        }
@@ -96,7 +95,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
            adapter = listAdapter
        }
 
-       rv.adapter!!.notifyDataSetChanged()
+
 
 
 
@@ -330,7 +329,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
             searchBar.visibility = View.GONE
             listAdapter.isSearch = true
             model.clearSearchData()
-           // model.dataLists.value?.let { it1 -> subscribeData(it1) }
+
         }
     }
 
@@ -338,7 +337,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
     override fun textChange(s: String) {
         val currentList = model.dataForSearch
         val list: ArrayList<DataProductList> = ArrayList()
-        for (i in currentList!!) {
+        for (i in currentList) {
             if (i.name!!.lowercase(Locale.getDefault()).contains(s.lowercase(Locale.getDefault()))) {
                 list.add(i)
             }

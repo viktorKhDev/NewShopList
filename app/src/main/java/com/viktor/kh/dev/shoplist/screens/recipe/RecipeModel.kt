@@ -2,7 +2,6 @@ package com.viktor.kh.dev.shoplist.screens.recipe
 
 import android.app.Application
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.viktor.kh.dev.shoplist.R
@@ -237,7 +236,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
                     sortedList = products.sortedWith(compareBy({ it.ready }, { it.color },{it.name}))
                 }
                 else -> {
-                    sortedList = products.sortedWith(compareBy({ it.ready }, { it.name }))
+                    sortedList = products.sortedWith(compareBy({ it.ready }, { it.date }))
                 }
             }
 

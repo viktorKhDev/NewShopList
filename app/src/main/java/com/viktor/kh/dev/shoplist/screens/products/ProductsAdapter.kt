@@ -24,8 +24,6 @@ class ProductsAdapter(
     var data : ArrayList<DataProduct> = ArrayList()
     private var positionClick = 0
     var nightTheme: Boolean = false
-    private var currentItemColor  = ColorId.get()
-    private var colorMap = mutableMapOf<DataProduct,Int>()
     var context: Context? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {

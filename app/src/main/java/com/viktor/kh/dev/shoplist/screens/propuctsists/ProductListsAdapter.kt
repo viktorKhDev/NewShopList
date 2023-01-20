@@ -3,7 +3,6 @@ package com.viktor.kh.dev.shoplist.screens.propuctsists
 import android.content.Context
 import android.content.res.Resources.NotFoundException
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,8 +52,14 @@ constructor(val onListClickListener: OnListClickListener,
             notifyDataSetChanged()
         }else{
             if (list.size>data.size){
+                var animPosition = 0
+                for (i in list.indices){
+                    if (!data.contains(list[i])){
+                        animPosition = i
+                    }
+                }
                 data = ArrayList(list)
-                notifyItemInserted(list.size-1)
+                notifyItemInserted(animPosition)
 
             }else if(list.size<data.size){
                 notifyItemRemoved(deletePosition)
@@ -144,6 +149,9 @@ constructor(val onListClickListener: OnListClickListener,
            0
        }
    }
+
+
+
 
 
 

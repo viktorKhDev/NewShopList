@@ -3,7 +3,6 @@ package com.viktor.kh.dev.shoplist.screens.recipelists
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,7 +28,6 @@ class RecipesAdapter constructor(val onListClickListener: OnListClickListener,
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_list,parent,false)
-        Log.d("MyLog" , "onCreateViewHolder in adapter")
         return RecipeHolder(view)
     }
 
@@ -47,8 +45,14 @@ class RecipesAdapter constructor(val onListClickListener: OnListClickListener,
             notifyDataSetChanged()
         }else{
             if (list.size>data.size){
+                var animPosition = 0
+                for (i in list.indices){
+                    if (!data.contains(list[i])){
+                        animPosition = i
+                    }
+                }
                 data = ArrayList(list)
-                notifyItemInserted(list.size-1)
+                notifyItemInserted(animPosition)
 
             }else if(list.size<data.size){
                 notifyItemRemoved(deletePosition)
@@ -67,7 +71,6 @@ class RecipesAdapter constructor(val onListClickListener: OnListClickListener,
         private val binding = ItemListBinding.bind(itemView)
         fun bind(data : DataRecipe) = with(binding){
             currentCardColor = cardColor(data.color)
-            Log.d("fixLog", "card color in recipe = $currentCardColor")
             if (currentCardColor!=0){
                 cl.setCardBackgroundColor(cardColor(data.color))
             }else{

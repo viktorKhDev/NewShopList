@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.view.animation.AnimationUtils
 import android.widget.Button
@@ -70,7 +69,6 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
         val onListClickListener = object : RecipesAdapter.OnListClickListener {
             override fun onListClick(position: Int) {
                 val list = model.dataRecipes.value!![position]
-                goneSearch()
                 model.openRecipe(findNavController(),list)
 
             }
@@ -224,9 +222,9 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
             })
 
             buttonAdd.setOnClickListener(View.OnClickListener {
-                goneSearch()
                 if(text.text.toString().isNotEmpty()){
                     model.setRecipe(position,text.text.toString())
+                    goneSearch()
                     dialog.dismiss()
                 }else{
 
@@ -257,9 +255,9 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
             dialog.show()
 
             buttonYes.setOnClickListener(View.OnClickListener {
-                goneSearch()
                 recipesAdapter.deletePosition = position
                 model.deleteRecipe(position)
+                goneSearch()
                 dialog.dismiss()
             })
 
@@ -300,6 +298,7 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
 
     private fun searchRecipe() = with(binding.listsIncludeInRecipes){
         searchBar.visibility  = View.VISIBLE
+        model.setSearchData()
         autoCompleteText.addTextChangedListener(FollowText(this@RecipeListsFragment))
         closeSearch.setOnClickListener(View.OnClickListener {
             goneSearch()
@@ -314,21 +313,22 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
             autoCompleteText.hideKeyboard()
             searchBar.visibility = View.GONE
             recipesAdapter.isSearch = true
-            model.dataRecipes.value?.let { it1 -> subscribeData(it1) }
+            model.clearSearchData()
         }
     }
 
 
     override fun textChange(s: String) {
-        val currentList = model.dataRecipes.value
+        val currentList = model.dataForSearch
         val list: ArrayList<DataRecipe> = ArrayList()
-        for (i in currentList!!) {
+        for (i in currentList) {
             if (i.name!!.lowercase(Locale.getDefault()).contains(s.lowercase(Locale.getDefault()))) {
                 list.add(i)
             }
         }
         recipesAdapter.isSearch = true
-        subscribeData(list)
+        model.searchData(list)
+
     }
 
     override fun onStop() {

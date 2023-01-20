@@ -1,6 +1,6 @@
 package com.viktor.kh.dev.shoplist.screens.propuctsists
 
-import android.annotation.SuppressLint
+
 import android.app.Application
 import android.os.Bundle
 import androidx.core.content.ContextCompat
@@ -48,6 +48,7 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
         getLists()
         dataColors.value = ColorClickedList()
     }
+
 
 
 
