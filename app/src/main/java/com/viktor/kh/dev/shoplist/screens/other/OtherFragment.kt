@@ -1,5 +1,6 @@
 package com.viktor.kh.dev.shoplist.screens.other
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -44,14 +45,15 @@ class OtherFragment : Fragment(R.layout.other_fragment){
 
 
 
+
     private fun initActionbar() = with(binding){
      toolbar.title = getString(R.string.other)
-        if (isNightTheme(context!!)){
-            activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
-            activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimary)
+        if (isNightTheme(requireContext())){
+            requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimary)
+            requireActivity().window.navigationBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimary)
         }else{
-            activity!!.window.statusBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
-            activity!!.window.navigationBarColor = ContextCompat.getColor(context!!,R.color.colorPrimaryDay)
+            requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimaryDay)
+            requireActivity().window.navigationBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimaryDay)
         }
     }
 

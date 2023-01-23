@@ -9,7 +9,9 @@ import android.app.Dialog
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
+import android.os.Build
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.*
 import android.view.animation.AnimationUtils
 import android.widget.Button
@@ -30,6 +32,7 @@ import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
 import com.viktor.kh.dev.shoplist.utils.*
 import dagger.hilt.android.AndroidEntryPoint
+
 
 
 @AndroidEntryPoint
@@ -311,9 +314,11 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
         if (cardColor!=0){
             requireActivity().window.statusBarColor = cardColor as Int
             requireActivity().window.navigationBarColor = cardColor as Int
-            requireActivity().window.insetsController!!.setSystemBarsAppearance(
-                WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
-                WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                requireActivity().window.insetsController!!.setSystemBarsAppearance(
+                    WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+                    WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
+            }
         }else{
             if (isNightTheme(requireContext())){
                 requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimary)
@@ -410,9 +415,20 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
         val dialog = builder.create()
         dialog.show()
 
-        val mDisplayMetrics = requireActivity().windowManager.currentWindowMetrics
-        val mDisplayWidth = mDisplayMetrics.bounds.width()
-        val mDisplayHeight = mDisplayMetrics.bounds.height()
+        var mDisplayWidth:  Int? = null
+        var mDisplayHeight: Int? = null
+
+       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            requireActivity().windowManager.currentWindowMetrics
+            mDisplayWidth = requireActivity().windowManager.currentWindowMetrics.bounds.width()
+             mDisplayHeight = requireActivity().windowManager.currentWindowMetrics.bounds.height()
+        } else {
+           val displayMetrics = DisplayMetrics()
+           requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
+           mDisplayWidth = displayMetrics.widthPixels
+           mDisplayHeight = displayMetrics.heightPixels
+        }
+
         val mLayoutParams = WindowManager.LayoutParams()
         mLayoutParams.width = (mDisplayWidth * 0.8f).toInt()
         mLayoutParams.height = (mDisplayHeight * 0.5f).toInt()

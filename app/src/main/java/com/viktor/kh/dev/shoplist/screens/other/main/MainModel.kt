@@ -1,4 +1,4 @@
-package com.viktor.kh.dev.shoplist.screens.main
+package com.viktor.kh.dev.shoplist.screens.other.main
 
 
 import android.app.Application

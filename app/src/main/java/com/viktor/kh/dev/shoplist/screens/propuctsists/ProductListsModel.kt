@@ -2,6 +2,7 @@ package com.viktor.kh.dev.shoplist.screens.propuctsists
 
 
 import android.app.Application
+import android.content.res.Resources.NotFoundException
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
@@ -54,7 +55,7 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
 
 
     fun clickColor(position: Int){
-     val data = dataColors.value
+        val data = dataColors.value
         data!!.clickColor(position)
         dataColors.value = data
         dataColors.hasActiveObservers()
@@ -132,7 +133,14 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
        bundle.putInt(LIST_ID,dataProductList.id)
         bundle.putString(LIST_NAME,dataProductList.name)
         if (dataProductList.color!=null){
-            bundle.putInt(LIST_COLOR, ContextCompat.getColor(getApplication(), dataProductList.color))
+            try {
+                bundle.putInt(LIST_COLOR, ContextCompat.getColor(getApplication(), dataProductList.color))
+            }catch (e: NotFoundException){
+                bundle.putInt(LIST_COLOR,0)
+                writeLog("error put color in openList : ${e.printStackTrace()}",
+                    app.applicationContext,true)
+            }
+
         }else{
             bundle.putInt(LIST_COLOR,0)
         }

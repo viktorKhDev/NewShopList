@@ -2,6 +2,7 @@ package com.viktor.kh.dev.shoplist.utils
 
 
 
+import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
 import android.content.ClipboardManager
@@ -41,6 +42,7 @@ const val UPDATE_DATA = 0
 
 
 
+
 fun isNightTheme(context:Context):Boolean{
  var state = false
     when (context.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
@@ -51,6 +53,8 @@ fun isNightTheme(context:Context):Boolean{
 
     return state
 }
+
+
 
 
 val colorsLight = listOf(
