@@ -12,6 +12,9 @@ import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.ItemListBinding
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
+import com.viktor.kh.dev.shoplist.utils.convertLongToTime
+import com.viktor.kh.dev.shoplist.utils.currentCardColor
+import com.viktor.kh.dev.shoplist.utils.writeLog
 import com.viktor.kh.dev.shoplist.utils.*
 
 
@@ -79,7 +82,7 @@ constructor(val onListClickListener: OnListClickListener,
 
         fun bind (data : DataProductList) = with(binding){
             currentCardColor = cardColor(data.color)
-            if (currentCardColor!=0){
+            if (currentCardColor !=0){
                 cl.setCardBackgroundColor(cardColor(data.color))
             }else{
                 if (nightTheme){
@@ -92,7 +95,7 @@ constructor(val onListClickListener: OnListClickListener,
             val date  = data.date?.let { convertLongToTime(it) }.toString()
             textListDate.text = date
             textListReady.text = data.products?.let { findReady(it) }
-            if (nightTheme&&currentCardColor==0){
+            if (nightTheme&& currentCardColor ==0){
                 listName.setTextColor(Color.WHITE)
                 textListDate.setTextColor(Color.WHITE)
                 textListReady.setTextColor(Color.WHITE)

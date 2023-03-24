@@ -1,6 +1,7 @@
 package com.viktor.kh.dev.shoplist.screens.propuctsists
 
 
+
 import android.app.Application
 import android.content.res.Resources.NotFoundException
 import android.os.Bundle
@@ -77,10 +78,11 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
     }
 
 
+
     private fun getLists(){
         // get all list from DB
        CoroutineScope(Dispatchers.IO).launch {
-         val  data = sortLists(productListsDao.getAll())
+         val  data = productListsDao.getAll()
            dataLists.postValue(data)
        }
 
@@ -164,33 +166,7 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
         dataLists.value?.let { dataForSearch.addAll(it) }
     }
 
-    private fun sortLists(data: List<DataProductList>):List<DataProductList>{
-        if (data.isNotEmpty()&&data.size!=1){
-            val sorted: List<DataProductList>
-            when(sortLists){
-                app.getString(R.string.time) ->{
-                    sorted = data.sortedWith(compareBy({ it.date }, { it.name }))
-                }
-                app.getString(R.string.title) -> {
-                    sorted = data.sortedWith(compareBy({ it.name }, { it.date }))
-                }
-                app.getString(R.string.color_time_pref) ->{
-                    sorted = data.sortedWith(compareBy({ it.color },{ it.date }, { it.name }))
-                }
-                app.getString(R.string.color_title_pref) -> {
-                    sorted = data.sortedWith(compareBy({ it.color },{ it.name }, { it.date }))
-                }
-                else -> {
-                    sorted = data.sortedWith(compareBy({ it.date }, { it.name }))
-                }
 
-            }
-
-            return sorted
-        }else{
-            return data
-        }
-    }
 
 }
 

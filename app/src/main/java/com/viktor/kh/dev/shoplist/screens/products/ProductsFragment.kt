@@ -12,7 +12,9 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.view.*
+import android.view.View
+import android.view.WindowInsetsController
+import android.view.WindowManager
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
@@ -32,7 +34,6 @@ import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
 import com.viktor.kh.dev.shoplist.utils.*
 import dagger.hilt.android.AndroidEntryPoint
-
 
 
 @AndroidEntryPoint
@@ -101,7 +102,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
 
 
         //for colors panel
-        val onColorClickListener = object : ColorsAdapter.OnColorClickListener{
+       /* val onColorClickListener = object : ColorsAdapter.OnColorClickListener{
             override fun onClick(position: Int) {
                 model.clickColor(position)
             }
@@ -126,7 +127,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
             colorsPanel.smoothScrollToPosition(currentPosition)
         }else{
             colorsPanel.smoothScrollToPosition(0)
-        }
+        }*/
         //////////
 
 
@@ -147,7 +148,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
             textProduct.hideKeyboard()
             relativeAddProduct.visibility = View.GONE
             addProductFabInProd.show()
-            model.dataColors.removeObservers(viewLifecycleOwner)
+            //model.dataColors.removeObservers(viewLifecycleOwner)
         })
 
     }
@@ -162,35 +163,36 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
         textProduct.showKeyboard()
 
 
-
-
         //init colors
-        val onColorClickListener = object : ColorsAdapter.OnColorClickListener{
+       /* val onColorClickListener = object : ColorsAdapter.OnColorClickListener{
             override fun onClick(position: Int) {
                 model.clickColor(position)
             }
 
         }
-        val colorAdapter = ColorsAdapter(requireContext(),onColorClickListener)
+       // val colorAdapter = ColorsAdapter(requireContext(),onColorClickListener)
 
         colorsPanel.apply {
             layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
-            adapter = colorAdapter
+            //adapter = colorAdapter
             adapter!!.notifyDataSetChanged()
         }
 
-        model.clickColorWithColor(dataProduct.color)
+       model.clickColorWithColor(dataProduct.color)
         model.dataColors.observe(viewLifecycleOwner, Observer {
             colorAdapter.data = it
             colorAdapter.notifyDataSetChanged()
 
         })
+
         val currentPosition = colorAdapter.data.getCurrentColorPosition()
         if(currentPosition>0){
             colorsPanel.smoothScrollToPosition(currentPosition)
         }else{
             colorsPanel.smoothScrollToPosition(0)
         }
+        */
+
         ////
 
         btnAcceptProduct.setOnClickListener(View.OnClickListener {
@@ -201,7 +203,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
                 textProduct.hideKeyboard()
                 relativeAddProduct.visibility = View.GONE
                 addProductFabInProd.show()
-                model.dataColors.removeObservers(viewLifecycleOwner)
+               // model.dataColors.removeObservers(viewLifecycleOwner)
             }else{
                 showToast(getString(R.string.input_the_title),context)
             }
@@ -214,7 +216,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
             textProduct.hideKeyboard()
             relativeAddProduct.visibility = View.GONE
             addProductFabInProd.show()
-            model.dataColors.removeObservers(viewLifecycleOwner)
+            //model.dataColors.removeObservers(viewLifecycleOwner)
         })
 
     }
@@ -224,7 +226,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
         if (model.stateChange== ADD_PRODUCT){
             rv.scrollToPosition(model.forScrollToPosition)
         }
-        if (model.stateChange== CHANGE_READY&&model.animPosition==0){
+        if (model.stateChange== CHANGE_READY &&model.animPosition==0){
             rv.scrollToPosition(0)
         }
 
@@ -280,7 +282,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
             itemShare.icon = ContextCompat.getDrawable(requireContext(),R.drawable.ic_black_share_24)
 
         }
-        if (isNightTheme(requireContext())&&cardColor==0){
+        if (isNightTheme(requireContext()) &&cardColor==0){
             toolbar.apply {
                 setNavigationIcon(R.drawable.ic_baseline_arrow_white_24)
                 setTitleTextColor(Color.WHITE)
@@ -311,13 +313,14 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
 
 
 
-        if (cardColor!=0){
-            requireActivity().window.statusBarColor = cardColor as Int
-            requireActivity().window.navigationBarColor = cardColor as Int
+        if (cardColor != 0) {
+            requireActivity().window.statusBarColor = cardColor!!
+            requireActivity().window.navigationBarColor = cardColor!!
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 requireActivity().window.insetsController!!.setSystemBarsAppearance(
                     WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
-                    WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
+                    WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+                )
             }
         }else{
             if (isNightTheme(requireContext())){

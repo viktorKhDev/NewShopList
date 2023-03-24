@@ -101,7 +101,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
         initAnim = false
         CoroutineScope(Dispatchers.IO).launch {
             val currentProduct = productsList.value!![position]
-            val newProduct = DataProduct(name,currentProduct.date, false,amount,currentColor)
+            val newProduct = DataProduct(name,currentProduct.date, false,amount)
             val recipe: DataRecipe = recipesDao.get(listId!!)
             val products  = mutableListOf<DataProduct>()
             recipe.products?.let { products.addAll(it) }
@@ -131,7 +131,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
         initAnim = false
         CoroutineScope(Dispatchers.IO).launch {
             val recipe: DataRecipe = recipesDao.get(listId!!)
-            val dataProduct = DataProduct(productName.trim(), currentTimeToLong(), false,amount,currentColor)
+            val dataProduct = DataProduct(productName.trim(), currentTimeToLong(), false,amount,)
             val products  = mutableListOf<DataProduct>()
             recipe.products?.let { products.addAll(it) }
             products.add(dataProduct)
@@ -169,7 +169,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
                 val recipe: DataRecipe = recipesDao.get(listId!!)
                 products.addAll(recipe.products!!)
                 for (name in strings) {
-                    val product = DataProduct(name.trim(), currentTimeToLong(), false,"",null)
+                    val product = DataProduct(name.trim(), currentTimeToLong(), false,"")
                     products.add(product)
                     animPosition = products.size
                 }
@@ -222,22 +222,11 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
     private  fun sortProducts(products: List<DataProduct>):List<DataProduct>{
         if (products.isNotEmpty()&&products.size!=1){
             val sortedList: List<DataProduct>
-            when(sortItems){
-                app.getString(R.string.time) ->{
-                    sortedList = products.sortedWith(compareBy({it.ready}, { it.date }))
-                }
-                app.getString(R.string.title) -> {
-                    sortedList = products.sortedWith(compareBy({ it.ready }, { it.name }))
-                }
-                app.getString(R.string.color_time_pref) ->{
-                    sortedList = products.sortedWith(compareBy({ it.ready }, { it.color },{it.date}))
-                }
-                app.getString(R.string.color_title_pref) -> {
-                    sortedList = products.sortedWith(compareBy({ it.ready }, { it.color },{it.name}))
-                }
-                else -> {
-                    sortedList = products.sortedWith(compareBy({ it.ready }, { it.date }))
-                }
+            if (sortByDate) {
+                sortedList = products.sortedWith(compareBy({it.ready}, { it.date }))
+
+            }else{
+                sortedList = products.sortedWith(compareBy({ it.ready }, { it.name }))
             }
 
             return sortedList

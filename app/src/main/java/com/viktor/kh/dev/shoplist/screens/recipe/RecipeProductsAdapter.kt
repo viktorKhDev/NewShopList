@@ -12,6 +12,9 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
+import com.viktor.kh.dev.shoplist.utils.ADD_PRODUCT
+import com.viktor.kh.dev.shoplist.utils.DELETE_PRODUCT
+import com.viktor.kh.dev.shoplist.utils.writeLog
 import com.viktor.kh.dev.shoplist.utils.*
 
 
@@ -82,12 +85,12 @@ class RecipeProductsAdapter(
 
         fun bind(product: DataProduct){
             var text = itemView.findViewById<TextView>(R.id.productName)
-            val color = cardColor(product.color)
+            //val color = cardColor(product.color)
             val card = itemView.findViewById<CardView>(R.id.cl)
-            if (color!=null){
+           /* if (color!=null){
                 card.setCardBackgroundColor(color)
                 text.setTextColor(Color.BLACK)
-            }else{
+            }else{*/
                 if (nightTheme){
                     text.setTextColor(Color.WHITE)
                     card.setCardBackgroundColor(ContextCompat.getColor(context!!,R.color.colorPrimary))
@@ -95,7 +98,7 @@ class RecipeProductsAdapter(
                     text.setTextColor(Color.BLACK)
                     card.setCardBackgroundColor(ContextCompat.getColor(context!!,R.color.colorPrimaryDay))
                 }
-            }
+         //   }
 
             text.text = "${product.name} ${product.amount}"
             if (nightTheme){

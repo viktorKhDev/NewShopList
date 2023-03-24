@@ -273,13 +273,16 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
     private fun initActionbar() = with(binding.listsIncludeInRecipes) {
 
         if (isNightTheme(requireContext())){
+           toBlackNavAndStatusBar(requireContext(),requireActivity())
+
             requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimary)
             requireActivity().window.navigationBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimary)
         }else{
+
             requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimaryDay)
             requireActivity().window.navigationBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimaryDay)
-        }
 
+        }
         listsToolbar.title = getString(R.string.recipes)
         listsToolbar.inflateMenu(R.menu.options_menu_in_lists)
         listsToolbar.setOnMenuItemClickListener { item ->

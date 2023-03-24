@@ -1,9 +1,11 @@
 package com.viktor.kh.dev.shoplist.screens.propuctsists
 
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.view.animation.AnimationUtils
@@ -103,6 +105,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
 
 
+    @SuppressLint("SuspiciousIndentation")
     private fun addList(){
         var dialog = context?.let { Dialog(it,R.style.MyDialog) }
         var listColor: Int? = null
@@ -140,7 +143,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
             model.dataColors.observe(viewLifecycleOwner, Observer {
                colorAdapter.data = it
-               colorAdapter.notifyDataSetChanged()
+                   colorAdapter.notifyDataSetChanged()
 
             })
 
@@ -284,9 +287,12 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
     private fun initActionbar() = with(binding){
 
         if (isNightTheme(requireContext())){
+            toBlackNavAndStatusBar(requireContext(),requireActivity())
+
             requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimary)
             requireActivity().window.navigationBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimary)
         }else{
+
             requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimaryDay)
             requireActivity().window.navigationBarColor = ContextCompat.getColor(requireContext(),R.color.colorPrimaryDay)
 

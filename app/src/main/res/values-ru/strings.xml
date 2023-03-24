@@ -3,7 +3,7 @@
     <string name="text_view">TextView</string>
     <string name="todo">TODO</string>
     <string name="todo2">TODO</string>
-    <string name="prod_name">Название товара</string>
+    <string name="prod_name">Название</string>
     <string name="buttonInput">Добавить</string>
     <string name="buttonCancel">Отмена</string>
     <string name="checkbox">CheckBox</string>

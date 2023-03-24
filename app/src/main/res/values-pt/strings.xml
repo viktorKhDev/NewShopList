@@ -3,7 +3,7 @@
     <string name = "text_view"> TextView </string>
     <string name = "todo"> TODO </string>
     <string name = "todo2"> TODO </string>
-    <string name = "prod_name"> Nome do produto </string>
+    <string name = "prod_name">Nome do produto</string>
     <string name = "buttonInput"> Adicionar </string>
     <string name = "buttonCancel"> Cancelar </string>
     <string name = "checkbox"> CheckBox </string>

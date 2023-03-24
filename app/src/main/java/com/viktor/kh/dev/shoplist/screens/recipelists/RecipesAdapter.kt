@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.ItemListBinding
 import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
+import com.viktor.kh.dev.shoplist.utils.convertLongToTime
+import com.viktor.kh.dev.shoplist.utils.currentCardColor
+import com.viktor.kh.dev.shoplist.utils.writeLog
 import com.viktor.kh.dev.shoplist.utils.*
 
 class RecipesAdapter constructor(val onListClickListener: OnListClickListener,
@@ -71,7 +74,7 @@ class RecipesAdapter constructor(val onListClickListener: OnListClickListener,
         private val binding = ItemListBinding.bind(itemView)
         fun bind(data : DataRecipe) = with(binding){
             currentCardColor = cardColor(data.color)
-            if (currentCardColor!=0){
+            if (currentCardColor !=0){
                 cl.setCardBackgroundColor(cardColor(data.color))
             }else{
                 if (nightTheme){
@@ -84,7 +87,7 @@ class RecipesAdapter constructor(val onListClickListener: OnListClickListener,
             val date  = data.date?.let { convertLongToTime(it) }.toString()
             textListDate.text = date
             textListReady.visibility = View.GONE
-            if (nightTheme&&currentCardColor==0){
+            if (nightTheme&& currentCardColor ==0){
                 listName.setTextColor(Color.WHITE)
                 textListDate.setTextColor(Color.WHITE)
                 editImage.setImageResource(R.drawable.ic_baseline_edit_white_24)

@@ -2,13 +2,16 @@ package com.viktor.kh.dev.shoplist.utils
 
 
 
-import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.os.Build
+import android.view.View
+import android.view.WindowInsetsController
+import androidx.fragment.app.FragmentActivity
 import androidx.preference.PreferenceManager
 import com.viktor.kh.dev.shoplist.R
 import java.io.File
@@ -20,8 +23,13 @@ import java.util.*
 val format = SimpleDateFormat("dd.MM.yyyy")
 val formatForLog = SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z")
 
-var sortItems = ""
-var sortLists = ""
+/*var sortItems = ""
+var sortLists = ""*/
+
+
+var sortByDate = false
+//var colorLists = true
+var colorItems = true
 
 
 
@@ -43,6 +51,7 @@ const val UPDATE_DATA = 0
 
 
 
+
 fun isNightTheme(context:Context):Boolean{
  var state = false
     when (context.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
@@ -53,6 +62,24 @@ fun isNightTheme(context:Context):Boolean{
 
     return state
 }
+
+
+fun toBlackNavAndStatusBar(context: Context,activity: FragmentActivity) {
+    if (isNightTheme(context)) {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
+            activity.window.insetsController?.setSystemBarsAppearance(
+                WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS,
+                WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+            )
+        } else {
+            val view = activity.window.decorView
+            @Suppress("DEPRECATION")
+            view.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+
+        }
+    }
+}
+
 
 
 
@@ -89,6 +116,21 @@ fun convertLongToTime(time: Long): String {
 
 fun currentTimeToLong(): Long {
     return System.currentTimeMillis()
+}
+
+
+
+
+class ColorId{
+
+    companion object{
+        fun get():Int{
+            var number  = MyRandom.random(colorsLight.size - 1)
+            return number
+        }
+    }
+
+
 }
 
 
@@ -133,9 +175,11 @@ fun shareText(text: String?, context: Context) {
 
 fun loadSetting(context: Context){
     val sp = PreferenceManager.getDefaultSharedPreferences(context)
-    sortItems = sp.getString(context.getString(R.string.sorting_items),"")!!
-    sortLists = sp.getString(context.getString(R.string.sorting_lists),"")!!
-
+    /*sortItems = sp.getString(context.getString(R.string.sorting_items),"")!!
+    sortLists = sp.getString(context.getString(R.string.sorting_lists),"")!!*/
+    sortByDate = sp.getBoolean(context.getString(R.string.sort_by_date),false)
+    //colorLists = sp.getBoolean(context.getString(R.string.color_lists_pref),true)
+    colorItems = sp.getBoolean(context.getString(R.string.color_items_pref),true)
 
 }
 

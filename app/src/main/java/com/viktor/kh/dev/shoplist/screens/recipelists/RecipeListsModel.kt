@@ -78,7 +78,7 @@ class RecipeListsModel @Inject constructor(application: Application) :AndroidVie
         // get all recipes from DB
         CoroutineScope(Dispatchers.IO).launch {
 
-            dataRecipes.postValue(sortLists(recipesDao.getAll()))
+            dataRecipes.postValue(recipesDao.getAll())
         }
 
     }
@@ -151,32 +151,6 @@ class RecipeListsModel @Inject constructor(application: Application) :AndroidVie
         dataRecipes.value?.let { dataForSearch.addAll(it) }
     }
 
-    private fun sortLists(data: List<DataRecipe>):List<DataRecipe>{
-        if (data.isNotEmpty()&&data.size!=1){
-            val sorted: List<DataRecipe>
-            when(sortLists){
-                app.getString(R.string.time) ->{
-                    sorted = data.sortedWith(compareBy({ it.date }, { it.name }))
-                }
-                app.getString(R.string.title) -> {
-                    sorted = data.sortedWith(compareBy({ it.name }, { it.date }))
-                }
-                app.getString(R.string.color_time_pref) ->{
-                    sorted = data.sortedWith(compareBy({ it.color },{ it.date }, { it.name }))
-                }
-                app.getString(R.string.color_title_pref) -> {
-                    sorted = data.sortedWith(compareBy({ it.color },{ it.name }, { it.date }))
-                }
-                else -> {
-                    sorted = data.sortedWith(compareBy({ it.date }, { it.name }))
-                }
 
-            }
-
-            return sorted
-        }else{
-            return data
-        }
-    }
 
 }

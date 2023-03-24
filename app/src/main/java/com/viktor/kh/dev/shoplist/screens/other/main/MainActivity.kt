@@ -3,6 +3,7 @@ package com.viktor.kh.dev.shoplist.screens.other.main
 
 
 
+import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
@@ -96,7 +97,8 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    private fun setColors(){
+
+   private fun setColors(){
         if (isNightTheme(this)){
             bottomNavView.setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimary))
             rootLayout.setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimary))

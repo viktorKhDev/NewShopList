@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.Paint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.utils.*
+
 import kotlin.collections.ArrayList
 
 class ProductsAdapter(
@@ -25,6 +27,9 @@ class ProductsAdapter(
     private var positionClick = 0
     var nightTheme: Boolean = false
     var context: Context? = null
+
+    private var currentItemColor  = ColorId.get()
+    private var colorMap = mutableMapOf<DataProduct,Int>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
 
@@ -54,7 +59,8 @@ class ProductsAdapter(
 
 
     fun setData(list: List<DataProduct>, stateForAnim: Int){
-        //Log.d("fixLog", "state  = $stateForAnim")
+        Log.d("fix", "colorItems = $colorItems")
+
         var animPosition = 0
           var newPosition = 0
 
@@ -112,6 +118,7 @@ class ProductsAdapter(
     inner class ProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
         fun bind(product: DataProduct){
+
            var text = itemView.findViewById<TextView>(R.id.productName)
             if (itemViewType == 1) {
                 text.paintFlags = text.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
@@ -124,9 +131,9 @@ class ProductsAdapter(
 
             } else {
 
-               val color = cardColor(product.color)
+               val color = cardColor(product)
                 val card = itemView.findViewById<CardView>(R.id.cl)
-                if (color!=null){
+                if (colorItems){
                     card.setCardBackgroundColor(color)
                     text.setTextColor(Color.BLACK)
                 }else{
@@ -168,7 +175,7 @@ class ProductsAdapter(
     }
 
 
-    private fun cardColor(color: Int?):Int?{
+  /*  private fun cardColor(color: Int?):Int?{
         return try {
             if (color!=null){
                 ContextCompat.getColor(context!!, color)
@@ -179,6 +186,19 @@ class ProductsAdapter(
             writeLog("error color selected = ${e.printStackTrace()}",
                 context!!.applicationContext,true)
             null
+        }
+
+
+    }*/
+
+    private fun cardColor(product: DataProduct):Int{
+        if (colorMap.contains(product)){
+            return ContextCompat.getColor(context!!, colorMap[product]!!)
+        }else{
+            if (currentItemColor== getColors().size-1) currentItemColor = 0 else currentItemColor++
+            colorMap.put(product, getColors()[currentItemColor])
+            return ContextCompat.getColor(context!!, getColors()[currentItemColor])
+
         }
 
 

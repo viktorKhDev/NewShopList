@@ -2,6 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.ShopList" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
+
+
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
         <item name="colorOnPrimary">@color/colorAccentDark</item>
@@ -36,11 +38,12 @@
         <item name="colorOnSecondary">@color/colorAccentDark</item>
 
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" >@color/black</item>
+        <item name="android:statusBarColor" >@color/white</item>
+
 
 
         <!-- Action bar. -->
-        <!-- Customize your theme here. -->
+
 
         <!-- Dialog theme. -->
         <item name="dialog_clicked_item_color">@color/card_clicked_night</item>

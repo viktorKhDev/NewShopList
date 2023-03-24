@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.viktor.kh.dev.shoplist">
 
+    <queries>
+        <package android:name="com.viktor.kh.dev.shoplist" />
+    </queries>
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
         <uses-permission android:name="android.permission.READ_LOGS"

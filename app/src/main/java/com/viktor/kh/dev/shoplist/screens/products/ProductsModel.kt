@@ -1,7 +1,7 @@
 package com.viktor.kh.dev.shoplist.screens.products
 
 
-import android.annotation.SuppressLint
+
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
@@ -44,10 +44,10 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
       }
   }
 
-
+/*
     val dataColors :MutableLiveData<ColorClickedList> by lazy {
         MutableLiveData<ColorClickedList>()
-    }
+    }*/
 
 
     fun init(id: Int){
@@ -59,21 +59,21 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
             listId = id
         }
         getProducts()
-        dataColors.value = ColorClickedList()
+       // dataColors.value = ColorClickedList()
     }
 
 
 
-    fun clickColor(position: Int){
+  /*  fun clickColor(position: Int){
         val data = dataColors.value
         data!!.clickColor(position)
         dataColors.value = data
         dataColors.hasActiveObservers()
         currentColor = dataColors.value!!.getCurrentColor()
-    }
+    }*/
 
 
-    fun clickColorWithColor(color: Int?){
+    /*fun clickColorWithColor(color: Int?){
         if (color!=null){
             val data = dataColors.value
             data!!.clickColorWithColor(color)
@@ -85,7 +85,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
             dataColors.hasActiveObservers()
             currentColor = dataColors.value!!.getCurrentColor()
         }
-    }
+    }*/
 
 
     private fun getProducts(){
@@ -105,7 +105,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
         CoroutineScope(Dispatchers.IO).launch {
           val currentProduct = productsList.value!![position]
           val newProduct = DataProduct(currentProduct.name,currentProduct.date
-              , currentProduct.ready?.let { changeReady(it) },currentProduct.amount,currentProduct.color)
+              , currentProduct.ready?.let { changeReady(it) },currentProduct.amount)
           val list: DataProductList = productListsDao.get(listId!!)
           val products  = mutableListOf<DataProduct>()
           list.products?.let { products.addAll(it) }
@@ -122,7 +122,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
         initAnim = false
         CoroutineScope(Dispatchers.IO).launch {
             val currentProduct = productsList.value!![position]
-            val newProduct = DataProduct(name,currentProduct.date,currentProduct.ready,"",currentColor)
+            val newProduct = DataProduct(name,currentProduct.date,currentProduct.ready,"")
             val list: DataProductList = productListsDao.get(listId!!)
             val products  = mutableListOf<DataProduct>()
             list.products?.let { products.addAll(it) }
@@ -150,12 +150,11 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
 
 
 
-
     fun addProduct(productName: String){
       initAnim = false
         CoroutineScope(Dispatchers.IO).launch {
             val list: DataProductList = productListsDao.get(listId!!)
-            val dataProduct = DataProduct(productName.trim(), currentTimeToLong(), false,"",currentColor)
+            val dataProduct = DataProduct(productName.trim(), currentTimeToLong(), false,"")
             productAdded = dataProduct
             val products  = mutableListOf<DataProduct>()
             list.products?.let { products.addAll(it) }
@@ -192,7 +191,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                  val list: DataProductList = productListsDao.get(listId!!)
                  products.addAll(list.products!!)
                  for (name in strings) {
-                     val product = DataProduct(name.trim(), currentTimeToLong(), false,"",null)
+                     val product = DataProduct(name.trim(), currentTimeToLong(), false,"")
                      products.add(product)
                      animPosition = products.size
                  }
@@ -236,8 +235,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                                         " (${listRecipes[i].name})"
                                 ,e.date
                                 ,false
-                                , "",
-                                e.color
+                                , ""
                             )
                             readyList.add(product)
                         }
@@ -291,27 +289,48 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
     }
 
     private  fun sortProducts(products: List<DataProduct>):List<DataProduct>{
-        if (products.isNotEmpty()&&products.size!=1){
-            val sortedList: List<DataProduct>
+        /*    if (products.isNotEmpty()&&products.size!=1){
+              val sortedList: List<DataProduct>
 
             when(sortItems){
-                app.getString(R.string.time) ->{
-                    sortedList = products.sortedWith(compareBy({it.ready}, { it.date }))
-                }
-                app.getString(R.string.title) -> {
-                    sortedList = products.sortedWith(compareBy({ it.ready }, { it.name }))
-                }
-                app.getString(R.string.color_time_pref) ->{
-                    sortedList = products.sortedWith(compareBy({ it.ready }, { it.color },{it.date}))
-                }
-                app.getString(R.string.color_title_pref) -> {
-                    sortedList = products.sortedWith(compareBy({ it.ready }, { it.color },{it.name}))
-                }
-                else -> {
-                    sortedList = products.sortedWith(compareBy({ it.ready }, { it.date }))
-                }
+                  app.getString(R.string.time) ->{
+                      sortedList = products.sortedWith(compareBy({it.ready}, { it.date }))
+                  }
+                  app.getString(R.string.title) -> {
+                      sortedList = products.sortedWith(compareBy({ it.ready }, { it.name }))
+                  }
+                  app.getString(R.string.color_time_pref) ->{
+                      sortedList = products.sortedWith(compareBy({ it.ready }, { it.color },{it.date}))
+                  }
+                  app.getString(R.string.color_title_pref) -> {
+                      sortedList = products.sortedWith(compareBy({ it.ready }, { it.color },{it.name}))
+                  }
+                  else -> {
+                      sortedList = products.sortedWith(compareBy({ it.ready }, { it.date }))
+                  }
+              }
+              if (stateChange == ADD_PRODUCT&&productAdded!=null){
+                  for (i in products.indices){
+                      if (compareProduct(productAdded!!,sortedList[i])){
+                          forScrollToPosition = i
+                          animPosition = i
+                      }
+                  }
+              }*/
+
+
+
+
+
+        if (products.isNotEmpty()&&products.size!=1){
+            val sortedList: List<DataProduct>
+            if (sortByDate) {
+                sortedList = products.sortedWith(compareBy({it.ready}, { it.date }))
+
+            }else{
+                sortedList = products.sortedWith(compareBy({ it.ready }, { it.name }))
             }
-            if (stateChange == ADD_PRODUCT&&productAdded!=null){
+            if (stateChange == ADD_PRODUCT &&productAdded!=null){
                 for (i in products.indices){
                     if (compareProduct(productAdded!!,sortedList[i])){
                         forScrollToPosition = i
