@@ -1,9 +1,8 @@
 package com.viktor.kh.dev.shoplist.repository.db.room
 
 import androidx.room.*
-import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
-import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
+
 
 
 @Dao

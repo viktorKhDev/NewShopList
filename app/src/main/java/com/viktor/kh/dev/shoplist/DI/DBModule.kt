@@ -2,10 +2,7 @@ package com.viktor.kh.dev.shoplist.DI
 
 import android.content.Context
 import androidx.room.Room
-import com.viktor.kh.dev.shoplist.repository.db.room.ProductListsDB
-import com.viktor.kh.dev.shoplist.repository.db.room.ProductListsDao
-import com.viktor.kh.dev.shoplist.repository.db.room.RecipesDB
-import com.viktor.kh.dev.shoplist.repository.db.room.RecipesDao
+import com.viktor.kh.dev.shoplist.repository.db.room.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -40,6 +37,16 @@ class DBModule {
         ).build()
     }
 
+    @Singleton
+    @Provides
+    fun providesProductsDB(@ApplicationContext context: Context):ProductsDB{
+        return Room.databaseBuilder(
+            context,
+            ProductsDB::class.java,
+            "ProductsDB"
+        ).build()
+    }
+
    @Singleton
     @Provides
     fun providesProductListsDao( db: ProductListsDB): ProductListsDao{
@@ -52,6 +59,12 @@ class DBModule {
     @Provides
     fun providesRecipesDao( db: RecipesDB): RecipesDao{
         return db.recipesDao()
+    }
+
+    @Singleton
+    @Provides
+    fun providesProductsDao(db: ProductsDB ): ProductsDao{
+        return db.productsDao()
     }
 
 }
