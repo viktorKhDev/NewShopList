@@ -2,6 +2,7 @@ package com.viktor.kh.dev.shoplist.utils
 
 
 
+import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
 import android.content.ClipboardManager
@@ -40,6 +41,7 @@ const val ADD_PRODUCT = 1
 const val CHANGE_READY = 2
 const val DELETE_PRODUCT = 3
 const val UPDATE_DATA = 0
+
 
 
 

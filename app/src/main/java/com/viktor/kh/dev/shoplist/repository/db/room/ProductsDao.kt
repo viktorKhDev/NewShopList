@@ -1,9 +1,6 @@
 package com.viktor.kh.dev.shoplist.repository.db.room
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Update
+import androidx.room.*
 import com.viktor.kh.dev.shoplist.repository.db.data.ProductData
 
 
@@ -18,4 +15,27 @@ interface ProductsDao {
 
     @Insert
     fun insert(dataProducts: ProductData)
+
+
+    @Transaction
+    fun updateTable(list: List<ProductData>){
+        for (i in list){
+            insert(i)
+        }
+    }
+
+    @Query("DELETE FROM productData")
+    fun clearData()
+
+
+    @Query("DELETE FROM productData WHERE parentID = :listID")
+    fun deleteProductsForList(listID: Int)
+
+
+    @Transaction
+    fun updateTableForList(list: List<ProductData>){
+        val listID = list[0].parentID
+        listID?.let { deleteProductsForList(it) }
+        updateTable(list)
+    }
 }

@@ -2,6 +2,7 @@ package com.viktor.kh.dev.shoplist.screens.propuctsists
 
 
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.res.Resources.NotFoundException
 import android.os.Bundle
@@ -12,7 +13,10 @@ import androidx.navigation.NavController
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
+import com.viktor.kh.dev.shoplist.repository.db.data.ProductData
 import com.viktor.kh.dev.shoplist.repository.db.room.ProductListsDao
+import com.viktor.kh.dev.shoplist.repository.db.room.ProductsDao
+import com.viktor.kh.dev.shoplist.repository.db.room.RecipesDao
 import com.viktor.kh.dev.shoplist.utils.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -25,6 +29,9 @@ import javax.inject.Inject
 class ProductListsModel @Inject constructor(application: Application) : AndroidViewModel(application) {
 
     @Inject lateinit var productListsDao: ProductListsDao
+
+
+
 
     private val app = application
     //variable for check start animation
@@ -49,6 +56,8 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
         initAnim = true
         getLists()
         dataColors.value = ColorClickedList()
+        copyProductsToProductsDB()
+
     }
 
 
@@ -76,6 +85,7 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
             currentColor = dataColors.value!!.getCurrentColor()
         }
     }
+
 
 
 
@@ -166,6 +176,59 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
         dataLists.value?.let { dataForSearch.addAll(it) }
     }
 
+
+
+    //temporary solution, for productsDB!!!
+    //this screen is opening first
+    @Inject lateinit var recipesDao: RecipesDao
+    @Inject lateinit var productsDao: ProductsDao
+
+    fun copyProductsToProductsDB(){
+       CoroutineScope(Dispatchers.IO).launch {
+           val  dataList = productListsDao.getAll()
+           val dataRecipes = recipesDao.getAll()
+           val products = mutableListOf<ProductData>()
+
+           for (i in dataList){
+             if (i.products!=null){
+                 for (y in i.products){
+                     products.add(ProductData(
+                         0,
+                         y.name,
+                         y.date,
+                         y.ready,
+                         y.amount,
+                         "",
+                         i.id,
+                         false
+                     ))
+                 }
+             }
+           }
+
+           for (i in dataRecipes){
+               if (i.products!=null){
+                   for (y in i.products){
+                       products.add(ProductData(
+                           0,
+                           y.name,
+                           y.date,
+                           y.ready,
+                           y.amount,
+                           "",
+                           i.id,
+                           true
+                       ))
+                   }
+               }
+           }
+
+
+           productsDao.updateTable(products)
+       }
+
+    }
+    /////
 
 
 }
