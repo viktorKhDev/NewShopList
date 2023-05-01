@@ -1,11 +1,12 @@
 package com.viktor.kh.dev.shoplist.screens.propuctsists
 
 
-
 import android.annotation.SuppressLint
 import android.app.Application
+import android.content.Context
 import android.content.res.Resources.NotFoundException
 import android.os.Bundle
+import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
@@ -92,8 +93,7 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
     private fun getLists(){
         // get all list from DB
        CoroutineScope(Dispatchers.IO).launch {
-         val  data = productListsDao.getAll()
-           dataLists.postValue(data)
+           dataLists.postValue(productListsDao.getAll())
        }
 
     }
@@ -183,49 +183,64 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
     @Inject lateinit var recipesDao: RecipesDao
     @Inject lateinit var productsDao: ProductsDao
 
-    fun copyProductsToProductsDB(){
-       CoroutineScope(Dispatchers.IO).launch {
-           val  dataList = productListsDao.getAll()
-           val dataRecipes = recipesDao.getAll()
-           val products = mutableListOf<ProductData>()
 
-           for (i in dataList){
-             if (i.products!=null){
-                 for (y in i.products){
-                     products.add(ProductData(
-                         0,
-                         y.name,
-                         y.date,
-                         y.ready,
-                         y.amount,
-                         "",
-                         i.id,
-                         false
-                     ))
-                 }
-             }
-           }
+    private fun copyProductsToProductsDB(){
+        if (!firstLaunchForProductsDB){
+            Log.d("dbDebug","Start write to db products")
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val  dataList = productListsDao.getAll()
+                    val dataRecipes = recipesDao.getAll()
+                    val products = mutableListOf<ProductData>()
 
-           for (i in dataRecipes){
-               if (i.products!=null){
-                   for (y in i.products){
-                       products.add(ProductData(
-                           0,
-                           y.name,
-                           y.date,
-                           y.ready,
-                           y.amount,
-                           "",
-                           i.id,
-                           true
-                       ))
-                   }
-               }
-           }
+                    for (i in dataList){
+                        if (i.products!=null){
+                            for (y in i.products){
+                                products.add(ProductData(
+                                    0,
+                                    y.name,
+                                    y.date,
+                                    y.ready,
+                                    y.amount,
+                                    "",
+                                    i.id,
+                                    false
+                                ))
+                            }
+                        }
+                    }
+
+                    for (i in dataRecipes){
+                        if (i.products!=null){
+                            for (y in i.products){
+                                products.add(ProductData(
+                                    0,
+                                    y.name,
+                                    y.date,
+                                    y.ready,
+                                    y.amount,
+                                    "",
+                                    i.id,
+                                    true
+                                ))
+                            }
+                        }
+                    }
+                    productsDao.updateTable(products)
+
+                    Log.d("dbDebug","put true to pref")
+                    app.getSharedPreferences(APP_PREF, Context.MODE_PRIVATE).edit()
+                        .putBoolean(FIRST_LAUNCH_FOR_PRODUCTS,true)
+                        .apply()
+
+                }catch (e:Exception){                    writeLog("error copy products - ${e.printStackTrace()}", getApplication(),true)
+                }
 
 
-           productsDao.updateTable(products)
-       }
+
+            }
+        }
+
 
     }
     /////

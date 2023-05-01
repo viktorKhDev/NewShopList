@@ -24,13 +24,22 @@ import java.util.*
 val format = SimpleDateFormat("dd.MM.yyyy")
 val formatForLog = SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z")
 
+
+
+
+
+
+
+////preferences
+
 /*var sortItems = ""
 var sortLists = ""*/
-
-
 var sortByDate = false
 //var colorLists = true
 var colorItems = true
+var firstLaunchForProductsDB = false
+
+//////////
 
 
 
@@ -41,6 +50,8 @@ const val ADD_PRODUCT = 1
 const val CHANGE_READY = 2
 const val DELETE_PRODUCT = 3
 const val UPDATE_DATA = 0
+const val APP_PREF = "appPreferences"
+const val FIRST_LAUNCH_FOR_PRODUCTS = "products_pref_launch"
 
 
 
@@ -52,6 +63,15 @@ const val UPDATE_DATA = 0
 
 
 
+ fun loadSetting(context: Context){
+     val sp = PreferenceManager.getDefaultSharedPreferences(context)
+    /*sortItems = sp.getString(context.getString(R.string.sorting_items),"")!!
+    sortLists = sp.getString(context.getString(R.string.sorting_lists),"")!!*/
+    sortByDate = sp.getBoolean(context.getString(R.string.sort_by_date),false)
+    //colorLists = sp.getBoolean(context.getString(R.string.color_lists_pref),true)
+    colorItems = sp.getBoolean(context.getString(R.string.color_items_pref),true)
+
+}
 
 
 fun isNightTheme(context:Context):Boolean{
@@ -175,15 +195,7 @@ fun shareText(text: String?, context: Context) {
 }
 
 
-fun loadSetting(context: Context){
-    val sp = PreferenceManager.getDefaultSharedPreferences(context)
-    /*sortItems = sp.getString(context.getString(R.string.sorting_items),"")!!
-    sortLists = sp.getString(context.getString(R.string.sorting_lists),"")!!*/
-    sortByDate = sp.getBoolean(context.getString(R.string.sort_by_date),false)
-    //colorLists = sp.getBoolean(context.getString(R.string.color_lists_pref),true)
-    colorItems = sp.getBoolean(context.getString(R.string.color_items_pref),true)
 
-}
 
 
 fun writeLog(log:String,context: Context,error:Boolean){

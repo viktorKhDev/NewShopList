@@ -1,4 +1,4 @@
-package com.viktor.kh.dev.shoplist.screens.other.main
+package com.viktor.kh.dev.shoplist.screens.main
 
 
 
@@ -18,7 +18,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.utils.isNightTheme
-import com.viktor.kh.dev.shoplist.utils.loadSetting
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -32,12 +31,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        loadSetting(this)
+        model.init()
         setContentView(R.layout.main_activity)
         rootLayout = findViewById(R.id.main_root_layout)
         navController = findNavController(R.id.nav_host_fragment)
         bottomNavView =  findViewById(R.id.bottom_nav_view)
         bottomNavView.setupWithNavController(navController)
+
         setColors()
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id){

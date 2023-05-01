@@ -20,7 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ShopList">
-        <activity android:name=".screens.other.main.MainActivity"
+        <activity android:name=".screens.main.MainActivity"
             android:exported="true"
             >
             <intent-filter>
