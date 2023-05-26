@@ -18,7 +18,7 @@ interface ProductsDao {
 
 
     @Transaction
-    fun updateTable(list: List<ProductData>){
+    fun addProducts(list: List<ProductData>){
         for (i in list){
             insert(i)
         }
@@ -36,6 +36,6 @@ interface ProductsDao {
     fun updateTableForList(list: List<ProductData>){
         val listID = list[0].parentID
         listID?.let { deleteProductsForList(it) }
-        updateTable(list)
+        addProducts(list)
     }
 }

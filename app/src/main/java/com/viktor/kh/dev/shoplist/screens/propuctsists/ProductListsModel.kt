@@ -1,7 +1,6 @@
 package com.viktor.kh.dev.shoplist.screens.propuctsists
 
 
-import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.content.res.Resources.NotFoundException
@@ -30,6 +29,11 @@ import javax.inject.Inject
 class ProductListsModel @Inject constructor(application: Application) : AndroidViewModel(application) {
 
     @Inject lateinit var productListsDao: ProductListsDao
+
+    ////
+    @Inject lateinit var recipesDao: RecipesDao
+    @Inject lateinit var productsDao: ProductsDao
+    ///
 
 
 
@@ -105,6 +109,9 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
         isAddClicked = false
         CoroutineScope(Dispatchers.IO).launch {
                 productListsDao.delete(dataLists.value!![position])
+            ///
+                productsDao.deleteProductsForList(dataLists.value!![position].id)
+            ///
             getLists()
         }
 
@@ -180,8 +187,7 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
 
     //temporary solution, for productsDB!!!
     //this screen is opening first
-    @Inject lateinit var recipesDao: RecipesDao
-    @Inject lateinit var productsDao: ProductsDao
+
 
 
     private fun copyProductsToProductsDB(){
@@ -226,7 +232,7 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
                             }
                         }
                     }
-                    productsDao.updateTable(products)
+                    productsDao.addProducts(products)
 
                     Log.d("dbDebug","put true to pref")
                     app.getSharedPreferences(APP_PREF, Context.MODE_PRIVATE).edit()
