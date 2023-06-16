@@ -28,14 +28,14 @@ interface ProductsDao {
     fun clearData()
 
 
-    @Query("DELETE FROM productData WHERE parentID = :listID")
-    fun deleteProductsForList(listID: Int)
+    @Query("DELETE FROM productData WHERE parentID = :listID AND isRecipe = :isRecipe")
+    fun deleteProductsForList(listID: Int, isRecipe: Boolean)
 
 
     @Transaction
-    fun updateTableForList(list: List<ProductData>){
+    fun updateTableForList(list: List<ProductData>,isRecipe: Boolean){
         val listID = list[0].parentID
-        listID?.let { deleteProductsForList(it) }
+        listID?.let { deleteProductsForList(it,isRecipe) }
         addProducts(list)
     }
 }

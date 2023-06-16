@@ -110,7 +110,7 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
         CoroutineScope(Dispatchers.IO).launch {
                 productListsDao.delete(dataLists.value!![position])
             ///
-                productsDao.deleteProductsForList(dataLists.value!![position].id)
+                productsDao.deleteProductsForList(dataLists.value!![position].id,false)
             ///
             getLists()
         }

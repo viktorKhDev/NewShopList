@@ -9,6 +9,7 @@ import androidx.navigation.NavController
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
+import com.viktor.kh.dev.shoplist.repository.db.room.ProductsDao
 import com.viktor.kh.dev.shoplist.repository.db.room.RecipesDao
 import com.viktor.kh.dev.shoplist.utils.*
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,6 +22,9 @@ import javax.inject.Inject
 class RecipeListsModel @Inject constructor(application: Application) :AndroidViewModel(application) {
 
     @Inject lateinit var recipesDao: RecipesDao
+    //
+    @Inject lateinit var productsDao: ProductsDao
+    //
     var initAnim = false
     var isAddClicked = false
     var currentColor: Int? = null
@@ -90,6 +94,9 @@ class RecipeListsModel @Inject constructor(application: Application) :AndroidVie
         isAddClicked = false
         CoroutineScope(Dispatchers.IO).launch {
             recipesDao.delete(dataRecipes.value!![position])
+            //
+            productsDao.deleteProductsForList(dataRecipes.value!![position].id,true)
+            //
             getRecipes()
         }
 
@@ -110,6 +117,7 @@ class RecipeListsModel @Inject constructor(application: Application) :AndroidVie
     }
 
     fun setRecipe(position: Int,name: String){
+        //set name and color for recipe
         isAddClicked = false
         initAnim = false
         val list : DataRecipe = dataRecipes.value!![position]

@@ -130,7 +130,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                     false
                 ))
             }
-            productsDao.updateTableForList(nl)
+            productsDao.updateTableForList(nl,false)
 
             //
 
@@ -152,6 +152,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
             products.removeAt(position)
             products.add(newProduct)
 
+            //
             val nl = mutableListOf<ProductData>()
             products.forEach{
                 nl.add(ProductData(
@@ -165,7 +166,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                     false
                 ))
             }
-            productsDao.updateTableForList(nl)
+            productsDao.updateTableForList(nl,false)
 
             //
 
@@ -197,7 +198,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                     false
                 ))
             }
-            productsDao.updateTableForList(nl)
+            productsDao.updateTableForList(nl,false)
 
             //
          productListsDao.update(DataProductList(list.id,list.name,list.date,list.color,products))
@@ -251,7 +252,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
            products.clear()
            productListsDao.update(DataProductList(list.id,list.name,list.date,list.color,products))
             //
-            productsDao.deleteProductsForList(listId!!)
+            productsDao.deleteProductsForList(listId!!,false)
             //
            stateChange = UPDATE_DATA
            getProducts()
