@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.view.animation.AnimationUtils
