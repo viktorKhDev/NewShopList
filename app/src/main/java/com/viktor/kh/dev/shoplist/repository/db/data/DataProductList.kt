@@ -4,8 +4,6 @@ package com.viktor.kh.dev.shoplist.repository.db.data
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
-import com.viktor.kh.dev.shoplist.repository.db.converters.ProductsConverter
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -16,6 +14,4 @@ data class DataProductList(
         @ColumnInfo(name = "name" ) val name: String?,
         @ColumnInfo(name = "date" ) val date: Long?,
         @ColumnInfo(name = "color") val color: Int?,
-        @TypeConverters(ProductsConverter::class)
-        @ColumnInfo(name = "products" ) val products: List<DataProduct>?
-)
+        )

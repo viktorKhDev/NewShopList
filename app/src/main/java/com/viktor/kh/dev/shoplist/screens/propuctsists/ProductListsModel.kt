@@ -61,7 +61,7 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
         initAnim = true
         getLists()
         dataColors.value = ColorClickedList()
-        copyProductsToProductsDB()
+        //copyProductsToProductsDB()
 
     }
 
@@ -123,7 +123,7 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
         initAnim = false
         isAddClicked = true
         val listProduct :List<DataProduct> = emptyList()
-        val productList = DataProductList(0,name, currentTimeToLong(),currentColor,listProduct)
+        val productList = DataProductList(0,name, currentTimeToLong(),currentColor)
         CoroutineScope(Dispatchers.IO).launch {
             productListsDao.insert(productList)
             getLists()
@@ -138,7 +138,7 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
         CoroutineScope(Dispatchers.IO).launch {
          productListsDao.update(
              DataProductList(
-             list.id, name, list.date,currentColor,list.products
+             list.id, name, list.date,currentColor
          )
          )
            getLists()
@@ -190,7 +190,7 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
 
 
 
-    private fun copyProductsToProductsDB(){
+   /* private fun copyProductsToProductsDB(){
         if (!firstLaunchForProductsDB){
             Log.d("dbDebug","Start write to db products")
             CoroutineScope(Dispatchers.IO).launch {
@@ -248,7 +248,7 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
         }
 
 
-    }
+    }*/
     /////
 
 

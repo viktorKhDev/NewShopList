@@ -27,6 +27,9 @@ interface ProductsDao {
     @Query("DELETE FROM productData")
     fun clearData()
 
+    @Query("SELECT * FROM productData WHERE parentID = :listID AND isRecipe = :isRecipe")
+    fun getProductsForList(listID: Int, isRecipe: Boolean): List<ProductData>
+
 
     @Query("DELETE FROM productData WHERE parentID = :listID AND isRecipe = :isRecipe")
     fun deleteProductsForList(listID: Int, isRecipe: Boolean)

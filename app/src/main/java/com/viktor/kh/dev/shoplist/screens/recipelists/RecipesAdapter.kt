@@ -86,7 +86,6 @@ class RecipesAdapter constructor(val onListClickListener: OnListClickListener,
             listName.text = data.name
             val date  = data.date?.let { convertLongToTime(it) }.toString()
             textListDate.text = date
-            textListReady.visibility = View.GONE
             if (nightTheme&& currentCardColor ==0){
                 listName.setTextColor(Color.WHITE)
                 textListDate.setTextColor(Color.WHITE)

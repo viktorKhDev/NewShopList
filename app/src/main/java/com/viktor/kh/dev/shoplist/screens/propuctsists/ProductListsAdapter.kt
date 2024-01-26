@@ -94,17 +94,14 @@ constructor(val onListClickListener: OnListClickListener,
             listName.text = data.name
             val date  = data.date?.let { convertLongToTime(it) }.toString()
             textListDate.text = date
-            textListReady.text = data.products?.let { findReady(it) }
             if (nightTheme&& currentCardColor ==0){
                 listName.setTextColor(Color.WHITE)
                 textListDate.setTextColor(Color.WHITE)
-                textListReady.setTextColor(Color.WHITE)
                 editImage.setImageResource(R.drawable.ic_baseline_edit_white_24)
                 deleteImage.setImageResource(R.drawable.ic_baseline_delete_white_24)
             }else{
                 listName.setTextColor(Color.BLACK)
                 textListDate.setTextColor(Color.BLACK)
-                textListReady.setTextColor(Color.BLACK)
                 editImage.setImageResource(R.drawable.ic_edit_black_24dp)
                 deleteImage.setImageResource(R.drawable.ic_delete_forever_black_24dp)
             }
