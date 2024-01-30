@@ -108,7 +108,7 @@ class RecipeListsModel @Inject constructor(application: Application) :AndroidVie
         initAnim = false
         isAddClicked = true
         val listProduct :List<DataProduct> = emptyList()
-        val productList = DataRecipe(0,name,"", currentTimeToLong(),currentColor,listProduct)
+        val productList = DataRecipe(0,name,"", currentTimeToLong(),currentColor)
         CoroutineScope(Dispatchers.IO).launch {
             recipesDao.insert(productList)
             getRecipes()
@@ -124,8 +124,7 @@ class RecipeListsModel @Inject constructor(application: Application) :AndroidVie
         CoroutineScope(Dispatchers.IO).launch {
             recipesDao.update(
                 DataRecipe(
-                    list.id, name,list.text, list.date, currentColor,list.products
-                )
+                    list.id, name,list.text, list.date, currentColor)
             )
             getRecipes()
         }

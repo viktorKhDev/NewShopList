@@ -24,7 +24,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductsModel @Inject constructor(application: Application) : AndroidViewModel(application) {
 
-  @Inject lateinit var productListsDao: ProductListsDao
+  //@Inject lateinit var productListsDao: ProductListsDao
   @Inject lateinit var recipeDao: RecipesDao
   @Inject lateinit var productsDao: ProductsDao
   private lateinit var listRecipes: List<DataRecipe>
@@ -36,13 +36,13 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
     var stateChange = UPDATE_DATA
     var animPosition = -1
     var forScrollToPosition = 0
-    var productAdded: DataProduct? = null
+    var productAdded: ProductData? = null
     var currentColor: Int? = null
     private val app = application
 
 
-    val productsList : MutableLiveData<List<DataProduct>> by lazy {
-      MutableLiveData<List<DataProduct>>().also {
+    val productsList : MutableLiveData<List<ProductData>> by lazy {
+      MutableLiveData<List<ProductData>>().also {
           getProducts()
       }
   }
@@ -93,12 +93,11 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
 
     private fun getProducts(){
         CoroutineScope(Dispatchers.IO).launch {
-            val data : DataProductList = productListsDao.get(listId!!)
-            val newData  = DataProductList(data.id,data.name,data.date,data.color
-                ,data.products?.let { sortProducts(it) })
-            productListsDao.update(DataProductList(newData.id,newData.name,newData.date,newData.color,newData.products))
+            val data : List<ProductData> = productsDao.getProductsForList(listId!!,false)
+            val sortData = sortProducts(data)
+            //productListsDao.update(DataProductList(newData.id,newData.name,newData.date,newData.color,newData.products))
             withContext(Dispatchers.Main){
-                productsList.value = newData.products
+                productsList.value = sortData
             }
         }
     }
@@ -107,7 +106,19 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
        initAnim = false
         CoroutineScope(Dispatchers.IO).launch {
           val currentProduct = productsList.value!![position]
-          val newProduct = DataProduct(currentProduct.name,currentProduct.date
+            val newProduct = ProductData(
+               currentProduct.id,
+                currentProduct.name,
+                currentProduct.date,
+                changeReady(currentProduct.ready!!),
+                currentProduct.amount,
+                currentProduct.color,
+                currentProduct.parentID,
+                currentProduct.isRecipe
+            )
+
+            productsDao.update(newProduct)
+          /*val newProduct = DataProduct(currentProduct.name,currentProduct.date
               , currentProduct.ready?.let { changeReady(it) },currentProduct.amount)
           val list: DataProductList = productListsDao.get(listId!!)
           val products  = mutableListOf<DataProduct>()
@@ -115,9 +126,9 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
           products.removeAt(position)
           products.add(newProduct)
 
-            productListsDao.update(DataProductList(list.id,list.name,list.date,list.color,products))
+            productListsDao.update(DataProductList(list.id,list.name,list.date,list.color,products))*/
             //
-            val nl = mutableListOf<ProductData>()
+            /*val nl = mutableListOf<ProductData>()
             products.forEach{
                 nl.add(ProductData(
                     0,
@@ -130,7 +141,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                     false
                 ))
             }
-            productsDao.updateTableForList(nl,false)
+            productsDao.updateTableForList(nl,false)*/
 
             //
 
@@ -144,7 +155,21 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
     fun renameProduct(position: Int,name: String){
         initAnim = false
         CoroutineScope(Dispatchers.IO).launch {
+
             val currentProduct = productsList.value!![position]
+            val newProduct = ProductData(
+                currentProduct.id,
+                name,
+                currentProduct.date,
+                currentProduct.ready,
+                currentProduct.amount,
+                currentProduct.color,
+                currentProduct.parentID,
+                currentProduct.isRecipe
+            )
+
+            productsDao.update(newProduct)
+           /* val currentProduct = productsList.value!![position]
             val newProduct = DataProduct(name,currentProduct.date,currentProduct.ready,"")
             val list: DataProductList = productListsDao.get(listId!!)
             val products  = mutableListOf<DataProduct>()
@@ -170,7 +195,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
 
             //
 
-            productListsDao.update(DataProductList(list.id,list.name,list.date,list.color,products))
+            productListsDao.update(DataProductList(list.id,list.name,list.date,list.color,products))*/
             stateChange = UPDATE_DATA
             getProducts()
         }
@@ -406,7 +431,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
         return if (state==true) false else true
     }
 
-    private  fun sortProducts(products: List<DataProduct>):List<DataProduct>{
+    private  fun sortProducts(products: List<ProductData>):List<ProductData>{
         /*    if (products.isNotEmpty()&&products.size!=1){
               val sortedList: List<DataProduct>
 
@@ -437,11 +462,8 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
               }*/
 
 
-
-
-
         if (products.isNotEmpty()&&products.size!=1){
-            val sortedList: List<DataProduct>
+            val sortedList: List<ProductData>
             if (sortByDate) {
                 sortedList = products.sortedWith(compareBy({it.ready}, { it.date }))
 
@@ -466,7 +488,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
 
     }
 
-    private fun compareProduct(product1:DataProduct,product2: DataProduct):Boolean{
+    private fun compareProduct(product1:ProductData,product2: ProductData):Boolean{
         return (product1.name==product2.name
                 &&product1.date == product2.date
                 )

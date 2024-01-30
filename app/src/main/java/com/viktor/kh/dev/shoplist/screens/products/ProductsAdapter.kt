@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
+import com.viktor.kh.dev.shoplist.repository.db.data.ProductData
 import com.viktor.kh.dev.shoplist.utils.*
 
 import kotlin.collections.ArrayList
@@ -23,13 +24,13 @@ class ProductsAdapter(
     val onProductLongClickListener: OnProductLongClickListener
 ) : RecyclerView.Adapter<ProductsAdapter.ProductHolder>() {
 
-    var data : ArrayList<DataProduct> = ArrayList()
+    var data : ArrayList<ProductData> = ArrayList()
     private var positionClick = 0
     var nightTheme: Boolean = false
     var context: Context? = null
 
     private var currentItemColor  = ColorId.get()
-    private var colorMap = mutableMapOf<DataProduct,Int>()
+    private var colorMap = mutableMapOf<ProductData,Int>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
 
@@ -58,7 +59,7 @@ class ProductsAdapter(
 
 
 
-    fun setData(list: List<DataProduct>, stateForAnim: Int){
+    fun setData(list: List<ProductData>, stateForAnim: Int){
         Log.d("fix", "colorItems = $colorItems")
 
         var animPosition = 0
@@ -117,7 +118,7 @@ class ProductsAdapter(
 
     inner class ProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
-        fun bind(product: DataProduct){
+        fun bind(product: ProductData){
 
            var text = itemView.findViewById<TextView>(R.id.productName)
             if (itemViewType == 1) {
@@ -167,7 +168,7 @@ class ProductsAdapter(
 
 
     }
-    private fun compareProduct(product1:DataProduct,product2: DataProduct):Boolean{
+    private fun compareProduct(product1:ProductData,product2: ProductData):Boolean{
         return (product1.name==product2.name
                 &&product1.date == product2.date
                 )
@@ -191,7 +192,7 @@ class ProductsAdapter(
 
     }*/
 
-    private fun cardColor(product: DataProduct):Int{
+    private fun cardColor(product: ProductData):Int{
         if (colorMap.contains(product)){
             return ContextCompat.getColor(context!!, colorMap[product]!!)
         }else{

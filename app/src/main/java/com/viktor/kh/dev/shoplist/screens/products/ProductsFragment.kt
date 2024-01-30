@@ -32,6 +32,7 @@ import com.viktor.kh.dev.shoplist.databinding.DialogAddFromRecipeBinding
 import com.viktor.kh.dev.shoplist.databinding.ProductsFragmentBinding
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
+import com.viktor.kh.dev.shoplist.repository.db.data.ProductData
 import com.viktor.kh.dev.shoplist.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -155,7 +156,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
 
     private fun setProduct(position: Int) = with(binding){
         //change name for product
-        var dataProduct: DataProduct = model.productsList.value!![position]
+        var dataProduct: ProductData = model.productsList.value!![position]
         relativeAddProduct.startAnimation(AnimationUtils.loadAnimation(activity,R.anim.to_start_anim))
         relativeAddProduct.visibility = View.VISIBLE
         addProductFabInProd.hide()
@@ -221,7 +222,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
 
     }
 
-    private fun subscribeData(data :List<DataProduct>){
+    private fun subscribeData(data :List<ProductData>){
         productsAdapter.setData(data,model.stateChange)
         if (model.stateChange== ADD_PRODUCT){
             rv.scrollToPosition(model.forScrollToPosition)
