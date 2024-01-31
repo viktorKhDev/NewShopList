@@ -1,7 +1,12 @@
 package com.viktor.kh.dev.shoplist.repository.db.room.migrationUtils
 
 import androidx.room.DeleteColumn
+import androidx.room.migration.AutoMigrationSpec
 
-@DeleteColumn(tableName = "RecipesDB", columnName = "products")
-class AutoMigrationRecipesFrom2To3 {
-}
+@DeleteColumn.Entries(
+    DeleteColumn(
+        tableName = "DataRecipe",
+        columnName = "products"
+    )
+)
+class AutoMigrationRecipesFrom2To3 : AutoMigrationSpec

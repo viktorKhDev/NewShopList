@@ -28,6 +28,7 @@ import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.RecipeFragmentBinding
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
+import com.viktor.kh.dev.shoplist.repository.db.data.ProductData
 import com.viktor.kh.dev.shoplist.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -391,7 +392,7 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
     private fun setProduct(position: Int) {
         //change name for product
-        var dataProduct: DataProduct = model.productsList.value!![position]
+        var dataProduct: ProductData = model.productsList.value!![position]
         var dialog = context?.let { Dialog(it, R.style.MyDialog) }
         if (isNightTheme(requireContext())) {
             dialog = context?.let { Dialog(it, R.style.MyDialogDark) }
@@ -427,7 +428,7 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
     }
 
-    private fun subscribeProducts(data: List<DataProduct>) {
+    private fun subscribeProducts(data: List<ProductData>) {
         productsAdapter.setData(data, model.stateChange)
         if (model.stateChange == ADD_PRODUCT) {
             rv.scrollToPosition(data.size - 1)

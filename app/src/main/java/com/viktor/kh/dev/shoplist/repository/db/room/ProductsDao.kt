@@ -1,6 +1,7 @@
 package com.viktor.kh.dev.shoplist.repository.db.room
 
 import androidx.room.*
+import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
 import com.viktor.kh.dev.shoplist.repository.db.data.ProductData
 
 
@@ -23,6 +24,10 @@ interface ProductsDao {
             insert(i)
         }
     }
+
+    @Query("SELECT * FROM productData")
+    fun getAll(): List<ProductData>
+
 
     @Query("DELETE FROM productData")
     fun clearData()

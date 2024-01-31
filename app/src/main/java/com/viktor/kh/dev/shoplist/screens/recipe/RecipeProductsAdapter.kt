@@ -1,5 +1,6 @@
 package com.viktor.kh.dev.shoplist.screens.recipe
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Color
@@ -12,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
+import com.viktor.kh.dev.shoplist.repository.db.data.ProductData
 import com.viktor.kh.dev.shoplist.utils.ADD_PRODUCT
 import com.viktor.kh.dev.shoplist.utils.DELETE_PRODUCT
 import com.viktor.kh.dev.shoplist.utils.writeLog
@@ -25,7 +27,7 @@ class RecipeProductsAdapter(
 
 
 
-    var data : ArrayList<DataProduct> = ArrayList()
+    var data : ArrayList<ProductData> = ArrayList()
     private var positionClick = 0
     var context: Context? = null
     var nightTheme: Boolean = false
@@ -45,7 +47,7 @@ class RecipeProductsAdapter(
     }
 
 
-    fun setData(list: List<DataProduct>, stateForAnim: Int){
+    fun setData(list: List<ProductData>, stateForAnim: Int){
         var animPosition = 0
 
         when(stateForAnim){
@@ -83,7 +85,8 @@ class RecipeProductsAdapter(
     inner class ProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
 
-        fun bind(product: DataProduct){
+
+        fun bind(product: ProductData){
             var text = itemView.findViewById<TextView>(R.id.productName)
             //val color = cardColor(product.color)
             val card = itemView.findViewById<CardView>(R.id.cl)

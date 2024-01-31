@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.repository.db.data.BackupData
 import com.viktor.kh.dev.shoplist.repository.db.room.ProductListsDao
+import com.viktor.kh.dev.shoplist.repository.db.room.ProductsDao
 import com.viktor.kh.dev.shoplist.repository.db.room.RecipesDao
 import com.viktor.kh.dev.shoplist.utils.showToast
 import com.viktor.kh.dev.shoplist.utils.writeLog
@@ -27,6 +28,9 @@ class BackupModel @Inject constructor(application: Application) : AndroidViewMod
      lateinit var productListsDao: ProductListsDao
     @Inject
      lateinit var recipesDao: RecipesDao
+     @Inject
+     lateinit var productsDao: ProductsDao
+
 
 
 
@@ -36,7 +40,8 @@ if (uri!="".toUri()){
     CoroutineScope(Dispatchers.IO).launch {
         val lists = productListsDao.getAll()
         val recipes = recipesDao.getAll()
-        val backupData = BackupData(lists,recipes)
+        val products = productsDao.getAll()
+        val backupData = BackupData(lists,recipes,products)
         val backupString: String = Json.encodeToString(backupData)
 
         try {
@@ -81,6 +86,8 @@ if (uri!="".toUri()){
                            productListsDao.updateTable(backupData.lists)
                            recipesDao.clearAllTable()
                            recipesDao.updateTable(backupData.recipes)
+                           productsDao.clearData()
+                           productsDao.addProducts(backupData.products)
                            writeLog("read backup file from ${uri.toString()}",app,false)
                            withContext(Dispatchers.Main){
                                showToast(app.getString(R.string.backup_read),app)
