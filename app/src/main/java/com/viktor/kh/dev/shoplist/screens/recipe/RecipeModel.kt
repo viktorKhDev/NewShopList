@@ -190,7 +190,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
                 productName.trim(),
                 currentTimeToLong(),
                 false,
-                "",
+                amount,
                 "",
                 listId!!,
                 true
@@ -219,7 +219,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
             recipesDao.update(DataRecipe(recipe.id,recipe.name,recipe.text,recipe.date,recipe.color,products))*/
 
 
-            productsDao.deleteProductsForList(listId!!,false)
+            productsDao.deleteProductsForList(listId!!,true)
 
 
             stateChange = UPDATE_DATA
@@ -239,10 +239,22 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
                 val strings = text.split("\n").toTypedArray()
                 /*val recipe: DataRecipe = recipesDao.get(listId!!)
                 products.addAll(recipe.products!!)*/
-                val copyList  = mutableListOf<DataProduct>()
+                val copyList  = mutableListOf<ProductData>()
                 for (name in strings) {
-                    val product = DataProduct(name.trim(), currentTimeToLong(), false,"")
-                    copyList.add(product)
+                    if (name.isNotEmpty()){
+                        val  product = ProductData(
+                            0,
+                            name,
+                            currentTimeToLong(),
+                            false,
+                            "",
+                            "",
+                            listId!!,
+                            true
+                        )
+                        copyList.add(product)
+                    }
+
                     //animPosition = products.size
 
                 }
@@ -250,21 +262,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
                /* products.addAll(copyList)
                 recipesDao.update(DataRecipe(recipe.id,recipe.name,recipe.text,recipe.date,recipe.color,products))*/
 
-
-                val nl = mutableListOf<ProductData>()
-                copyList.forEach{
-                    nl.add(ProductData(
-                        0,
-                        it.name,
-                        it.date,
-                        it.ready,
-                        "",
-                        "",
-                        listId!!,
-                        false
-                    ))
-                }
-                productsDao.addProducts(nl)
+                productsDao.addProducts(copyList)
                 stateChange =  UPDATE_DATA
                 getProducts()
                 productsList.value?.let { animPosition = it.size }
@@ -318,7 +316,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
                 sortedList = products.sortedWith(compareBy({it.ready}, { it.date }))
 
             }else{
-                sortedList = products.sortedWith(compareBy({ it.ready }, { it.name }))
+                sortedList = products.sortedWith(compareBy({ it.ready }, { it.name!!.lowercase() }))
             }
 
             return sortedList

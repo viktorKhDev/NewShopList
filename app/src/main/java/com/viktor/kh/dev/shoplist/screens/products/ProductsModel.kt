@@ -295,6 +295,17 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                  val copyList  = mutableListOf<ProductData>()
                 // products.addAll(list.products!!)
                  for (name in strings) {
+                     if (name.isNotEmpty()){
+                         val product = ProductData(0,
+                             name.trim(),
+                             currentTimeToLong(),
+                             false,
+                             "",
+                             "",
+                             listId,
+                             false)
+                         copyList.add(product)
+                     }
 
                     /* val product = DataProduct(name.trim(), currentTimeToLong(), false,"")
                      copyList.add(product)*/
@@ -304,20 +315,8 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                  //productListsDao.update(DataProductList(list.id,list.name,list.date,list.color,products))
 
                  //
-                 val nl = mutableListOf<ProductData>()
-                 copyList.forEach{
-                     nl.add(ProductData(
-                         0,
-                         it.name,
-                         it.date,
-                         it.ready,
-                         "",
-                         "",
-                         listId!!,
-                         false
-                     ))
-                 }
-                 productsDao.addProducts(nl)
+
+                 productsDao.addProducts(copyList)
                  //
                  stateChange =  UPDATE_DATA
                  getProducts()
@@ -488,7 +487,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                 sortedList = products.sortedWith(compareBy({it.ready}, { it.date }))
 
             }else{
-                sortedList = products.sortedWith(compareBy({ it.ready }, { it.name }))
+                sortedList = products.sortedWith(compareBy({ it.ready }, { it.name!!.lowercase() }))
             }
             if (stateChange == ADD_PRODUCT &&productAdded!=null){
                 for (i in products.indices){
