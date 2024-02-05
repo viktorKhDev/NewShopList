@@ -13,7 +13,6 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
-import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.ProductData
 import com.viktor.kh.dev.shoplist.utils.*
 
@@ -93,7 +92,7 @@ class ProductsAdapter(
 
                     }
 
-                    //Log.d("fixLog", "moved from $animPosition(${data[animPosition].name}) to $newPosition(${data[newPosition].name}) ")
+
                 }
                 DELETE_PRODUCT -> {
                     for (i in data.indices){

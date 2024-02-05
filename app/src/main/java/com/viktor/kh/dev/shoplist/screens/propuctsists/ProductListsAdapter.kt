@@ -10,12 +10,12 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.ItemListBinding
-import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
+import com.viktor.kh.dev.shoplist.repository.db.data.ProductData
 import com.viktor.kh.dev.shoplist.utils.convertLongToTime
 import com.viktor.kh.dev.shoplist.utils.currentCardColor
 import com.viktor.kh.dev.shoplist.utils.writeLog
-import com.viktor.kh.dev.shoplist.utils.*
+
 
 
 class ProductListsAdapter
@@ -123,7 +123,7 @@ constructor(val onListClickListener: OnListClickListener,
 
 
 
-        private fun findReady(list: List<DataProduct>): String{
+        private fun findReady(list: List<ProductData>): String{
            var containsReady = 0
            for(i in list){
                if(i.ready == true){

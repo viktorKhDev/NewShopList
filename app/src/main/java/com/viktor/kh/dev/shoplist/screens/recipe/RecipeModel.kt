@@ -5,7 +5,6 @@ import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.viktor.kh.dev.shoplist.R
-import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
 import com.viktor.kh.dev.shoplist.repository.db.data.ProductData
 import com.viktor.kh.dev.shoplist.repository.db.room.ProductsDao
@@ -88,11 +87,6 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
 
     fun getProducts(){
         CoroutineScope(Dispatchers.IO).launch {
-            /*val data : DataRecipe = recipesDao.get(listId!!)
-            val newData  = DataRecipe(data.id,data.name,data.text,data.date,data.color,
-                data.products?.let { sortProducts(it) })
-             recipesDao.update(newData)
-            */
             val data = productsDao.getProductsForList(listId!!,true)
             withContext(Dispatchers.Main){
                 productsList.value = sortProducts(data)
@@ -110,33 +104,6 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
                 listId,
                 true
                 )
-           /* val recipe: DataRecipe = recipesDao.get(listId!!)
-            val products  = mutableListOf<DataProduct>()
-            recipe.products?.let { products.addAll(it) }
-            products.removeAt(position)
-            products.add(newProduct)*/
-
-
-            //
-          /*  val nl = mutableListOf<ProductData>()
-            products.forEach{
-                nl.add(
-                    ProductData(
-                    0,
-                    it.name,
-                    it.date,
-                    it.ready,
-                    "",
-                    "",
-                    listId!!,
-                    true
-                )
-                )
-            }
-            productsDao.updateTableForList(nl,true)*/
-
-            //
-            //recipesDao.update(DataRecipe(recipe.id,recipe.name,recipe.text,recipe.date,recipe.color,products))
             productsDao.update(newProduct)
             stateChange = UPDATE_DATA
             getProducts()
@@ -147,31 +114,6 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
         initAnim = false
         CoroutineScope(Dispatchers.IO).launch {
             productsDao.delete(productsList.value!![position])
-          /*  val recipe: DataRecipe = recipesDao.get(listId!!)
-            val products  = mutableListOf<DataProduct>()
-            recipe.products?.let { products.addAll(it) }
-            products.removeAt(position)
-
-
-            //
-            val nl = mutableListOf<ProductData>()
-            products.forEach{
-                nl.add(ProductData(
-                    0,
-                    it.name,
-                    it.date,
-                    it.ready,
-                    "",
-                    "",
-                    listId!!,
-                    true
-                ))
-            }
-            productsDao.updateTableForList(nl,true)
-
-            //
-
-            recipesDao.update(DataRecipe(recipe.id,recipe.name,recipe.text,recipe.date,recipe.color,products))*/
             stateChange = DELETE_PRODUCT
             animPosition = position
             getProducts()
@@ -181,9 +123,6 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
     fun addProduct(productName: String,amount :String){
         initAnim = false
         CoroutineScope(Dispatchers.IO).launch {
-           /* val recipe: DataRecipe = recipesDao.get(listId!!)
-            val dataProduct = DataProduct(productName.trim(), currentTimeToLong(), false,amount,)*/
-
 
             productsDao.insert(ProductData(
                 0,
@@ -196,12 +135,6 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
                 true
             ))
 
-
-
-            /*val products  = mutableListOf<DataProduct>()
-            recipe.products?.let { products.addAll(it) }
-            products.add(dataProduct)
-            recipesDao.update(DataRecipe(recipe.id,recipe.name,recipe.text,recipe.date,recipe.color,products))*/
             stateChange = ADD_PRODUCT
             productsList.value?.let { animPosition = it.size }
             getProducts()
@@ -212,16 +145,8 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
 
     fun cleanList(){
         CoroutineScope(Dispatchers.IO).launch {
-           /* val recipe: DataRecipe = recipesDao.get(listId!!)
-            val products  = mutableListOf<DataProduct>()
-            recipe.products?.let { products.addAll(it) }
-            products.clear()
-            recipesDao.update(DataRecipe(recipe.id,recipe.name,recipe.text,recipe.date,recipe.color,products))*/
-
 
             productsDao.deleteProductsForList(listId!!,true)
-
-
             stateChange = UPDATE_DATA
             getProducts()
             withContext(Dispatchers.Main){
@@ -258,9 +183,6 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
                     //animPosition = products.size
 
                 }
-
-               /* products.addAll(copyList)
-                recipesDao.update(DataRecipe(recipe.id,recipe.name,recipe.text,recipe.date,recipe.color,products))*/
 
                 productsDao.addProducts(copyList)
                 stateChange =  UPDATE_DATA

@@ -8,11 +8,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.utils.*
-import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
-import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
 import com.viktor.kh.dev.shoplist.repository.db.data.ProductData
-import com.viktor.kh.dev.shoplist.repository.db.room.ProductListsDao
 import com.viktor.kh.dev.shoplist.repository.db.room.ProductsDao
 import com.viktor.kh.dev.shoplist.repository.db.room.RecipesDao
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -118,32 +115,6 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
             )
 
             productsDao.update(newProduct)
-          /*val newProduct = DataProduct(currentProduct.name,currentProduct.date
-              , currentProduct.ready?.let { changeReady(it) },currentProduct.amount)
-          val list: DataProductList = productListsDao.get(listId!!)
-          val products  = mutableListOf<DataProduct>()
-          list.products?.let { products.addAll(it) }
-          products.removeAt(position)
-          products.add(newProduct)
-
-            productListsDao.update(DataProductList(list.id,list.name,list.date,list.color,products))*/
-            //
-            /*val nl = mutableListOf<ProductData>()
-            products.forEach{
-                nl.add(ProductData(
-                    0,
-                    it.name,
-                    it.date,
-                    it.ready,
-                    "",
-                    "",
-                    listId!!,
-                    false
-                ))
-            }
-            productsDao.updateTableForList(nl,false)*/
-
-            //
 
 
           stateChange = CHANGE_READY
@@ -169,33 +140,6 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
             )
 
             productsDao.update(newProduct)
-           /* val currentProduct = productsList.value!![position]
-            val newProduct = DataProduct(name,currentProduct.date,currentProduct.ready,"")
-            val list: DataProductList = productListsDao.get(listId!!)
-            val products  = mutableListOf<DataProduct>()
-            list.products?.let { products.addAll(it) }
-            products.removeAt(position)
-            products.add(newProduct)
-
-            //
-            val nl = mutableListOf<ProductData>()
-            products.forEach{
-                nl.add(ProductData(
-                    0,
-                    it.name,
-                    it.date,
-                    it.ready,
-                    "",
-                    "",
-                    listId!!,
-                    false
-                ))
-            }
-            productsDao.updateTableForList(nl,false)
-
-            //
-
-            productListsDao.update(DataProductList(list.id,list.name,list.date,list.color,products))*/
             stateChange = UPDATE_DATA
             getProducts()
         }
@@ -206,29 +150,6 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
         CoroutineScope(Dispatchers.IO).launch {
 
             productsDao.delete(productsList.value!![position])
-         /*val list: DataProductList = productListsDao.get(listId!!)
-         val products  = mutableListOf<DataProduct>()
-         list.products?.let { products.addAll(it) }
-         products.removeAt(position)
-
-            //
-            val nl = mutableListOf<ProductData>()
-            products.forEach{
-                nl.add(ProductData(
-                    0,
-                    it.name,
-                    it.date,
-                    it.ready,
-                    "",
-                    "",
-                    listId!!,
-                    false
-                ))
-            }
-            productsDao.updateTableForList(nl,false)
-
-            //
-         productListsDao.update(DataProductList(list.id,list.name,list.date,list.color,products))*/
             stateChange = DELETE_PRODUCT
             animPosition = position
          getProducts()
@@ -241,23 +162,11 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
       initAnim = false
 
         CoroutineScope(Dispatchers.IO).launch {
-           //val list: DataProductList = productListsDao.get(listId!!)
-           /* val dataProduct = ProductData(productName.trim(), currentTimeToLong(),
-                false,"","","",listId,false
-                )*/
             val product = ProductData(0,productName.trim(), currentTimeToLong(),
                 false,"","",listId,false)
 
             productAdded = product
-            //
             productsDao.insert(product)
-
-            //
-
-            /*val products  = mutableListOf<DataProduct>()
-            list.products?.let { products.addAll(it) }
-            products.add(dataProduct)
-            productListsDao.update(DataProductList(list.id,list.name,list.date,list.color,products))*/
             stateChange = ADD_PRODUCT
             productsList.value?.let { animPosition = it.size }
             getProducts()
@@ -269,15 +178,8 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
 
     fun cleanList(){
         CoroutineScope(Dispatchers.IO).launch {
-          /* val list: DataProductList = productListsDao.get(listId!!)
-           val products  = mutableListOf<DataProduct>()
-           list.products?.let { products.addAll(it) }
-           products.clear()
-           productListsDao.update(DataProductList(list.id,list.name,list.date,list.color,products))*/
-            //
             productsDao.deleteProductsForList(listId!!,false)
-            //
-           stateChange = UPDATE_DATA
+            stateChange = UPDATE_DATA
            getProducts()
 
 
@@ -306,15 +208,8 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                              false)
                          copyList.add(product)
                      }
-
-                    /* val product = DataProduct(name.trim(), currentTimeToLong(), false,"")
-                     copyList.add(product)*/
                  }
-                 //products.addAll(copyList)
 
-                 //productListsDao.update(DataProductList(list.id,list.name,list.date,list.color,products))
-
-                 //
 
                  productsDao.addProducts(copyList)
                  //
@@ -368,46 +263,9 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                             readyList.add(product)
                         }
                     }
-
-                   /* if (listRecipes[i].products!=null){
-
-                        for (e in listRecipes[i].products!!){
-                            val product = DataProduct(
-                                "${e.name}" +
-                                        " ${e.amount?.let { countPortions(it,portions) }}" +
-                                        " (${listRecipes[i].name})"
-                                ,e.date
-                                ,false
-                                , ""
-                            )
-                            readyList.add(product)
-                        }
-
-                    }*/
                 }
             }
-
-            //
-          /*  val nl = mutableListOf<ProductData>()
-            readyList.forEach{
-                nl.add(ProductData(
-                    0,
-                    it.name,
-                    it.date,
-                    it.ready,
-                    "",
-                    "",
-                    listId!!,
-                    false
-                ))
-            }*/
             productsDao.addProducts(readyList)
-            //
-
-
-           /* val list: DataProductList = productListsDao.get(listId!!)
-            list.products?.let { readyList.addAll(it) }
-            productListsDao.update(DataProductList(list.id,list.name,list.date,list.color,readyList))*/
             stateChange = UPDATE_DATA
             getProducts()
 

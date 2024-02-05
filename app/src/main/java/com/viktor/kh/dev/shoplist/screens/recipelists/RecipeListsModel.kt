@@ -7,7 +7,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import com.viktor.kh.dev.shoplist.R
-import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
 import com.viktor.kh.dev.shoplist.repository.db.room.ProductsDao
 import com.viktor.kh.dev.shoplist.repository.db.room.RecipesDao
@@ -107,7 +106,6 @@ class RecipeListsModel @Inject constructor(application: Application) :AndroidVie
         //add recipe with name
         initAnim = false
         isAddClicked = true
-        val listProduct :List<DataProduct> = emptyList()
         val productList = DataRecipe(0,name,"", currentTimeToLong(),currentColor)
         CoroutineScope(Dispatchers.IO).launch {
             recipesDao.insert(productList)

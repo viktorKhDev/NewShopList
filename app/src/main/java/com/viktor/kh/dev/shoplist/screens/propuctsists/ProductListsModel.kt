@@ -2,16 +2,13 @@ package com.viktor.kh.dev.shoplist.screens.propuctsists
 
 
 import android.app.Application
-import android.content.Context
 import android.content.res.Resources.NotFoundException
 import android.os.Bundle
-import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import com.viktor.kh.dev.shoplist.R
-import com.viktor.kh.dev.shoplist.repository.db.data.DataProduct
 import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 import com.viktor.kh.dev.shoplist.repository.db.data.ProductData
 import com.viktor.kh.dev.shoplist.repository.db.room.ProductListsDao
@@ -122,7 +119,6 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
         //add list with name
         initAnim = false
         isAddClicked = true
-        val listProduct :List<DataProduct> = emptyList()
         val productList = DataProductList(0,name, currentTimeToLong(),currentColor)
         CoroutineScope(Dispatchers.IO).launch {
             productListsDao.insert(productList)
@@ -182,75 +178,6 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
     fun setSearchData(){
         dataLists.value?.let { dataForSearch.addAll(it) }
     }
-
-
-
-    //temporary solution, for productsDB!!!
-    //this screen is opening first
-
-
-
-   /* private fun copyProductsToProductsDB(){
-        if (!firstLaunchForProductsDB){
-            Log.d("dbDebug","Start write to db products")
-            CoroutineScope(Dispatchers.IO).launch {
-                try {
-                    val  dataList = productListsDao.getAll()
-                    val dataRecipes = recipesDao.getAll()
-                    val products = mutableListOf<ProductData>()
-
-                    for (i in dataList){
-                        if (i.products!=null){
-                            for (y in i.products){
-                                products.add(ProductData(
-                                    0,
-                                    y.name,
-                                    y.date,
-                                    y.ready,
-                                    y.amount,
-                                    "",
-                                    i.id,
-                                    false
-                                ))
-                            }
-                        }
-                    }
-
-                    for (i in dataRecipes){
-                        if (i.products!=null){
-                            for (y in i.products){
-                                products.add(ProductData(
-                                    0,
-                                    y.name,
-                                    y.date,
-                                    y.ready,
-                                    y.amount,
-                                    "",
-                                    i.id,
-                                    true
-                                ))
-                            }
-                        }
-                    }
-                    productsDao.addProducts(products)
-
-                    Log.d("dbDebug","put true to pref")
-                    app.getSharedPreferences(APP_PREF, Context.MODE_PRIVATE).edit()
-                        .putBoolean(FIRST_LAUNCH_FOR_PRODUCTS,true)
-                        .apply()
-
-                }catch (e:Exception){                    writeLog("error copy products - ${e.printStackTrace()}", getApplication(),true)
-                }
-
-
-
-            }
-        }
-
-
-    }*/
-    /////
-
 
 }
 
