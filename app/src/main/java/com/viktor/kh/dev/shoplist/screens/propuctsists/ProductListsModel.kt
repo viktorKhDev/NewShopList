@@ -19,6 +19,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.newCoroutineContext
 import javax.inject.Inject
 
 
@@ -94,7 +95,17 @@ class ProductListsModel @Inject constructor(application: Application) : AndroidV
     private fun getLists(){
         // get all list from DB
        CoroutineScope(Dispatchers.IO).launch {
-           dataLists.postValue(productListsDao.getAll())
+           val tempList = productListsDao.getAll()
+           val tempList2 = mutableListOf<DataProductList>()
+           for (i in tempList){
+               if (!colorsLight.contains(i.color)){
+                   val newList = DataProductList(i.id,i.name,i.date,null)
+                   tempList2.add(newList)
+               }else{
+                   tempList2.add(i)
+               }
+           }
+           dataLists.postValue(tempList2)
        }
 
     }

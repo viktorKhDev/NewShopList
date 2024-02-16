@@ -100,7 +100,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
             var currentProduct = productsList.value!![position]
 
             val newProduct = ProductData(currentProduct.id,name,currentProduct.date, false,amount,
-                "",
+                null,
                 listId,
                 true
                 )
@@ -130,7 +130,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
                 currentTimeToLong(),
                 false,
                 amount,
-                "",
+                null,
                 listId!!,
                 true
             ))
@@ -173,7 +173,7 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
                             currentTimeToLong(),
                             false,
                             "",
-                            "",
+                            null,
                             listId!!,
                             true
                         )

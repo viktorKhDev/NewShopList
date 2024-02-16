@@ -69,10 +69,10 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
 
          val callback = object :OnBackPressedCallback(true){
              override fun handleOnBackPressed() {
-                 if (binding.relativeAddProduct.visibility==View.VISIBLE){
+                 if (binding.constrainAddProduct.visibility==View.VISIBLE){
                      binding.textProduct.text.clear()
                      binding.textProduct.hideKeyboard()
-                     binding.relativeAddProduct.visibility = View.GONE
+                     binding.constrainAddProduct.visibility = View.GONE
                      binding.addProductFabInProd.show()
                  }else{
                     findNavController().popBackStack()
@@ -96,14 +96,14 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
     }
 
     private fun addProduct() = with(binding) {
-        relativeAddProduct.startAnimation(AnimationUtils.loadAnimation(activity,R.anim.to_start_anim))
-        relativeAddProduct.visibility = View.VISIBLE
+        constrainAddProduct.startAnimation(AnimationUtils.loadAnimation(activity,R.anim.to_start_anim))
+        constrainAddProduct.visibility = View.VISIBLE
         addProductFabInProd.hide()
         textProduct.showKeyboard()
 
 
         //for colors panel
-       /* val onColorClickListener = object : ColorsAdapter.OnColorClickListener{
+       val onColorClickListener = object : ColorsAdapter.OnColorClickListener{
             override fun onClick(position: Int) {
                 model.clickColor(position)
             }
@@ -128,7 +128,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
             colorsPanel.smoothScrollToPosition(currentPosition)
         }else{
             colorsPanel.smoothScrollToPosition(0)
-        }*/
+        }
         //////////
 
 
@@ -147,9 +147,9 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
         btnNoProduct.setOnClickListener(View.OnClickListener {
             textProduct.text.clear()
             textProduct.hideKeyboard()
-            relativeAddProduct.visibility = View.GONE
+            constrainAddProduct.visibility = View.GONE
             addProductFabInProd.show()
-            //model.dataColors.removeObservers(viewLifecycleOwner)
+            model.dataColors.removeObservers(viewLifecycleOwner)
         })
 
     }
@@ -157,29 +157,31 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
     private fun setProduct(position: Int) = with(binding){
         //change name for product
         var dataProduct: ProductData = model.productsList.value!![position]
-        relativeAddProduct.startAnimation(AnimationUtils.loadAnimation(activity,R.anim.to_start_anim))
-        relativeAddProduct.visibility = View.VISIBLE
+        constrainAddProduct.startAnimation(AnimationUtils.loadAnimation(activity,R.anim.to_start_anim))
+        constrainAddProduct.visibility = View.VISIBLE
         addProductFabInProd.hide()
         textProduct.setText(dataProduct.name)
         textProduct.showKeyboard()
 
 
         //init colors
-       /* val onColorClickListener = object : ColorsAdapter.OnColorClickListener{
+        val onColorClickListener = object : ColorsAdapter.OnColorClickListener{
             override fun onClick(position: Int) {
                 model.clickColor(position)
             }
 
         }
-       // val colorAdapter = ColorsAdapter(requireContext(),onColorClickListener)
+        val colorAdapter = ColorsAdapter(requireContext(),onColorClickListener)
 
         colorsPanel.apply {
             layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
-            //adapter = colorAdapter
+            adapter = colorAdapter
             adapter!!.notifyDataSetChanged()
         }
 
-       model.clickColorWithColor(dataProduct.color)
+        //temp solution
+       model.clickColorWithColor(colorsLight[0])
+        //
         model.dataColors.observe(viewLifecycleOwner, Observer {
             colorAdapter.data = it
             colorAdapter.notifyDataSetChanged()
@@ -192,7 +194,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
         }else{
             colorsPanel.smoothScrollToPosition(0)
         }
-        */
+
 
         ////
 
@@ -202,7 +204,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
                 model.renameProduct(position,textProduct.text.toString())
                 textProduct.text.clear()
                 textProduct.hideKeyboard()
-                relativeAddProduct.visibility = View.GONE
+                constrainAddProduct.visibility = View.GONE
                 addProductFabInProd.show()
                // model.dataColors.removeObservers(viewLifecycleOwner)
             }else{
@@ -215,7 +217,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
         btnNoProduct.setOnClickListener(View.OnClickListener {
             textProduct.text.clear()
             textProduct.hideKeyboard()
-            relativeAddProduct.visibility = View.GONE
+            constrainAddProduct.visibility = View.GONE
             addProductFabInProd.show()
             //model.dataColors.removeObservers(viewLifecycleOwner)
         })
@@ -510,7 +512,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
     }
 
     override fun onResume() {
-        if (binding.relativeAddProduct.visibility != View.VISIBLE){
+        if (binding.constrainAddProduct.visibility != View.VISIBLE){
             val showAnim = AnimationUtils.loadAnimation(context,R.anim.fab_show_anim)
             showAnim.startOffset = 200
             binding.addProductFabInProd.animation = showAnim

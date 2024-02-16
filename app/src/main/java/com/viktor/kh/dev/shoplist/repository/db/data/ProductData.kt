@@ -15,7 +15,7 @@ data class ProductData(
     @ColumnInfo(name = "date" ) val date: Long?,
     @ColumnInfo(name = "ready" ) val ready: Boolean?,
     @ColumnInfo(name = "amount" ) val amount: String?,
-    @ColumnInfo(name = "color" ) val color: String,
+    @ColumnInfo(name = "productColor" ) val productColor: Int?,
     @ColumnInfo(name = "parentID" ) val parentID: Int?,
     @ColumnInfo(name = "isRecipe" ) val isRecipe: Boolean
 )

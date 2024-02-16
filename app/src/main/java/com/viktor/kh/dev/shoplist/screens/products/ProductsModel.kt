@@ -44,10 +44,10 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
       }
   }
 
-/*
+
     val dataColors :MutableLiveData<ColorClickedList> by lazy {
         MutableLiveData<ColorClickedList>()
-    }*/
+    }
 
 
     fun init(id: Int){
@@ -59,21 +59,21 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
             listId = id
         }
         getProducts()
-       // dataColors.value = ColorClickedList()
+        dataColors.value = ColorClickedList()
     }
 
 
 
-  /*  fun clickColor(position: Int){
+   fun clickColor(position: Int){
         val data = dataColors.value
         data!!.clickColor(position)
         dataColors.value = data
         dataColors.hasActiveObservers()
         currentColor = dataColors.value!!.getCurrentColor()
-    }*/
+    }
 
 
-    /*fun clickColorWithColor(color: Int?){
+    fun clickColorWithColor(color: Int?){
         if (color!=null){
             val data = dataColors.value
             data!!.clickColorWithColor(color)
@@ -85,14 +85,13 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
             dataColors.hasActiveObservers()
             currentColor = dataColors.value!!.getCurrentColor()
         }
-    }*/
+    }
 
 
     private fun getProducts(){
         CoroutineScope(Dispatchers.IO).launch {
             val data : List<ProductData> = productsDao.getProductsForList(listId!!,false)
             val sortData = sortProducts(data)
-            //productListsDao.update(DataProductList(newData.id,newData.name,newData.date,newData.color,newData.products))
             withContext(Dispatchers.Main){
                 productsList.value = sortData
             }
@@ -109,7 +108,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                 currentProduct.date,
                 changeReady(currentProduct.ready!!),
                 currentProduct.amount,
-                currentProduct.color,
+                currentProduct.productColor,
                 currentProduct.parentID,
                 currentProduct.isRecipe
             )
@@ -134,7 +133,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                 currentProduct.date,
                 currentProduct.ready,
                 currentProduct.amount,
-                currentProduct.color,
+                currentProduct.productColor,
                 currentProduct.parentID,
                 currentProduct.isRecipe
             )
@@ -163,7 +162,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
 
         CoroutineScope(Dispatchers.IO).launch {
             val product = ProductData(0,productName.trim(), currentTimeToLong(),
-                false,"","",listId,false)
+                false,"",null,listId,false)
 
             productAdded = product
             productsDao.insert(product)
@@ -203,7 +202,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                              currentTimeToLong(),
                              false,
                              "",
-                             "",
+                             null,
                              listId,
                              false)
                          copyList.add(product)
@@ -255,7 +254,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                                 currentTimeToLong(),
                                 false,
                                 i.amount?.let { countPortions(it,portions) },
-                                "",
+                                null,
                                 listId,
                                 false
                                 )
@@ -285,7 +284,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
         val sb = StringBuilder()
         while (matcherNumber.find()) {
                sb.append((matcherNumber.group().toDouble()*value).toString())
-               sb.append(" ")
+               sb.append("")
         }
 
         return "$sb $text1".replace("  "," ")

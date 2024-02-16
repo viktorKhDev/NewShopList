@@ -1,7 +1,7 @@
 package com.viktor.kh.dev.shoplist.screens.propuctsists
 
 
-import android.annotation.SuppressLint
+
 import android.app.Dialog
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -104,7 +104,7 @@ class ProductListsFragment: Fragment(R.layout.fragment_lists)
 
 
 
-    @SuppressLint("SuspiciousIndentation")
+
     private fun addList(){
         var dialog = context?.let { Dialog(it,R.style.MyDialog) }
         var listColor: Int? = null

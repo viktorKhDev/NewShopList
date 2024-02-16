@@ -344,13 +344,13 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
 
 
     private fun addProduct() = with(binding) {
-        relativeAddProduct.startAnimation(
+        constrainAddProduct.startAnimation(
             AnimationUtils.loadAnimation(
                 activity,
                 R.anim.to_start_anim
             )
         )
-        relativeAddProduct.visibility = View.VISIBLE
+        constrainAddProduct.visibility = View.VISIBLE
         addProductFab.hide()
         textProduct.showKeyboard()
 
@@ -382,7 +382,7 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         btnNoProduct.setOnClickListener(View.OnClickListener {
             textProduct.text.clear()
             textAmount.text.clear()
-            relativeAddProduct.visibility = View.GONE
+            constrainAddProduct.visibility = View.GONE
             addProductFab.show()
             textProduct.hideKeyboard()
         })

@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import com.viktor.kh.dev.shoplist.R
+import com.viktor.kh.dev.shoplist.repository.db.data.DataProductList
 import com.viktor.kh.dev.shoplist.repository.db.data.DataRecipe
 import com.viktor.kh.dev.shoplist.repository.db.room.ProductsDao
 import com.viktor.kh.dev.shoplist.repository.db.room.RecipesDao
@@ -80,8 +81,17 @@ class RecipeListsModel @Inject constructor(application: Application) :AndroidVie
     private fun getRecipes(){
         // get all recipes from DB
         CoroutineScope(Dispatchers.IO).launch {
-
-            dataRecipes.postValue(recipesDao.getAll())
+            val tempList = recipesDao.getAll()
+            val tempList2 = mutableListOf<DataRecipe>()
+            for (i in tempList){
+                if (!colorsLight.contains(i.color)){
+                    val newList = DataRecipe(i.id,i.name,i.text,i.date,null)
+                    tempList2.add(newList)
+                }else{
+                    tempList2.add(i)
+                }
+            }
+            dataRecipes.postValue(tempList2)
         }
 
     }

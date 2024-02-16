@@ -118,11 +118,21 @@ val colorsLight = listOf(
     R.color.card_pink,
     R.color.card_red_variant,
     R.color.card_blue_variant
+
 )
 
 fun getColors():List<Int>{
     return colorsLight
 }
+
+
+
+/*fun getHexColors(context: Context): List<String>{
+   val listHex = mutableListOf<String>()
+    for (i in colorsLight){
+        listHex.add(" #${}")
+    }
+}*/
 
 
 var currentCardColor = 0
