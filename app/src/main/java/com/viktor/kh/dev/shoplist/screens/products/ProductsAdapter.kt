@@ -131,10 +131,12 @@ class ProductsAdapter(
 
             } else {
 
-               val color = cardColor(product)
+              // var color = cardColor(product)
+
+                var color = product.productColor
                 val card = itemView.findViewById<CardView>(R.id.cl)
-                if (colorItems){
-                    card.setCardBackgroundColor(color)
+                if (colorItems&&color!=null){
+                    convertColor(color)?.let { card.setCardBackgroundColor(it) }
                     text.setTextColor(Color.BLACK)
                 }else{
 
@@ -175,7 +177,7 @@ class ProductsAdapter(
     }
 
 
-  /*  private fun cardColor(color: Int?):Int?{
+    private fun convertColor(color: Int?):Int?{
         return try {
             if (color!=null){
                 ContextCompat.getColor(context!!, color)
@@ -189,7 +191,7 @@ class ProductsAdapter(
         }
 
 
-    }*/
+    }
 
     private fun cardColor(product: ProductData):Int{
         if (colorMap.contains(product)){

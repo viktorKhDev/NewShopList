@@ -88,6 +88,12 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
     }
 
 
+    fun clearClick(){
+        dataColors.value!!.clearClick()
+        dataColors.hasActiveObservers()
+    }
+
+
     private fun getProducts(){
         CoroutineScope(Dispatchers.IO).launch {
             val data : List<ProductData> = productsDao.getProductsForList(listId!!,false)
@@ -133,7 +139,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                 currentProduct.date,
                 currentProduct.ready,
                 currentProduct.amount,
-                currentProduct.productColor,
+                currentColor,
                 currentProduct.parentID,
                 currentProduct.isRecipe
             )
@@ -162,7 +168,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
 
         CoroutineScope(Dispatchers.IO).launch {
             val product = ProductData(0,productName.trim(), currentTimeToLong(),
-                false,"",null,listId,false)
+                false,"",currentColor,listId,false)
 
             productAdded = product
             productsDao.insert(product)

@@ -150,6 +150,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
             constrainAddProduct.visibility = View.GONE
             addProductFabInProd.show()
             model.dataColors.removeObservers(viewLifecycleOwner)
+            model.clearClick()
         })
 
     }
@@ -178,10 +179,10 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
             adapter = colorAdapter
             adapter!!.notifyDataSetChanged()
         }
+        model.clickColorWithColor(dataProduct.productColor)
 
-        //temp solution
-       model.clickColorWithColor(colorsLight[0])
-        //
+
+
         model.dataColors.observe(viewLifecycleOwner, Observer {
             colorAdapter.data = it
             colorAdapter.notifyDataSetChanged()
@@ -504,10 +505,13 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
 
     override fun onStop() {
         val hideAnim = AnimationUtils.loadAnimation(context,R.anim.fab_hide_anim)
+        model.clearClick()
+        model.currentColor = null
         hideAnim.startOffset = 200
         binding.addProductFabInProd.animation = hideAnim
         hideAnim.start()
         binding.addProductFabInProd.hide()
+
         super.onStop()
     }
 
