@@ -52,21 +52,11 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constrain_add_product"
+        android:backgroundTint="@color/transparent"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
         android:visibility="gone"
@@ -77,19 +67,19 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_accept_text"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/background_with_corners"
             android:padding="2dp"
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/color_layout">
+            app:layout_constraintBottom_toBottomOf="parent">
 
 
             <EditText
                 android:id="@+id/text_product"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="60dp"
                 android:autofillHints=""
                 android:background="?colorPrimary"
                 android:focusable="true"
@@ -129,7 +119,6 @@
             app:layout_constraintBottom_toTopOf="@id/layout_accept_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginEnd="30dp"
             android:padding="2dp"
             >
 
@@ -144,21 +133,26 @@
 
         </RelativeLayout>
 
-        <ImageButton
-            android:id="@+id/btn_no_product"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/circle_button"
-            android:clickable="true"
-            android:elevation="4dp"
-            android:focusable="true"
-            android:src="@drawable/ic_clear_black_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/btn_no_product"
+        android:visibility="gone"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/circle_button"
+        android:clickable="true"
+        android:elevation="4dp"
+        android:focusable="true"
+        android:layout_marginBottom="2dp"
+        android:src="@drawable/ic_clear_black_24"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/constrain_add_product"
+
+        />
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_product_fab_in_prod"

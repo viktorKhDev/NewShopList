@@ -97,38 +97,46 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
 
     private fun addProduct() = with(binding) {
         constrainAddProduct.startAnimation(AnimationUtils.loadAnimation(activity,R.anim.to_start_anim))
+        btnNoProduct.startAnimation(AnimationUtils.loadAnimation(activity,R.anim.fab_show_anim))
         constrainAddProduct.visibility = View.VISIBLE
+        btnNoProduct.visibility = View.VISIBLE
         addProductFabInProd.hide()
         textProduct.showKeyboard()
 
-
         //for colors panel
-       val onColorClickListener = object : ColorsAdapter.OnColorClickListener{
-            override fun onClick(position: Int) {
-                model.clickColor(position)
+        if(colorItems){
+            colorLayout.visibility = View.VISIBLE
+
+            val onColorClickListener = object : ColorsAdapter.OnColorClickListener{
+                override fun onClick(position: Int) {
+                    model.clickColor(position)
+                }
+
+            }
+            val colorAdapter = ColorsAdapter(requireContext(),onColorClickListener)
+
+            colorsPanel.apply {
+                layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
+                adapter = colorAdapter
+                adapter!!.notifyDataSetChanged()
             }
 
-        }
-        val colorAdapter = ColorsAdapter(requireContext(),onColorClickListener)
-
-        colorsPanel.apply {
-            layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
-            adapter = colorAdapter
-            adapter!!.notifyDataSetChanged()
-        }
-
-        model.dataColors.observe(viewLifecycleOwner, Observer {
-            colorAdapter.data = it
-            colorAdapter.notifyDataSetChanged()
-        })
+            model.dataColors.observe(viewLifecycleOwner, Observer {
+                colorAdapter.data = it
+                colorAdapter.notifyDataSetChanged()
+            })
 
 
-        val currentPosition = colorAdapter.data.getCurrentColorPosition()
-        if(currentPosition>0){
-            colorsPanel.smoothScrollToPosition(currentPosition)
+            val currentPosition = colorAdapter.data.getCurrentColorPosition()
+            if(currentPosition>0){
+                colorsPanel.smoothScrollToPosition(currentPosition)
+            }else{
+                colorsPanel.smoothScrollToPosition(0)
+            }
         }else{
-            colorsPanel.smoothScrollToPosition(0)
+            colorLayout.visibility = View.GONE
         }
+
         //////////
 
 
@@ -148,9 +156,11 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
             textProduct.text.clear()
             textProduct.hideKeyboard()
             constrainAddProduct.visibility = View.GONE
+            btnNoProduct.visibility = View.GONE
             addProductFabInProd.show()
             model.dataColors.removeObservers(viewLifecycleOwner)
             model.clearClick()
+
         })
 
     }
@@ -159,7 +169,9 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
         //change name for product
         var dataProduct: ProductData = model.productsList.value!![position]
         constrainAddProduct.startAnimation(AnimationUtils.loadAnimation(activity,R.anim.to_start_anim))
+        btnNoProduct.startAnimation(AnimationUtils.loadAnimation(activity,R.anim.fab_show_anim))
         constrainAddProduct.visibility = View.VISIBLE
+        btnNoProduct.visibility = View.VISIBLE
         addProductFabInProd.hide()
         textProduct.setText(dataProduct.name)
         textProduct.showKeyboard()
@@ -207,7 +219,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
                 textProduct.hideKeyboard()
                 constrainAddProduct.visibility = View.GONE
                 addProductFabInProd.show()
-               // model.dataColors.removeObservers(viewLifecycleOwner)
+                model.dataColors.removeObservers(viewLifecycleOwner)
             }else{
                 showToast(getString(R.string.input_the_title),context)
             }
@@ -219,8 +231,9 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
             textProduct.text.clear()
             textProduct.hideKeyboard()
             constrainAddProduct.visibility = View.GONE
+            btnNoProduct.visibility = View.GONE
             addProductFabInProd.show()
-            //model.dataColors.removeObservers(viewLifecycleOwner)
+            model.dataColors.removeObservers(viewLifecycleOwner)
         })
 
     }
