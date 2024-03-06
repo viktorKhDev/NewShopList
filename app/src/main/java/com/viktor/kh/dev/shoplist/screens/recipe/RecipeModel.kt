@@ -232,16 +232,8 @@ class RecipeModel @Inject constructor(application: Application): AndroidViewMode
 
 
     private  fun sortProducts(products: List<ProductData>):List<ProductData>{
-        if (products.isNotEmpty()&&products.size!=1){
-            val sortedList: List<ProductData>
-            if (sortByDate) {
-                sortedList = products.sortedWith(compareBy({it.ready}, { it.date }))
-
-            }else{
-                sortedList = products.sortedWith(compareBy({ it.ready }, { it.name!!.lowercase() }))
-            }
-
-            return sortedList
+        if (products.isNotEmpty()&&products.size!=1) {
+            return products.sortedWith(compareBy { it.date })
         }else{
             return products
         }

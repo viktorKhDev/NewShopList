@@ -7,5 +7,12 @@
         <item>@string/color_time_pref</item>
     </array>
 
+    <array name="sort_pref_array_values">
+        <item>@string/title_value</item>
+        <item>@string/time_value</item>
+        <item>@string/color_title_pref_value</item>
+        <item>@string/color_time_pref_value</item>
+    </array>
+
 
 </resources>

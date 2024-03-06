@@ -2,7 +2,7 @@ package com.viktor.kh.dev.shoplist.utils
 
 
 
-import android.annotation.SuppressLint
+
 import android.content.ClipData
 import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
 import android.content.ClipboardManager
@@ -32,10 +32,10 @@ val formatForLog = SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z")
 
 ////preferences
 
-/*var sortItems = ""
-var sortLists = ""*/
-var sortByDate = false
-//var colorLists = true
+var sortItems = ""
+var sortLists = ""
+//var sortByDate = false
+var colorLists = true
 var colorItems = true
 var firstLaunchForProductsDB = false
 
@@ -65,10 +65,11 @@ const val FIRST_LAUNCH_FOR_PRODUCTS = "products_pref_launch"
 
  fun loadSetting(context: Context){
      val sp = PreferenceManager.getDefaultSharedPreferences(context)
-    /*sortItems = sp.getString(context.getString(R.string.sorting_items),"")!!
-    sortLists = sp.getString(context.getString(R.string.sorting_lists),"")!!*/
-    sortByDate = sp.getBoolean(context.getString(R.string.sort_by_date),false)
-    //colorLists = sp.getBoolean(context.getString(R.string.color_lists_pref),true)
+    sortItems = sp.getString(context.getString(R.string.sorting_items),
+        context.getString(R.string.time_value))!!
+    sortLists = sp.getString(context.getString(R.string.sorting_lists),"")!!
+    //sortByDate = sp.getBoolean(context.getString(R.string.sort_by_date),false)
+    colorLists = sp.getBoolean(context.getString(R.string.color_lists_pref),true)
     colorItems = sp.getBoolean(context.getString(R.string.color_items_pref),true)
 
 }

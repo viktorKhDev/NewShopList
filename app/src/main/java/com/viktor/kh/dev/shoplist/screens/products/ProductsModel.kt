@@ -314,8 +314,8 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
     }
 
     private  fun sortProducts(products: List<ProductData>):List<ProductData>{
-        /*    if (products.isNotEmpty()&&products.size!=1){
-              val sortedList: List<DataProduct>
+           if (products.isNotEmpty()&&products.size!=1){
+              val sortedList: List<ProductData>
 
             when(sortItems){
                   app.getString(R.string.time) ->{
@@ -325,10 +325,10 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                       sortedList = products.sortedWith(compareBy({ it.ready }, { it.name }))
                   }
                   app.getString(R.string.color_time_pref) ->{
-                      sortedList = products.sortedWith(compareBy({ it.ready }, { it.color },{it.date}))
+                      sortedList = products.sortedWith(compareBy({ it.ready }, { it.productColor },{it.date}))
                   }
                   app.getString(R.string.color_title_pref) -> {
-                      sortedList = products.sortedWith(compareBy({ it.ready }, { it.color },{it.name}))
+                      sortedList = products.sortedWith(compareBy({ it.ready }, { it.productColor },{it.name}))
                   }
                   else -> {
                       sortedList = products.sortedWith(compareBy({ it.ready }, { it.date }))
@@ -341,10 +341,10 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                           animPosition = i
                       }
                   }
-              }*/
+              }
 
 
-        if (products.isNotEmpty()&&products.size!=1){
+       /* if (products.isNotEmpty()&&products.size!=1){
             val sortedList: List<ProductData>
             if (sortByDate) {
                 sortedList = products.sortedWith(compareBy({it.ready}, { it.date }))
@@ -359,7 +359,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                         animPosition = i
                     }
                 }
-            }
+            }*/
 
             return sortedList
         }else{

@@ -6,13 +6,18 @@
     <PreferenceCategory
         app:title="@string/element_position"
         android:icon="@drawable/ic_baseline_sort_day_night_24">
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="@string/sort_by_date"
-            android:title="@string/sort_title"
-            android:summary="@string/sort_summary"
-            app:iconSpaceReserved="false"
-            />
+
+
+        <ListPreference
+            android:entries="@array/sort_pref_array"
+            android:entryValues="@array/sort_pref_array_values"
+            android:defaultValue="@string/time_value"
+            android:key="@string/sorting_items"
+            android:title="@string/sorting_items"
+            android:summary="@string/title"
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false"/>
+
     </PreferenceCategory>
 
 

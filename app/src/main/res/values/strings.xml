@@ -6,6 +6,15 @@
     <string name="color_lists_pref" translatable="false" >color_lists_pref</string>
     <string name="color_items_pref" translatable="false">color_items_pref</string>
 
+    <string name="time_value" translatable="false">Time</string>
+    <string name="title_value" translatable="false">Title</string>
+    <string name="color_title_pref_value" translatable="false">Color -> Title</string>
+    <string name="color_time_pref_value" translatable="false">Color -> Time</string>
+
+
+
+
+
 
 
     <string name="app_name">Shopping List</string>
