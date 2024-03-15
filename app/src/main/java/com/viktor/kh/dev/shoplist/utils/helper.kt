@@ -10,6 +10,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Build
+import android.util.Log
 import android.view.View
 import android.view.WindowInsetsController
 import androidx.fragment.app.FragmentActivity
@@ -66,10 +67,9 @@ const val FIRST_LAUNCH_FOR_PRODUCTS = "products_pref_launch"
  fun loadSetting(context: Context){
      val sp = PreferenceManager.getDefaultSharedPreferences(context)
     sortItems = sp.getString(context.getString(R.string.sorting_items),
-        context.getString(R.string.time_value))!!
-    sortLists = sp.getString(context.getString(R.string.sorting_lists),"")!!
-    //sortByDate = sp.getBoolean(context.getString(R.string.sort_by_date),false)
-    colorLists = sp.getBoolean(context.getString(R.string.color_lists_pref),true)
+        context.getString(R.string.color_time_pref_value))!!
+     sortLists = sp.getString(context.getString(R.string.sorting_lists),"")!!
+     colorLists = sp.getBoolean(context.getString(R.string.color_lists_pref),true)
     colorItems = sp.getBoolean(context.getString(R.string.color_items_pref),true)
 
 }

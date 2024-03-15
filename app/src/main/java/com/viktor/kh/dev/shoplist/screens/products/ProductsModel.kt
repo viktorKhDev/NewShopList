@@ -4,6 +4,7 @@ package com.viktor.kh.dev.shoplist.screens.products
 
 import android.app.Application
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.viktor.kh.dev.shoplist.R
@@ -21,8 +22,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductsModel @Inject constructor(application: Application) : AndroidViewModel(application) {
 
-  //@Inject lateinit var productListsDao: ProductListsDao
-  @Inject lateinit var recipeDao: RecipesDao
+    @Inject lateinit var recipeDao: RecipesDao
   @Inject lateinit var productsDao: ProductsDao
   private lateinit var listRecipes: List<DataRecipe>
 
@@ -317,21 +317,22 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
            if (products.isNotEmpty()&&products.size!=1){
               val sortedList: List<ProductData>
 
-            when(sortItems){
-                  app.getString(R.string.time) ->{
+              when(sortItems){
+                  app.getString(R.string.time_value) ->{
                       sortedList = products.sortedWith(compareBy({it.ready}, { it.date }))
                   }
-                  app.getString(R.string.title) -> {
+                  app.getString(R.string.title_value) -> {
                       sortedList = products.sortedWith(compareBy({ it.ready }, { it.name }))
                   }
-                  app.getString(R.string.color_time_pref) ->{
+                  app.getString(R.string.color_time_pref_value) ->{
                       sortedList = products.sortedWith(compareBy({ it.ready }, { it.productColor },{it.date}))
                   }
-                  app.getString(R.string.color_title_pref) -> {
+                  app.getString(R.string.color_title_pref_value) -> {
                       sortedList = products.sortedWith(compareBy({ it.ready }, { it.productColor },{it.name}))
                   }
                   else -> {
-                      sortedList = products.sortedWith(compareBy({ it.ready }, { it.date }))
+                      sortedList = products.sortedWith(compareBy({ it.ready }, { it.productColor },{it.date}))
+
                   }
               }
               if (stateChange == ADD_PRODUCT&&productAdded!=null){
@@ -343,25 +344,7 @@ class ProductsModel @Inject constructor(application: Application) : AndroidViewM
                   }
               }
 
-
-       /* if (products.isNotEmpty()&&products.size!=1){
-            val sortedList: List<ProductData>
-            if (sortByDate) {
-                sortedList = products.sortedWith(compareBy({it.ready}, { it.date }))
-
-            }else{
-                sortedList = products.sortedWith(compareBy({ it.ready }, { it.name!!.lowercase() }))
-            }
-            if (stateChange == ADD_PRODUCT &&productAdded!=null){
-                for (i in products.indices){
-                    if (compareProduct(productAdded!!,sortedList[i])){
-                        forScrollToPosition = i
-                        animPosition = i
-                    }
-                }
-            }*/
-
-            return sortedList
+               return sortedList
         }else{
             return products
         }
