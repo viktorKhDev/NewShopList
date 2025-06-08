@@ -318,8 +318,6 @@ class RecipeFragment : Fragment(R.layout.recipe_fragment), ItemTouchAdapter {
         recipeToolbar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
 
-                R.id.home -> requireActivity().onBackPressedDispatcher.onBackPressed()
-
                 R.id.share_item -> listName?.let {
                     model.shareRecipe(
                         activity as AppCompatActivity,

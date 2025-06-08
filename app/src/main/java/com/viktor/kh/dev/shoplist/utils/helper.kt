@@ -171,27 +171,15 @@ class ColorId{
 
 
 fun getClipboard(context: Context): String {
-    val clipboard: ClipboardManager =
-        context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-    var pasteData = ""
+    val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 
-    // If it does contain data, decide if you can handle the data.
-    if (!clipboard.hasPrimaryClip()) {
-    } else if (!clipboard.primaryClipDescription?.hasMimeType(
-            MIMETYPE_TEXT_PLAIN
-        )!!
-    ) {
-
-        // since the clipboard has data but it is not plain text
-    } else {
-
-        //since the clipboard contains plain text.
-        val item: ClipData.Item = clipboard.primaryClip!!.getItemAt(0)
-
-        // Gets the clipboard as text.
-        pasteData = item.text.toString()
+    val clipData = clipboard.primaryClip
+    if (clipData != null && clipData.itemCount > 0) {
+        val item = clipData.getItemAt(0)
+        return item.text?.toString() ?: ""
     }
-    return pasteData
+
+    return ""
 }
 
 

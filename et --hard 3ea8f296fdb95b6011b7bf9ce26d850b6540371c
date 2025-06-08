@@ -1,0 +1,249 @@
+[33mcommit 08fdf22a3c23eaf0448e2bb7dabba2fc83966087[m[33m ([m[1;36mHEAD -> [m[1;32mdev[m[33m, [m[1;31morigin/dev[m[33m)[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Tue Mar 26 17:45:35 2024 +0200
+
+    dev migrate lists DB to DB with cryptography
+
+[33mcommit 1638d11ffef27b5fa2c572013579b496c2802626[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Tue Mar 19 16:22:16 2024 +0200
+
+    start dev cryptography
+
+[33mcommit 3ea8f296fdb95b6011b7bf9ce26d850b6540371c[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Fri Mar 15 15:37:25 2024 +0200
+
+    fix sorting items, to market
+
+[33mcommit 70d786e54feabe845d74c90a06fd683cde5bedd3[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Wed Mar 6 17:23:55 2024 +0200
+
+    dev sort pref
+
+[33mcommit 486a8a4a0e54da297363754d45bebf307b152dd9[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Fri Mar 1 20:13:47 2024 +0200
+
+    change add prod layout for color settings
+
+[33mcommit 4f90dddd6f9e2161965c3bccb4a28343a8eac891[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Thu Feb 29 19:33:04 2024 +0200
+
+    dev product colors for db
+
+[33mcommit 65a0fba5bf708ddf249b9c61714adc549cf73416[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Fri Feb 16 17:45:37 2024 +0200
+
+    dev colors for products
+
+[33mcommit fbb9ef5d56e7246c718af600db3c8a177111ee0b[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Mon Feb 5 16:16:28 2024 +0200
+
+    to market 19
+
+[33mcommit 97a0ca0f8abb72c0987f0cddc7660e5c970a81eb[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Fri Feb 2 18:00:08 2024 +0200
+
+    fixed bugs
+
+[33mcommit 082d5f72b27b765309dea2d32ac4dee938eccc27[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Wed Jan 31 14:25:01 2024 +0200
+
+    finish dev migrate 2to3, start testing
+
+[33mcommit e9420f274755b4ea00acdc1d64879c2262630c4e[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Tue Jan 30 14:48:10 2024 +0200
+
+    dev migrate db from 2 to 3
+
+[33mcommit d5fab0d5ef8b4e832ea5c69ff53a59d91b968c05[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Fri Jan 26 16:56:53 2024 +0200
+
+    start dev migrate db lists from 2 to3
+
+[33mcommit 2bdc97f5c2cfe4363f6d496c9a11c287a48a0a08[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Tue Jan 23 14:20:43 2024 +0200
+
+    come back and start dew new version
+
+[33mcommit 675745005818fffc887c874152cc67e4a1a264b5[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Fri Jun 16 16:19:38 2023 +0300
+
+    made copy data to products db, start tests
+
+[33mcommit 67106809d7044b197eae42b9688c6b303055a99d[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Fri May 26 17:16:51 2023 +0300
+
+    change productsmodel for migrate products to new table
+
+[33mcommit 6255b32205cec1a4896176452ec3a02187857164[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Mon May 1 17:46:53 2023 +0300
+
+    dev copy data to products DB
+
+[33mcommit 9971ccecaae149c12d592b9a79c126fb8dc7fd7d[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Thu Apr 20 16:43:07 2023 +0300
+
+    dev copy datato products db
+
+[33mcommit 469b9778ac8720ed3c668a00a802c8287e8c2d96[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Tue Apr 11 16:58:50 2023 +0300
+
+    start dev products DB
+
+[33mcommit 2aacd5aa85305c7585dcc88ea07521465c0f8032[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Fri Mar 24 12:09:16 2023 +0200
+
+    16 to market
+
+[33mcommit b26e2f0a9f3c4b62556472a6b135ea2cc5c4818e[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Mon Jan 23 14:46:20 2023 +0200
+
+    add dialog to recipe, fix bug with search, change size on list buttons, fix byg with api <R, to market
+
+[33mcommit 8da4fb0341fd14f86deb6800ea1b6d92277f6619[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Fri Jan 20 18:19:21 2023 +0200
+
+    fix search lists, finish sort for lists and reciepes
+
+[33mcommit 807c8449466699a09ab802c348718ff2a21b8e52[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Thu Jan 19 23:52:58 2023 +0200
+
+    add sort to productlist, fix search in productlist
+
+[33mcommit 86055223f89f3db1d52b24ac57394b5562ce64e7[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Thu Jan 19 17:18:20 2023 +0200
+
+    fix list pref summary and dialog
+
+[33mcommit 13ed35440e567f9f653bf31de49e3b8d7782caa4[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Wed Jan 18 16:32:59 2023 +0200
+
+    finish dev color buttons, start change pref screen
+
+[33mcommit acb1d46e0cbdb751234174c5c355296793961061[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Tue Jan 17 20:34:31 2023 +0200
+
+    change buttons tint if for theme if no color, change info screen
+
+[33mcommit 42b8c8b75924d6c55b463a3d76767e8a2d505cd0[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Tue Jan 17 12:57:18 2023 +0200
+
+    migrate db from 2 to 3, fix change color in list window, fix recipe products text color
+
+[33mcommit cabbc0c722b76ce7ec65b446e270ee38b094bbbd[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Mon Jan 16 17:50:49 2023 +0200
+
+    add lists and recipes automigration with spec from 2 to 3, no launch
+
+[33mcommit 60caec6362e1f1eb3ab1a2a22e37f6cfa0690b2d[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Wed Jan 11 15:32:56 2023 +0200
+
+    dev migrate db lists from 2 to 3
+
+[33mcommit 70235336d5aa9dd3416aee86cc30d7bb7fd1d88b[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Tue Jan 10 12:36:26 2023 +0200
+
+    dev color select of products
+
+[33mcommit 081331c087fedde8654edc7a2cafa22af9ce5d8b[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Mon Jan 9 17:11:13 2023 +0200
+
+    dev color palel of products
+
+[33mcommit 255574353663d636e052d1227fd82fe405aa4670[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Thu Jan 5 11:58:22 2023 +0200
+
+    start dev product color select
+
+[33mcommit d31ae246215d6141dd57d531ecbd99a28f6e2712[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Wed Jan 4 13:04:58 2023 +0200
+
+    finish select color in reciepes, to market
+
+[33mcommit af0024b56775e5cc6e38ad84262951ff72bd4760[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Wed Jan 4 10:35:17 2023 +0200
+
+    dev select color in recipelists
+
+[33mcommit 7cbd4d6ba162f723a331d96a2fdcd84123035d3d[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Tue Jan 3 11:23:15 2023 +0200
+
+    ref code, fix change theme in other, change logic color in products
+
+[33mcommit 31328aa70824d84e34da431ef894050a1a1ee772[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Mon Jan 2 16:20:01 2023 +0200
+
+    fix add prod on onresume, fix color selected in model if oncreate
+
+[33mcommit 8bf3c8938fdc83974295ea431c45ca473ac25674[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Mon Jan 2 12:19:45 2023 +0200
+
+    finish color select in lists
+
+[33mcommit 0204966927801f893c498f6eccfd4d64a04b0ed4[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Wed Dec 28 18:18:11 2022 +0200
+
+    dev color select in lists
+
+[33mcommit 8a2863961246f270e950909dbe6c918777d38066[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Mon Dec 26 17:51:12 2022 +0200
+
+    migrate productlists db to 2 version, add color
+
+[33mcommit 2738389ea8a0f7013cd8a09dedcb398e111487e7[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Fri Dec 23 11:09:20 2022 +0200
+
+    fix scroll color panel
+
+[33mcommit 731b8e9af5ed397de1c4611142a267c136e8e48a[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Fri Dec 16 16:28:40 2022 +0200
+
+    add listener for color panel, start change model for color data
+
+[33mcommit acda19a91d9bde01b75934a058eb38d566b698ce[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Thu Dec 15 17:23:40 2022 +0200
+
+    add color list dor lists dialog
+
+[33mcommit d698641fde66338968ef4ac9bbd6b06864057746[m
+Author: Viktor Khalamovskyi <viktor.kh.dev@gmail.com>
+Date:   Wed Dec 14 16:42:17 2022 +020
