@@ -9,6 +9,8 @@ import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -42,6 +44,11 @@ class RecipeListsFragment : Fragment(R.layout.recipes_fragment)
         initList()
         model.init()
         initActionbar()
+       ViewCompat.setOnApplyWindowInsetsListener(binding.listsIncludeInRecipes.root) { view, insets ->
+    val top = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top
+    view.setPadding(view.paddingLeft, top, view.paddingRight, view.paddingBottom)
+    insets
+}
         if (isNightTheme(requireContext())){
             binding.listsIncludeInRecipes.fabAddList.imageTintList = ColorStateList.valueOf(Color.WHITE)
         }else{

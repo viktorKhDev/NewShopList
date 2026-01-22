@@ -12,7 +12,7 @@ plugins {
 
 android {
 
-    //compileSdkVersion 33
+
 
     namespace 'com.viktor.kh.dev.shoplist'
     compileSdk = 35
@@ -21,9 +21,9 @@ android {
         applicationId "com.viktor.kh.dev.shoplist"
         minSdk = 23
         targetSdk = 35
-        versionCode 21
-        versionName "2.8.11"
-        buildConfigField "String", "VERSION_NAME", "\"2.8.11\""
+        versionCode 22
+        versionName "2.8.12"
+        buildConfigField "String", "VERSION_NAME", "\"2.8.12\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 

@@ -5,7 +5,9 @@
     android:id="@+id/cl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?colorPrimary">
+    android:background="?colorPrimary"
+    >
+
 
 
 
@@ -18,7 +20,9 @@
         app:navigationIcon="@drawable/ic_baseline_arrow_day_night"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/recycler_layout"/>
+        app:layout_constraintBottom_toTopOf="@id/recycler_layout"
+        />
+
 
 
 
@@ -112,26 +116,29 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/color_layout"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="40dp"
+            android:padding="2dp"
             app:layout_constraintBottom_toTopOf="@id/layout_accept_text"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:padding="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
             >
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/colors_panel"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:background="?colorPrimary"
-                android:orientation="horizontal"
                 android:paddingStart="5dp"
-                android:paddingEnd="5dp"/>
+                android:paddingEnd="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

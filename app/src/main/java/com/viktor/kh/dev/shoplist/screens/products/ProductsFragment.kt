@@ -20,6 +20,8 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -27,6 +29,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.color.MaterialColors.isColorLight
 import com.viktor.kh.dev.shoplist.R
 import com.viktor.kh.dev.shoplist.databinding.DialogAddFromRecipeBinding
 import com.viktor.kh.dev.shoplist.databinding.ProductsFragmentBinding
@@ -54,9 +57,35 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
         super.onViewCreated(view, savedInstanceState)
         context?.let { loadSetting(it) }
         binding = ProductsFragmentBinding.bind(view)
-        cardColor = arguments?.getInt(LIST_COLOR)!!
+        cardColor = arguments?.getInt(LIST_COLOR) ?: 0
         val  listId = arguments?.getInt(LIST_ID)!!
         rv  = binding.listProducts
+
+
+        cardColor?.let { color ->
+            requireActivity().window.statusBarColor = color
+            val insetsController = ViewCompat.getWindowInsetsController(requireActivity().window.decorView)
+            insetsController?.isAppearanceLightStatusBars = isColorLight(color)
+        }
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.cl) { view, insets ->
+            val top = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top
+            view.setPadding(view.paddingLeft, top, view.paddingRight, view.paddingBottom)
+            insets
+        }
+
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.constrainAddProduct) { view, insets ->
+            val imeHeight = insets.getInsets(WindowInsetsCompat.Type.ime()).bottom
+            val navBarHeight = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom
+            view.setPadding(
+                view.paddingLeft,
+                view.paddingTop,
+                view.paddingRight,
+                imeHeight.coerceAtLeast(navBarHeight)
+            )
+            insets
+        }
         binding.addProductFabInProd.setOnClickListener(View.OnClickListener {
             addProduct()
         })
@@ -290,6 +319,7 @@ class ProductsFragment : Fragment(R.layout.products_fragment), ItemTouchAdapter 
     private fun initActionbar() = with(binding){
         val listName = arguments?.getString(LIST_NAME)
         if(cardColor!=0) toolbar.setBackgroundColor(cardColor!!)
+
         toolbar.apply {
             title = listName
             inflateMenu(R.menu.options_menu_in_list)
